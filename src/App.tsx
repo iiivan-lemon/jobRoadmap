@@ -1,58 +1,83 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
+import Header from './features/header/Header'
+import GraphRoadMap from './features/graph/Graph'
 
-function App() {
+function App (): JSX.Element {
+  const [data, changeData] = useState([{ skill: '10', value: 10 }, { skill: '7', value: 7 }, {
+    skill: '7',
+    value: 7
+  }, { skill: '7', value: 7 }, { skill: '4', value: 4 }])
+
+  // function checkStatus(status: number):string {
+  //     switch (Math.round(status / 100)) {
+  //         case 1: {
+  //             return "Information";
+  //         }
+  //         case 2: {
+  //             return "Success";
+  //         }
+  //         case 3: {
+  //             return "Redirect";
+  //         }
+  //         case 4: {
+  //             return "Client Error";
+  //         }
+  //         case 5: {
+  //             return "Server Error";
+  //         }
+  //         default: {
+  //             return;
+  //         }
+  //     }
+  // }
+
+  function fetchUser () {
+    // axios.get('https://api.hh.ru/vacancies?text=python&per_page=100&page=1&experience=noExperience')
+    //     .then((response) => {
+    //         const statusInfo = checkStatus(response.status);
+    //         if (
+    //             statusInfo === "Client Error" ||
+    //             statusInfo === "Server Error" ||
+    //             statusInfo === "Undefined"
+    //         ) {
+    //             console.err(statusInfo);
+    //         }
+    //         console.log("fetchUser", this.state.fetchUser);
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+  }
+
+  function change () {
+    fetchUser()
+    // changeData([
+    //     {skill: 'python', value: 10},
+    //     {skill: 'sql', value: 7},
+    //     {skill: 'linux', value: 7},
+    //     {skill: 'postgresql', value: 7},
+    //     {skill: 'it', value: 4},
+    //     {skill: 'git', value: 4},
+    //     {skill: 'cicd', value: 4},
+    //     {skill: 'data', value: 2},
+    //     {skill: 'ml', value: 2},
+    //     {skill: 'docker', value: 1}
+    // ])
+    const arr = [{ skill: 'golang', value: 6, grade: 3 },
+      { skill: 'python', value: 1, grade: 0 },
+      { skill: 'sql', value: 2, grade: 1 },
+      { skill: 'docker', value: 3, grade: 1 },
+      { skill: 'k8s', value: 5, grade: 2 }]
+    changeData(arr)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+        <div className="App">
+            <Header changeData={change}/>
+            <GraphRoadMap data={data}></GraphRoadMap>
+        </div>
+  )
 }
 
-export default App;
+export default App
