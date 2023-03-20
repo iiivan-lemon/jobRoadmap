@@ -61,7 +61,6 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
   }
 
   const setNodeColor = (data: any[]): string[] => {
-    debugger;
     // @ts-expect-error
     data = [...new Set(data.map(el => el.grade))].sort((a,b)=> a-b)
     const colors = ['#28C10F', '#146FC3', '#FB1A1A'];
@@ -93,7 +92,6 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
     })
     graph = graph.sort((a: { count: number }, b: { count: number }) => a.count - b.count)
     const mainNode = graph[0]
-debugger;
     return {
       nodes: graph,
       edges: graph.map((el: { id: any, value: number },index) => ({
