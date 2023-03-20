@@ -7,7 +7,6 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ title, changeData }) => {
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function submitForm (event: any) {
     event.preventDefault()
     if (event.target.searchTerm.value.includes('python')) {
