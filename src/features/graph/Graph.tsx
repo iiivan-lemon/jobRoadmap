@@ -1,11 +1,12 @@
 import React, { type FC } from 'react'
-
+import pSBC from 'shade-blend-color';
 import VisGraph, {
   type GraphData,
   GraphEvents,
   type Options
 } from 'react-vis-graph-wrapper'
 import styles from './Graph.module.css'
+import {debug} from "util";
 
 interface GraphProps {
   data: any
@@ -13,6 +14,8 @@ interface GraphProps {
 
 const GraphRoadMap: FC<GraphProps> = ({ data }) => {
   const options: Options = {
+    height: "700px",
+    width: '100%',
     physics: {
       barnesHut: { gravitationalConstant: -30000 },
       stabilization: { iterations: 2500 }
@@ -38,11 +41,10 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
       // }
     },
     edges: {
-      color: '#fff'
+      color: 'transparent'
     },
-    height: '500px',
     nodes: {
-      borderWidth: 1,
+      borderWidth: 2,
       borderWidthSelected: 2,
       brokenImage: undefined,
       chosen: true,
@@ -58,47 +60,46 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
 
   }
 
-  const setNodeColor = (data: any[]): Map<number, string> => {
+  const setNodeColor = (data: any[]): string[] => {
+    debugger;
     // @ts-expect-error
-    data = [...new Set(data.map(el => el.grade))]
-    const colors = ['green', 'blue', 'yellow', 'red', 'black']
+    data = [...new Set(data.map(el => el.grade))].sort((a,b)=> a-b)
+    const colors = ['#28C10F', '#146FC3', '#FB1A1A'];
     const res = new Map()
     data.forEach((el, i) => res.set(el, colors[i]))
-    return res
+    // return res;
+    return colors;
   }
 
   const setGraph = (): GraphData => {
     data = data.sort((a: { value: number }, b: { value: number }) => a.value - b.value)
-    const coloration = setNodeColor(data)
-    let graph = data.map((i: { skill: any, value: number, grade: any }, index: any) => {
+    const coloration = setNodeColor(data);
+    let graph = data.map((i: { skill: any, value: number, grade: number}, index: any) => {
       return ({
+        size: Math.pow(data.length-i.value,3),
         id: index,
         label: i.skill,
-        value: data.length - i.value,
+        value: data.length*1000 - i.value*50,
         shape: 'hexagon',
         color: {
-          border: 'grey',
-          background: coloration.get(i.grade),
+          border: coloration[i.grade],
+          background: pSBC(0.3, coloration[i.grade]),
           highlight: {
-            border: 'grey',
-            background: coloration.get(i.grade)
+            border: pSBC(0.3, coloration[i.grade]),
+            background: pSBC(-0.3, coloration[i.grade]),
           },
-          hover: {
-            border: 'grey',
-            background: 'grey'
-          }
         }
       })
     })
     graph = graph.sort((a: { count: number }, b: { count: number }) => a.count - b.count)
     const mainNode = graph[0]
-
+debugger;
     return {
       nodes: graph,
-      edges: graph.map((el: { id: any, value: number }) => ({
+      edges: graph.map((el: { id: any, value: number },index) => ({
         from: mainNode.id,
         to: el.id,
-        length: 30 * (data.length - el.value + 1)
+        length: (Math.pow(data[index].value,3))
       })).filter((el: { from: any, to: any }) => el.from !== el.to)
     }
   }

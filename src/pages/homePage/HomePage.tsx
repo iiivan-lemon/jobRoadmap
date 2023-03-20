@@ -67,11 +67,14 @@ const HomePage: FC = () => {
         //     {skill: 'ml', value: 2},
         //     {skill: 'docker', value: 1}
         // ])
-        const arr = [{ skill: 'golang', value: 6, grade: 3 },
+        const arr = [{ skill: 'golang', value: 6, grade: 2 },
             { skill: 'python', value: 1, grade: 0 },
             { skill: 'sql', value: 2, grade: 1 },
-            { skill: 'docker', value: 3, grade: 1 },
-            { skill: 'k8s', value: 5, grade: 2 }]
+            { skill: 'docker', value: 2, grade: 1 },
+            { skill: 'k8s', value: 4, grade: 2 },
+            { skill: 'k8s88', value: 6, grade: 2 },
+            { skill: 'sqlite', value: 1, grade: 0 }]
+
         changeData(arr)
     }
 
