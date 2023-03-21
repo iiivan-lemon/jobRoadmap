@@ -37,7 +37,7 @@ const HomePage: FC = () => {
     }
 
     function fetchUser () {
-        axios.get('https://api.hh.ru/vacancies?text=python&per_page=100&page=1&experience=noExperience')
+        axios.get('http://95.163.182.151:1323/api/v1/technologies?search_text=hgcg')
             .then((response) => {
                 const statusInfo = checkStatus(response.status);
                 if (
