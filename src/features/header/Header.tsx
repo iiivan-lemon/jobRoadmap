@@ -1,6 +1,7 @@
 import React, { type FC } from 'react'
 import Search from '../search/Search'
 import styles from './Header.module.css'
+import NewUserPage from "../../pages/newUserPage/NewUserPage";
 interface HeaderProps {
   title?: string
   changeData?: any
@@ -17,7 +18,9 @@ const Header: FC<HeaderProps> = ({ title, changeData }) => {
 
   return (
         <div className={styles.header}>
+            <a href='/start' className={styles.logoHref}>
             <span className={styles.title}>JOB Roadmap</span>
+            </a>
             <Search submit={submitForm} ></Search>
             <span className={styles.username}>admin</span>
             <svg width="35" height="35" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">

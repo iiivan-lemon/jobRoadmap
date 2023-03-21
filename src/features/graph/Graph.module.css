@@ -1,3 +1,4 @@
-.graph-block{
-    background: #3A3A3A;
+.graphBlock{
+    background-size: 100% 100%;
+    background-image: url("../../../static/images/back-pattern-graph.png");
 }

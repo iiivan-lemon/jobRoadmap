@@ -1,0 +1,35 @@
+.startBlock{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../../../static/images/back-pattern-home.png");
+    background-size: 100% 100%;
+}
+
+.description{
+    padding: 10px;
+    margin: 70px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    font-family: 'GT Eesti Pro Display', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 37px;
+    /* text-align: center; */
+    flex-grow: 1;
+    color: #FFFFFF;
+}
+
+.titleDescr{
+    font-family: 'GT Eesti Pro Display', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 37px;
+    flex-grow: 1;
+    color: #FFFFFF;
+}

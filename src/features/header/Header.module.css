@@ -6,6 +6,11 @@
     padding-block: 14px;
 }
 
+.logoHref{
+    /*flex-grow: 1;*/
+    text-decoration: none;
+}
+
 .title{
     font-family: 'GT Eesti Pro Display', serif;
     font-style: normal;

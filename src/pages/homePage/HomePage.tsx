@@ -4,6 +4,7 @@ import Search from "../../features/search/Search";
 import {ReactComponent} from "*.svg";
 import Header from "../../features/header/Header";
 import GraphRoadMap from "../../features/graph/Graph";
+import axios from "axios";
 
 const HomePage: FC = () => {
 
@@ -12,45 +13,44 @@ const HomePage: FC = () => {
         value: 7
     }, { skill: '7', value: 7 }, { skill: '4', value: 4 }])
 
-    // function checkStatus(status: number):string {
-    //     switch (Math.round(status / 100)) {
-    //         case 1: {
-    //             return "Information";
-    //         }
-    //         case 2: {
-    //             return "Success";
-    //         }
-    //         case 3: {
-    //             return "Redirect";
-    //         }
-    //         case 4: {
-    //             return "Client Error";
-    //         }
-    //         case 5: {
-    //             return "Server Error";
-    //         }
-    //         default: {
-    //             return;
-    //         }
-    //     }
-    // }
+    function checkStatus(status: number):string {
+        switch (Math.round(status / 100)) {
+            case 1: {
+                return "Information";
+            }
+            case 2: {
+                return "Success";
+            }
+            case 3: {
+                return "Redirect";
+            }
+            case 4: {
+                return "Client Error";
+            }
+            case 5: {
+                return "Server Error";
+            }
+            default: {
+                return '';
+            }
+        }
+    }
 
     function fetchUser () {
-        // axios.get('https://api.hh.ru/vacancies?text=python&per_page=100&page=1&experience=noExperience')
-        //     .then((response) => {
-        //         const statusInfo = checkStatus(response.status);
-        //         if (
-        //             statusInfo === "Client Error" ||
-        //             statusInfo === "Server Error" ||
-        //             statusInfo === "Undefined"
-        //         ) {
-        //             console.err(statusInfo);
-        //         }
-        //         console.log("fetchUser", this.state.fetchUser);
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
+        axios.get('https://api.hh.ru/vacancies?text=python&per_page=100&page=1&experience=noExperience')
+            .then((response) => {
+                const statusInfo = checkStatus(response.status);
+                if (
+                    statusInfo === "Client Error" ||
+                    statusInfo === "Server Error" ||
+                    statusInfo === "Undefined"
+                ) {
+                    console.error(statusInfo);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     function change () {
@@ -69,14 +69,16 @@ const HomePage: FC = () => {
         // ])
         const arr = [{ skill: 'golang', value: 6, grade: 2 },
             { skill: 'python', value: 1, grade: 0 },
-            { skill: 'sql', value: 2, grade: 1 },
-            { skill: 'docker', value: 2, grade: 1 },
-            { skill: 'k8s', value: 4, grade: 2 },
+            { skill: 'sql', value: 4, grade: 1 },
+            { skill: 'docker', value: 4, grade: 1 },
+            { skill: 'k8s', value: 5, grade: 2 },
             { skill: 'k8s88', value: 6, grade: 2 },
             { skill: 'sqlite', value: 1, grade: 0 }]
 
         changeData(arr)
     }
+
+
 
     return (
         <React.Fragment><Header changeData={change}/><GraphRoadMap data={data}/></React.Fragment>

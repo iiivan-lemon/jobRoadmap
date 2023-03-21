@@ -1,18 +1,22 @@
-import React, { type FC } from 'react'
+import React, {type FC, useState} from 'react'
 import pSBC from 'shade-blend-color';
 import VisGraph, {
   type GraphData,
-  GraphEvents,
+  GraphEvents, Network,
   type Options
 } from 'react-vis-graph-wrapper'
 import styles from './Graph.module.css'
 import {debug} from "util";
+import {Data} from "vis";
+import {DataInterfaceEdges, DataInterfaceNodes, Edge, Node} from "vis-network/declarations/network/Network";
 
 interface GraphProps {
   data: any
 }
 
 const GraphRoadMap: FC<GraphProps> = ({ data }) => {
+
+
   const options: Options = {
     height: "700px",
     width: '100%',
@@ -70,6 +74,8 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
     return colors;
   }
 
+
+
   const setGraph = (): GraphData => {
     data = data.sort((a: { value: number }, b: { value: number }) => a.value - b.value)
     const coloration = setNodeColor(data);
@@ -82,7 +88,7 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
         shape: 'hexagon',
         color: {
           border: coloration[i.grade],
-          background: pSBC(0.3, coloration[i.grade]),
+          background: pSBC(0.5, coloration[i.grade]),
           highlight: {
             border: pSBC(0.3, coloration[i.grade]),
             background: pSBC(-0.3, coloration[i.grade]),
@@ -97,7 +103,7 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
       edges: graph.map((el: { id: any, value: number },index) => ({
         from: mainNode.id,
         to: el.id,
-        length: (Math.pow(data[index].value,3))
+        length: (Math.pow(data[index].value,2))
       })).filter((el: { from: any, to: any }) => el.from !== el.to)
     }
   }
@@ -108,6 +114,7 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
     }
   }
 
+
   return (
         <div className={styles.graphBlock}>
             <VisGraph
@@ -116,8 +123,8 @@ const GraphRoadMap: FC<GraphProps> = ({ data }) => {
                 options={options}
                 events={events}
                 getNetwork={(network: any) => {
+
                   //  if you want access to vis.js network api you can set the state in a parent component using this property
-                  console.log(network)
                 }}
             />
         </div>
