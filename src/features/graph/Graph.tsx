@@ -45,10 +45,12 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
             // }
         },
         edges: {
-            color: 'transparent'
+            width: 2,
+            color: 'rgba(199,197,197,0.17)',
+            arrows:{to:{enabled: false}}
         },
         nodes: {
-            borderWidth: 2,
+            borderWidth: 1,
             borderWidthSelected: 2,
             brokenImage: undefined,
             chosen: true,
@@ -83,8 +85,15 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
                 size: i.distance * 50,
                 id: index,
                 label: i.name,
-                value: i.distance * 50,
+                value: i.distance * 100,
                 shape: 'hexagon',
+                shadow: {
+                enabled: true,
+                    color: coloration[Math.round(i.professionalism*2)],
+                    size: 10,
+                    x : 0,
+                    y: 4
+                },
                 color: {
                     border: coloration[Math.round(i.professionalism*2)],
                     background: pSBC(0.5, coloration[Math.round(i.professionalism*2)]),
@@ -108,7 +117,7 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
             edges: graph.map((el: { id: any, value: number }, index) => ({
                 from: mainNode.id,
                 to: el.id,
-                length: (data[0].distance - data[index].distance + 1) * 50
+                length:  50 / data[index].distance
             })).filter((el: { from: any, to: any }) => el.from !== el.to)
         }
     }
