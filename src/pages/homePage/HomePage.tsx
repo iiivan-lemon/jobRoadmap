@@ -36,8 +36,8 @@ const HomePage: FC = () => {
         }
     }
 
-    function fetchUser () {
-        axios.get('http://95.163.182.151:1323/api/v1/technologies?search_text=hgcg')
+    function fetchUser (inputData: string) {
+        axios.get('http://37.139.41.200:1323/api/v1/technologies?search_text='+inputData)
             .then((response) => {
                 const statusInfo = checkStatus(response.status);
                 if (
@@ -46,6 +46,9 @@ const HomePage: FC = () => {
                     statusInfo === "Undefined"
                 ) {
                     console.error(statusInfo);
+                } else {
+                    console.log(response);
+                    changeData(response.data)
                 }
             })
             .catch((error) => {
@@ -53,8 +56,8 @@ const HomePage: FC = () => {
             });
     }
 
-    function change () {
-        fetchUser()
+    function change (inputData: string) {
+        fetchUser(inputData)
         // changeData([
         //     {skill: 'python', value: 10},
         //     {skill: 'sql', value: 7},

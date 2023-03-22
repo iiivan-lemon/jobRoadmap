@@ -11,7 +11,7 @@ const Header: FC<HeaderProps> = ({ title, changeData }) => {
   function submitForm (event: any) {
     event.preventDefault()
     if (event.target.searchTerm.value.includes('python')) {
-      changeData()
+      changeData(event.target.searchTerm.value)
     }
     event.target.searchTerm.value = ''
   }
