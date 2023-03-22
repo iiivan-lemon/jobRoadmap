@@ -66,7 +66,7 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
 
     const setNodeColor = (data: any[]): string[] => {
         // @ts-expect-error
-        data = [...new Set(data.map(el => el.grade))].sort((a, b) => a - b)
+        data = [...new Set(data.map(el => el.professionalism))].sort((a, b) => a - b)
         const colors = ['#28C10F', '#146FC3', '#FB1A1A'];
         const res = new Map()
         data.forEach((el, i) => res.set(el, colors[i]))
@@ -76,21 +76,21 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
 
 
     const setGraph = (): GraphData => {
-        data = data.sort((a: { value: number }, b: { value: number }) => a.value - b.value)
+        data = data.sort((a: { distance: number }, b: { distance: number }) => b.distance - a.distance)
         const coloration = setNodeColor(data);
-        let graph = data.map((i: { skill: any, value: number, grade: number }, index: any) => {
+        let graph = data.map((i: { name: any, distance: number, professionalism: number }, index: any) => {
             return ({
-                size: Math.pow(data.length - i.value, 3),
+                size: i.distance * 50,
                 id: index,
-                label: i.skill,
-                value: data.length * 1000 - i.value * 50,
+                label: i.name,
+                value: i.distance * 50,
                 shape: 'hexagon',
                 color: {
-                    border: coloration[i.grade],
-                    background: pSBC(0.5, coloration[i.grade]),
+                    border: coloration[Math.round(i.professionalism*2)],
+                    background: pSBC(0.5, coloration[Math.round(i.professionalism*2)]),
                     highlight: {
-                        border: pSBC(0.3, coloration[i.grade]),
-                        background: pSBC(-0.3, coloration[i.grade]),
+                        border: pSBC(0.3, coloration[Math.round(i.professionalism*2)]),
+                        background: pSBC(-0.3, coloration[Math.round(i.professionalism*2)]),
                     },
                 }
             })
@@ -108,7 +108,7 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
             edges: graph.map((el: { id: any, value: number }, index) => ({
                 from: mainNode.id,
                 to: el.id,
-                length: (Math.pow(data[index].value, 3))
+                length: (data[0].distance - data[index].distance + 1) * 50
             })).filter((el: { from: any, to: any }) => el.from !== el.to)
         }
     }
