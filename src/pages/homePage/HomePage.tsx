@@ -34,7 +34,7 @@ const HomePage: FC = () => {
     }
 
     function fetchUser(inputData: string) {
-        axios.get('http://37.139.41.200:1323/api/v1/technologies?search_text=' + inputData)
+        axios.get('http://localhost:1323/api/v1/technologies?search_text=' + inputData)
             .then((response) => {
                 const statusInfo = checkStatus(response.status);
                 if (
