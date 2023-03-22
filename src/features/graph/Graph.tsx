@@ -18,7 +18,7 @@ interface GraphProps {
 const GraphRoadMap: FC<GraphProps> = ({data}) => {
 
     const options: Options = {
-        height: "700px",
+        height: "100%",
         width: '100%',
         physics: {
             barnesHut: {gravitationalConstant: -30000},
