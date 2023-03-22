@@ -1,5 +1,5 @@
 .graphBlock{
-    height: 36rem;
+    height: 100vh;
     background-size: cover;
     background-image: url("../../../static/images/back-pattern-graph.png");
 }
