@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './App.css'
-import Header from './features/header/Header'
-import GraphRoadMap from './features/graph/Graph'
-import {Route, Switch} from 'react-router';
-import HomePage from "./pages/homePage/HomePage";
-import NewUserPage from "./pages/newUserPage/NewUserPage";
+import { Route, Switch } from 'react-router'
+import HomePage from './pages/homePage/HomePage'
+import NewUserPage from './pages/newUserPage/NewUserPage'
 function App (): JSX.Element {
-
-
   const routes = (
       <div>
         <Switch>
