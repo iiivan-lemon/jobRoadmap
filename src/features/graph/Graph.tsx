@@ -63,6 +63,7 @@ const GraphRoadMap: FC<GraphProps> = ({ data, title }) => {
   }
 
   const setNodeColor = (data: any[]): string[] => {
+    // @ts-expect-error set iter need fix
     data = [...new Set(data.map(el => el.professionalism))]
       .sort((a, b) => a - b)
     const colors = ['#28C10F', '#146FC3', '#FB1A1A']
