@@ -30,11 +30,11 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           # This path is totally independant from the 'file' directve below
-          context: ./node
+          context: ./job-roadmap
           # This path is totally independant from the 'context' directive above
-          file: ./node/Dockerfile.prod
+          file: ./job-roadmap/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-deploy:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
           
   deploy:
         runs-on: ubuntu-latest   
