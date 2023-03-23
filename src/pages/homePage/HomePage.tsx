@@ -9,6 +9,7 @@ import axios from "axios";
 const HomePage: FC = () => {
 
     const [data, changeData] = useState([{"name": "python", "distance": 1, "professionalism": 0},{"name": "sqlite", "distance": 1, "professionalism": 0.5},{"name": "django", "distance": 0.6, "professionalism": 0.4},{"name": "selenium", "distance": 0.8, "professionalism": 0.5},{"name": "docker", "distance": 0.2, "professionalism": 0.8},{"name": "c++", "distance": 0.1, "professionalism": 1}])
+    const [inputData, changeInputData] = useState('')
 
     function checkStatus(status: number): string {
         switch (Math.round(status / 100)) {
@@ -45,6 +46,7 @@ const HomePage: FC = () => {
                     console.error(statusInfo);
                 } else {
                     changeData(response?.data?.technologies);
+                    changeInputData(inputData);
                 }
             })
             .catch((error) => {
@@ -77,7 +79,7 @@ const HomePage: FC = () => {
 
 
     return (
-        <React.Fragment><Header changeData={change}/><GraphRoadMap data={data}/></React.Fragment>
+        <React.Fragment><Header changeData={change}/><GraphRoadMap data={data} title={inputData}/></React.Fragment>
     )
 }
 

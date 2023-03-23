@@ -12,10 +12,11 @@ import {DataInterfaceEdges, DataInterfaceNodes, Edge, Node} from "vis-network/de
 import * as net from "net";
 
 interface GraphProps {
-    data: any
+    data: any,
+    title: string
 }
 
-const GraphRoadMap: FC<GraphProps> = ({data}) => {
+const GraphRoadMap: FC<GraphProps> = ({data, title}) => {
 
     const options: Options = {
         height: "100%",
@@ -31,22 +32,23 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
         },
         layout: {
             randomSeed: undefined,
-            improvedLayout: true
+            improvedLayout: true,
             // hierarchical: true
             // hierarchical: {
             //     levelSeparation: 150,
             //     nodeSpacing: 100,
-            //     treeSpacing: 200,
-            //     blockShifting: true,
-            //     edgeMinimization: true,
-            //     parentCentralization: true,
-            //     direction: 'UD',        // UD, DU, LR, RL
-            //     sortMethod: 'directed'   // hubsize, directed
+                // treeSpacing: 200,
+                // blockShifting: true,
+                // edgeMinimization: true,
+                // parentCentralization: true,
+                // direction: 'UD',        // UD, DU, LR, RL
+                // sortMethod: 'directed'   // hubsize, directed
             // }
         },
         edges: {
+            physics: true,
             width: 2,
-            color: 'rgba(199,197,197,0.17)',
+            color: 'transparent',
             arrows:{to:{enabled: false}}
         },
         nodes: {
@@ -82,10 +84,13 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
         const coloration = setNodeColor(data);
         let graph = data.map((i: { name: any, distance: number, professionalism: number }, index: any) => {
             return ({
-                size: i.distance * 50,
+                scaling: {
+                    label: false
+                },
+                size: i.distance,
                 id: index,
                 label: i.name,
-                value: i.distance * 100,
+                value: (data.length-index)*1000,
                 shape: 'hexagon',
                 shadow: {
                 enabled: true,
@@ -105,6 +110,31 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
             })
         })
         graph = graph.sort((a: { count: number }, b: { count: number }) => a.count - b.count)
+        debugger;
+        graph.unshift({
+            scaling: {
+                label: false
+            },
+            id: -1,
+            label: title,
+            value: (data.length)*1000,
+            shape: 'hexagon',
+            shadow: {
+                enabled: true,
+                color: 'white',
+                size: 5,
+                x : 0,
+                y: 4
+            },
+            color: {
+                border: 'white',
+                background: pSBC(0.3, '#808080'),
+                highlight: {
+                    border: pSBC(0.3, '#808080'),
+                    background: pSBC(-0.3, '#808080'),
+                },
+            }
+        })
         const mainNode = graph[0];
         // nodes = graph;
         // edges = graph.map((el: { id: any, value: number }, index) => ({
@@ -117,7 +147,7 @@ const GraphRoadMap: FC<GraphProps> = ({data}) => {
             edges: graph.map((el: { id: any, value: number }, index) => ({
                 from: mainNode.id,
                 to: el.id,
-                length:  50 / data[index].distance
+                length: 10*(1+index)
             })).filter((el: { from: any, to: any }) => el.from !== el.to)
         }
     }
