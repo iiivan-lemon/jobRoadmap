@@ -57,7 +57,6 @@ jobs:
                 echo "Pull new image"
                 sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
                 cd jobRoadmap/ 
-                sudo docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev . 
                 echo "Restart the container"
                 sudo docker stop $(docker ps -a -q --filter name=frontend --format="{{.ID}}")
-                sudo docker run --name=frontend --restart=always -d -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
+                sudo docker run --name=frontend -d -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
