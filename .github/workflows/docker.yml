@@ -33,5 +33,17 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          build-args: SERVER_URL=${{ secrets.VPS_SSH_HOST }}
           tags: sample:dev
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+            # TODO: add env vars as secrets on GitHub
+        with:
+              host: ${{ secrets.VPS_SSH_HOST }}
+              username: ${{ secrets.VPS_SSH_USERNAME }}
+              key: ${{ secrets.VPS_SSH_SECRET }}
+              port: ${{ secrets.VPS_SSH_PORT }}
+              script: |
+                echo "Pull new image"
+                sudo docker build -t sample:dev .  pull
+                echo "Restart the container"
+                docker restart $(docker ps -a -q --filter ancestor=sample:dev --format="{{.ID}}")
