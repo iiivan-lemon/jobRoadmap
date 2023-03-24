@@ -1,21 +1,20 @@
-import React, {type FC} from 'react'
+import React, { type FC } from 'react'
 import Search from '../search/Search'
 import styles from './Header.module.css'
-import NewUserPage from "../../pages/newUserPage/NewUserPage";
 
 interface HeaderProps {
-    title?: string
-    changeData?: any
+  title?: string
+  changeData?: (params: string) => void
 }
 
-const Header: FC<HeaderProps> = ({title, changeData}) => {
-    function submitForm(event: any) {
-        event.preventDefault()
-        if(changeData) changeData(event.target.searchTerm.value)
-        event.target.searchTerm.value = ''
-    }
+const Header: FC<HeaderProps> = ({ title, changeData }) => {
+  function submitForm (event: any): void {
+    event.preventDefault()
+    if (changeData) changeData(event.target.searchTerm.value)
+    event.target.searchTerm.value = ''
+  }
 
-    return (
+  return (
         <div className={styles.header}>
             <a href='/start' className={styles.logoHref}>
                 <span className={styles.title}>JOB Roadmap</span>
@@ -29,7 +28,7 @@ const Header: FC<HeaderProps> = ({title, changeData}) => {
             </svg>
 
         </div>
-    )
+  )
 }
 
 export default Header

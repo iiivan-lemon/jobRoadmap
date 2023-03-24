@@ -1,0 +1,62 @@
+name: CD
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+jobs:
+  push_to_docker_hub:
+    runs-on: ubuntu-latest
+    # Build Docker image and push to Docker Hub only if the app build and test is successfull
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          # This path is totally independant from the 'file' directve below
+          context: .
+          # This path is totally independant from the 'context' directive above
+          file: Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
+          
+  deploy:
+        runs-on: ubuntu-latest   
+        needs: [push_to_docker_hub]
+
+        steps:
+          - name: Deploy to VPS
+            uses: appleboy/ssh-action@master
+            # TODO: add env vars as secrets on GitHub
+            with:
+              # VPS IP
+              host: ${{ secrets.VPS_SSH_HOST }}
+              # VPS username
+              username: ${{ secrets.VPS_SSH_USERNAME }}
+              # SSH key (copy it from your local machine)
+              key: ${{ secrets.VPS_SSH_SECRET }}
+              # SSH port
+              port: ${{ secrets.VPS_SSH_PORT }}
+              script: |
+                echo "Pull new image"
+                sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
+                cd jobRoadmap/ 
+                echo "Restart the container"
+                sudo docker stop $(docker ps -a -q --filter name=frontend --format="{{.ID}}")
+                sudo docker run --name=frontend -d -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
