@@ -55,7 +55,7 @@ jobs:
               port: ${{ secrets.VPS_SSH_PORT }}
               script: |
                 echo "Pull new image"
-                sudo docker pull -t sample:dev . 
-                sudo docker build -t sample:dev . 
+                sudo docker pull -t ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev . 
+                sudo docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev . 
                 echo "Restart the container"
-                docker restart $(docker ps -a -q --filter ancestor=sample:dev --format="{{.ID}}")
+                docker restart $(docker ps -a -q --filter ancestor=${{ secrets.DOCKERHUB_USERNAME }}/sample:dev --format="{{.ID}}")
