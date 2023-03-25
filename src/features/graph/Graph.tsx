@@ -62,7 +62,7 @@ const GraphRoadMap: FC<GraphProps> = ({ data, title }) => {
 
   }
 
-  const setNodeColor = (data: any[]): string[] => {
+  const addColorMap = (data: any[]): string[] => {
     // @ts-expect-error set iter need fix
     data = [...new Set(data.map(el => el.professionalism))]
       .sort((a, b) => a - b)
@@ -73,9 +73,22 @@ const GraphRoadMap: FC<GraphProps> = ({ data, title }) => {
     return colors
   }
 
+  const setNodeGradient = (coloration: string[], prof: number): string => {
+    let resColor: string | null
+    const fixProf = Number(prof.toFixed(2))
+    if (fixProf < 0.5 && fixProf > 0) {
+      resColor = pSBC(fixProf * 2, coloration[0], coloration[1])
+    } else if (fixProf > 0.5 && fixProf < 1) {
+      resColor = pSBC(fixProf - 0.5, coloration[1], coloration[2])
+    } else {
+      resColor = coloration[fixProf * 2]
+    }
+    return resColor ?? 'grey'
+  }
+
   const setGraph = (): GraphData => {
     data = data.sort((a: { distance: number }, b: { distance: number }) => b.distance - a.distance)
-    const coloration = setNodeColor(data)
+    const coloration = addColorMap(data)
     let graph = data.map((i: { name: any, distance: number, professionalism: number }, index: any) => {
       return ({
         scaling: {
@@ -88,17 +101,17 @@ const GraphRoadMap: FC<GraphProps> = ({ data, title }) => {
         shape: 'hexagon',
         shadow: {
           enabled: true,
-          color: coloration[Math.round(i.professionalism * 2)],
+          color: setNodeGradient(coloration, i.professionalism),
           size: 10,
           x: 0,
           y: 4
         },
         color: {
-          border: coloration[Math.round(i.professionalism * 2)],
-          background: pSBC(0.5, coloration[Math.round(i.professionalism * 2)]),
+          border: setNodeGradient(coloration, i.professionalism),
+          background: pSBC(0.5, setNodeGradient(coloration, i.professionalism)),
           highlight: {
-            border: pSBC(0.3, coloration[Math.round(i.professionalism * 2)]),
-            background: pSBC(-0.3, coloration[Math.round(i.professionalism * 2)])
+            border: pSBC(0.3, setNodeGradient(coloration, i.professionalism)),
+            background: pSBC(-0.3, setNodeGradient(coloration, i.professionalism))
           }
         }
       })
