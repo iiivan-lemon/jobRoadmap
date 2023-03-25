@@ -23,8 +23,11 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install --legacy-peer-deps
+        run: npm install --legacy-peer
 
       - name: Run ESLint
         run: npm run lint
+
+      - name: run build
+        run: npm run build
 
