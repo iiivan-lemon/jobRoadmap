@@ -1,11 +1,19 @@
 import React, { type FC, useState } from 'react'
 import Header from '../../features/header/Header'
-import GraphRoadMap from '../../features/graph/Graph'
+// import GraphRoadMap from '../../features/graph/Graph'
+// import axios from 'axios'
+import Graph from '../../features/visGraph/Graph'
 import axios from 'axios'
-
+import styles from './HomePage.module.css'
 const HomePage: FC = () => {
   const [data, changeData] = useState([{ name: 'python', distance: 1, professionalism: 0 }, { name: 'sqlite', distance: 1, professionalism: 0.5 }, { name: 'django', distance: 0.6, professionalism: 0.4 }, { name: 'selenium', distance: 0.8, professionalism: 0.5 }, { name: 'docker', distance: 0.2, professionalism: 0.8 }, { name: 'c++', distance: 0.1, professionalism: 1 }])
   const [inputData, changeInputData] = useState('')
+
+  // const [network, setNetwork] = useState<Network>(new Network(
+  //     container.current as HTMLElement,
+  //     { edges, nodes },
+  //
+  // ))
 
   function checkStatus (status: number): string {
     switch (Math.round(status / 100)) {
@@ -74,7 +82,7 @@ const HomePage: FC = () => {
   }
 
   return (
-        <React.Fragment><Header changeData={change}/><GraphRoadMap data={data} title={inputData}/></React.Fragment>
+        <div className={styles.page}><Header changeData={change}/><Graph data={data} title={inputData}/></div>
   )
 }
 
