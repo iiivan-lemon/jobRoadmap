@@ -5,6 +5,7 @@ import useVisNetwork from './useVisNetwork'
 // import GraphRoadMap from '../graph/Graph'
 import { type GraphData } from 'react-vis-graph-wrapper'
 import pSBC from 'shade-blend-color'
+import styles from './Graph.module.css'
 
 interface GraphProps {
   data: any
@@ -14,86 +15,46 @@ interface GraphProps {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type,react/display-name
 const Graph = ({ data, title }: GraphProps) => {
   const options: Options = {
-    physics: {
-      enabled: true,
-      barnesHut: {
-        theta: 0.5,
-        gravitationalConstant: -2000,
-        centralGravity: 0.3,
-        springLength: 95,
-        springConstant: 0.04,
-        damping: 0.09,
-        avoidOverlap: 0
-      },
-      forceAtlas2Based: {
-        theta: 0.5,
-        gravitationalConstant: -50,
-        centralGravity: 0.01,
-        springConstant: 0.08,
-        springLength: 100,
-        damping: 0.4,
-        avoidOverlap: 0
-      },
-      repulsion: {
-        centralGravity: 0.2,
-        springLength: 200,
-        springConstant: 0.05,
-        nodeDistance: 100,
-        damping: 0.09
-      },
-      hierarchicalRepulsion: {
-        centralGravity: 0.0,
-        springLength: 100,
-        springConstant: 0.01,
-        nodeDistance: 120,
-        damping: 0.09,
-        avoidOverlap: 0
-      },
-      maxVelocity: 50,
-      minVelocity: 0.1,
-      solver: 'forceAtlas2Based',
-      stabilization: {
-        enabled: true,
-        iterations: 1000,
-        updateInterval: 100,
-        onlyDynamicEdges: false,
-        fit: true
-      },
-      timestep: 0.5,
-      adaptiveTimestep: true,
-      wind: { x: 0, y: 0 }
-    },
     height: '100%',
     width: '100%',
-    // physics: true,
+    physics: {
+      barnesHut: { gravitationalConstant: -30000 },
+      stabilization: { iterations: 2500 }
+    },
     interaction: {
       keyboard: false,
       dragNodes: false,
       dragView: true
     },
     layout: {
-      randomSeed: 2,
+      randomSeed: 1,
       improvedLayout: true
-    },
-    edges: {
-      width: 2,
-      color: 'transparent',
-      arrows: { to: { enabled: false } },
-      physics: false
-      // scaling: {
-      //   min: 1,
-      //   max: 1
+      // hierarchical: true
+      // hierarchical: {
+      //     levelSeparation: 150,
+      //     nodeSpacing: 100,
+      // treeSpacing: 200,
+      // blockShifting: true,
+      // edgeMinimization: true,
+      // parentCentralization: true,
+      // direction: 'UD',        // UD, DU, LR, RL
+      // sortMethod: 'directed'   // hubsize, directed
       // }
     },
+    edges: {
+      physics: true,
+      width: 2,
+      color: 'transparent',
+      arrows: { to: { enabled: false } }
+    },
     nodes: {
-      scaling: {
-        min: 20,
-        max: 50
-      },
       borderWidth: 1,
       borderWidthSelected: 2,
       brokenImage: undefined,
       chosen: true,
+      scaling: {
+        max: 75
+      },
       font: {
         color: '#fff',
         size: 18,
@@ -108,7 +69,7 @@ const Graph = ({ data, title }: GraphProps) => {
     // @ts-expect-error set iter need fix
     data = [...new Set(data.map(el => el.professionalism))]
       .sort((a, b) => a - b)
-    const colors = ['#28C10F', '#146FC3', '#FB1A1A']
+    const colors = ['#28C10F', '#ffe500', '#FB1A1A']
     const res = new Map()
     data.forEach((el, i) => res.set(el, colors[i]))
     // return res;
@@ -143,9 +104,9 @@ const Graph = ({ data, title }: GraphProps) => {
         shadow: {
           enabled: true,
           color: setNodeGradient(coloration, i.professionalism),
-          size: 10,
+          size: 5,
           x: 0,
-          y: 4
+          y: 2
         },
         color: {
           border: setNodeGradient(coloration, i.professionalism),
@@ -159,45 +120,54 @@ const Graph = ({ data, title }: GraphProps) => {
     })
     graph = graph.sort((a: { count: number }, b: { count: number }) => a.count - b.count)
     graph.unshift({
+      hidden: false,
+      size: 0,
+      value: 0,
       scaling: {
         label: false
       },
       id: -1,
       label: title,
-      value: (data.length) * 1000,
-      shape: 'box',
+      shape: 'elipse',
       shadow: {
         enabled: true,
-        color: 'white',
+        color: 'black',
         size: 2,
         x: 0,
-        y: 4
+        y: 2
       },
+      // color: {
+      //   border: 'black',
+      //   background: pSBC(0.3, '#808080'),
+      //   highlight: {
+      //     border: pSBC(0.3, '#808080'),
+      //     background: pSBC(-0.3, '#808080')
+      //   }
+      // },
       color: {
-        border: 'white',
-        background: pSBC(0.3, '#808080'),
+        border: 'transparent',
+        background: 'transparent',
         highlight: {
-          border: pSBC(0.3, '#808080'),
-          background: pSBC(-0.3, '#808080')
+          border: 'transparent',
+          background: 'transparent'
         }
+      },
+      font: {
+        color: 'white',
+        size: 36,
+        bold: {
+          mod: 'bold'
+        },
+        face: 'GT Eesti Pro Display, serif'
       }
     })
     const mainNode = graph[0]
-    // eslint-disable-next-line no-debugger
-    console.log({
-      nodes: graph,
-      edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
-        from: mainNode.id,
-        to: el.id,
-        length: (el.id > -1) ? 1 - data[el.id].distance : 1
-      })).filter((el) => el.to !== el.from)
-    })
     return {
       nodes: graph,
       edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
         from: mainNode.id,
         to: el.id,
-        length: 10 * (graph.length - index)
+        length: 10 * (1 + index)
       })).filter((el) => el.to !== el.from)
     }
   }
@@ -221,19 +191,18 @@ const Graph = ({ data, title }: GraphProps) => {
     if (!network) return
 
     network.once('beforeDrawing', () => {
-      // eslint-disable-next-line no-debugger
       // network.focus(-1)
       network.fit()
     })
-    // eslint-disable-next-line no-debugger
     network.setData(setGraph(data))
+    network.setOptions({ ...options, layout: { randomSeed: network.getSeed() } })
   }, [data])
 
   return (
         <>
             <button onClick={handleClickFocus}>Focus</button>
             <button onClick={handleClickFit}>Fit</button>
-            <div style={{ height: '100%', width: '100%' }} ref={ref}/>
+            <div className={styles.graphBlock} ref={ref}/>
         </>
   )
 }
