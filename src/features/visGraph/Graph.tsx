@@ -14,33 +14,86 @@ interface GraphProps {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type,react/display-name
 const Graph = ({ data, title }: GraphProps) => {
   const options: Options = {
+    physics: {
+      enabled: true,
+      barnesHut: {
+        theta: 0.5,
+        gravitationalConstant: -2000,
+        centralGravity: 0.3,
+        springLength: 95,
+        springConstant: 0.04,
+        damping: 0.09,
+        avoidOverlap: 0
+      },
+      forceAtlas2Based: {
+        theta: 0.5,
+        gravitationalConstant: -50,
+        centralGravity: 0.01,
+        springConstant: 0.08,
+        springLength: 100,
+        damping: 0.4,
+        avoidOverlap: 0
+      },
+      repulsion: {
+        centralGravity: 0.2,
+        springLength: 200,
+        springConstant: 0.05,
+        nodeDistance: 100,
+        damping: 0.09
+      },
+      hierarchicalRepulsion: {
+        centralGravity: 0.0,
+        springLength: 100,
+        springConstant: 0.01,
+        nodeDistance: 120,
+        damping: 0.09,
+        avoidOverlap: 0
+      },
+      maxVelocity: 50,
+      minVelocity: 0.1,
+      solver: 'forceAtlas2Based',
+      stabilization: {
+        enabled: true,
+        iterations: 1000,
+        updateInterval: 100,
+        onlyDynamicEdges: false,
+        fit: true
+      },
+      timestep: 0.5,
+      adaptiveTimestep: true,
+      wind: { x: 0, y: 0 }
+    },
     height: '100%',
     width: '100%',
-    physics: {
-      barnesHut: { gravitationalConstant: -30000 },
-      stabilization: { iterations: 2500 }
-    },
+    // physics: true,
     interaction: {
       keyboard: false,
       dragNodes: false,
       dragView: true
     },
     layout: {
-      randomSeed: undefined,
+      randomSeed: 2,
       improvedLayout: true
     },
     edges: {
-      physics: true,
       width: 2,
       color: 'transparent',
-      arrows: { to: { enabled: false } }
+      arrows: { to: { enabled: false } },
+      physics: false
+      // scaling: {
+      //   min: 1,
+      //   max: 1
+      // }
     },
     nodes: {
+      scaling: {
+        min: 20,
+        max: 50
+      },
       borderWidth: 1,
       borderWidthSelected: 2,
       brokenImage: undefined,
       chosen: true,
-
       font: {
         color: '#fff',
         size: 18,
@@ -131,12 +184,20 @@ const Graph = ({ data, title }: GraphProps) => {
     })
     const mainNode = graph[0]
     // eslint-disable-next-line no-debugger
+    console.log({
+      nodes: graph,
+      edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
+        from: mainNode.id,
+        to: el.id,
+        length: (el.id > -1) ? 1 - data[el.id].distance : 1
+      })).filter((el) => el.to !== el.from)
+    })
     return {
       nodes: graph,
       edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
         from: mainNode.id,
         to: el.id,
-        length: index * 10
+        length: 10 * (graph.length - index)
       })).filter((el) => el.to !== el.from)
     }
   }
@@ -171,7 +232,7 @@ const Graph = ({ data, title }: GraphProps) => {
   return (
         <>
             <button onClick={handleClickFocus}>Focus</button>
-          <button onClick={handleClickFit}>Fit</button>
+            <button onClick={handleClickFit}>Fit</button>
             <div style={{ height: '100%', width: '100%' }} ref={ref}/>
         </>
   )
