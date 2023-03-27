@@ -34,7 +34,7 @@ jobs:
           # This path is totally independant from the 'context' directive above
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sample:latest
           
   deploy:
         runs-on: ubuntu-latest   
@@ -55,8 +55,9 @@ jobs:
               port: ${{ secrets.VPS_SSH_PORT }}
               script: |
                 echo "Pull new image"
-                sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
+                sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/sample
                 cd jobRoadmap/ 
                 echo "Restart the container"
                 sudo docker stop $(docker ps -a -q --filter name=frontend --format="{{.ID}}")
-                sudo docker run --name=frontend -d -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true ${{ secrets.DOCKERHUB_USERNAME }}/sample:dev
+                sudo docker run --name=frontend -d -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true ${{ secrets.DOCKERHUB_USERNAME }}/sample:latest
+                sudo docker image prune -f
