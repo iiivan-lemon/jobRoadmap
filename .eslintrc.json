@@ -4,19 +4,18 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
         "standard-with-typescript"
     ],
     "overrides": [
     ],
     "parserOptions": {
         "project": "tsconfig.json",
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+        "ecmaVersion": "latest"
     },
     "plugins": [
         "react"
     ],
     "rules": {
+        "@typescript-eslint/consistent-type-assertions": 0
     }
 }

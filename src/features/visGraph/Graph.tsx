@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { type Options } from 'vis-network/standalone/esm/vis-network'
 
-import useVisNetwork from './useVisNetwork'
+import useVisNetwork, { type UseVisNetworkOptions } from './useVisNetwork'
 // import GraphRoadMap from '../graph/Graph'
 import { type GraphData } from 'react-vis-graph-wrapper'
 import pSBC from 'shade-blend-color'
 import styles from './Graph.module.css'
+import { type Data } from 'vis-network/declarations/network/Network'
 
 interface GraphProps {
   data: any
@@ -172,19 +173,14 @@ const Graph = ({ data, title }: GraphProps) => {
     }
   }
 
-  const { ref, network } = useVisNetwork({ ...setGraph(data), options })
+  const { ref, network } = useVisNetwork({ ...setGraph(data) as Data, options } as UseVisNetworkOptions)
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const handleClickFocus = () => {
-    if (network == null) return
-    // network.fit()
-    network.focus(-1)
-  }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleClickFit = () => {
     if (network == null) return
-    network.fit()
+    network.fit({ nodes: network?.getConnectedNodes(-1) as string[], animation: true })
   }
 
   useEffect(() => {
@@ -194,17 +190,17 @@ const Graph = ({ data, title }: GraphProps) => {
       // network.focus(-1)
       network.fit()
     })
-    network.setData(setGraph(data))
+    network.setData(setGraph(data) as Data)
     network.setOptions({ ...options, layout: { randomSeed: network.getSeed() } })
+    network.on('selectNode', () => { })
   }, [data])
 
   return (
         <>
           <div className={styles.btnOptions}>
-            <button onClick={handleClickFocus}>Focus</button>
             <button onClick={handleClickFit}>Fit</button>
           </div>
-            <div className={styles.graphBlock} ref={ref}/>
+            <div className={styles.graphBlock} ref={ref} />
         </>
   )
 }

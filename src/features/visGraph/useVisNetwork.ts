@@ -5,7 +5,7 @@ import {
   type Data,
   type Edge,
   type Node
-} from 'vis-network/standalone/esm/vis-network'
+} from 'vis-network'
 
 export interface UseVisNetworkOptions {
   options: Options
