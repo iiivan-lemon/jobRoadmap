@@ -176,19 +176,19 @@ const Graph = ({ data, title }: GraphProps) => {
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleClickFocus = () => {
-    if (!network) return
+    if (network == null) return
     // network.fit()
     network.focus(-1)
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleClickFit = () => {
-    if (!network) return
+    if (network == null) return
     network.fit()
   }
 
   useEffect(() => {
-    if (!network) return
+    if (network == null) return
 
     network.once('beforeDrawing', () => {
       // network.focus(-1)
@@ -200,8 +200,10 @@ const Graph = ({ data, title }: GraphProps) => {
 
   return (
         <>
+          <div className={styles.btnOptions}>
             <button onClick={handleClickFocus}>Focus</button>
             <button onClick={handleClickFit}>Fit</button>
+          </div>
             <div className={styles.graphBlock} ref={ref}/>
         </>
   )

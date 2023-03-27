@@ -4,3 +4,9 @@
     background-size: cover;
     background-image: url("../../../static/images/back-pattern-graph.png");
 }
+
+.btnOptions{
+    display: flex;
+    position: absolute;
+    z-index: 10;
+}

@@ -10,14 +10,13 @@
     "overrides": [
     ],
     "parserOptions": {
+        "project": "tsconfig.json",
         "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": ["tsconfig.json"]
+        "sourceType": "module"
     },
     "plugins": [
         "react"
     ],
     "rules": {
-        "@typescript-eslint/strict-boolean-expressions": "off"
     }
 }

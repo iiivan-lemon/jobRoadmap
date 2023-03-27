@@ -23,7 +23,7 @@ export default (props: UseVisNetworkOptions) => {
   const data: Data = { nodes, edges }
 
   useLayoutEffect(() => {
-    if (ref.current) {
+    if (ref.current != null) {
       const instance = new Network(ref.current, data, options)
       addNetwork(instance)
     }
