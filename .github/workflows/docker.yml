@@ -59,5 +59,5 @@ jobs:
                 cd jobRoadmap/ 
                 echo "Restart the container"
                 sudo docker stop $(docker ps -a -q --filter name=frontend --format="{{.ID}}")
-                sudo docker run --name=frontend -d -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true ${{ secrets.DOCKERHUB_USERNAME }}/sample:latest
+                docker run --name=frontend --restart=always -p 3001:3000 -d ivanlemon/sample
                 sudo docker image prune -f
