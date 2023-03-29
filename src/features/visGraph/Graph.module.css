@@ -1,8 +1,8 @@
 .graphBlock{
     height: 92%;
     width: 100%;
-    background-size: cover;
-    background-image: url("../../../static/images/back-pattern-graph.png");
+    /*background-size: cover;*/
+    /*background-image: url("../../../static/images/back-pattern-graph.png");*/
 }
 
 .btnOptions{
