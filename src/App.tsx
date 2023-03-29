@@ -25,6 +25,8 @@ function App (): JSX.Element {
   const coursesPage = (): void => {
     if (window.location.href !== '/search') {
       history.push('/search')
+    } else {
+      change(inputData)
     }
   }
 
@@ -57,8 +59,8 @@ function App (): JSX.Element {
         const statusInfo = checkStatus(response.status)
         if (
           statusInfo === 'Client Error' ||
-          statusInfo === 'Server Error' ||
-          statusInfo === 'Undefined'
+                    statusInfo === 'Server Error' ||
+                    statusInfo === 'Undefined'
         ) {
           console.error(statusInfo)
         } else {
@@ -99,26 +101,25 @@ function App (): JSX.Element {
     //   professionalism: 0.5
     // }, { name: 'docker', distance: 0.2, professionalism: 0.8 }, { name: 'c++', distance: 0.1, professionalism: 1 }]
     //
+    // // @ts-expect-error awd
     // changeData(arr)
   }
 
   const routes = (
-    <React.Fragment>
-      <Header changeData={change}/>
-      <Switch>
-        <Route path="/search" render={() => <HomePage data={data} inputData={inputData}/>}/>
-        <Route path="/profile" component={ProfilePage}/>
-        <Route path="/" component={NewUserPage}/>
-
-      </Switch>
-    </React.Fragment>
+        <React.Fragment>
+            <Header changeData={change}/>
+            <Switch>
+                <Route path="/search" render={() => <HomePage data={data} inputData={inputData}/>}/>
+                <Route path="/profile" component={ProfilePage}/>
+                <Route path="/" component={NewUserPage}/>
+            </Switch>
+        </React.Fragment>
   )
 
   return (
-    <React.Fragment>
-      {routes}
-    </React.Fragment>
-
+        <React.Fragment>
+            {routes}
+        </React.Fragment>
   )
 }
 

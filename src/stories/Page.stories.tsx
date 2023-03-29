@@ -21,6 +21,8 @@ export const LoggedIn = Template.bind({})
 // More on interaction testing: https://storybook.js.org/docs/react/writing-tests/interaction-testing
 LoggedIn.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+  // eslint-disable-next-line @typescript-eslint/await-thenable
   const loginButton = await canvas.getByRole('button', { name: /Log in/i })
+  // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression,@typescript-eslint/await-thenable
   await userEvent.click(loginButton)
 }

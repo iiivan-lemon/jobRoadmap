@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { type Options } from 'vis-network/standalone/esm/vis-network'
 
 import useVisNetwork, { type UseVisNetworkOptions } from './useVisNetwork'
@@ -7,6 +7,7 @@ import { type GraphData } from 'react-vis-graph-wrapper'
 import pSBC from 'shade-blend-color'
 import styles from './Graph.module.css'
 import { type Data } from 'vis-network/declarations/network/Network'
+import NodeModal from '../nodeModal/NodeModal'
 
 interface GraphProps {
   data: any
@@ -183,6 +184,8 @@ const Graph = ({ data, title }: GraphProps) => {
     network.fit({ nodes: network?.getConnectedNodes(-1) as string[], animation: true })
   }
 
+  const [isModalOpen, setIsModalOpen] = useState(-1)
+
   useEffect(() => {
     if (network == null) return
 
@@ -192,15 +195,19 @@ const Graph = ({ data, title }: GraphProps) => {
     })
     network.setData(setGraph(data) as Data)
     network.setOptions({ ...options, layout: { randomSeed: network.getSeed() } })
-    network.on('selectNode', () => { })
+    network.on('selectNode', () => { setIsModalOpen(+network.getSelectedNodes()[0]) })
   }, [data])
 
   return (
         <>
           <div className={styles.btnOptions}>
             <button onClick={handleClickFit}>Fit</button>
+            <div className={styles.colorsLevel}></div>
           </div>
             <div className={styles.graphBlock} ref={ref} />
+          {(isModalOpen > -1) && <NodeModal onClose={() => {
+            setIsModalOpen(-1)
+          }} nodeId={isModalOpen}/>}
         </>
   )
 }

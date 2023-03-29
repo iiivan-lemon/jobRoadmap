@@ -1,17 +1,15 @@
-.header{
+.header {
     display: flex;
     background: #1B1B1B;
-    padding-inline: 80px;
-    align-items: center;
-    padding-block: 14px;
+    flex-direction: column;
 }
 
-.logoHref{
+.logoHref {
     /*flex-grow: 1;*/
     text-decoration: none;
 }
 
-.title{
+.title {
     font-family: 'GT Eesti Pro Display', serif;
     font-style: normal;
     font-weight: 700;
@@ -22,7 +20,7 @@
     color: #FFFFFF;
 }
 
-.username{
+.username {
     padding-inline: 10px;
     font-family: 'GT Eesti Pro Display', serif;
     font-style: normal;
@@ -33,5 +31,23 @@
     align-items: flex-end;
     text-align: center;
     color: #FFFFFF;
+}
+
+
+.mainHeader {
+    align-items: center;
+    padding-block: 14px;
+    display: flex;
+    padding-inline: 80px;
+}
+
+.headerTags {
+    z-index: 10;
+    background: #1B1B1B;
+    position: absolute;
+    display: flex;
+    padding: 1rem 80px;
+    flex-direction: column;
+    width: 100vw;
 }
 
