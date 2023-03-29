@@ -1,8 +1,8 @@
 import { configureStore, type ThunkAction, type Action } from '@reduxjs/toolkit'
-
+import dataGraphReducer from '../models/dataGraph/dataGraphSlice'
 export const store = configureStore({
   reducer: {
-    // counter: counterReducer
+    dataGraph: dataGraphReducer
   }
 })
 

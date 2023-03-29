@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './NodeModal.module.css'
-const NodeModal = ({ onClose, nodeId }): JSX.Element => {
+const NodeModal = ({ onClose, nodeId, nodeTitle }): JSX.Element => {
   const ref = React.useRef<HTMLDivElement | null>(null)
   React.useEffect(() => {
     const checkIfClickedOutside = (e): void => {
@@ -23,7 +23,7 @@ const NodeModal = ({ onClose, nodeId }): JSX.Element => {
     }
   }, [])
 
-  return (<div className={styles.nodeModal} ref={ref}>NODE MODAL</div>)
+  return (<div className={styles.nodeModal} ref={ref}>{nodeTitle}</div>)
 }
 
 export default NodeModal

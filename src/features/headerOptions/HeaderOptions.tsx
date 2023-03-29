@@ -3,6 +3,7 @@ import styles from '../header/Header.module.css'
 import { Space, Tag } from 'antd'
 import React, { useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
+import stylesTags from './HeaderOptions.module.css'
 
 const HeaderOptions = ({ tags, onClose, setTitleTag }): any => {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -27,9 +28,9 @@ const HeaderOptions = ({ tags, onClose, setTitleTag }): any => {
   }, [])
 
   function renderTags (tags: string[]): any[] {
-    return tags.map((el, index) => <div onClick={() => {
+    return tags.map((el, index) => <div className={stylesTags.tag} onClick={() => {
       setTitleTag(el)
-    }}><Tag key={index} color="#f50">{el}</Tag></div>)
+    }}><Tag key={index} color="#3A3A3A">{el}</Tag></div>)
   }
 
   return ReactDOM.createPortal(

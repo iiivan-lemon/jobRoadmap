@@ -3,12 +3,12 @@ import { type Options } from 'vis-network/standalone/esm/vis-network'
 
 import useVisNetwork, { type UseVisNetworkOptions } from './useVisNetwork'
 // import GraphRoadMap from '../graph/Graph'
-import { type GraphData } from 'react-vis-graph-wrapper'
+// import { type GraphData } from 'react-vis-graph-wrapper'
 import pSBC from 'shade-blend-color'
 import styles from './Graph.module.css'
-import { type Data } from 'vis-network/declarations/network/Network'
+import { type Data, type DataInterfaceNodes, type Node } from 'vis-network/declarations/network/Network'
 import NodeModal from '../nodeModal/NodeModal'
-
+import { type DataGraphState } from '../../models/dataGraph/dataGraphSlice'
 interface GraphProps {
   data: any
   title: string
@@ -90,10 +90,10 @@ const Graph = ({ data, title }: GraphProps) => {
     }
     return resColor ?? 'grey'
   }
-  const setGraph = (data: any): GraphData => {
-    data = data.sort((a: { distance: number }, b: { distance: number }) => b.distance - a.distance)
-    const coloration = addColorMap(data)
-    let graph = data.map((i: { name: any, distance: number, professionalism: number }, index: any) => {
+  const setGraph = (data: any[]): Data => {
+    const dataGraph = [...data].sort((a: DataGraphState, b: DataGraphState) => b.distance - a.distance)
+    const coloration = addColorMap(dataGraph)
+    let graph = dataGraph.map((i: { name: any, distance: number, professionalism: number }, index: any) => {
       return ({
         scaling: {
           label: false
@@ -101,7 +101,7 @@ const Graph = ({ data, title }: GraphProps) => {
         size: i.distance,
         id: index,
         label: i.name,
-        value: (data.length - index) * 1000,
+        value: (dataGraph.length - index) * 1000,
         shape: 'hexagon',
         shadow: {
           enabled: true,
@@ -117,12 +117,21 @@ const Graph = ({ data, title }: GraphProps) => {
             border: pSBC(0.3, setNodeGradient(coloration, i.professionalism)),
             background: pSBC(-0.3, setNodeGradient(coloration, i.professionalism))
           }
+        },
+        font: {
+          color: 'white',
+          size: 20,
+          bold: {
+            mod: 'bold'
+          },
+          face: 'GT Eesti Pro Display, serif'
         }
       })
     })
-    graph = graph.sort((a: { count: number }, b: { count: number }) => a.count - b.count)
+    // eslint-disable-next-line no-debugger
+    // debugger
+    graph = graph.sort((a, b) => a.size - b.size)
     graph.unshift({
-      hidden: false,
       size: 0,
       value: 0,
       scaling: {
@@ -165,18 +174,16 @@ const Graph = ({ data, title }: GraphProps) => {
     })
     const mainNode = graph[0]
     return {
-      nodes: graph,
+      nodes: graph as (Node[] | DataInterfaceNodes),
       edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
         from: mainNode.id,
         to: el.id,
-        length: 10 * (1 + index)
+        length: el.size
       })).filter((el) => el.to !== el.from)
     }
   }
 
-  const { ref, network } = useVisNetwork({ ...setGraph(data) as Data, options } as UseVisNetworkOptions)
-
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const { ref, network } = useVisNetwork({ ...setGraph(data), options } as UseVisNetworkOptions)
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleClickFit = () => {
@@ -193,10 +200,23 @@ const Graph = ({ data, title }: GraphProps) => {
       // network.focus(-1)
       network.fit()
     })
-    network.setData(setGraph(data) as Data)
+    network.setData(setGraph(data))
     network.setOptions({ ...options, layout: { randomSeed: network.getSeed() } })
-    network.on('selectNode', () => { setIsModalOpen(+network.getSelectedNodes()[0]) })
+    network.on('selectNode', () => {
+      // eslint-disable-next-line no-debugger
+      // debugger
+      // setIsModalOpen(+network.getSelectedNodes()[0])
+    })
   }, [data])
+
+  function nodeModal (): void {
+    if (network == null) return
+    if (+network.getSelectedNodes()[0] === isModalOpen) {
+      setIsModalOpen(-1)
+      return
+    }
+    setIsModalOpen(+network.getSelectedNodes()[0])
+  }
 
   return (
         <>
@@ -204,10 +224,10 @@ const Graph = ({ data, title }: GraphProps) => {
             <button onClick={handleClickFit}>Fit</button>
             <div className={styles.colorsLevel}></div>
           </div>
-            <div className={styles.graphBlock} ref={ref} />
+            <div className={styles.graphBlock} ref={ref} onClick={nodeModal}/>
           {(isModalOpen > -1) && <NodeModal onClose={() => {
             setIsModalOpen(-1)
-          }} nodeId={isModalOpen}/>}
+          }} nodeId={isModalOpen} nodeTitle={data[isModalOpen].name}/>}
         </>
   )
 }

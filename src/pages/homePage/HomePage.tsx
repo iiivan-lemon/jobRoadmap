@@ -10,13 +10,14 @@ interface HomePageProps {
 
 const HomePage = ({ data, inputData }: HomePageProps): JSX.Element => {
   // const history = useHistory()
+
   React.useEffect(() => {
     document.body.style.overflow = 'auto'
     document.getElementById('header')?.classList.remove('headerFix')
   }, [])
 
   return (
-    <div className={styles.page}><Graph data={ data } title={ inputData }/></div>
+    <div className={styles.page}>{(data.length > 0) && <Graph data={ data } title={ inputData }/>}</div>
   )
 }
 
