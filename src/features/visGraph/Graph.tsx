@@ -29,7 +29,7 @@ const Graph = ({ data, title }: GraphProps) => {
       dragView: true
     },
     layout: {
-      randomSeed: 1,
+      randomSeed: 2,
       improvedLayout: true
       // hierarchical: true
       // hierarchical: {
@@ -128,8 +128,6 @@ const Graph = ({ data, title }: GraphProps) => {
         }
       })
     })
-    // eslint-disable-next-line no-debugger
-    // debugger
     graph = graph.sort((a, b) => a.size - b.size)
     graph.unshift({
       size: 0,
@@ -165,7 +163,7 @@ const Graph = ({ data, title }: GraphProps) => {
       },
       font: {
         color: 'white',
-        size: 36,
+        size: 30,
         bold: {
           mod: 'bold'
         },
@@ -178,7 +176,7 @@ const Graph = ({ data, title }: GraphProps) => {
       edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
         from: mainNode.id,
         to: el.id,
-        length: el.size
+        length: 0.1 * (index + 1)
       })).filter((el) => el.to !== el.from)
     }
   }
@@ -203,8 +201,6 @@ const Graph = ({ data, title }: GraphProps) => {
     network.setData(setGraph(data))
     network.setOptions({ ...options, layout: { randomSeed: network.getSeed() } })
     network.on('selectNode', () => {
-      // eslint-disable-next-line no-debugger
-      // debugger
       // setIsModalOpen(+network.getSelectedNodes()[0])
     })
   }, [data])

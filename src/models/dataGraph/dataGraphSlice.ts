@@ -46,7 +46,6 @@ export const getDataGraph = createAsyncThunk(
   'dataGraph/fetchDataGraph',
   async (input: string) => {
     const response = await fetchDataGraph(input)
-    // eslint-disable-next-line no-debugger
     checkStatus(response.status)
     // The value we return becomes the `fulfilled` action payload
     return response.data.technologies
@@ -81,7 +80,6 @@ export const dataGraphSlice = createSlice({
         console.log('loading')
       })
       .addCase(getDataGraph.fulfilled, (state, action) => {
-        // eslint-disable-next-line no-debugger
         state.length = 0
         state.push(...action.payload)
       })

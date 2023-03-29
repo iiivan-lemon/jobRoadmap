@@ -42,7 +42,6 @@
 }
 
 .headerTags {
-
     z-index: 10;
     background: #1B1B1B;
     position: absolute;
@@ -51,4 +50,6 @@
     flex-direction: column;
     width: 100vw;
 }
+
+
 

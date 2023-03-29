@@ -14,13 +14,11 @@ const HomePage = ({ data, inputData }: HomePageProps): JSX.Element => {
   const [loading, setLoad] = React.useState(true)
 
   React.useEffect(() => {
-    document.body.style.overflow = 'none'
+    document.body.style.overflow = 'hidden'
     document.getElementById('header')?.classList.remove('headerFix')
   }, [])
   React.useEffect(() => {
     if (data.length > 0) {
-      // eslint-disable-next-line no-debugger
-      // debugger
       setTimeout(() => { setLoad(false) }, 5000)
     } else setLoad(true)
   }, [data])

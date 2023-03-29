@@ -4,8 +4,6 @@ const NodeModal = ({ onClose, nodeId, nodeTitle }): JSX.Element => {
   const ref = React.useRef<HTMLDivElement | null>(null)
   React.useEffect(() => {
     const checkIfClickedOutside = (e): void => {
-      // eslint-disable-next-line no-debugger
-      // debugger
       if (nodeId === -1) {
         onClose()
       }

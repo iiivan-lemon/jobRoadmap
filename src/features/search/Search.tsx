@@ -12,6 +12,7 @@ const Search: FC<SearchProps> = ({ title, changeData, showOptions }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [tags] = useState(['python developer', 'frontend developer', 'ML developer', 'UI/UX designer'])
   const [titleTag, setTitleTag] = useState('')
+  const [gradeTag, setGradeTag] = useState('')
   function sub (event: any): void {
     event?.preventDefault()
     if (changeData != null) {
@@ -21,9 +22,9 @@ const Search: FC<SearchProps> = ({ title, changeData, showOptions }) => {
     }
   }
   useEffect(() => {
-    (document.getElementById('search') as HTMLInputElement).value = titleTag
+    (document.getElementById('search') as HTMLInputElement).value = gradeTag + ' ' + titleTag
     if (changeData != null) changeData((document.getElementById('search') as HTMLInputElement).value)
-  }, [titleTag])
+  }, [titleTag, gradeTag])
 
   return (
       <React.Fragment>
@@ -35,7 +36,7 @@ const Search: FC<SearchProps> = ({ title, changeData, showOptions }) => {
         </div>
     {isModalOpen && <HeaderOptions tags={tags} onClose={() => {
       setIsModalOpen(false)
-    }} setTitleTag={setTitleTag}/>}
+    }} setTitleTag={setTitleTag} setGrade={setGradeTag}/>}
       </React.Fragment>
   )
 }

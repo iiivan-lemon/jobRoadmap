@@ -1,0 +1,44 @@
+.tag{
+    margin-inline-end: 0.6rem;
+    padding: 0.4rem 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 0 1px #000000;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: center;
+    transition: 0.5s ease;
+}
+
+.profTag{
+    background: #464646;
+}
+
+.tag:hover{
+    color: white;
+    /*border: 1px solid white;*/
+}
+.tagActive{
+    color: white;
+    box-shadow: 0 0 0 3px #FFFFFF;
+    border-radius: 10px;
+}
+
+.gradeTag{
+    width: 12rem;
+}
+
+.junTag {
+    background: #598744;
+}
+
+.midTag{
+    background: #A0952F;
+}
+
+.senTag{
+    background: #803535;
+}

@@ -1,3 +1,11 @@
-.tag{
-    cursor: pointer;
+.spaceLine{
+    margin-inline-start: 80px;
+}
+
+.headerOpsStrings{
+    margin-block-end: 1rem;
+}
+.gradeDesr{
+    color: white;
+    margin-inline-end: 1rem;
 }
