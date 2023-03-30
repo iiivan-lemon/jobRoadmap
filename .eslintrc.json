@@ -17,6 +17,7 @@
   ],
   "rules": {
     "@typescript-eslint/consistent-type-assertions": 0,
-    "@typescript-eslint/no-debugger": 0
+    "@typescript-eslint/no-debugger": 0,
+    "@typescript-eslint/strict-boolean-expressions": 0
   }
 }

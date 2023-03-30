@@ -1,16 +1,20 @@
 import styles from './Tag.module.css'
 const Tag = ({ title, className, setTitleTag, id, setGrade }): any => {
   const setColorClick = (e): void => {
+    // eslint-disable-next-line no-debugger
     const els = document.getElementsByClassName(styles.tagActive)
-    for (let i = 0; i < els.length; ++i) {
-      if (els[i]?.id === e.target.id) { els[i].classList.remove(styles.tagActive) }
+    for (const el of els) {
+      if (el.id === e.target.id && el !== e.target) {
+        el.classList.remove(styles.tagActive)
+      }
     }
     e.target.classList.toggle(styles.tagActive)
+    // eslint-disable-next-line no-debugger
     if (+e.target.id === 10) {
-      setGrade(title)
+      (e?.target.classList.contains(styles.tagActive)) ? setGrade(title) : setGrade('')
       return
     }
-    setTitleTag(title)
+    (e?.target.classList.contains(styles.tagActive)) ? setTitleTag(title) : setTitleTag('')
   }
   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   return (<div id={id} onClick = {setColorClick} className={styles.tag + ' ' + className}>{title}</div>)

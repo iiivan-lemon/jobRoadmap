@@ -68,7 +68,6 @@ const Graph = ({ data, title }: GraphProps) => {
 
   }
   const addColorMap = (data: any[]): string[] => {
-    // @ts-expect-error set iter need fix
     data = [...new Set(data.map(el => el.professionalism))]
       .sort((a, b) => a - b)
     const colors = ['#28C10F', '#ffe500', '#FB1A1A']

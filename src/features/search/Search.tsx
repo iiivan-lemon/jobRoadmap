@@ -22,8 +22,16 @@ const Search: FC<SearchProps> = ({ title, changeData, showOptions }) => {
     }
   }
   useEffect(() => {
+    if (!gradeTag) {
+      (document.getElementById('search') as HTMLInputElement).value = titleTag
+      return
+    }
+    if (!titleTag) {
+      (document.getElementById('search') as HTMLInputElement).value = gradeTag
+      return
+    }
     (document.getElementById('search') as HTMLInputElement).value = gradeTag + ' ' + titleTag
-    if (changeData != null) changeData((document.getElementById('search') as HTMLInputElement).value)
+    // if (changeData != null) changeData((document.getElementById('search') as HTMLInputElement).value)
   }, [titleTag, gradeTag])
 
   return (
