@@ -92,5 +92,6 @@
   },
   "resolutions": {
     "@storybook/react-docgen-typescript-plugin": "1.0.6--canary.9.cd77847.0"
-  }
+  },
+  "proxy": "http://37.139.41.200:1323/"
 }

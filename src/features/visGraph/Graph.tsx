@@ -9,13 +9,14 @@ import styles from './Graph.module.css'
 import { type Data, type DataInterfaceNodes, type Node } from 'vis-network/declarations/network/Network'
 import NodeModal from '../nodeModal/NodeModal'
 import { type DataGraphState } from '../../models/dataGraph/dataGraphSlice'
-interface GraphProps {
-  data: any
-  title: string
-}
+import image from './node.svg'
+// interface GraphProps {
+//   data: any
+//   title: string
+// }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type,react/display-name
-const Graph = ({ data, title }: GraphProps) => {
+const Graph = ({ data, title, grade }) => {
   const options: Options = {
     height: '100%',
     width: '100%',
@@ -50,9 +51,10 @@ const Graph = ({ data, title }: GraphProps) => {
       arrows: { to: { enabled: false } }
     },
     nodes: {
+      shape: 'image',
+      brokenImage: image,
       borderWidth: 1,
       borderWidthSelected: 2,
-      brokenImage: undefined,
       chosen: true,
       scaling: {
         max: 75
@@ -97,11 +99,11 @@ const Graph = ({ data, title }: GraphProps) => {
         scaling: {
           label: false
         },
+        image,
         size: i.distance,
         id: index,
         label: i.name,
         value: (dataGraph.length - index) * 1000,
-        shape: 'hexagon',
         shadow: {
           enabled: true,
           color: setNodeGradient(coloration, i.professionalism),
@@ -136,7 +138,6 @@ const Graph = ({ data, title }: GraphProps) => {
       },
       id: -1,
       label: title,
-      shape: 'elipse',
       shadow: {
         enabled: true,
         color: 'black',
@@ -167,7 +168,8 @@ const Graph = ({ data, title }: GraphProps) => {
           mod: 'bold'
         },
         face: 'GT Eesti Pro Display, serif'
-      }
+      },
+      image: ''
     })
     const mainNode = graph[0]
     return {
@@ -203,6 +205,11 @@ const Graph = ({ data, title }: GraphProps) => {
       // setIsModalOpen(+network.getSelectedNodes()[0])
     })
   }, [data])
+
+  React.useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    console.log('FILTER: ', grade)
+  }, [grade])
 
   function nodeModal (): void {
     if (network == null) return

@@ -11,13 +11,13 @@ const Tag = ({ title, className, setTitleTag, id, setGrade }): any => {
     e.target.classList.toggle(styles.tagActive)
     // eslint-disable-next-line no-debugger
     if (+e.target.id === 10) {
-      (e?.target.classList.contains(styles.tagActive)) ? setGrade(title) : setGrade('')
+      (e?.target.classList.contains(styles.tagActive)) ? setGrade(title.id) : setGrade(0)
       return
     }
-    (e?.target.classList.contains(styles.tagActive)) ? setTitleTag(title) : setTitleTag('')
+    (e?.target.classList.contains(styles.tagActive)) ? setTitleTag(title.title) : setTitleTag(0)
   }
   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  return (<div id={id} onClick = {setColorClick} className={styles.tag + ' ' + className}>{title}</div>)
+  return (<div id={id} onClick = {setColorClick} className={styles.tag + ' ' + className}>{title.title}</div>)
 }
 
 export default Tag

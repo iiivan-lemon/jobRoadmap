@@ -1,13 +1,21 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import styles from '../header/Header.module.css'
 import { Space } from 'antd'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef }
+  from 'react'
 import ReactDOM from 'react-dom'
 import stylesOps from './HeaderOptions.module.css'
 import Tag from '../Tag/Tag'
 import stylesTag from './../Tag/Tag.module.css'
-const HeaderOptions = ({ tags, onClose, setTitleTag, setGrade }): any => {
-  const grades = ['junior', 'middle', 'senior']
+const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
+  const tags = [{ title: 'python developer' }, { title: 'frontend developer' }, { title: 'ML developer' }, { title: 'UI/UX designer' }]
+
+  const grades = [
+    { title: 'нет опыта', id: 0 },
+    { title: '0-3 лет', id: 0.25 },
+    { title: '3-6 лет', id: 0.5 },
+    { title: 'более 6 лет', id: 1 }
+  ]
   const ref = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
     const checkIfClickedOutside = (e): void => {
@@ -28,7 +36,7 @@ const HeaderOptions = ({ tags, onClose, setTitleTag, setGrade }): any => {
     }
   }, [])
 
-  function renderTags (tags: string[], className: string[]): any[] {
+  function renderTags (tags: any[], className: string[]): any[] {
     return tags.map((el, index) => <Tag setGrade={setGrade} setTitleTag={setTitleTag} className={(tags.length === className.length) ? className[index] : className[0] }
                                         title={el} id={(tags.length === className.length) ? 10 : 1 }></Tag>)
   }
@@ -52,7 +60,7 @@ const HeaderOptions = ({ tags, onClose, setTitleTag, setGrade }): any => {
 
           <Space className={stylesOps.headerOpsStrings} size={[0, 8]} wrap>
             <span className={stylesOps.gradeDesr}>опыт работы</span>
-          {renderTags(grades, [stylesTag.junTag, stylesTag.midTag, stylesTag.senTag].map(el => el + ' ' + stylesTag.gradeTag))}
+          {renderTags(grades, [stylesTag.zeroTag, stylesTag.junTag, stylesTag.midTag, stylesTag.senTag].map(el => el + ' ' + stylesTag.gradeTag))}
           </Space>
         </div></>, document.getElementById('header-options') as HTMLElement)
 

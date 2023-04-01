@@ -14,7 +14,7 @@
 }
 
 .profTag{
-    background: #464646;
+    background: linear-gradient(242.29deg, #adadadcf -125.58%, rgba(255, 255, 255, 0) 73.6%), #464646;
 }
 
 .tag:hover{
@@ -31,14 +31,18 @@
     width: 12rem;
 }
 
-.junTag {
-    background: #598744;
+.zeroTag {
+    background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #6ad13b;
+}
+.junTag{
+    background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #7F9F23;
 }
 
 .midTag{
-    background: #A0952F;
+    background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #cfbf35;
 }
 
 .senTag{
-    background: #803535;
+    background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #d34848;
+
 }
