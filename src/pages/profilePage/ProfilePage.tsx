@@ -1,9 +1,14 @@
 import React, { type FC } from 'react'
 import styles from './ProfilePage.module.css'
 import './../../App.css'
+// import { userProfile } from '../../models/user/UserSlice'
+// import { useAppDispatch } from '../../app/hooks'
 // import stylesTags from '../../features/headerOptions/HeaderOptions.module.css'
 // import { Tag } from 'antd'
 const ProfilePage: FC = () => {
+  // const dispatch = useAppDispatch()
+  React.useEffect(() => {
+  }, [])
   const tags = ['python developer', 'python developer123123', 'frontend developer', 'middle ML developer']
   function renderGraphBlock (tags: string[]): any[] {
     return tags.map((el, index) => <div className={styles.saveGraph} >{el}<svg width="59" height="78" viewBox="0 0 59 78" fill="none" xmlns="http://www.w3.org/2000/svg">

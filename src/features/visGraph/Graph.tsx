@@ -9,14 +9,18 @@ import styles from './Graph.module.css'
 import { type Data, type DataInterfaceNodes, type Node } from 'vis-network/declarations/network/Network'
 import NodeModal from '../nodeModal/NodeModal'
 import { type DataGraphState } from '../../models/dataGraph/dataGraphSlice'
-import image from './node.svg'
+import { ReactComponent as YourSvg } from './node.svg'
+import ii from './node.png'
+import { renderToString } from 'react-dom/server'
 // interface GraphProps {
 //   data: any
 //   title: string
 // }
+// import { recolorSVGString } from 'recolor-img'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type,react/display-name
 const Graph = ({ data, title, grade }) => {
+  console.log('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(renderToString(<YourSvg fill='red'/>)))
   const options: Options = {
     height: '100%',
     width: '100%',
@@ -52,7 +56,7 @@ const Graph = ({ data, title, grade }) => {
     },
     nodes: {
       shape: 'image',
-      brokenImage: image,
+      brokenImage: ii,
       borderWidth: 1,
       borderWidthSelected: 2,
       chosen: true,
@@ -99,21 +103,23 @@ const Graph = ({ data, title, grade }) => {
         scaling: {
           label: false
         },
-        image,
+        image: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(renderToString(<YourSvg fill=
+                                                                                                    {((filterGrade(i.professionalism)) ? pSBC(0.2, setNodeGradient(coloration, i.professionalism)) : '#3A3A3A') as string } />)),
         size: i.distance,
         id: index,
         label: i.name,
         value: (dataGraph.length - index) * 1000,
         shadow: {
-          enabled: true,
+          enabled: (filterGrade(i.professionalism)),
           color: setNodeGradient(coloration, i.professionalism),
           size: 5,
           x: 0,
           y: 2
         },
         color: {
-          border: setNodeGradient(coloration, i.professionalism),
-          background: pSBC(0.5, setNodeGradient(coloration, i.professionalism)),
+          border: (filterGrade(i.professionalism)) ? setNodeGradient(coloration, i.professionalism) : '#3A3A3A',
+          // border: setNodeGradient(coloration, i.professionalism),
+          background: (filterGrade(i.professionalism)) ? pSBC(0.2, setNodeGradient(coloration, i.professionalism)) : '#3A3A3A',
           highlight: {
             border: pSBC(0.3, setNodeGradient(coloration, i.professionalism)),
             background: pSBC(-0.3, setNodeGradient(coloration, i.professionalism))
@@ -129,55 +135,55 @@ const Graph = ({ data, title, grade }) => {
         }
       })
     })
-    graph = graph.sort((a, b) => a.size - b.size)
-    graph.unshift({
-      size: 0,
-      value: 0,
-      scaling: {
-        label: false
-      },
-      id: -1,
-      label: title,
-      shadow: {
-        enabled: true,
-        color: 'black',
-        size: 2,
-        x: 0,
-        y: 2
-      },
-      // color: {
-      //   border: 'black',
-      //   background: pSBC(0.3, '#808080'),
-      //   highlight: {
-      //     border: pSBC(0.3, '#808080'),
-      //     background: pSBC(-0.3, '#808080')
-      //   }
-      // },
-      color: {
-        border: 'transparent',
-        background: 'transparent',
-        highlight: {
-          border: 'transparent',
-          background: 'transparent'
-        }
-      },
-      font: {
-        color: 'white',
-        size: 30,
-        bold: {
-          mod: 'bold'
-        },
-        face: 'GT Eesti Pro Display, serif'
-      },
-      image: ''
-    })
+    graph = graph.sort((a, b) => b.size - a.size)
+    // graph.unshift({
+    //   size: 0,
+    //   value: 0,
+    //   scaling: {
+    //     label: false
+    //   },
+    //   id: -1,
+    //   label: title,
+    //   shadow: {
+    //     enabled: true,
+    //     color: 'black',
+    //     size: 2,
+    //     x: 0,
+    //     y: 2
+    //   },
+    //   // color: {
+    //   //   border: 'black',
+    //   //   background: pSBC(0.3, '#808080'),
+    //   //   highlight: {
+    //   //     border: pSBC(0.3, '#808080'),
+    //   //     background: pSBC(-0.3, '#808080')
+    //   //   }
+    //   // },
+    //   color: {
+    //     border: 'transparent',
+    //     background: 'transparent',
+    //     highlight: {
+    //       border: 'transparent',
+    //       background: 'transparent'
+    //     }
+    //   },
+    //   font: {
+    //     color: 'white',
+    //     size: 30,
+    //     bold: {
+    //       mod: 'bold'
+    //     },
+    //     face: 'GT Eesti Pro Display, serif'
+    //   },
+    //   image: ii
+    // })
     const mainNode = graph[0]
     return {
       nodes: graph as (Node[] | DataInterfaceNodes),
       edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
         from: mainNode.id,
         to: el.id,
-        length: 0.1 * (index + 1)
+        length: 1 - dataGraph[index].distance
       })).filter((el) => el.to !== el.from)
     }
   }
@@ -207,9 +213,12 @@ const Graph = ({ data, title, grade }) => {
   }, [data])
 
   React.useEffect(() => {
-    // eslint-disable-next-line no-debugger
     console.log('FILTER: ', grade)
   }, [grade])
+
+  function filterGrade (value: number): boolean {
+    return (grade.begin <= value && value <= grade.end)
+  }
 
   function nodeModal (): void {
     if (network == null) return
@@ -219,12 +228,21 @@ const Graph = ({ data, title, grade }) => {
     }
     setIsModalOpen(+network.getSelectedNodes()[0])
   }
+  // const svg1 = image
+  // // recolorPNGImage recolors image of the given <img> element with the specified color.
+  // document
+  //   .getElementById('svg1')
+  //   .setAttribute('src', recolorSVGString(image, '#83c400', true))
 
   return (
         <>
           <div className={styles.btnOptions}>
-            <button onClick={handleClickFit}>Fit</button>
-            <div className={styles.colorsLevel}></div>
+            <span className={styles.gradeTitle}>опыт работы</span>
+            <div className={styles.colorsLevel}>
+              <span>нет опыта</span>
+              <span>более 6 лет</span>
+            </div>
+            <button onClick={handleClickFit}>общий вид</button>
           </div>
             <div className={styles.graphBlock} ref={ref} onClick={nodeModal}/>
           {(isModalOpen > -1) && <NodeModal onClose={() => {

@@ -1,7 +1,6 @@
 import styles from './Tag.module.css'
 const Tag = ({ title, className, setTitleTag, id, setGrade }): any => {
   const setColorClick = (e): void => {
-    // eslint-disable-next-line no-debugger
     const els = document.getElementsByClassName(styles.tagActive)
     for (const el of els) {
       if (el.id === e.target.id && el !== e.target) {
@@ -9,9 +8,9 @@ const Tag = ({ title, className, setTitleTag, id, setGrade }): any => {
       }
     }
     e.target.classList.toggle(styles.tagActive)
-    // eslint-disable-next-line no-debugger
+
     if (+e.target.id === 10) {
-      (e?.target.classList.contains(styles.tagActive)) ? setGrade(title.id) : setGrade(0)
+      (e?.target.classList.contains(styles.tagActive)) ? setGrade({ begin: title.id, end: 1 }) : setGrade({ begin: 0, end: 0 })
       return
     }
     (e?.target.classList.contains(styles.tagActive)) ? setTitleTag(title.title) : setTitleTag(0)

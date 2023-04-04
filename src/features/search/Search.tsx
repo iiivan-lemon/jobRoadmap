@@ -15,7 +15,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [titleTag, setTitleTag] = useState('')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [gradeTag, setGradeTag] = useState('')
+  const [gradeTag, setGradeTag] = useState({ begin: 0, end: 1 })
 
   const [isFavorite, setFavorite] = useState(false)
   function sub (event: any): void {
@@ -23,7 +23,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     if (changeData != null) {
       const value = (document.getElementById('search') as HTMLInputElement).value
       changeData(value)
-      // eslint-disable-next-line no-debugger
+
       setGrade(gradeTag)
       // (document.getElementById('search') as HTMLInputElement).value = ''
     }
