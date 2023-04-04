@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useEffect } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -10,13 +10,21 @@ import {authActions, userActions} from '../_store';
 import {useNavigate} from "react-router-dom";
 import {loadingProfile, registration} from "../../models/user/userActions";
 import {loginOrLogout} from "../../models/auth/authActions";
+import './reg.css'
+// export { Reg };
 
-export { Reg };
-
-function Reg() {
+export const Reg = () => {
+    const refLinkCon = useRef();
+    const refRegCon = useRef();
     const dispatch = useDispatch();
     const authUser = useSelector(x => x?.auth?.user);
     const authError = useSelector(x => x?.auth?.error);
+
+
+    const [link, setLink] = useState('');
+    const regLink = () => {
+        window.location.href = `${link}`;
+    }
     const history = useNavigate()
     useEffect(() => {
         document.body.style.overflow = 'hidden'
@@ -50,11 +58,12 @@ function Reg() {
                 }
             });
     }, [])
-    async function onSubmit({email, password}) {
-        const res = await dispatch(loginOrLogout(true, {email, password}));
-
-        if (res === true) {
-            nav('/favorite');
+    async function onSubmit({username,email, password}) {
+        const res = await dispatch(loginOrLogout(true, {username,email, password}));
+        if (res !== undefined) {
+            setLink(res)
+            refLinkCon.current.classList.remove('conf-container-hidden');
+            refRegCon.current.classList.add('conf-container-hidden');
         }
     }
 
@@ -89,6 +98,10 @@ function Reg() {
                     </form>
                 </div>
                 <span onClick={()=>{ history('/login')}}> у вас есть аккаунт? Войти</span>
+                <div ref={refLinkCon} className='conf-container conf-container-hidden'>
+                    <div className='log-h1' style={{textAlign: 'center'}}> Подтвердите почту </div>
+                    <div className='conf-first'> Перейдите по этой <span onClick={regLink} className='conf-a'> сслыке!</span> для заверщения регистрации</div>
+                </div>
             </div>
         </div>
     )

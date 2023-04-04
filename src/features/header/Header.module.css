@@ -21,6 +21,7 @@
 }
 
 .favorite {
+    z-index: 20;
     flex-grow: 1;
     text-decoration: none;
     padding-inline: 10px;

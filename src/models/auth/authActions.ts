@@ -8,7 +8,7 @@ export const loginOrLogout = (auth, user?) => {
     let message
     try {
       if (user !== undefined) {
-        if (user.hasOwnProperty('name')) {
+        if (user.hasOwnProperty('username')) {
           message = await dispatch(registration(user))
           if (message === 500) {
             throw 500

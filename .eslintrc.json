@@ -16,6 +16,9 @@
     "react"
   ],
   "rules": {
+    "@typescript-eslint/indent": "warn",
+    "@typescript-eslint/member-delimiter-style": "warn",
+    "@typescript-eslint/semi": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-misused-promises": "warn",
     "@typescript-eslint/no-throw-literal": "warn",
