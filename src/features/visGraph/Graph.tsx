@@ -15,6 +15,7 @@ import { type DataGraphState } from '../../models/dataGraph/dataGraphSlice'
 import { ReactComponent as YourSvg } from './node.svg'
 import ii from './node.png'
 import { renderToString } from 'react-dom/server'
+import GradientGrade from '../gradientGrade/GradientGrade'
 
 /*
  * Interface GraphProps {
@@ -256,14 +257,7 @@ const Graph = ({ data, title, grade }) => {
               <span className={styles.gradeTitle}>
                   опыт работы
               </span>
-              <div className={styles.colorsLevel}>
-                  <span>
-                      нет опыта
-                  </span>
-                  <span>
-                      более 6 лет
-                  </span>
-              </div>
+              <GradientGrade width={'14rem'}/>
               <button onClick={handleClickFit}>
                   общий вид
               </button>

@@ -1,36 +1,91 @@
 .startBlock{
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-image: url("../../static/images/back-pattern-home.png");
+    background-size: contain;
+}
+
+.gradeBlock{
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
+    display: flex;
     background-size: 100% 100%;
+    background: url("../../static/images/back-pattern-grade.png"), linear-gradient(180deg, rgba(24, 24, 24, 0) 0%, #141414 100%);
+    backdrop-filter: blur(5px);
+    background-size: contain;
+}
+.gradeDescr{
+    align-items: center;
+    padding: 10px;
+    margin-inline: 70px;
+    display: flex;
+    justify-content: space-between;
+}
+.nodes{
+    height: 20rem;
+}
+
+.endBlock{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+    justify-content: space-around;
+    background: url("../../static/images/back-pattern-graph.png"), linear-gradient(180deg, #141414 0%, #141414 100%);
+    background-size: cover;
 }
 
 .description{
+    height: 86%;
     padding: 10px;
     margin: 70px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .title{
+    margin-block-start: 1rem;
     font-family: 'GT Eesti Pro Display', serif;
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
     line-height: 37px;
     /* text-align: center; */
-    flex-grow: 1;
+    color: #FFFFFF;
+}
+
+.titleEnd{
+    cursor: pointer;
+    align-self: center;
+    margin-inline: 1rem;
+    font-family: 'GT Eesti Pro Display', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 37px;
+    /* text-align: center; */
     color: #FFFFFF;
 }
 
 .titleDescr{
-    font-family: 'GT Eesti Pro Display', serif;
+    margin-block: 1rem;
+    width: 30rem;
     font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 37px;
-    flex-grow: 1;
+    font-weight: 400;
+    font-size: 22px;
     color: #FFFFFF;
 }
 
+.tasks{
+    width: 30rem;
+    margin-block: 1rem;
+}
+
+.titleFavEnd{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}

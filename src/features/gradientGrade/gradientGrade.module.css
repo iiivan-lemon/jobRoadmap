@@ -1,0 +1,10 @@
+.colorsLevel{
+    padding: 0.3rem;
+    display: flex;
+    width: 14rem;
+    background: linear-gradient(90deg, #28C10F 0.03%, #ffe500 50.27%, #FB1A1A 99.97%);
+    font-size: 14px;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
