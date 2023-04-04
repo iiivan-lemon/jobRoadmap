@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../_helpers';
 import {authActions, userActions} from '../_store';
 import {useNavigate} from "react-router-dom";
+import {loadingProfile, registration} from "../../models/user/userActions";
+import {loginOrLogout} from "../../models/auth/authActions";
 
 export { Reg };
 
@@ -36,12 +38,24 @@ function Reg() {
     // get functions to build form with useForm() hook
     const { register, handleSubmit, formState } = useForm(formOptions);
     const { errors, isSubmitting } = formState;
-
-    function onSubmit({ username, email, password }) {
-        dispatch(userActions.signup({ username, email, password }))
+    useEffect(() => {
+        dispatch(loadingProfile())
             .then((res) => {
-            })
-            .catch()
+                if (res === true) {
+                    history('/favorites');
+                }
+
+                if (res === 500) {
+                    alert('ошибка сервера')
+                }
+            });
+    }, [])
+    async function onSubmit({email, password}) {
+        const res = await dispatch(loginOrLogout(true, {email, password}));
+
+        if (res === true) {
+            nav('/favorite');
+        }
     }
 
     return (

@@ -41,7 +41,7 @@ function createExtraActions() {
     return {
         login: login(),
         logout: logout(),
-        profile: profile()
+
     };
 
     function login() {

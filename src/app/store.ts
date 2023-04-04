@@ -1,16 +1,17 @@
-import { configureStore, type ThunkAction, type Action } from '@reduxjs/toolkit'
+import { configureStore, type ThunkAction, type Action, combineReducers } from '@reduxjs/toolkit'
 import dataGraphReducer from '../models/dataGraph/dataGraphSlice'
 import gradeReducer from '../models/gradeFilter/gradeSlice'
-// import userReducer from '../models/user/UserSlice'
-import { authReducer, usersReducer } from '../authApp/_store'
-// import { authReducer } from '../models/auth/authSlice'
+// import user from '../models/user/UserSlice'
+import { UserReducer } from '../models/user/userReducer'
+import { AuthReducer } from '../models/auth/authReducer'
+// import { auth } from '../models/auth/authSlice'
 export const store = configureStore({
-  reducer: {
+  reducer: combineReducers({
     dataGraph: dataGraphReducer,
     grade: gradeReducer,
-    auth: authReducer,
-    users: usersReducer
-  }
+    auth: AuthReducer,
+    user: UserReducer
+  })
 })
 
 export type AppDispatch = typeof store.dispatch
@@ -21,3 +22,4 @@ RootState,
 unknown,
 Action<string>
 >
+export const apiUrl = 'http://37.139.41.200:1323/api/v1'

@@ -8,6 +8,8 @@ import {useNavigate} from "react-router-dom";
 import {authActions, userActions} from '../_store';
 
 import  './../styles/auth.css'
+import {loadingProfile} from "../../models/user/userActions";
+import {loginOrLogout} from "../../models/auth/authActions";
 
 
 export { Login };
@@ -25,7 +27,18 @@ function Login() {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    useEffect(() => {
+        dispatch(loadingProfile())
+            .then((res) => {
+                if (res === true) {
+                    history('/favorites');
+                }
 
+                if (res === 500) {
+                    alert('ошибка сервера')
+                }
+            });
+    }, [])
     // form validation rules
     const validationSchema = Yup.object().shape({
         email: Yup.string().required('email is required'),
@@ -37,19 +50,12 @@ function Login() {
     const { register, handleSubmit, formState } = useForm(formOptions);
     const { errors, isSubmitting } = formState;
 
-    function onSubmit({ email, password }) {
-        dispatch(authActions.login({ email, password }))
-            .then((res) => {
-                
-                if (res.payload === true) {
-                    history('/favorites');
-                }
+    async function onSubmit({email, password}) {
+        const res = await dispatch(loginOrLogout(true, {email, password}));
 
-                if (res.payload === 500) {
-                    alert('ошибка на сервере', res.payload)
-                }
-            })
-            .catch(e => console.log(111))
+        if (res === true) {
+            nav('/favorite');
+        }
     }
 
     return (
