@@ -7,7 +7,8 @@ export const loginOrLogout = (auth, user?) => async (dispatch) => {
   let message
   try {
     if (user !== undefined) {
-      if (user.hasOwnProperty('username')) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (user?.hasOwnProperty('username')) {
         message = await dispatch(registration(user))
         if (message === 500) {
           throw 500
