@@ -35,7 +35,7 @@
     "yup": "^1.0.2"
   },
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -86,5 +86,5 @@
     "prop-types": "^15.8.1",
     "typescript": "^5.0.2",
     "webpack": "^5.76.3"
-  }
+  },
 }
