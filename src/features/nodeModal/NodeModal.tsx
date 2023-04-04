@@ -14,14 +14,21 @@ const NodeModal = ({ onClose, nodeId, nodeTitle }): JSX.Element => {
     }
   }, [onClose])
 
-  React.useEffect(() => {
-    // document.body.style.overflow = 'hidden'
-    return () => {
-      // document.body.style.overflow = 'auto'
-    }
-  }, [])
+  React.useEffect(
+    () =>
+    // Document.body.style.overflow = 'hidden'
+      () => {
+      // Document.body.style.overflow = 'auto'
+      }
+    , []
+  )
 
-  return (<div className={styles.nodeModal} ref={ref}>{nodeTitle}</div>)
+  return (<div
+      className={styles.nodeModal}
+      ref={ref}
+          >
+      {nodeTitle}
+          </div>)
 }
 
 export default NodeModal

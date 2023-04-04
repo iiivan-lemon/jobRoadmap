@@ -8,7 +8,12 @@ import stylesOps from './HeaderOptions.module.css'
 import Tag from '../Tag/Tag'
 import stylesTag from './../Tag/Tag.module.css'
 const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
-  const tags = [{ title: 'python developer' }, { title: 'frontend developer' }, { title: 'ML developer' }, { title: 'UI/UX designer' }]
+  const tags = [
+    { title: 'python developer' },
+    { title: 'frontend developer' },
+    { title: 'ML developer' },
+    { title: 'UI/UX designer' }
+  ]
 
   const grades = [
     { title: 'нет опыта', id: 0 },
@@ -29,42 +34,97 @@ const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
     }
   }, [onClose])
 
-  useEffect(() => {
-    // document.body.style.overflow = 'hidden'
-    return () => {
-      // document.body.style.overflow = 'auto'
-    }
-  }, [])
+  useEffect(
+    () =>
+    // Document.body.style.overflow = 'hidden'
+      () => {
+      // Document.body.style.overflow = 'auto'
+      }
+    , []
+  )
 
   function renderTags (tags: any[], className: string[]): any[] {
-    return tags.map((el, index) => <Tag setGrade={setGrade} setTitleTag={setTitleTag} className={(tags.length === className.length) ? className[index] : className[0] }
-                                        title={el} id={(tags.length === className.length) ? 10 : 1 }></Tag>)
+    return tags.map((el, index) => (<Tag
+        className={(tags.length === className.length) ? className[index] : className[0]}
+        id={(tags.length === className.length) ? 10 : 1}
+        setGrade={setGrade}
+        setTitleTag={setTitleTag}
+        title={el}
+                                    />))
   }
 
-  return ReactDOM.createPortal(
-      <>
-        <svg className={stylesOps.spaceLine} width="1418" height="1" viewBox="0 0 1418 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1418" y="1" width="1418" height="1" transform="rotate(-180 1418 1)" fill="url(#paint0_linear_120_572)"/>
+  return ReactDOM.createPortal(<>
+      <svg
+          className={stylesOps.spaceLine}
+          fill="none"
+          height="1"
+          viewBox="0 0 1418 1"
+          width="1418"
+          xmlns="http://www.w3.org/2000/svg"
+      >
+          <rect
+              fill="url(#paint0_linear_120_572)"
+              height="1"
+              transform="rotate(-180 1418 1)"
+              width="1418"
+              x="1418"
+              y="1"
+          />
           <defs>
-            <linearGradient id="paint0_linear_120_572" x1="3027.87" y1="3.01352" x2="1647.1" y2="1.40684" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#D9D9D9"/>
-              <stop offset="1" stop-color="#1B1B1B"/>
-            </linearGradient>
+              <linearGradient
+                  gradientUnits="userSpaceOnUse"
+                  id="paint0_linear_120_572"
+                  x1="3027.87"
+                  x2="1647.1"
+                  y1="3.01352"
+                  y2="1.40684"
+              >
+                  <stop stopColor="#D9D9D9" />
+                  <stop
+                      offset="1"
+                      stopColor="#1B1B1B"
+                  />
+              </linearGradient>
           </defs>
-        </svg>
-        <div className={styles.headerTags} ref={ref}>
-            {/* <Divider orientation="left">Custom</Divider> */}
-            <Space className={stylesOps.headerOpsStrings} size={[0, 8]} wrap>
-                {renderTags(tags, [stylesTag.profTag])}
-            </Space>
-
-          <Space className={stylesOps.headerOpsStrings} size={[0, 8]} wrap>
-            <span className={stylesOps.gradeDesr}>опыт работы</span>
-          {renderTags(grades, [stylesTag.zeroTag, stylesTag.junTag, stylesTag.midTag, stylesTag.senTag].map(el => el + ' ' + stylesTag.gradeTag))}
+      </svg>
+      <div
+          className={styles.headerTags}
+          ref={ref}
+      >
+          {/* <Divider orientation="left">Custom</Divider> */}
+          <Space
+              className={stylesOps.headerOpsStrings}
+              size={[
+                0,
+                8
+              ]}
+              wrap
+          >
+              {renderTags(tags, [stylesTag.profTag])}
           </Space>
-        </div></>, document.getElementById('header-options') as HTMLElement)
 
-  // return (
+          <Space
+              className={stylesOps.headerOpsStrings}
+              size={[
+                0,
+                8
+              ]}
+              wrap
+          >
+              <span className={stylesOps.gradeDesr}>
+                  опыт работы
+              </span>
+              {renderTags(grades, [
+                stylesTag.zeroTag,
+                stylesTag.junTag,
+                stylesTag.midTag,
+                stylesTag.senTag
+              ].map((el) => `${el} ${stylesTag.gradeTag}`))}
+          </Space>
+      </div>
+                               </>, document.getElementById('header-options') as HTMLElement)
+
+  // Return (
   //       <div className={styles.headerTags} ref={ref}>
   //           {/* <Divider orientation="left">Custom</Divider> */}
   //           <Space size={[0, 8]} wrap>

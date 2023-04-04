@@ -30,38 +30,27 @@ export const UserReducer = (state = defaultState, action: UserActions): UserStat
   }
 }
 
-export const userActionName = (payload) => {
-  return {
-    type: UserActionEnum.SET_NAME,
-    payload
-  }
-}
+export const userActionName = (payload) => ({
+  type: UserActionEnum.SET_NAME,
+  payload
+})
 
+export const userActionSurname = (payload) => ({
+  type: UserActionEnum.SET_SURNAME,
+  payload
+})
 
-export const userActionSurname = (payload) => {
-  return {
-    type: UserActionEnum.SET_SURNAME,
-    payload
-  }
-}
+export const userActionEmail = (payload) => ({
+  type: UserActionEnum.SET_EMAIL,
+  payload
+})
 
-export const userActionEmail = (payload) => {
-  return {
-    type: UserActionEnum.SET_EMAIL,
-    payload
-  }
-}
+export const userActionAge = (payload) => ({
+  type: UserActionEnum.SET_AGE,
+  payload
+})
 
-export const userActionAge = (payload) => {
-  return {
-    type: UserActionEnum.SET_AGE,
-    payload
-  }
-}
-
-export const userActionPhoto = (payload) => {
-  return {
-    type: UserActionEnum.SET_PHOTO,
-    payload
-  }
-}
+export const userActionPhoto = (payload) => ({
+  type: UserActionEnum.SET_PHOTO,
+  payload
+})

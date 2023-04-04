@@ -1,18 +1,20 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-// import { useSelector } from 'react-redux'
+// Import { useSelector } from 'react-redux'
 
-// import { history } from '../../utils/history'
+// Import { history } from '../../utils/history'
 
 function PrivateRoute (): any {
-  // const auth = useSelector((x: any) => x.auth.value)
+  // Const auth = useSelector((x: any) => x.auth.value)
 
-  // constant-condition
-  // if (0) {
-  //   return <Navigate to="/login" state={{ from: history.location }} />
-  // }
+  /*
+   * Constant-condition
+   * if (0) {
+   *   return <Navigate to="/login" state={{ from: history.location }} />
+   * }
+   */
 
-  // authorized so return outlet for child routes
+  // Authorized so return outlet for child routes
   return <Outlet />
 }
 

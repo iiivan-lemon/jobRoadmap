@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { type Options } from 'vis-network/standalone/esm/vis-network'
 
 import useVisNetwork, { type UseVisNetworkOptions } from './useVisNetwork'
-// import GraphRoadMap from '../graph/Graph'
-// import { type GraphData } from 'react-vis-graph-wrapper'
+
+/*
+ * Import GraphRoadMap from '../graph/Graph'
+ * import { type GraphData } from 'react-vis-graph-wrapper'
+ */
 import pSBC from 'shade-blend-color'
 import styles from './Graph.module.css'
 import { type Data, type DataInterfaceNodes, type Node } from 'vis-network/declarations/network/Network'
@@ -12,15 +15,18 @@ import { type DataGraphState } from '../../models/dataGraph/dataGraphSlice'
 import { ReactComponent as YourSvg } from './node.svg'
 import ii from './node.png'
 import { renderToString } from 'react-dom/server'
-// interface GraphProps {
-//   data: any
-//   title: string
-// }
-// import { recolorSVGString } from 'recolor-img'
+
+/*
+ * Interface GraphProps {
+ *   data: any
+ *   title: string
+ * }
+ * import { recolorSVGString } from 'recolor-img'
+ */
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type,react/display-name
 const Graph = ({ data, title, grade }) => {
-  console.log('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(renderToString(<YourSvg fill='red'/>)))
+  console.log(`data:image/svg+xml;charset=utf-8,${encodeURIComponent(renderToString(<YourSvg fill="red" />))}`)
   const options: Options = {
     height: '100%',
     width: '100%',
@@ -36,17 +42,20 @@ const Graph = ({ data, title, grade }) => {
     layout: {
       randomSeed: 2,
       improvedLayout: true
-      // hierarchical: true
-      // hierarchical: {
-      //     levelSeparation: 150,
-      //     nodeSpacing: 100,
-      // treeSpacing: 200,
-      // blockShifting: true,
-      // edgeMinimization: true,
-      // parentCentralization: true,
-      // direction: 'UD',        // UD, DU, LR, RL
-      // sortMethod: 'directed'   // hubsize, directed
-      // }
+
+      /*
+       * Hierarchical: true
+       * hierarchical: {
+       *     levelSeparation: 150,
+       *     nodeSpacing: 100,
+       * treeSpacing: 200,
+       * blockShifting: true,
+       * edgeMinimization: true,
+       * parentCentralization: true,
+       * direction: 'UD',        // UD, DU, LR, RL
+       * sortMethod: 'directed'   // hubsize, directed
+       * }
+       */
     },
     edges: {
       physics: true,
@@ -74,12 +83,16 @@ const Graph = ({ data, title, grade }) => {
 
   }
   const addColorMap = (data: any[]): string[] => {
-    data = [...new Set(data.map(el => el.professionalism))]
+    data = [...new Set(data.map((el) => el.professionalism))]
       .sort((a, b) => a - b)
-    const colors = ['#28C10F', '#ffe500', '#FB1A1A']
+    const colors = [
+      '#28C10F',
+      '#ffe500',
+      '#FB1A1A'
+    ]
     const res = new Map()
     data.forEach((el, i) => res.set(el, colors[i]))
-    // return res;
+    // Return res;
     return colors
   }
 
@@ -98,85 +111,85 @@ const Graph = ({ data, title, grade }) => {
   const setGraph = (data: any[]): Data => {
     const dataGraph = [...data].sort((a: DataGraphState, b: DataGraphState) => b.distance - a.distance)
     const coloration = addColorMap(dataGraph)
-    let graph = dataGraph.map((i: { name: any, distance: number, professionalism: number }, index: any) => {
-      return ({
-        scaling: {
-          label: false
-        },
-        image: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(renderToString(<YourSvg fill=
-                                                                                                    {((filterGrade(i.professionalism)) ? pSBC(0.2, setNodeGradient(coloration, i.professionalism)) : '#3A3A3A') as string } />)),
-        size: i.distance,
-        id: index,
-        label: i.name,
-        value: (dataGraph.length - index) * 1000,
-        shadow: {
-          enabled: (filterGrade(i.professionalism)),
-          color: setNodeGradient(coloration, i.professionalism),
-          size: 5,
-          x: 0,
-          y: 2
-        },
-        color: {
-          border: (filterGrade(i.professionalism)) ? setNodeGradient(coloration, i.professionalism) : '#3A3A3A',
-          // border: setNodeGradient(coloration, i.professionalism),
-          background: (filterGrade(i.professionalism)) ? pSBC(0.2, setNodeGradient(coloration, i.professionalism)) : '#3A3A3A',
-          highlight: {
-            border: pSBC(0.3, setNodeGradient(coloration, i.professionalism)),
-            background: pSBC(-0.3, setNodeGradient(coloration, i.professionalism))
-          }
-        },
-        font: {
-          color: 'white',
-          size: 20,
-          bold: {
-            mod: 'bold'
-          },
-          face: 'GT Eesti Pro Display, serif'
+    let graph = dataGraph.map((i: { name: any, distance: number, professionalism: number }, index: any) => ({
+      scaling: {
+        label: false
+      },
+      image: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(renderToString(<YourSvg fill={((filterGrade(i.professionalism)) ? pSBC(0.2, setNodeGradient(coloration, i.professionalism)) : '#3A3A3A') as string} />))}`,
+      size: i.distance,
+      id: index,
+      label: i.name,
+      value: (dataGraph.length - index) * 1000,
+      shadow: {
+        enabled: (filterGrade(i.professionalism)),
+        color: setNodeGradient(coloration, i.professionalism),
+        size: 5,
+        x: 0,
+        y: 2
+      },
+      color: {
+        border: (filterGrade(i.professionalism)) ? setNodeGradient(coloration, i.professionalism) : '#3A3A3A',
+        // Border: setNodeGradient(coloration, i.professionalism),
+        background: (filterGrade(i.professionalism)) ? pSBC(0.2, setNodeGradient(coloration, i.professionalism)) : '#3A3A3A',
+        highlight: {
+          border: pSBC(0.3, setNodeGradient(coloration, i.professionalism)),
+          background: pSBC(-0.3, setNodeGradient(coloration, i.professionalism))
         }
-      })
-    })
+      },
+      font: {
+        color: 'white',
+        size: 20,
+        bold: {
+          mod: 'bold'
+        },
+        face: 'GT Eesti Pro Display, serif'
+      }
+    }))
     graph = graph.sort((a, b) => b.size - a.size)
-    // graph.unshift({
-    //   size: 0,
-    //   value: 0,
-    //   scaling: {
-    //     label: false
-    //   },
-    //   id: -1,
-    //   label: title,
-    //   shadow: {
-    //     enabled: true,
-    //     color: 'black',
-    //     size: 2,
-    //     x: 0,
-    //     y: 2
-    //   },
-    //   // color: {
-    //   //   border: 'black',
-    //   //   background: pSBC(0.3, '#808080'),
-    //   //   highlight: {
-    //   //     border: pSBC(0.3, '#808080'),
-    //   //     background: pSBC(-0.3, '#808080')
-    //   //   }
-    //   // },
-    //   color: {
-    //     border: 'transparent',
-    //     background: 'transparent',
-    //     highlight: {
-    //       border: 'transparent',
-    //       background: 'transparent'
-    //     }
-    //   },
-    //   font: {
-    //     color: 'white',
-    //     size: 30,
-    //     bold: {
-    //       mod: 'bold'
-    //     },
-    //     face: 'GT Eesti Pro Display, serif'
-    //   },
-    //   image: ii
-    // })
+
+    /*
+     * Graph.unshift({
+     *   size: 0,
+     *   value: 0,
+     *   scaling: {
+     *     label: false
+     *   },
+     *   id: -1,
+     *   label: title,
+     *   shadow: {
+     *     enabled: true,
+     *     color: 'black',
+     *     size: 2,
+     *     x: 0,
+     *     y: 2
+     *   },
+     *   // color: {
+     *   //   border: 'black',
+     *   //   background: pSBC(0.3, '#808080'),
+     *   //   highlight: {
+     *   //     border: pSBC(0.3, '#808080'),
+     *   //     background: pSBC(-0.3, '#808080')
+     *   //   }
+     *   // },
+     *   color: {
+     *     border: 'transparent',
+     *     background: 'transparent',
+     *     highlight: {
+     *       border: 'transparent',
+     *       background: 'transparent'
+     *     }
+     *   },
+     *   font: {
+     *     color: 'white',
+     *     size: 30,
+     *     bold: {
+     *       mod: 'bold'
+     *     },
+     *     face: 'GT Eesti Pro Display, serif'
+     *   },
+     *   image: ii
+     * })
+     */
     const mainNode = graph[0]
     return {
       nodes: graph as (Node[] | DataInterfaceNodes),
@@ -196,19 +209,22 @@ const Graph = ({ data, title, grade }) => {
     network.fit({ nodes: network?.getConnectedNodes(-1) as string[], animation: true })
   }
 
-  const [isModalOpen, setIsModalOpen] = useState(-1)
+  const [
+    isModalOpen,
+    setIsModalOpen
+  ] = useState(-1)
 
   useEffect(() => {
     if (network == null) return
 
     network.once('beforeDrawing', () => {
-      // network.focus(-1)
+      // Network.focus(-1)
       network.fit()
     })
     network.setData(setGraph(data))
     network.setOptions({ ...options, layout: { randomSeed: network.getSeed() } })
     network.on('selectNode', () => {
-      // setIsModalOpen(+network.getSelectedNodes()[0])
+      // SetIsModalOpen(+network.getSelectedNodes()[0])
     })
   }, [data])
 
@@ -222,33 +238,49 @@ const Graph = ({ data, title, grade }) => {
 
   function nodeModal (): void {
     if (network == null) return
-    if (+network.getSelectedNodes()[0] === isModalOpen) {
+    if (Number(network.getSelectedNodes()[0]) === isModalOpen) {
       setIsModalOpen(-1)
       return
     }
-    setIsModalOpen(+network.getSelectedNodes()[0])
+    setIsModalOpen(Number(network.getSelectedNodes()[0]))
   }
-  // const svg1 = image
+  // Const svg1 = image
   // // recolorPNGImage recolors image of the given <img> element with the specified color.
-  // document
+  // Document
   //   .getElementById('svg1')
   //   .setAttribute('src', recolorSVGString(image, '#83c400', true))
 
   return (
-        <>
+      <>
           <div className={styles.btnOptions}>
-            <span className={styles.gradeTitle}>опыт работы</span>
-            <div className={styles.colorsLevel}>
-              <span>нет опыта</span>
-              <span>более 6 лет</span>
-            </div>
-            <button onClick={handleClickFit}>общий вид</button>
+              <span className={styles.gradeTitle}>
+                  опыт работы
+              </span>
+              <div className={styles.colorsLevel}>
+                  <span>
+                      нет опыта
+                  </span>
+                  <span>
+                      более 6 лет
+                  </span>
+              </div>
+              <button onClick={handleClickFit}>
+                  общий вид
+              </button>
           </div>
-            <div className={styles.graphBlock} ref={ref} onClick={nodeModal}/>
-          {(isModalOpen > -1) && <NodeModal onClose={() => {
-            setIsModalOpen(-1)
-          }} nodeId={isModalOpen} nodeTitle={data[isModalOpen].name}/>}
-        </>
+          <div
+              className={styles.graphBlock}
+              onClick={nodeModal}
+              ref={ref}
+          />
+          {(isModalOpen > -1) && <NodeModal
+              nodeId={isModalOpen}
+              nodeTitle={data[isModalOpen].name}
+              onClose={() => {
+                setIsModalOpen(-1)
+              }}
+                                 />}
+      </>
   )
 }
 export default Graph

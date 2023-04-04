@@ -18,7 +18,6 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
-
   /*
    * Function submitForm (event: any): void {
    *   event?.preventDefault()

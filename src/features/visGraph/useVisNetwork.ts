@@ -1,10 +1,10 @@
-import { useState, useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import {
-  Network,
-  type Options,
   type Data,
   type Edge,
-  type Node
+  Network,
+  type Node,
+  type Options
 } from 'vis-network'
 
 export interface UseVisNetworkOptions {
@@ -17,7 +17,10 @@ export interface UseVisNetworkOptions {
 export default (props: UseVisNetworkOptions) => {
   const { edges, nodes, options } = props
 
-  const [network, addNetwork] = useState<Network | null>(null)
+  const [
+    network,
+    addNetwork
+  ] = useState<Network | null>(null)
   const ref = useRef<HTMLDivElement>(null)
 
   const data: Data = { nodes, edges }

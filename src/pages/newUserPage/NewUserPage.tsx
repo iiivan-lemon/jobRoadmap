@@ -8,22 +8,39 @@ const NewUserPage: FC = () => {
   }, [])
 
   return (
-        <React.Fragment>
-            <div className={styles.startBlock}>
-                <div className={styles.description}><span className={styles.title}>Job Roadmap</span><span
-                    className={styles.titleDescr}>Сервис который поможет вам изучить навыки, необходимые для подготовки по выбранной специальности</span>
-                </div>
-            </div>
-            <div className={styles.startBlock}>
-                <div className={styles.description}><span className={styles.title}>Job Roadmap</span><span
-                    className={styles.titleDescr}>разделение скиллов по опыту и упоминаемости в вакансиях</span>
-                </div>
-            </div>
-            <div className={styles.startBlock}>
-                <div className={styles.description}><span className={styles.title}>---зарегистрироваться---</span>
-                </div>
-            </div>
-        </React.Fragment>
+      <React.Fragment>
+          <div className={styles.startBlock}>
+              <div className={styles.description}>
+                  <span className={styles.title}>
+                      Job Roadmap
+                  </span>
+                  <span
+                      className={styles.titleDescr}
+                  >
+                      Сервис который поможет вам изучить навыки, необходимые для подготовки по выбранной специальности
+                  </span>
+              </div>
+          </div>
+          <div className={styles.startBlock}>
+              <div className={styles.description}>
+                  <span className={styles.title}>
+                      Job Roadmap
+                  </span>
+                  <span
+                      className={styles.titleDescr}
+                  >
+                      разделение скиллов по опыту и упоминаемости в вакансиях
+                  </span>
+              </div>
+          </div>
+          <div className={styles.startBlock}>
+              <div className={styles.description}>
+                  <span className={styles.title}>
+                      ---зарегистрироваться---
+                  </span>
+              </div>
+          </div>
+      </React.Fragment>
   )
 }
 
