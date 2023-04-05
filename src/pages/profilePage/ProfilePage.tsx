@@ -17,12 +17,7 @@ const ProfilePage: FC = () => {
   React.useEffect(() => {
     void dispatch(getFavs())
   }, [])
-  let tags = [
-    'python developer',
-    'python developer123123',
-    'frontend developer',
-    'middle ML developer'
-  ]
+  let tags = ['python developer']
   if (favs.length) { tags = favs.map(el => el.name) }
   const [
     isFavorite,
