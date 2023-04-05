@@ -7,13 +7,20 @@ import ReactDOM from 'react-dom'
 import stylesOps from './HeaderOptions.module.css'
 import Tag from '../Tag/Tag'
 import stylesTag from './../Tag/Tag.module.css'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { selectGrade } from '../../models/gradeFilter/gradeSlice'
+import { getTops, selectDataTops } from '../../models/tops/topsSlice'
+import { getDataGraph } from '../../models/dataGraph/dataGraphSlice'
 const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
-  const tags = [
-    { title: 'python developer' },
-    { title: 'frontend developer' },
-    { title: 'ML developer' },
-    { title: 'UI/UX designer' }
-  ]
+  const top = useAppSelector(selectDataTops)
+
+  // const tags = [
+  //   { title: 'python developer' },
+  //   { title: 'frontend developer' },
+  //   { title: 'backend developer' }
+  // ]
+
+  const tags = top.professions
 
   const grades = [
     { title: 'нет опыта', id: 0 },
@@ -34,13 +41,9 @@ const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
     }
   }, [onClose])
 
-  useEffect(
-    () =>
-    // Document.body.style.overflow = 'hidden'
-      () => {
-      // Document.body.style.overflow = 'auto'
-      }
-    , []
+  useEffect(() => {
+  }
+  , []
   )
 
   function renderTags (tags: any[], className: string[]): any[] {

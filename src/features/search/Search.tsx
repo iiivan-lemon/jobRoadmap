@@ -4,6 +4,8 @@ import styles from './Search.module.css'
 import HeaderOptions from '../headerOptions/HeaderOptions'
 // eslint-disable-next-line import/no-duplicates
 import './Search.module.css'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { getTops } from '../../models/tops/topsSlice'
 
 /*
  * Interface SearchProps {
@@ -14,6 +16,7 @@ import './Search.module.css'
  */
 
 const Search = ({ changeData, setGrade }): JSX.Element => {
+  const { isAuth } = useAppSelector(state => state.auth)
   // Const [value, setValue] = useState('')
   const [
     isModalOpen,
@@ -33,6 +36,14 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     isFavorite,
     setFavorite
   ] = useState(false)
+
+  const sendFav = () => {
+    if ((document.getElementById('search') as HTMLInputElement).value !== '') { setFavorite(true) }
+  }
+
+  const sendUnFav = () => {
+    if ((document.getElementById('search') as HTMLInputElement).value !== '') { setFavorite(false) }
+  }
   function sub (event: any): void {
     event?.preventDefault()
     if (changeData != null) {
@@ -43,6 +54,10 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
       // (document.getElementById('search') as HTMLInputElement).value = ''
     }
   }
+
+  React.useEffect(() => {
+    setFavorite(false)
+  }, [changeData])
   useEffect(() => {
     (document.getElementById('search') as HTMLInputElement).value = titleTag
     // If (changeData != null) changeData((document.getElementById('search') as HTMLInputElement).value)
@@ -74,7 +89,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
                     ? <svg
                             fill="none"
                             height="29"
-                            onClick={(e) => { e.stopPropagation(); setFavorite(false) }}
+                            onClick={(e) => { e.stopPropagation(); sendUnFav() }}
                             viewBox="0 0 24 29"
                             width="24"
                             xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +103,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
                     : <svg
                             fill="none"
                             height="29"
-                            onClick={(e) => { e.stopPropagation(); setFavorite(true) }}
+                            onClick={(e) => { if (isAuth) { e.stopPropagation(); sendFav() } }}
                             viewBox="0 0 24 29"
                             width="24"
                             xmlns="http://www.w3.org/2000/svg"

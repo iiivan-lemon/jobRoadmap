@@ -3,12 +3,13 @@ import styles from './NewUserPage.module.css'
 import './../../App.css'
 import GradientGrade from '../../features/gradientGrade/GradientGrade'
 import NodeFav from '../../features/nodeFav/nodeFav'
+import { useNavigate } from 'react-router-dom'
 const NewUserPage: FC = () => {
   React.useEffect(() => {
     document.body.style.overflow = 'auto'
     document.getElementById('header')?.classList.add('headerFix')
   }, [])
-
+  const history = useNavigate()
   return (
       <React.Fragment>
           <div className={styles.startBlock}>
@@ -172,7 +173,9 @@ const NewUserPage: FC = () => {
               </svg>
               </div>
 
-                  <span className={styles.titleEnd} >
+                  <span className={styles.titleEnd} onClick={() => {
+                    history('/signup')
+                  }} >
                       ---зарегистрироваться---
                   </span>
 

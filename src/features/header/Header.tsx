@@ -2,10 +2,11 @@ import React, { type FC } from 'react'
 import Search from '../search/Search'
 import styles from './Header.module.css'
 // Import { useHistory } from 'react-router'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { authActions } from '../../authApp/_store'
 import { loginOrLogout } from '../../models/auth/authActions'
+import { getTops } from '../../models/tops/topsSlice'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -18,6 +19,12 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
+  const { isAuth } = useAppSelector(state => state.auth)
+  const { username } = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
+  React.useEffect(() => {
+    void dispatch(getTops())
+  }, [])
   /*
    * Function submitForm (event: any): void {
    *   event?.preventDefault()
@@ -25,7 +32,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
    *   event.target.searchTerm.value = ''
    * }
    */
-  const dispatch = useAppDispatch()
+
   const nav = useNavigate()
   const logout = async () => {
     const res = await dispatch(loginOrLogout(false))
@@ -66,11 +73,12 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                   >
                       Избранное
                   </span>
-                  <span
+                  {/* eslint-disable-next-line multiline-ternary */}
+                  {(isAuth) ? (<><span
                       className={styles.username}
-                      onClick={() => { goTo('/profile') }}
+                      // onClick={() => { goTo('/profile') }}
                   >
-                      admin
+                      {username}
                   </span>
                   <svg
                       fill="none"
@@ -126,8 +134,15 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                               />
                           </clipPath>
                       </defs>
-                  </svg>
+                  </svg></>) : <span
+                      className={styles.username}
+                      onClick={() => { goTo('/login') }}
+                  >
+                      войти
+                  </span>}
+
               </div>
+
               <div id="header-options" />
           </div>
 

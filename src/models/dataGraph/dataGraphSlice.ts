@@ -37,6 +37,7 @@ function checkStatus (status: number): string {
       return 'Client Error'
     }
     case 5: {
+      alert('ошибка сервера')
       return 'Server Error'
     }
     default: {
@@ -47,10 +48,16 @@ function checkStatus (status: number): string {
 export const getDataGraph = createAsyncThunk(
   'dataGraph/fetchDataGraph',
   async (input: string) => {
+    // eslint-disable-next-line no-debugger
+
     const response = await fetchDataGraph(input)
     checkStatus(response.status)
+    if (response.data.detail) {
+      return { technology_name: input, distance: 1, professionalism: 0 }
+    }
+
     // The value we return becomes the `fulfilled` action payload
-    return response.data.technologies
+    return response.data?.position_data?.additional
   }
 )
 
@@ -84,11 +91,11 @@ export const dataGraphSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getDataGraph.pending, (state) => {
-        console.log('loading')
+        return []
       })
       .addCase(getDataGraph.fulfilled, (state, action) => ((action.payload) ? action.payload : state))
       .addCase(getDataGraph.rejected, (state) => {
-        console.log('failed')
+        return []
       })
   }
 })

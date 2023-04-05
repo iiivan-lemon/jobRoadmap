@@ -28,7 +28,7 @@ function createInitialState() {
 }
 
 function createExtraActions() {
-    const baseUrl = `http://37.139.41.200:1323/api/v1`;
+    const baseUrl = `http://109.120.182.94:1323/api/v1`;
 
     return {
         signup: signup(),

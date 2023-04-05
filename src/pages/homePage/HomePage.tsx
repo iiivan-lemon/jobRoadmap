@@ -5,8 +5,10 @@ import './../../App.css'
 import { PushSpinner } from 'react-spinners-kit'
 import { selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
 import { useAppSelector } from '../../app/hooks'
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
+  const nav = useNavigate()
   const data = useAppSelector(selectDataGraph)
   const [
     loading,
@@ -15,14 +17,18 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const [
     grade,
     setGrade
-  ] = React.useState({ begin: 0, end: 0 })
+  ] = React.useState({ begin: 0, end: 1 })
   React.useEffect(() => {
     document.body.style.overflow = 'hidden'
     document.getElementById('header')?.classList.remove('headerFix')
   }, [])
   React.useEffect(() => {
-    if (data.length > 0) {
-      setTimeout(() => { setLoad(false) }, 5000)
+    // eslint-disable-next-line no-debugger
+
+    if (!data) {
+      nav('/')
+    } else if (data.length > 0) {
+      setLoad(false)
     } else { setLoad(true) }
   }, [data])
   React.useEffect(() => {
@@ -39,7 +45,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
                   size={30}
               />
           </div>
-          {(data.length > 0 && !loading) && <Graph
+          {(!loading) && <Graph
               data={data}
               grade={grade}
               title={inputData}

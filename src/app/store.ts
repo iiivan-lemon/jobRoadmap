@@ -4,13 +4,15 @@ import gradeReducer from '../models/gradeFilter/gradeSlice'
 // Import user from '../models/user/UserSlice'
 import { UserReducer } from '../models/user/userReducer'
 import { AuthReducer } from '../models/auth/authReducer'
+import topsReducer from '../models/tops/topsSlice'
 // Import { auth } from '../models/auth/authSlice'
 export const store = configureStore({
   reducer: combineReducers({
     dataGraph: dataGraphReducer,
     grade: gradeReducer,
     auth: AuthReducer,
-    user: UserReducer
+    user: UserReducer,
+    top: topsReducer
   })
 })
 
@@ -22,4 +24,4 @@ RootState,
 unknown,
 Action<string>
 >
-export const apiUrl = 'http://37.139.41.200:1323/api/v1'
+export const apiUrl = 'http://109.120.182.94:1323/api/v1'

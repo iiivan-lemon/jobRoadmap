@@ -87,9 +87,9 @@ const Graph = ({ data, title, grade }) => {
     data = [...new Set(data.map((el) => el.professionalism))]
       .sort((a, b) => a - b)
     const colors = [
-      '#28C10F',
-      '#ffe500',
-      '#FB1A1A'
+      '#21c705',
+      '#cbe520',
+      '#e54e20'
     ]
     const res = new Map()
     data.forEach((el, i) => res.set(el, colors[i]))
@@ -112,14 +112,14 @@ const Graph = ({ data, title, grade }) => {
   const setGraph = (data: any[]): Data => {
     const dataGraph = [...data].sort((a: DataGraphState, b: DataGraphState) => b.distance - a.distance)
     const coloration = addColorMap(dataGraph)
-    let graph = dataGraph.map((i: { name: any, distance: number, professionalism: number }, index: any) => ({
+    let graph = dataGraph.map((i: { technology_name: any, distance: number, professionalism: number }, index: any) => ({
       scaling: {
         label: false
       },
       image: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(renderToString(<YourSvg fill={((filterGrade(i.professionalism)) ? pSBC(0.2, setNodeGradient(coloration, i.professionalism)) : '#3A3A3A') as string} />))}`,
       size: i.distance,
       id: index,
-      label: i.name,
+      label: i.technology_name,
       value: (dataGraph.length - index) * 1000,
       shadow: {
         enabled: (filterGrade(i.professionalism)),
@@ -197,7 +197,7 @@ const Graph = ({ data, title, grade }) => {
       edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
         from: mainNode.id,
         to: el.id,
-        length: 1 - dataGraph[index].distance
+        length: 1 / (dataGraph.length - index)
       })).filter((el) => el.to !== el.from)
     }
   }
@@ -269,7 +269,7 @@ const Graph = ({ data, title, grade }) => {
           />
           {(isModalOpen > -1) && <NodeModal
               nodeId={isModalOpen}
-              nodeTitle={data[isModalOpen].name}
+              nodeTitle={data[isModalOpen].technology_name}
               onClose={() => {
                 setIsModalOpen(-1)
               }}

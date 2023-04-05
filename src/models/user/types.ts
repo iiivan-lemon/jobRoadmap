@@ -1,8 +1,6 @@
 export interface UserState {
-  name: string
-  surname: string
+  username: string
   email: string
-  age: string
   photo: string
 }
 
