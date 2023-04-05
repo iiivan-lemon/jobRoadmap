@@ -6,6 +6,7 @@ import HeaderOptions from '../headerOptions/HeaderOptions'
 import './Search.module.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getTops } from '../../models/tops/topsSlice'
+import { setFavs, setUnFavs } from '../../models/favs/favsSlice'
 
 /*
  * Interface SearchProps {
@@ -16,6 +17,7 @@ import { getTops } from '../../models/tops/topsSlice'
  */
 
 const Search = ({ changeData, setGrade }): JSX.Element => {
+  const dispatch = useAppDispatch()
   const { isAuth } = useAppSelector(state => state.auth)
   // Const [value, setValue] = useState('')
   const [
@@ -38,11 +40,17 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
   ] = useState(false)
 
   const sendFav = () => {
-    if ((document.getElementById('search') as HTMLInputElement).value !== '') { setFavorite(true) }
+    if ((document.getElementById('search') as HTMLInputElement).value !== '') {
+      void dispatch(setFavs((document.getElementById('search') as HTMLInputElement).value))
+      setFavorite(true)
+    }
   }
 
   const sendUnFav = () => {
-    if ((document.getElementById('search') as HTMLInputElement).value !== '') { setFavorite(false) }
+    if ((document.getElementById('search') as HTMLInputElement).value !== '') {
+      void dispatch(setUnFavs((document.getElementById('search') as HTMLInputElement).value))
+      setFavorite(false)
+    }
   }
   function sub (event: any): void {
     event?.preventDefault()
