@@ -3,6 +3,7 @@ import styles from './ProfilePage.module.css'
 import './../../App.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getFavs, selectDataFavs, setFavs, setUnFavs } from '../../models/favs/favsSlice'
+import { GraphSelf } from '../../features/graphSelf/graphSelf'
 
 /*
  * Import { userProfile } from '../../models/user/UserSlice'
@@ -81,6 +82,7 @@ const ProfilePage: FC = () => {
           <div className={styles.profile}>
               {renderGraphBlock(tags)}
           </div>
+
       </React.Fragment>
   )
 }

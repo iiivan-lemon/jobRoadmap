@@ -12,7 +12,7 @@ import styles from './Graph.module.css'
 import { type Data, type DataInterfaceNodes, type Node } from 'vis-network/declarations/network/Network'
 import NodeModal from '../nodeModal/NodeModal'
 import { type DataGraphState } from '../../models/dataGraph/dataGraphSlice'
-import { ReactComponent as YourSvg } from './node.svg'
+import { ReactComponent as YourSvg } from '../../static/images/node.svg'
 import ii from './node.png'
 import { renderToString } from 'react-dom/server'
 import GradientGrade from '../gradientGrade/GradientGrade'
@@ -27,19 +27,24 @@ import GradientGrade from '../gradientGrade/GradientGrade'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type,react/display-name
 const Graph = ({ data, title, grade }) => {
-  console.log(`data:image/svg+xml;charset=utf-8,${encodeURIComponent(renderToString(<YourSvg fill="red" />))}`)
   const options: Options = {
     height: '100%',
     width: '100%',
     physics: {
-      barnesHut: { gravitationalConstant: -30000 },
-      stabilization: { iterations: 2500 }
+      barnesHut: {
+        centralGravity: 1,
+        gravitationalConstant: -50000,
+        avoidOverlap: 0,
+        springLength: 0
+      },
+      stabilization: { iterations: 250000, onlyDynamicEdges: true }
+
     },
-    interaction: {
-      keyboard: false,
-      dragNodes: false,
-      dragView: true
-    },
+    // interaction: {
+    //   keyboard: false,
+    //   dragNodes: false,
+    //   dragView: true
+    // },
     layout: {
       randomSeed: 2,
       improvedLayout: true
@@ -59,20 +64,24 @@ const Graph = ({ data, title, grade }) => {
        */
     },
     edges: {
-      physics: true,
+      // physics: false,
       width: 2,
-      color: 'transparent',
+      color: 'white',
       arrows: { to: { enabled: false } }
     },
     nodes: {
+      scaling: {
+        min: 16,
+        max: 50
+      },
       shape: 'image',
       brokenImage: ii,
       borderWidth: 1,
       borderWidthSelected: 2,
       chosen: true,
-      scaling: {
-        max: 75
-      },
+      // scaling: {
+      //   max: 75
+      // },
       font: {
         color: '#fff',
         size: 18,
@@ -117,10 +126,10 @@ const Graph = ({ data, title, grade }) => {
         label: false
       },
       image: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(renderToString(<YourSvg fill={((filterGrade(i.professionalism)) ? pSBC(0.2, setNodeGradient(coloration, i.professionalism)) : '#3A3A3A') as string} />))}`,
-      size: i.distance,
+      // size: i.distance,
       id: index,
       label: i.technology_name,
-      value: (dataGraph.length - index) * 1000,
+      value: i.distance * 1000,
       shadow: {
         enabled: (filterGrade(i.professionalism)),
         color: setNodeGradient(coloration, i.professionalism),
@@ -146,7 +155,7 @@ const Graph = ({ data, title, grade }) => {
         face: 'GT Eesti Pro Display, serif'
       }
     }))
-    graph = graph.sort((a, b) => b.size - a.size)
+    graph = graph.sort((a, b) => b.value - a.value)
 
     /*
      * Graph.unshift({
@@ -194,10 +203,12 @@ const Graph = ({ data, title, grade }) => {
     const mainNode = graph[0]
     return {
       nodes: graph as (Node[] | DataInterfaceNodes),
-      edges: graph.map((el: { id: number, value: number, size: number }, index: number) => ({
+      edges: graph.map((el: { id: number, value: number }, index: number) => ({
         from: mainNode.id,
         to: el.id,
-        length: 1 / (dataGraph.length - index)
+        length: 0.1 * (1000 - el.value),
+        width: 2
+        // length: 500 * (1 - data[index].distance)
       })).filter((el) => el.to !== el.from)
     }
   }
@@ -223,7 +234,7 @@ const Graph = ({ data, title, grade }) => {
       network.fit()
     })
     network.setData(setGraph(data))
-    network.setOptions({ ...options, layout: { randomSeed: network.getSeed() } })
+    // network.setOptions({ ...options, layout: { randomSeed: network.getSeed() } })
     network.on('selectNode', () => {
       // SetIsModalOpen(+network.getSelectedNodes()[0])
     })

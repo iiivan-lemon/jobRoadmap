@@ -6,6 +6,7 @@ import { PushSpinner } from 'react-spinners-kit'
 import { selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
 import { useAppSelector } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
+import { GraphSelf } from '../../features/graphSelf/graphSelf'
 
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
@@ -36,20 +37,17 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   }, [headerGrade])
 
   return (
-      <div className={styles.page}>
-          <div className={styles.preloader}>
+      <div id='container' className={styles.page}>
+            <div className={styles.preloader}>
               <PushSpinner
                   color="#686769"
                   id="preloader"
                   loading={loading}
                   size={30}
               />
-          </div>
-          {(!loading) && <Graph
-              data={data}
-              grade={grade}
-              title={inputData}
-                                            />}
+            </div>
+            {(!loading) && <GraphSelf data={data} grade={grade}></GraphSelf>
+                                            }
       </div>
   )
 }

@@ -1,4 +1,6 @@
 .header {
+    position: relative;
+    z-index: 100;
     display: flex;
     background: #1B1B1B;
     flex-direction: column;
