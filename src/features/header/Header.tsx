@@ -36,10 +36,6 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   const nav = useNavigate()
   const logout = async () => {
     const res = await dispatch(loginOrLogout(false))
-
-    if (res === 200) {
-      nav('/info')
-    }
   }
 
   function goTo (path: string): void {

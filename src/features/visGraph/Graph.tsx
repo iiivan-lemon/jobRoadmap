@@ -264,15 +264,7 @@ const Graph = ({ data, title, grade }) => {
 
   return (
       <>
-          <div className={styles.btnOptions}>
-              <span className={styles.gradeTitle}>
-                  опыт работы
-              </span>
-              <GradientGrade width={'14rem'}/>
-              <button onClick={handleClickFit}>
-                  общий вид
-              </button>
-          </div>
+
           <div
               className={styles.graphBlock}
               onClick={nodeModal}

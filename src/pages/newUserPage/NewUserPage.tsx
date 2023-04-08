@@ -1,15 +1,20 @@
 import React, { type FC } from 'react'
 import styles from './NewUserPage.module.css'
+import stylesTag from '../../features/Tag/Tag.module.css'
 import './../../App.css'
 import GradientGrade from '../../features/gradientGrade/GradientGrade'
 import NodeFav from '../../features/nodeFav/nodeFav'
 import { useNavigate } from 'react-router-dom'
+import { ReactComponent as NodeSvg } from '../../static/images/node.svg'
 const NewUserPage: FC = () => {
   React.useEffect(() => {
     document.body.style.overflow = 'auto'
     document.getElementById('header')?.classList.add('headerFix')
   }, [])
   const history = useNavigate()
+
+  const openHeader = () => { (document.getElementById('search') as HTMLInputElement).focus() }
+
   return (
       <React.Fragment>
           <div className={styles.startBlock}>
@@ -17,11 +22,14 @@ const NewUserPage: FC = () => {
                   <span className={styles.title}>
                       Job Roadmap
                   </span>
+                  <div className={styles.wrapper}>
                   <span
                       className={styles.titleDescr}
                   >
                       Cервис, который поможет вам узнать и изучить необходимые навыки для подготовки к собеседованиям по выбранной Вами профессии
                   </span>
+                  <button type='button' className={styles.tag} onClick={openHeader}>начать поиск!</button>
+                  </div>
                   <svg className={styles.tasks} width="937" height="198" viewBox="0 0 937 198" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g filter="url(#filter0_b_149_3491)">
                           <rect width="936.39" height="184.419" rx="20" fill="#181818"/>
@@ -54,6 +62,11 @@ const NewUserPage: FC = () => {
                   <span className={styles.titleDescr}>
                       Мы анализируем актуальные открытые вакансии по Вашей специальности и отображаем навыки в виде графа-роадмапы
                   </span>
+              </div>
+              <div className={styles.description}>
+                  <NodeSvg className={styles.firstNode}/>
+                  <NodeSvg className={styles.secondNode}/>
+                  <NodeSvg className={styles.thirdNode}/>
               </div>
           </div>
           <div className={styles.gradeBlock}>

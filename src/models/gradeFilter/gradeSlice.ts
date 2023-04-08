@@ -14,7 +14,7 @@ export interface GradeState {
 
 const initialState: GradeState = {
   begin: 0,
-  end: 1
+  end: 3
 }
 
 /*

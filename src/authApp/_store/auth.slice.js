@@ -36,7 +36,7 @@ function createReducers() {
 }
 
 function createExtraActions() {
-    const baseUrl = `http://109.120.182.94:1323/api/v1`;
+    const baseUrl = `http://89.208.85.17:1323/api/v1`;
 
     return {
         login: login(),

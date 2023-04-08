@@ -24,9 +24,10 @@ const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
 
   const grades = [
     { title: 'нет опыта', id: 0 },
-    { title: '0-3 лет', id: 0.25 },
-    { title: '3-6 лет', id: 0.5 },
-    { title: 'более 6 лет', id: 1 }
+    { title: '0-3 лет', id: 1 },
+
+    { title: '3-6 лет', id: 2 },
+    { title: 'более 6 лет', id: 3 }
   ]
   const ref = useRef<HTMLDivElement | null>(null)
   useEffect(() => {

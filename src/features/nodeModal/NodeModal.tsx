@@ -4,7 +4,7 @@ const NodeModal = ({ onClose, nodeId, nodeTitle }): JSX.Element => {
   const ref = React.useRef<HTMLDivElement | null>(null)
   React.useEffect(() => {
     const checkIfClickedOutside = (e): void => {
-      if (nodeId === -1) {
+      if (nodeTitle === '') {
         onClose()
       }
     }

@@ -1,7 +1,7 @@
 import axios from 'axios'
-// Const ip = 'http://109.120.182.94:1323/'
+const ip = 'http://89.208.85.17:1323/'
 export async function fetchFavs (): Promise<any> {
-  return await axios.get('api/v1/likes')
+  return await axios.get(`${ip}api/v1/likes`)
     .then((response) => response)
     .catch((error) => {
       console.log(error)

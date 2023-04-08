@@ -32,7 +32,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
   const [
     gradeTag,
     setGradeTag
-  ] = useState({ begin: 0, end: 1 })
+  ] = useState({ begin: 0, end: 3 })
 
   const [
     isFavorite,
@@ -78,13 +78,15 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
       <React.Fragment>
           <div
               className={styles.searchBlock}
-              onClick={() => { setIsModalOpen(true) }}
+              onClick={() => { setIsModalOpen(true); document.body.style.overflowX = 'hidden' }}
           >
               <form
                   className={styles.formSearch}
                   onSubmit={sub}
               >
                   <input
+                      placeholder="введите профессию или должность"
+                      autoFocus
                       autoComplete="off"
                       className={styles.search}
                       id="search"
