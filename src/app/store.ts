@@ -5,6 +5,8 @@ import gradeReducer from '../models/gradeFilter/gradeSlice'
 import { UserReducer } from '../models/user/userReducer'
 import { AuthReducer } from '../models/auth/authReducer'
 import topsReducer from '../models/tops/topsSlice'
+import recommendReducer from '../models/recommend/recommendSlice'
+import jobsReducer from '../models/dataJobs/dataJobsSlice'
 import favsReducer from '../models/favs/favsSlice'
 // Import { auth } from '../models/auth/authSlice'
 export const store = configureStore({
@@ -14,7 +16,9 @@ export const store = configureStore({
     auth: AuthReducer,
     user: UserReducer,
     top: topsReducer,
-    fav: favsReducer
+    fav: favsReducer,
+    recommend: recommendReducer,
+    jobs: jobsReducer
   })
 })
 

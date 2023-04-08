@@ -13,7 +13,7 @@ const NewUserPage: FC = () => {
   }, [])
   const history = useNavigate()
 
-  const openHeader = () => { (document.getElementById('search') as HTMLInputElement).focus() }
+  const openHeader = () => { (document.getElementById('search') as HTMLInputElement)?.focus(); (document.getElementById('searchJob') as HTMLInputElement)?.focus() }
 
   return (
       <React.Fragment>

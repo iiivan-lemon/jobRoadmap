@@ -10,7 +10,7 @@ const Tag = ({ title, className, setTitleTag, id, setGrade }): any => {
     e.target.classList.toggle(styles.tagActive)
 
     if (Number(e.target.id) === 10) {
-      (e?.target.classList.contains(styles.tagActive)) ? setGrade({ begin: title.id, end: 1 }) : setGrade({ begin: 0, end: 1 })
+      (e?.target.classList.contains(styles.tagActive)) ? setGrade({ begin: title.id, end: 3 }) : setGrade({ begin: 0, end: 1 })
       return
     }
     (e?.target.classList.contains(styles.tagActive)) ? setTitleTag(title.profession) : setTitleTag('')

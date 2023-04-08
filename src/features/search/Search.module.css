@@ -10,11 +10,11 @@
     outline-color: #0047ff;
 }
 .searchBlock{
+    align-items: center;
     margin-inline-start: 24px;
     flex-grow: 8;
     display: flex;
-    justify-content: flex-start;
-    column-gap: 2rem
+
 }
 
 .formSearch{
@@ -23,6 +23,8 @@
 }
 
 .favorite{
+    margin-inline: 2rem;
+    /*visibility: visible;*/
 }
 
 /* Задаем общий стиль всплывающей подсказки для нужных элементов*/
@@ -41,4 +43,20 @@
 /* Добавляем текст в конкретной всплывающей подсказке */
 .favorite:hover:before {
     content: "добавьте роадмап в избранное";
+}
+
+.changeSearch{
+    width: 3rem;
+    margin-inline: 1rem;
+}
+
+.dropDown{
+    box-shadow: 0 0 0 4px #9cb1ff;
+    margin-block: 10px;
+    position: absolute;
+    z-index: 200;
+    width: 32%;
+    background-color: aliceblue;
+    padding: 1rem;
+    border-radius: 20px;
 }

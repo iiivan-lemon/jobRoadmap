@@ -1,6 +1,6 @@
 import React from 'react'
 import Graph from '../../features/visGraph/Graph'
-import styles from './HomePage.module.css'
+import './HomePage.css'
 import './../../App.css'
 import { PushSpinner } from 'react-spinners-kit'
 import { selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
@@ -9,10 +9,11 @@ import { useNavigate } from 'react-router-dom'
 import { GraphSelf } from '../../features/graphSelf/graphSelf'
 import Draggable from 'react-draggable'
 import GradientGrade from '../../features/gradientGrade/GradientGrade'
-
+// import 'react-double-range-slider/dist/cjs/index.css'
+import { RangeSlider } from 'react-double-range-slider'
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
-  const data = useAppSelector(selectDataGraph)
+  const data = useAppSelector(selectDataGraph).slice(0, 15)
   const [
     loading,
     setLoad
@@ -44,9 +45,10 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     max: 1.5,
     step: 0.05
   }
+
   return (
 
-      <div id='page' className={styles.page}
+      <div id='page' className='page'
            onWheel={ (event) => {
              // event.preventDefault()
              if (event.deltaY < 0) {
@@ -67,7 +69,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
              // }
            }
       >
-            <div className={styles.preloader}>
+            <div className='preloader'>
               <PushSpinner
                   color="#686769"
                   id="preloader"
@@ -76,12 +78,16 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
               />
             </div>
             {(!loading) && <>
-                <div className={styles.btnOptions}>
-              <span className={styles.gradeTitle}>
+                <div className='btnOptions'>
+              <span className='gradeTitle'>
                   опыт работы
               </span>
+                    <RangeSlider onChange={(e) => {
+                      setGrade({ begin: e.minIndex, end: +e.maxIndex })
+                    }} value={[0, 1, 2, 3]}></RangeSlider>
                     <GradientGrade width={'14rem'}/>
-                </div><GraphSelf data={data} grade={grade} ></GraphSelf>
+                </div>
+                <GraphSelf data={data} grade={grade} ></GraphSelf>
                                             </>}
       </div>
 

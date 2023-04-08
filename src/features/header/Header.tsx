@@ -39,7 +39,15 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   }
 
   function goTo (path: string): void {
-    (document.getElementById('search') as HTMLInputElement).value = ''
+    if ((document.getElementById('search') as HTMLInputElement)) {
+      (document.getElementById('search') as HTMLInputElement).value = ''
+    }
+    if (
+      (document.getElementById('searchJob') as HTMLInputElement)
+    ) {
+      (document.getElementById('searchJob') as HTMLInputElement).value = ''
+    }
+
     history(path)
   }
 
