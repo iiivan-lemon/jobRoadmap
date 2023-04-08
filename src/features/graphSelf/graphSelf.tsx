@@ -93,7 +93,6 @@ export const GraphSelf = ({ data, grade }) => {
   }
   function filterGrade (value: number): boolean {
     // eslint-disable-next-line no-debugger
-    debugger
     return (grade.begin <= value && value <= grade.end)
   }
 
@@ -118,7 +117,6 @@ export const GraphSelf = ({ data, grade }) => {
         circleArray[i].style.left = ((mainHeight / 2) + parseInt(circleArray[i].posx.slice(0, -2))) + 'px'
         circleArray[i].click = (e) => {
           // eslint-disable-next-line no-debugger
-          debugger
           setIsModalOpen(e.current.id)
         }
         // const newSvg = renderToString(<NodeSvg fill={((filterGrade(n[i].professionalism)) ? pSBC(0.2, setNodeGradient(coloration, n[i].professionalism)) : '#3A3A3A') as string} />)
