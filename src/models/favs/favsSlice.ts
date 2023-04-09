@@ -27,8 +27,6 @@ const initialState: Favs[] = []
 export const getFavs = createAsyncThunk(
   'favs/fetchFavs',
   async () => {
-    // eslint-disable-next-line no-debugger
-
     const response = await fetchFavs()
     if (response.status === 200) {
       return response.data
@@ -39,8 +37,6 @@ export const getFavs = createAsyncThunk(
 export const setFavs = createAsyncThunk(
   'favs/setFavs',
   async (input: string) => {
-    // eslint-disable-next-line no-debugger
-
     const response = await setFav(input)
     if (response.status === 200) {
       return response.data
@@ -51,8 +47,6 @@ export const setFavs = createAsyncThunk(
 export const setUnFavs = createAsyncThunk(
   'favs/setUnFavs',
   async (input: string) => {
-    // eslint-disable-next-line no-debugger
-
     const response = await setUnFav(input)
     if (response.status === 200) {
       return response.data
@@ -87,7 +81,6 @@ export const FavsSlice = createSlice({
       .addCase(getFavs.pending, (state) => {
       })
       .addCase(getFavs.fulfilled, (state, action) => {
-        // eslint-disable-next-line no-debugger
         return ((action.payload) ? action.payload : state)
       })
       .addCase(getFavs.rejected, (state) => {

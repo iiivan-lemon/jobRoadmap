@@ -13,7 +13,7 @@ import GradientGrade from '../../features/gradientGrade/GradientGrade'
 import { RangeSlider } from 'react-double-range-slider'
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
-  const data = useAppSelector(selectDataGraph).slice(0, 15)
+  const data = useAppSelector(selectDataGraph).slice(0, 25)
   const [
     loading,
     setLoad
@@ -27,8 +27,6 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     document.getElementById('header')?.classList.remove('headerFix')
   }, [])
   React.useEffect(() => {
-    // eslint-disable-next-line no-debugger
-
     if (!data) {
       nav('/')
     } else if (data.length > 0) {
@@ -41,7 +39,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
 
   const [zoom, setZoom] = React.useState(1)
   const zoomOptions = {
-    min: 0.5,
+    min: 0.1,
     max: 1.5,
     step: 0.05
   }
@@ -59,9 +57,9 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
              // const xPerc = (offset.x * 100) / window.screen.width
              // const yPerc = (offset.y * 100) / window.outerHeight
              // if (ref.current) { (ref.current as HTMLElement).style.transformOrigin = xPerc + '%' + ' ' + yPerc + '%' }
-             // eslint-disable-next-line no-debugger
+
              //
-             (event.currentTarget.children[2] as HTMLElement).style.scale = `${zoom} `
+             if (event.currentTarget.children[2] as HTMLElement) { (event.currentTarget.children[2] as HTMLElement).style.scale = `${zoom} ` }
            }
              // } onMouseMove={(e) => {
              //   x = e.clientX - (e.currentTarget as HTMLElement).offsetLeft
@@ -82,7 +80,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
               <span className='gradeTitle'>
                   опыт работы
               </span>
-                    <RangeSlider onChange={(e) => {
+                    <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
                       setGrade({ begin: e.minIndex, end: +e.maxIndex })
                     }} value={[0, 1, 2, 3]}></RangeSlider>
                     <GradientGrade width={'14rem'}/>

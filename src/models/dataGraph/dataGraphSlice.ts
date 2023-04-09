@@ -49,11 +49,9 @@ function checkStatus (status: number): string {
 export const getDataGraph = createAsyncThunk(
   'dataGraph/fetchDataGraph',
   async (input: string) => {
-    // eslint-disable-next-line no-debugger
-
     // const data = { job_name: 'frontend developer', technology_number: 13, additional: [{ technology_name: 'JavaScript', distance: 1.0, professionalism: 0 }, { technology_name: 'Vue.js', distance: 0.6666666666666666, professionalism: 2 }, { technology_name: 'Git', distance: 0.6666666666666666, professionalism: 1 }, { technology_name: 'CSS', distance: 0.6555555555555556, professionalism: 0 }, { technology_name: 'TypeScript', distance: 0.55, professionalism: 3 }, { technology_name: 'HTML', distance: 0.4916666666666667, professionalism: 0 }, { technology_name: 'CSS3', distance: 0.45, professionalism: 0 }, { technology_name: 'HTML5', distance: 0.45, professionalism: 0 }, { technology_name: 'React', distance: 0.43333333333333335, professionalism: 0 }, { technology_name: 'React.js', distance: 0.4, professionalism: 0 }, { technology_name: 'ReactJS', distance: 0.3333333333333333, professionalism: 1 }, { technology_name: 'Node.js', distance: 0.3333333333333333, professionalism: 1 }, { technology_name: 'Angular', distance: 0.3333333333333333, professionalism: 1 }] }
     // return data.additional
-    // eslint-disable-next-line no-debugger
+
     const response = await fetchDataGraph(input)
     checkStatus(response.status)
     // if (response.position_data.detail) {
@@ -95,10 +93,12 @@ export const dataGraphSlice = createSlice({
    */
   extraReducers: (builder) => {
     builder
-      .addCase(getDataGraph.pending, (state) => {
+      .addCase(getDataGraph.pending, (state, action) => {
         return []
       })
-      .addCase(getDataGraph.fulfilled, (state, action) => ((action.payload) ? action.payload : state))
+      .addCase(getDataGraph.fulfilled, (state, action) => {
+        return ((action.payload) ? action.payload : state)
+      })
       .addCase(getDataGraph.rejected, (state) => {
         return []
       })

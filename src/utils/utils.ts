@@ -1,8 +1,6 @@
-export function debounce (func, timeout = 300) {
+export function debounce (func, timeout = 400) {
   let timer
   return (...args: any) => {
-    // eslint-disable-next-line no-debugger
-
     clearTimeout(timer)
     timer = setTimeout(() => {
       // @ts-expect-error werwer

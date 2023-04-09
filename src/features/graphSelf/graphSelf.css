@@ -21,12 +21,19 @@
 }
 
 .svgTitle{
+    max-inline-size: fit-content;
+    animation: pulse 3s linear infinite;
     padding: 1rem;
     display: flex;
     color: white;
     font-weight: 300;
+    height: min-content;
     font-size: 1rem;
 }
+
+/*.svgTitle:after{*/
+/*    filter: brightness(1.5);*/
+/*}*/
 
 #zoom{
     width: 50%;
@@ -40,4 +47,18 @@
     background-color: #1B1B1B;
     color: white;
     left: 0;
+    font-size: 5rem;
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.1, 1.1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
 }

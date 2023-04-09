@@ -116,7 +116,7 @@ const Graph = ({ data, title, grade }) => {
     } else {
       resColor = coloration[fixProf * 2]
     }
-    return resColor ?? 'grey'
+    return resColor ?? 'black'
   }
   const setGraph = (data: any[]): Data => {
     const dataGraph = [...data].sort((a: DataGraphState, b: DataGraphState) => b.distance - a.distance)

@@ -66,7 +66,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     event?.preventDefault()
     if (changeData != null) {
       const { value } = document.getElementById('search') as HTMLInputElement
-      changeData(value)
+      changeData({ value, isTechSearch })
 
       setGrade(gradeTag)
       // (document.getElementById('search') as HTMLInputElement).value = ''
@@ -87,9 +87,8 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     setFavorite(false)
   }, [changeData])
   useEffect(() => {
-    setHavRecommends(false)
-    // eslint-disable-next-line no-debugger
-    debugger
+    setHavRecommends(false);
+
     (document.getElementById('search') as HTMLInputElement).value = titleTag
     // If (changeData != null) changeData((document.getElementById('search') as HTMLInputElement).value)
   }, [titleTag])
@@ -103,22 +102,20 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     setHavRecommends(false)
   }, [])
   useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    debugger
     if (recommends.professions.length) { setHavRecommends(true) } else setHavRecommends(false)
   }, [recommends])
   // const [recommends, setRecommends] = useState([])
   const renderRecommends = (recommends) => {
-    // eslint-disable-next-line no-debugger
     if (recommends.professions.length) {
       return recommends.professions.map((el) =>
-    <div className={styles.titleRecommend}>{el}</div>)
+    <div className={styles.titleRecommend} onClick={ (e) => {
+      (document.getElementById('search') as HTMLInputElement).value = el
+      sub(e)
+    }}>{el}</div>)
     }
   }
 
   const sendSearchValue = (e) => {
-    // eslint-disable-next-line no-debugger
-    debugger
     if (!e.target.value && e.target.value === titleTag) { return }
     void (dispatch(getRecommends(e.target.value)))
   }

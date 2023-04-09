@@ -27,8 +27,6 @@ const initialState: Tops = { professions: [] }
 export const getTops = createAsyncThunk(
   'tops/fetchTop',
   async () => {
-    // eslint-disable-next-line no-debugger
-
     const response = await fetchTop()
     if (response.status === 200) {
       return response.data
@@ -64,8 +62,6 @@ export const TopsSlice = createSlice({
         return { professions: [] }
       })
       .addCase(getTops.fulfilled, (state, action) => {
-        // eslint-disable-next-line no-debugger
-
         return ((action.payload) ? action.payload : state)
       })
       .addCase(getTops.rejected, (state) => {

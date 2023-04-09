@@ -1,0 +1,16 @@
+.page{
+    flex-direction: column;
+    height: 100vh;
+    display: flex;
+    background-size: 100% 100%;
+    background: url("../../static/images/back-pattern-grade.png"), linear-gradient(180deg, rgb(0 0 0) 0%, #08041c 100%);
+    backdrop-filter: blur(5px);
+    background-size: contain;
+}
+
+.job{
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: grey;
+}

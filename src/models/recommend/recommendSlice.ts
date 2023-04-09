@@ -27,7 +27,6 @@ const initialState: Recommends = { professions: [] }
 export const getRecommends = createAsyncThunk(
   'recommends/fetchRecommend',
   async (input: string) => {
-    // eslint-disable-next-line no-debugger
     //
     // const string = { professions: [input] }
     // return string
@@ -66,8 +65,6 @@ export const RecommendSlice = createSlice({
         return { professions: [] }
       })
       .addCase(getRecommends.fulfilled, (state, action) => {
-        // eslint-disable-next-line no-debugger
-
         return ((action.payload) ? action.payload : state)
       })
       .addCase(getRecommends.rejected, (state) => {

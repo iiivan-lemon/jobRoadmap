@@ -28,6 +28,8 @@ import NewUserPage from './pages/newUserPage/NewUserPage'
 import { Login } from './authApp/login'
 import ProfilePage from './pages/profilePage/ProfilePage'
 import { Reg } from './authApp/register'
+import { JobsPage } from './pages/jobsPage/JobsPage'
+import { getJobs } from './models/dataJobs/dataJobsSlice'
 
 /*
  * Import { PrivateRoute } from './features/privateRoute/PrivateRoute'
@@ -54,13 +56,18 @@ function App (): JSX.Element {
   //   }
   // }
 
-  function change (inputData: string): void {
+  function change (inputData: { value: string, isTechSearch: boolean }): void {
     // If (inputData.includes('python')) {
     // CoursesPage()
     // // @ts-expect-error errors
-    history('/search')
-    void dispatch(getDataGraph(inputData))
-    changeInputData(inputData)
+    if (inputData.isTechSearch) {
+      history('/search')
+      void dispatch(getDataGraph(inputData.value))
+      changeInputData(inputData.value)
+    } else {
+      history('/searchjob')
+      void dispatch(getJobs(inputData.value))
+    }
 
     /*
      * FetchUser(inputData)
@@ -100,6 +107,11 @@ function App (): JSX.Element {
                            />}
                   path="/search"
               />
+            <Route
+              element={<JobsPage
+              />}
+              path="/searchJob"
+            />
               <Route
                   element={<Login />}
                   path="/login"
