@@ -64,7 +64,6 @@ export const GraphSelf = ({ data, grade }) => {
 
     const mainNode = data[0]
     // eslint-disable-next-line no-debugger
-    debugger
     if (!refMainNode.current?.children.length) {
       const graphData = distances.map((el, index) => {
         return data.filter((e, i) => {

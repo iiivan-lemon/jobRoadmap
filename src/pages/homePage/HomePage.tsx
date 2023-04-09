@@ -60,7 +60,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
              // const yPerc = (offset.y * 100) / window.outerHeight
              // if (ref.current) { (ref.current as HTMLElement).style.transformOrigin = xPerc + '%' + ' ' + yPerc + '%' }
              // eslint-disable-next-line no-debugger
-             // debugger
+             //
              (event.currentTarget.children[2] as HTMLElement).style.scale = `${zoom} `
            }
              // } onMouseMove={(e) => {

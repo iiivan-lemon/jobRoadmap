@@ -28,12 +28,13 @@ export const getRecommends = createAsyncThunk(
   'recommends/fetchRecommend',
   async (input: string) => {
     // eslint-disable-next-line no-debugger
-    debugger
-    const string = { professions: [input] }
-    return string
-    // const response = await fetchRecommend(input)
-    // if (response.status === 200) {
-    //   return response.data
+    //
+    // const string = { professions: [input] }
+    // return string
+    const response = await fetchRecommend(input)
+    if (response.status === 200) {
+      return response.data
+    }
   }
 )
 
@@ -66,7 +67,7 @@ export const RecommendSlice = createSlice({
       })
       .addCase(getRecommends.fulfilled, (state, action) => {
         // eslint-disable-next-line no-debugger
-        debugger
+
         return ((action.payload) ? action.payload : state)
       })
       .addCase(getRecommends.rejected, (state) => {

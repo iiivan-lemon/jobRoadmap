@@ -9,6 +9,7 @@ import { getTops } from '../../models/tops/topsSlice'
 import { setFavs, setUnFavs } from '../../models/favs/favsSlice'
 import { getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
 import { selectGrade } from '../../models/gradeFilter/gradeSlice'
+import { debounce } from '../../utils/utils'
 
 /*
  * Interface SearchProps {
@@ -111,8 +112,15 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     // eslint-disable-next-line no-debugger
     if (recommends.professions.length) {
       return recommends.professions.map((el) =>
-    <div>{el}</div>)
+    <div className={styles.titleRecommend}>{el}</div>)
     }
+  }
+
+  const sendSearchValue = (e) => {
+    // eslint-disable-next-line no-debugger
+    debugger
+    if (!e.target.value && e.target.value === titleTag) { return }
+    void (dispatch(getRecommends(e.target.value)))
   }
 
   return (
@@ -138,12 +146,9 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
                       className={styles.search}
                       id="search"
                       name="searchTerm"
-                      onChange={(e) => {
-                        // eslint-disable-next-line no-debugger
-                        debugger
-                        if (!(document.getElementById('search') as HTMLInputElement).value && (document.getElementById('search') as HTMLInputElement).value === titleTag) { return }
-                        void dispatch(getRecommends((document.getElementById('search') as HTMLInputElement).value))
-                      }}
+                      onChange={
+                        debounce(sendSearchValue)
+                      }
                   />
                 { haveRecommends && <div className={styles.dropDown}>{renderRecommends(recommends)}</div> }
               </form>

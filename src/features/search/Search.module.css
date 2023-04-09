@@ -60,3 +60,11 @@
     padding: 1rem;
     border-radius: 20px;
 }
+
+.titleRecommend{
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #c7d9f9;
+    margin: 10px 0px;
+    padding: 10px;
+}
