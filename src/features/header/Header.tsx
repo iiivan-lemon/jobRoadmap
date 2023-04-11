@@ -71,6 +71,12 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                       changeData={changeData}
                       setGrade={setGrade}
                   />
+                <span
+                  className={styles.favorite}
+                  onClick={() => { goTo('/resumeFix') }}
+                >
+                      Резюме
+                  </span>
                   <span
                       className={styles.favorite}
                       onClick={() => { goTo('/favorites') }}

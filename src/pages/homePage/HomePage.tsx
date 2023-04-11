@@ -3,17 +3,29 @@ import Graph from '../../features/visGraph/Graph'
 import './HomePage.css'
 import './../../App.css'
 import { PushSpinner } from 'react-spinners-kit'
-import { selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
-import { useAppSelector } from '../../app/hooks'
+import { getDataGraph, selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { GraphSelf } from '../../features/graphSelf/graphSelf'
 import Draggable from 'react-draggable'
 import GradientGrade from '../../features/gradientGrade/GradientGrade'
 // import 'react-double-range-slider/dist/cjs/index.css'
 import { RangeSlider } from 'react-double-range-slider'
+import { getJobs } from '../../models/dataJobs/dataJobsSlice'
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
-  const data = useAppSelector(selectDataGraph).slice(0, 25)
+  const [data, setData] = React.useState([])
+  const dispatch = useAppDispatch()
+  React.useEffect(() => {
+    // setData([])
+    void dispatch(getDataGraph(inputData)).then(
+      dataJob => {
+        setLoad(false)
+        setData(dataJob.payload)
+      }
+    )
+      .catch(() => { setLoad(true); setData([]) })
+  }, [inputData])
   const [
     loading,
     setLoad
@@ -27,6 +39,8 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     document.getElementById('header')?.classList.remove('headerFix')
   }, [])
   React.useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    debugger
     if (!data) {
       nav('/')
     } else if (data.length > 0) {

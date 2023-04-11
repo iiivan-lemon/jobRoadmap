@@ -1,13 +1,24 @@
-import { useAppSelector } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
-import { selectDataJobs } from '../../models/dataJobs/dataJobsSlice'
-import React from 'react'
+import { getJobs, selectDataJobs } from '../../models/dataJobs/dataJobsSlice'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PushSpinner } from 'react-spinners-kit'
 import styles from './JobsPage.module.css'
-export const JobsPage = () => {
-  const data = useAppSelector(selectDataJobs)
+export const JobsPage = ({ inputData }) => {
+  const [data, setData] = useState([])
+  const dispatch = useAppDispatch()
   const nav = useNavigate()
+  React.useEffect(() => {
+    void dispatch(getJobs(inputData)).then(
+      dataJob => {
+        // eslint-disable-next-line no-debugger
+        debugger
+        setLoad(false)
+        setData(dataJob.payload)
+      }
+    )
+  }, [inputData])
 
   const [
     loading,
@@ -15,6 +26,8 @@ export const JobsPage = () => {
   ] = React.useState(true)
 
   React.useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    debugger
     if (!data) {
       nav('/')
     } else if (data.length > 0) {

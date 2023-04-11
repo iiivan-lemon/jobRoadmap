@@ -8,6 +8,7 @@ import topsReducer from '../models/tops/topsSlice'
 import recommendReducer from '../models/recommend/recommendSlice'
 import jobsReducer from '../models/dataJobs/dataJobsSlice'
 import favsReducer from '../models/favs/favsSlice'
+import resumeReducer from '../models/resume/resumeFixSlice'
 // Import { auth } from '../models/auth/authSlice'
 export const store = configureStore({
   reducer: combineReducers({
@@ -18,7 +19,8 @@ export const store = configureStore({
     top: topsReducer,
     fav: favsReducer,
     recommend: recommendReducer,
-    jobs: jobsReducer
+    jobs: jobsReducer,
+    resume: resumeReducer
   })
 })
 

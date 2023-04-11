@@ -1,2 +1,3 @@
 !.storybook
 src/authApp/
+src/features/pdfReader/

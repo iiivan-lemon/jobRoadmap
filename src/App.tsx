@@ -30,6 +30,7 @@ import ProfilePage from './pages/profilePage/ProfilePage'
 import { Reg } from './authApp/register'
 import { JobsPage } from './pages/jobsPage/JobsPage'
 import { getJobs } from './models/dataJobs/dataJobsSlice'
+import { ResumeFixPage } from './pages/resumeFixPage/ResumeFixPage'
 
 /*
  * Import { PrivateRoute } from './features/privateRoute/PrivateRoute'
@@ -61,12 +62,11 @@ function App (): JSX.Element {
     // CoursesPage()
     // // @ts-expect-error errors
     if (inputData.isTechSearch) {
-      history('/search')
-      void dispatch(getDataGraph(inputData.value))
       changeInputData(inputData.value)
+      history('/search')
     } else {
+      changeInputData(inputData.value)
       history('/searchjob')
-      void dispatch(getJobs(inputData.value))
     }
 
     /*
@@ -109,8 +109,14 @@ function App (): JSX.Element {
               />
             <Route
               element={<JobsPage
+                inputData={inputData}
               />}
               path="/searchJob"
+            />
+            <Route
+              element={<ResumeFixPage
+              />}
+              path="/resumeFix"
             />
               <Route
                   element={<Login />}

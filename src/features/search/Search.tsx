@@ -77,7 +77,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     event?.preventDefault()
     if (changeData != null) {
       const { value } = document.getElementById('searchJob') as HTMLInputElement
-      changeData(value)
+      changeData({ value, isTechSearch })
 
       // (document.getElementById('search') as HTMLInputElement).value = ''
     }
