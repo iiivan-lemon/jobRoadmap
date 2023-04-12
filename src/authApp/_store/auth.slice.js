@@ -36,7 +36,7 @@ function createReducers() {
 }
 
 function createExtraActions() {
-    const baseUrl = `http://job-roadmap.ru:1323/api/v1`;
+    const baseUrl = `http://job-roadmap.ru/api/v1`;
 
     return {
         login: login(),
