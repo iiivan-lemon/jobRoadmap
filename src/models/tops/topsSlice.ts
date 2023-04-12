@@ -62,7 +62,8 @@ export const TopsSlice = createSlice({
         return { professions: [] }
       })
       .addCase(getTops.fulfilled, (state, action) => {
-        return ((action.payload) ? action.payload : state)
+        action.payload.professions = action.payload.professions.filter(el => el.profession !== 'NAN')
+        return (action.payload) ? action.payload : state
       })
       .addCase(getTops.rejected, (state) => {
         return { professions: [] }

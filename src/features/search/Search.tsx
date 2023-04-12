@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 // eslint-disable-next-line import/no-duplicates
 import styles from './Search.module.css'
 import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -10,6 +10,7 @@ import { setFavs, setUnFavs } from '../../models/favs/favsSlice'
 import { getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
 import { selectGrade } from '../../models/gradeFilter/gradeSlice'
 import { debounce } from '../../utils/utils'
+import { TagInput } from '../tagInput/TagInput'
 
 /*
  * Interface SearchProps {
@@ -73,11 +74,12 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     }
   }
 
-  function subJob (event: any): void {
-    event?.preventDefault()
+  function subJob (tag: []): void {
+    // eslint-disable-next-line no-debugger
     if (changeData != null) {
-      const { value } = document.getElementById('searchJob') as HTMLInputElement
-      changeData({ value, isTechSearch })
+      if (tag.length) {
+        changeData({ value: tag.join(','), isTechSearch })
+      }
 
       // (document.getElementById('search') as HTMLInputElement).value = ''
     }
@@ -87,9 +89,12 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     setFavorite(false)
   }, [changeData])
   useEffect(() => {
-    setHavRecommends(false);
+    setHavRecommends(false)
 
-    (document.getElementById('search') as HTMLInputElement).value = titleTag
+    if ((document.getElementById('search') as HTMLInputElement)) {
+      (document.getElementById('search') as HTMLInputElement).value = titleTag
+    }
+
     // If (changeData != null) changeData((document.getElementById('search') as HTMLInputElement).value)
   }, [titleTag])
   useEffect(() => {
@@ -119,7 +124,8 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     if (!e.target.value && e.target.value === titleTag) { return }
     void (dispatch(getRecommends(e.target.value)))
   }
-
+  const refSearchJob = useRef<HTMLInputElement | null>(null)
+  const refSearch = useRef<HTMLInputElement | null>(null)
   return (
       <React.Fragment>
 
@@ -127,16 +133,18 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
               className={styles.searchBlock}
               onClick={() => { setIsModalOpen(true); document.body.style.overflowX = 'hidden' }}
           >
+            <div className='changeIconSearch'>
             <svg className={styles.changeSearch} onClick={ () => {
               setSearch(!isTechSearch)
             }
-            } fill="#2663f2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" enable-background="new 0 0 100 100" stroke="#2663f2"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M37.3,31.9h21.8c1.1,0,2-0.9,2-2v-4c0-3.3-2.7-5.9-5.9-5.9H41.3c-3.3,0-5.9,2.7-5.9,5.9v4 C35.3,31,36.2,31.9,37.3,31.9z"></path> <path d="M70,24.9h-2c-0.6,0-1,0.4-1,1v4c0,4.4-3.6,7.9-7.9,7.9H37.3c-4.4,0-7.9-3.6-7.9-7.9v-4c0-0.6-0.4-1-1-1h-2 c-3.3,0-5.9,2.7-5.9,5.9v40.6c0,3.3,2.7,5.9,5.9,5.9h20c2.8,0,3.1-2.3,3.1-3.1V52.8c0-2.3,1.3-2.8,2-2.8h21.6c2.4,0,2.8-2.1,2.8-2.8 V31C76,27.6,73.3,24.9,70,24.9z"></path> <path d="M78.4,60.4H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,59.9,79,60.4,78.4,60.4z M78.4,70.2H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,69.7,79,70.2,78.4,70.2z M78.4,80H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,79.5,79,80,78.4,80z"></path> </g></svg>
+            } fill="#2663f2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" enable-background="new 0 0 100 100" stroke="#2663f2"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M37.3,31.9h21.8c1.1,0,2-0.9,2-2v-4c0-3.3-2.7-5.9-5.9-5.9H41.3c-3.3,0-5.9,2.7-5.9,5.9v4 C35.3,31,36.2,31.9,37.3,31.9z"></path> <path d="M70,24.9h-2c-0.6,0-1,0.4-1,1v4c0,4.4-3.6,7.9-7.9,7.9H37.3c-4.4,0-7.9-3.6-7.9-7.9v-4c0-0.6-0.4-1-1-1h-2 c-3.3,0-5.9,2.7-5.9,5.9v40.6c0,3.3,2.7,5.9,5.9,5.9h20c2.8,0,3.1-2.3,3.1-3.1V52.8c0-2.3,1.3-2.8,2-2.8h21.6c2.4,0,2.8-2.1,2.8-2.8 V31C76,27.6,73.3,24.9,70,24.9z"></path> <path d="M78.4,60.4H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,59.9,79,60.4,78.4,60.4z M78.4,70.2H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,69.7,79,70.2,78.4,70.2z M78.4,80H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,79.5,79,80,78.4,80z"></path> </g></svg></div>
             {isTechSearch && <>
               <form
                   className={styles.formSearch}
                   onSubmit={sub}
               >
                   <input
+                      ref={refSearch}
                       placeholder="введите профессию или должность"
                       autoFocus
                       autoComplete="off"
@@ -146,24 +154,25 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
                       onChange={
                         debounce(sendSearchValue)
                       }
-                  />
+                  /><div className={styles.searchSvg}>
+                  <svg width='2rem' onClick={sub} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Search_Magnifying_Glass"> <path id="Vector" d="M15 15L21 21M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
+              </div>
                 { haveRecommends && <div className={styles.dropDown}>{renderRecommends(recommends)}</div> }
               </form>
             </>}
             {!isTechSearch && <>
-              <form
-              className={styles.formSearch}
-              onSubmit={subJob}
-              >
-              <input
-              placeholder="введите навыки или стек технологий"
-              autoFocus
-              autoComplete="off"
-              className={styles.search}
-              id="searchJob"
-              name="searchTerm"
-              />
-              </form>
+
+              <TagInput subJob={subJob}/>
+              {/* <input */}
+              {/*    ref={refSearchJob} */}
+              {/* placeholder="введите навыки или стек технологий" */}
+              {/* autoFocus */}
+              {/* autoComplete="off" */}
+              {/* className={styles.search} */}
+              {/* id="searchJob" */}
+              {/* name="searchTerm" */}
+              {/* /> */}
+
             {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
             </>}
             <div style = {{ visibility: (isTechSearch) ? 'visible' : 'hidden' }} className={isFavorite ? '' : styles.favorite}>

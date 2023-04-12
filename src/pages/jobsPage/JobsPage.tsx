@@ -13,7 +13,6 @@ export const JobsPage = ({ inputData }) => {
     void dispatch(getJobs(inputData)).then(
       dataJob => {
         // eslint-disable-next-line no-debugger
-        debugger
         setLoad(false)
         setData(dataJob.payload)
       }
@@ -27,7 +26,6 @@ export const JobsPage = ({ inputData }) => {
 
   React.useEffect(() => {
     // eslint-disable-next-line no-debugger
-    debugger
     if (!data) {
       nav('/')
     } else if (data.length > 0) {

@@ -18,6 +18,8 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     // setData([])
+    // eslint-disable-next-line no-debugger
+    setLoad(true)
     void dispatch(getDataGraph(inputData)).then(
       dataJob => {
         setLoad(false)
@@ -40,7 +42,6 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   }, [])
   React.useEffect(() => {
     // eslint-disable-next-line no-debugger
-    debugger
     if (!data) {
       nav('/')
     } else if (data.length > 0) {

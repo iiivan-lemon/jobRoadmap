@@ -31,7 +31,6 @@ export const getResResume = createAsyncThunk(
     // const string = { professions: [input] }
     // return string
     // eslint-disable-next-line no-debugger
-    debugger
     const response = await fetchResResume(inputResume)
     if (response.status === 200) {
       return response.data
