@@ -6,7 +6,7 @@ import {
 
 // import { fetchDataGraph } from './dataGraphService'
 import { type RootState } from '../../app/store'
-import { fetchTop } from './topsService'
+import { fetchNodeProf, fetchTop } from './topsService'
 
 export interface Top {
   profession: string
@@ -28,6 +28,17 @@ export const getTops = createAsyncThunk(
   'tops/fetchTop',
   async () => {
     const response = await fetchTop()
+    if (response.status === 200) {
+      return response.data
+    }
+  }
+)
+
+export const getNodeProf = createAsyncThunk(
+  'tops/fetchNodeProf',
+  async (input: string) => {
+    // return { professions: [{ profession: input }, { profession: '2' }] }
+    const response = await fetchNodeProf(input)
     if (response.status === 200) {
       return response.data
     }

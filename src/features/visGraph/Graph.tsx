@@ -270,13 +270,6 @@ const Graph = ({ data, title, grade }) => {
               onClick={nodeModal}
               ref={ref}
           />
-          {(isModalOpen > -1) && <NodeModal
-              nodeId={isModalOpen}
-              nodeTitle={data[isModalOpen].technology_name}
-              onClose={() => {
-                setIsModalOpen(-1)
-              }}
-                                 />}
       </>
   )
 }

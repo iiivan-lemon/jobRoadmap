@@ -63,6 +63,10 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
 
       <div id='page' className='page'
            onWheel={ (event) => {
+             // // eslint-disable-next-line no-debugger
+             if ((event.target as HTMLElement).classList.contains('profList')) {
+               return
+             }
              // event.preventDefault()
              if (event.deltaY < 0) {
                setZoom(zoom >= zoomOptions.max ? zoomOptions.max : zoom + zoomOptions.step)

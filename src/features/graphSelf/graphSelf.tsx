@@ -184,9 +184,12 @@ export const GraphSelf = ({ data, grade }) => {
         }
         const StyledIcon = styled(NodeSvg)`
         ${styles.circle}`
-        ReactDOM.render(<><span id={n[i].technology_name} className='titleNode'>{n[i].technology_name}</span><StyledIcon
+        ReactDOM.render(<><span onClick = {(e) => {
+          setIsModalOpen(n[i])
+        }}
+          id={n[i].technology_name} className='titleNode'>{n[i].technology_name}</span><StyledIcon
           onClick = {(e) => {
-            setIsModalOpen(n[i].technology_name)
+            setIsModalOpen(n[i])
           }}
           id={n[i].professionalism} /></>, circleArray[i])
         // svgsArray.push(
@@ -222,7 +225,7 @@ export const GraphSelf = ({ data, grade }) => {
   const [
     isModalOpen,
     setIsModalOpen
-  ] = useState('')
+  ] = useState(null)
 
   return (
       <>
@@ -232,10 +235,9 @@ export const GraphSelf = ({ data, grade }) => {
         {renderContainers(data)}
         </div></Draggable>
         {(isModalOpen) && <NodeModal
-            nodeId={isModalOpen}
-            nodeTitle={isModalOpen}
+            node={isModalOpen}
             onClose={() => {
-              setIsModalOpen('')
+              setIsModalOpen(null)
             }}
         />}
       </>
