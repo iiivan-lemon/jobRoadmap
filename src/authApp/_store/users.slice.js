@@ -28,7 +28,7 @@ function createInitialState() {
 }
 
 function createExtraActions() {
-    const baseUrl = `http://89.208.85.17:1323/api/v1`;
+    const baseUrl = `http://job-roadmap.ru:1323/api/v1`;
 
     return {
         signup: signup(),

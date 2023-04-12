@@ -32,4 +32,4 @@ RootState,
 unknown,
 Action<string>
 >
-export const apiUrl = 'http://89.208.85.17:1323/api/v1'
+export const apiUrl = 'http://job-roadmap.ru:1323/api/v1'
