@@ -1,0 +1,13 @@
+.saveGraph{
+    display: flex;
+    height: 10rem;
+    width: 14rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 3px solid #3A3A3A;
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+
+}

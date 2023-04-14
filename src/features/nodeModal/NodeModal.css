@@ -1,0 +1,53 @@
+.nodeModal{
+    display: flex;
+    top: 4rem;
+    z-index: 20;
+    position: absolute;
+    right: 0;
+    height: 100vh;
+    width: 20rem;
+    background-color: #1B1B1B;
+    font-size: 1.4rem;
+    color: white;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.closeBtn{
+    width: 2rem;
+height: 2rem;
+    cursor: pointer;
+}
+
+.titleBlock{
+    margin-block: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nodeTitle{
+    padding: 10px;
+    border-radius: 30px;
+    color: white;
+    background-color: #4d5b7a;
+    font-size: 22px;
+}
+
+.profList{
+    height: 60vh;
+    overflow-y: scroll;
+    margin-block: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+.profTitle{
+    color:white;
+}
+
+.percentTitle{
+    color:white;
+}

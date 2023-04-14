@@ -1,88 +1,113 @@
-import React, { type FC, useState } from 'react'
-import Header from '../../features/header/Header'
-// import GraphRoadMap from '../../features/graph/Graph'
-// import axios from 'axios'
+import React from 'react'
 import Graph from '../../features/visGraph/Graph'
-import axios from 'axios'
-import styles from './HomePage.module.css'
-const HomePage: FC = () => {
-  const [data, changeData] = useState([{ name: 'python', distance: 1, professionalism: 0 }, { name: 'sqlite', distance: 1, professionalism: 0.5 }, { name: 'django', distance: 0.6, professionalism: 0.4 }, { name: 'selenium', distance: 0.8, professionalism: 0.5 }, { name: 'docker', distance: 0.2, professionalism: 0.8 }, { name: 'c++', distance: 0.1, professionalism: 1 }])
-  const [inputData, changeInputData] = useState('')
-
-  // const [network, setNetwork] = useState<Network>(new Network(
-  //     container.current as HTMLElement,
-  //     { edges, nodes },
-  //
-  // ))
-
-  function checkStatus (status: number): string {
-    switch (Math.round(status / 100)) {
-      case 1: {
-        return 'Information'
+import './HomePage.css'
+import './../../App.css'
+import { PushSpinner } from 'react-spinners-kit'
+import { getDataGraph, selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { useNavigate } from 'react-router-dom'
+import { GraphSelf } from '../../features/graphSelf/graphSelf'
+import Draggable from 'react-draggable'
+import GradientGrade from '../../features/gradientGrade/GradientGrade'
+// import 'react-double-range-slider/dist/cjs/index.css'
+import { RangeSlider } from 'react-double-range-slider'
+import { getJobs } from '../../models/dataJobs/dataJobsSlice'
+const HomePage = ({ inputData, headerGrade }): JSX.Element => {
+  const nav = useNavigate()
+  const [data, setData] = React.useState([])
+  const dispatch = useAppDispatch()
+  React.useEffect(() => {
+    // setData([])
+    // eslint-disable-next-line no-debugger
+    setLoad(true)
+    void dispatch(getDataGraph(inputData)).then(
+      dataJob => {
+        setLoad(false)
+        setData(dataJob.payload)
       }
-      case 2: {
-        return 'Success'
-      }
-      case 3: {
-        return 'Redirect'
-      }
-      case 4: {
-        return 'Client Error'
-      }
-      case 5: {
-        return 'Server Error'
-      }
-      default: {
-        return ''
-      }
-    }
-  }
+    )
+      .catch(() => { setLoad(true); setData([]) })
+  }, [inputData])
+  const [
+    loading,
+    setLoad
+  ] = React.useState(true)
+  const [
+    grade,
+    setGrade
+  ] = React.useState({ begin: 0, end: 3 })
+  React.useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    document.getElementById('header')?.classList.remove('headerFix')
+  }, [])
+  React.useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    if (!data) {
+      nav('/')
+    } else if (data.length > 0) {
+      setLoad(false)
+    } else { setLoad(true) }
+  }, [data])
+  React.useEffect(() => {
+    setGrade(headerGrade)
+  }, [headerGrade])
 
-  function fetchUser (inputData: string): void {
-    axios.get('api/v1/technologies?search_text=' + inputData)
-      .then((response) => {
-        const statusInfo = checkStatus(response.status)
-        if (
-          statusInfo === 'Client Error' ||
-                    statusInfo === 'Server Error' ||
-                    statusInfo === 'Undefined'
-        ) {
-          console.error(statusInfo)
-        } else {
-          changeData(response?.data?.technologies)
-          changeInputData(inputData)
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  function change (inputData: string): void {
-    if (inputData.includes('python')) {
-      fetchUser(inputData)
-      return
-    }
-
-    // changeData([
-    //     {skill: 'python', value: 10},
-    //     {skill: 'sql', value: 7},
-    //     {skill: 'linux', value: 7},
-    //     {skill: 'postgresql', value: 7},
-    //     {skill: 'it', value: 4},
-    //     {skill: 'git', value: 4},
-    //     {skill: 'cicd', value: 4},
-    //     {skill: 'data', value: 2},
-    //     {skill: 'ml', value: 2},
-    //     {skill: 'docker', value: 1}
-    // ])
-    const arr = [{ name: 'python', distance: 1, professionalism: 0 }, { name: 'sqlite', distance: 1, professionalism: 0.5 }, { name: 'django', distance: 0.6, professionalism: 0.4 }, { name: 'selenium', distance: 0.8, professionalism: 0.5 }, { name: 'docker', distance: 0.2, professionalism: 0.8 }, { name: 'c++', distance: 0.1, professionalism: 1 }]
-
-    changeData(arr)
+  const [zoom, setZoom] = React.useState(1)
+  const zoomOptions = {
+    min: 0.1,
+    max: 1.5,
+    step: 0.05
   }
 
   return (
-        <div className={styles.page}><Header changeData={change}/><Graph data={data} title={inputData}/></div>
+
+      <div id='page' className='page'
+           onWheel={ (event) => {
+             // // eslint-disable-next-line no-debugger
+             if ((event.target as HTMLElement).classList.contains('profList')) {
+               return
+             }
+             // event.preventDefault()
+             if (event.deltaY < 0) {
+               setZoom(zoom >= zoomOptions.max ? zoomOptions.max : zoom + zoomOptions.step)
+             } else if (event.deltaY > 0) {
+               setZoom(zoom <= zoomOptions.min ? zoomOptions.min : zoom - zoomOptions.step)
+             }
+             // const xPerc = (offset.x * 100) / window.screen.width
+             // const yPerc = (offset.y * 100) / window.outerHeight
+             // if (ref.current) { (ref.current as HTMLElement).style.transformOrigin = xPerc + '%' + ' ' + yPerc + '%' }
+
+             //
+             if (event.currentTarget.children[2] as HTMLElement) { (event.currentTarget.children[2] as HTMLElement).style.scale = `${zoom} ` }
+           }
+             // } onMouseMove={(e) => {
+             //   x = e.clientX - (e.currentTarget as HTMLElement).offsetLeft
+             //   y = e.clientY - (e.currentTarget as HTMLElement).offsetTop
+             // }
+           }
+      >
+            <div className='preloader'>
+              <PushSpinner
+                  color="#686769"
+                  id="preloader"
+                  loading={loading}
+                  size={30}
+              />
+            </div>
+            {(!loading) && <>
+                <div className='btnOptions'>
+              <span className='gradeTitle'>
+                  опыт работы
+              </span>
+                    <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
+                      setGrade({ begin: e.minIndex, end: +e.maxIndex })
+                    }} value={[0, 1, 2, 3]}></RangeSlider>
+                    <GradientGrade width={'14rem'}/>
+                </div>
+                <GraphSelf data={data} grade={grade} ></GraphSelf>
+                                            </>}
+      </div>
+
   )
 }
 

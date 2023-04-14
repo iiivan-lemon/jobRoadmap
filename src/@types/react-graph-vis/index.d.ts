@@ -1,5 +1,5 @@
 declare module 'react-graph-vis' {
-  import { type Network, type NetworkEvents, type Options, type Node, type Edge, type DataSet } from 'vis'
+  import { type DataSet, type Edge, type Network, type NetworkEvents, type Node, type Options } from 'vis'
   import { Component } from 'react'
 
   export { Network, type NetworkEvents, type Options, type Node, type Edge, DataSet } from 'vis'

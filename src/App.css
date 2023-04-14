@@ -1,3 +1,12 @@
 #root{
     height: 100vh;
 }
+#modal-root{
+    position: absolute;
+}
+
+.headerFix{
+    position: fixed;
+    width: 100%;
+    z-index: 15;
+}

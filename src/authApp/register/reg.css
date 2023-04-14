@@ -1,0 +1,18 @@
+.conf-container-hidden {
+    position: absolute;
+    left: -99999px;
+    opacity: 0;
+}
+
+.conf-container {
+    border: 1px solid #ffffff;
+    padding: 1rem;
+    margin: 1rem;
+    background: #3A3A3A;
+    border-radius: 1rem;
+}
+.conf-a{
+    text-decoration: underline;
+    cursor: pointer;
+    color: white;
+}

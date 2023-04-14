@@ -1,11 +1,11 @@
-import { useState, useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import {
-  Network,
-  type Options,
   type Data,
   type Edge,
-  type Node
-} from 'vis-network/standalone/esm/vis-network'
+  Network,
+  type Node,
+  type Options
+} from 'vis-network'
 
 export interface UseVisNetworkOptions {
   options: Options
@@ -17,13 +17,16 @@ export interface UseVisNetworkOptions {
 export default (props: UseVisNetworkOptions) => {
   const { edges, nodes, options } = props
 
-  const [network, addNetwork] = useState<Network | null>(null)
+  const [
+    network,
+    addNetwork
+  ] = useState<Network | null>(null)
   const ref = useRef<HTMLDivElement>(null)
 
   const data: Data = { nodes, edges }
 
   useLayoutEffect(() => {
-    if (ref.current) {
+    if (ref.current != null) {
       const instance = new Network(ref.current, data, options)
       addNetwork(instance)
     }
