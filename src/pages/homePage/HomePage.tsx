@@ -22,7 +22,6 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     void dispatch(getDataGraph(inputData)).then(
       dataJob => {
         // eslint-disable-next-line no-debugger
-        debugger
         if (!dataJob.payload) {
           setLoad(loadState.error)
         } else {

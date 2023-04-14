@@ -27,7 +27,6 @@ export const JobLetterPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     // eslint-disable-next-line no-debugger
-    debugger
     if (!(selectedFile && selectedUrl)) {
       return
     }

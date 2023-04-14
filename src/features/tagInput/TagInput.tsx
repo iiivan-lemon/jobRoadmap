@@ -25,7 +25,6 @@ export const TagInput = ({ subJob }) => {
   }
   const sendSearchValue = (e) => {
     // eslint-disable-next-line no-debugger
-    debugger
     // if (!e.target.value) { }
     // void (dispatch(getRecommends(e.target.value)))
   }
