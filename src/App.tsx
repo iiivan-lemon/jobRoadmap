@@ -31,6 +31,7 @@ import { Reg } from './authApp/register'
 import { JobsPage } from './pages/jobsPage/JobsPage'
 import { getJobs } from './models/dataJobs/dataJobsSlice'
 import { ResumeFixPage } from './pages/resumeFixPage/ResumeFixPage'
+import { JobLetterPage } from './pages/jobLetterPage/jobLetterPage'
 
 /*
  * Import { PrivateRoute } from './features/privateRoute/PrivateRoute'
@@ -112,6 +113,11 @@ function App (): JSX.Element {
                 inputData={inputData}
               />}
               path="/searchJob"
+            />
+            <Route
+              element={<JobLetterPage
+              />}
+              path="/jobLetter"
             />
             <Route
               element={<ResumeFixPage

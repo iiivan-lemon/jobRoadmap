@@ -8,3 +8,10 @@ export function debounce (func, timeout = 400) {
     }, timeout)
   }
 }
+
+export const enum loadState {
+  error,
+  res,
+  load,
+  base
+}

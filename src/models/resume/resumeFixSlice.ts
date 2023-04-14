@@ -14,7 +14,7 @@ import { fetchResResume } from './resumeFixService'
 
 export interface Recommends {professions: string[] }
 
-const initialState: Recommends = { professions: [] }
+const initialState: Recommends | null = { professions: [] }
 
 /*
  * The function below is called a thunk and allows us to perform async logic. It
@@ -31,10 +31,8 @@ export const getResResume = createAsyncThunk(
     // const string = { professions: [input] }
     // return string
     // eslint-disable-next-line no-debugger
-    const response = await fetchResResume(inputResume)
-    if (response.status === 200) {
-      return response.data
-    }
+    const response = await fetchResResume(inputResume).then().catch(() => null)
+    return (response && (response.status) === 200 ? response.data.recommend : null)
   }
 )
 

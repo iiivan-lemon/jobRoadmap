@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 // import { PdfReader } from '../../features/pdfReader/pdfReader'
-import { Document, Page, pdfjs } from 'react-pdf'
+import { pdfjs } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 import { useAppDispatch } from '../../app/hooks'
 import { getResResume } from '../../models/resume/resumeFixSlice'
-import * as fs from 'fs'
 import { useNavigate } from 'react-router-dom'
 import { PushSpinner } from 'react-spinners-kit'
 import './resumeFixPage.css'
+import { loadState } from '../../utils/utils'
 // eslint-disable-next-line no-template-curly-in-string
 pdfjs.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -16,7 +16,7 @@ export const ResumeFixPage = () => {
   const [
     loading,
     setLoad
-  ] = React.useState(2)
+  ] = React.useState(loadState.base)
 
   const nav = useNavigate()
 
@@ -25,30 +25,34 @@ export const ResumeFixPage = () => {
   const [selectedFile, setSelectedFile] = React.useState(null)
   const [data, setData] = React.useState([])
 
-  React.useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    if (!data) {
-      nav('/')
-    } else if (data.length > 0) {
-      setLoad(0)
-    } else { setLoad(2) }
-  }, [data])
+  // React.useEffect(() => {
+  //   // eslint-disable-next-line no-debugger
+  //   if (!data) {
+  //     nav('/')
+  //   } else if (data.length > 0) {
+  //     setLoad(0)
+  //   } else { setLoad(2) }
+  // }, [data])
 
   const handleSubmit = async (event) => {
-    setLoad(1)
     event.preventDefault()
     // eslint-disable-next-line no-debugger
     const formData = new FormData()
     // @ts-expect-error qwer
     formData.append('file', selectedFile)
     try {
-      void dispatch(getResResume(formData.get('file')
-      )).then(data => {
-        // eslint-disable-next-line no-debugger
-        setData(data.payload.recommend)
-      })
+      setLoad(loadState.load)
+      void dispatch(getResResume(formData.get('file')))
+        .then(data => {
+          if (!data.payload) {
+            setLoad(loadState.error)
+          } else {
+            setLoad(loadState.res)
+            setData(data.payload)
+          }
+        }).catch(() => { setLoad(loadState.error) })
     } catch (error) {
-      console.log(error)
+      setLoad(loadState.error)
     }
   }
 
@@ -76,12 +80,12 @@ export const ResumeFixPage = () => {
         <PushSpinner
           color="#686769"
           id="preloader"
-          loading={loading === 1}
+          loading={loading === loadState.load}
           size={30}
         />
       </div>
 
-      {(loading === 0) &&
+      {(loading === loadState.res) &&
           <>
               <div className='allrecs'>{renderResumeRes(data)}</div></>
       }

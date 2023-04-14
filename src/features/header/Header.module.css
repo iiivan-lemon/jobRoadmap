@@ -12,6 +12,7 @@
 }
 
 .title {
+    cursor: pointer;
     font-family: 'GT Eesti Pro Display', serif;
     font-style: normal;
     font-weight: 700;
@@ -23,6 +24,7 @@
 }
 
 .favorite {
+    cursor: pointer;
     z-index: 20;
     flex-grow: 1;
     text-decoration: none;
@@ -38,6 +40,7 @@
 }
 
 .username {
+    cursor: pointer;
     text-decoration: none;
     padding-inline: 10px;
     font-style: normal;

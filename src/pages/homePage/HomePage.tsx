@@ -1,17 +1,16 @@
 import React from 'react'
-import Graph from '../../features/visGraph/Graph'
 import './HomePage.css'
 import './../../App.css'
 import { PushSpinner } from 'react-spinners-kit'
-import { getDataGraph, selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { getDataGraph } from '../../models/dataGraph/dataGraphSlice'
+import { useAppDispatch } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { GraphSelf } from '../../features/graphSelf/graphSelf'
-import Draggable from 'react-draggable'
 import GradientGrade from '../../features/gradientGrade/GradientGrade'
 // import 'react-double-range-slider/dist/cjs/index.css'
 import { RangeSlider } from 'react-double-range-slider'
-import { getJobs } from '../../models/dataJobs/dataJobsSlice'
+import { loadState } from '../../utils/utils'
+
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
   const [data, setData] = React.useState([])
@@ -19,19 +18,27 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   React.useEffect(() => {
     // setData([])
     // eslint-disable-next-line no-debugger
-    setLoad(true)
+    setLoad(loadState.load)
     void dispatch(getDataGraph(inputData)).then(
       dataJob => {
-        setLoad(false)
-        setData(dataJob.payload)
+        // eslint-disable-next-line no-debugger
+        debugger
+        if (!dataJob.payload) {
+          setLoad(loadState.error)
+        } else {
+          setLoad(loadState.res)
+          setData(dataJob.payload)
+        }
       }
     )
-      .catch(() => { setLoad(true); setData([]) })
+      .catch(() => {
+        setLoad(loadState.error)
+      })
   }, [inputData])
   const [
     loading,
     setLoad
-  ] = React.useState(true)
+  ] = React.useState(loadState.base)
   const [
     grade,
     setGrade
@@ -40,14 +47,16 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     document.body.style.overflow = 'hidden'
     document.getElementById('header')?.classList.remove('headerFix')
   }, [])
-  React.useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    if (!data) {
-      nav('/')
-    } else if (data.length > 0) {
-      setLoad(false)
-    } else { setLoad(true) }
-  }, [data])
+  // React.useEffect(() => {
+  //   // eslint-disable-next-line no-debugger
+  //   debugger
+  //   if (!data) {
+  //     setLoad(loadState.error)
+  //     nav('/')
+  //   } else if (data.length > 0) {
+  //     setLoad(loadState.res)
+  //   }
+  // }, [data])
   React.useEffect(() => {
     setGrade(headerGrade)
   }, [headerGrade])
@@ -90,11 +99,11 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
               <PushSpinner
                   color="#686769"
                   id="preloader"
-                  loading={loading}
+                  loading={loading === loadState.load}
                   size={30}
               />
             </div>
-            {(!loading) && <>
+            {(loading === loadState.res) && <>
                 <div className='btnOptions'>
               <span className='gradeTitle'>
                   опыт работы

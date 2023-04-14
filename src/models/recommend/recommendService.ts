@@ -1,5 +1,5 @@
 import axios from 'axios'
-const ip = 'http://job-roadmap.ru/'
+const ip = 'http://89.208.85.17:1323/'
 export async function fetchRecommend (input): Promise<any> {
   // eslint-disable-next-line no-debugger
 
