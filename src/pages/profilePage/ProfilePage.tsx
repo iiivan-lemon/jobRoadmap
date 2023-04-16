@@ -3,12 +3,12 @@ import styles from './ProfilePage.module.css'
 import './../../App.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getFavs, selectDataFavs, setFavs, setUnFavs } from '../../models/favs/favsSlice'
-import { GraphSelf } from '../../features/graphSelf/graphSelf'
+import { GraphSelf } from '../../components/graphSelf/graphSelf'
 
 /*
  * Import { userProfile } from '../../models/user/UserSlice'
  * import { useAppDispatch } from '../../app/hooks'
- * import stylesTags from '../../features/headerOptions/HeaderOptions.module.css'
+ * import stylesTags from '../../components/headerOptions/HeaderOptions.module.css'
  * import { Tag } from 'antd'
  */
 const ProfilePage: FC = () => {

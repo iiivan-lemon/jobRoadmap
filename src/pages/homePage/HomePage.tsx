@@ -5,15 +5,18 @@ import { PushSpinner } from 'react-spinners-kit'
 import { getDataGraph } from '../../models/dataGraph/dataGraphSlice'
 import { useAppDispatch } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
-import { GraphSelf } from '../../features/graphSelf/graphSelf'
-import GradientGrade from '../../features/gradientGrade/GradientGrade'
+import { GraphSelf } from '../../components/graphSelf/graphSelf'
+import GradientGrade from '../../components/gradientGrade/GradientGrade'
 // import 'react-double-range-slider/dist/cjs/index.css'
 import { RangeSlider } from 'react-double-range-slider'
 import { loadState } from '../../utils/utils'
+import { getFinished }
+  from '../../models/check/checkNodeSlice'
 
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
   const [data, setData] = React.useState([])
+  const [finishedNodes, setFinished] = React.useState(new Set([]))
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     // setData([])
@@ -26,6 +29,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
+          // @ts-expect-error adawd
           setData(dataJob.payload)
         }
       }
@@ -33,6 +37,14 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
       .catch(() => {
         setLoad(loadState.error)
       })
+    void dispatch(getFinished(inputData)).then(data => {
+      if (!data.payload || !Array.isArray(data.payload)) {
+        setFinished(new Set([]))
+      } else {
+        // @ts-expect-error dawd
+        setFinished(new Set(data.payload))
+      }
+    })
   }, [inputData])
   const [
     loading,
@@ -112,7 +124,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
                     }} value={[0, 1, 2, 3]}></RangeSlider>
                     <GradientGrade width={'14rem'}/>
                 </div>
-                <GraphSelf data={data} grade={grade} ></GraphSelf>
+                <GraphSelf data={data} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
                                             </>}
       </div>
 

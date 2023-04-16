@@ -3,3 +3,9 @@
     background: url("../../static/images/back-pattern-grade.png"), linear-gradient(180deg, rgb(0 0 0) 0%, #08041c 100%);
     padding: 20px 80px;
 }
+
+.letterBlock{
+    row-gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}

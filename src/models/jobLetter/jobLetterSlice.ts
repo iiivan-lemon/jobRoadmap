@@ -6,6 +6,7 @@ import {
 
 // import { fetchDataGraph } from './dataGraphService'
 import { type RootState } from '../../app/store'
+import { fetchJobLetter } from './jobLetterService'
 // import {fetchJobLetter, fetchResResume} from './jobLetterService'
 
 // export interface Recommend {
@@ -31,10 +32,10 @@ export const getJobLetter = createAsyncThunk(
     // const string = { professions: [input] }
     // return string
     // eslint-disable-next-line no-debugger
+    const response = await fetchJobLetter(input).then().catch(() => null)
+    // return (response && (response.status) === 200 ? response.data.recommend : null)
     const mockText = 'Hello!\naselkfhnapoufhbfhsrduginhsdtugdnlgorinhsuioflhsefhusef'
     return mockText
-    // const response = await fetchJobLetter(inputResume).then().catch(() => null)
-    // return (response && (response.status) === 200 ? response.data.recommend : null)
   }
 )
 

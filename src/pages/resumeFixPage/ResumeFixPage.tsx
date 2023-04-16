@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import { PdfReader } from '../../features/pdfReader/pdfReader'
+// import { PdfReader } from '../../components/pdfReader/pdfReader'
 import { pdfjs } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
@@ -24,7 +24,6 @@ export const ResumeFixPage = () => {
   const dispatch = useAppDispatch()
   const [selectedFile, setSelectedFile] = React.useState(null)
   const [data, setData] = React.useState([])
-
   // React.useEffect(() => {
   //   // eslint-disable-next-line no-debugger
   //   if (!data) {
@@ -72,8 +71,8 @@ export const ResumeFixPage = () => {
       <div className='resumeInput'>
       <span>добавьте резюме PDF</span>
       <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileSelect}/>
-        <input type="submit" value="сканировать резюме" />
+        <input placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
+        <input type="submit" id='inputScan' value="сканировать резюме" style={ selectedFile ? { visibility: 'visible' } : { visibility: 'hidden' }} />
       </form>
       </div>
       <div className='preloader'>

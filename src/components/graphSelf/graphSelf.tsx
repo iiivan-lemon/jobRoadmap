@@ -9,7 +9,12 @@ import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import NodeModal from '../nodeModal/NodeModal'
 
-export const GraphSelf = ({ data, grade }) => {
+export const GraphSelf = ({ data, grade, finishedNodes }) => {
+  const [finished, setFinished] = React.useState(new Set(finishedNodes))
+  // React.useEffect(() => {
+  //   setFinished(new Set(finishedNodes))
+  // }, [finishedNodes])
+
   React.useEffect(() => {
     const svgs = ref.current?.getElementsByTagName('svg');
     [].forEach.call(svgs, function (el: SVGSVGElement) {
@@ -52,6 +57,19 @@ export const GraphSelf = ({ data, grade }) => {
     return resColor ?? 'grey'
   }
 
+  const isFinished = (tech_name: string) => {
+    return finished.has(tech_name)
+  }
+
+  const isCheckNode = (tech_name: string) => {
+    // eslint-disable-next-line no-debugger
+
+    isFinished(tech_name)
+      ? finished.delete(tech_name)
+      : finished.add(tech_name);
+    ((document.getElementById(tech_name) as HTMLElement).parentElement as HTMLElement).classList.toggle('checkNode')
+  }
+
   const [containersRender, setContainersRender] = useState(false)
 
   const distancesDesr = [0.15, 0.25, 0.5, 0.75, 1]
@@ -85,23 +103,13 @@ export const GraphSelf = ({ data, grade }) => {
         dataCircles.push(subArr)
       }
 
-      const graphData = distances.map((el, index) => {
-        return data.filter((e, i) => {
-          if (i === 0) {
-            // eslint-disable-next-line array-callback-return
-            return
-          }
-          return (index + 1 === distances.length) ? e.distance <= el : e.distance <= el && e.distance > distances[index + 1]
-        })
-      })
-
       // @ts-expect-error sef
       dataCircles.filter(el => el.length).forEach((el, i) => {
         if (!i) {
           generate(el, 0, 0, 'graph' + i)
           return
         }
-        generate(el, (i - 1) * 500 + 700, (i - 1) * 500 + 700, 'graph' + i)
+        generate(el, (i - 1) * 600 + 700, (i - 1) * 600 + 700, 'graph' + i)
       })
       // if (!refMainNode.current?.children.length) {
 
@@ -118,16 +126,6 @@ export const GraphSelf = ({ data, grade }) => {
 
   React.useEffect(() => {
     setContainersRender(true)
-    // const script = document.createElement('script')
-    //
-    // script.src = 'https://draggable-html-elements.glitch.me/script.js'
-    // script.async = true
-    //
-    // document.body.appendChild(script)
-    //
-    // return () => {
-    //   document.body.removeChild(script)
-    // }
   }, [])
 
   function renderContainers (data) {
@@ -163,7 +161,7 @@ export const GraphSelf = ({ data, grade }) => {
         circleArray[i].posy = Math.round(ry * (Math.sin(theta[i]))) + 'px'
         circleArray[i].style.filter = !(filterGrade(n[i].professionalism)) ? 'brightness(0.2) grayscale(1) ' : ''
         circleArray[i].style.position = 'absolute'
-        circleArray[i].style.width = n[i].distance * 500 * (i + 1) + 'px'
+        circleArray[i].style.width = n[i].distance * 900 * (i + 1) + 'px'
         // circleArray[i].style.height = n[i].distance * 100 * (i + 1) + 'px'
         if (n.length === 1) {
           circleArray[i].style.top = ((mainHeight / 2) - parseInt(circleArray[i].posy.slice(0, -2))) + 'px'
@@ -171,6 +169,9 @@ export const GraphSelf = ({ data, grade }) => {
         } else {
           circleArray[i].style.top = ((mainHeight / 2) - parseInt(circleArray[i].posy.slice(0, -2))) + 'px'
           circleArray[i].style.left = ((mainHeight / 2) + parseInt(circleArray[i].posx.slice(0, -2))) + 'px'
+        }
+        if (isFinished(n[i].technology_name)) {
+          circleArray[i].classList.add('checkNode')
         }
         // const newSvg = renderToString(<NodeSvg fill={((filterGrade(n[i].professionalism)) ? pSBC(0.2, setNodeGradient(coloration, n[i].professionalism)) : '#3A3A3A') as string} />)
         // const newSvg = renderToString(<NodeSvg fill={(pSBC(0.2, setNodeGradient(coloration, n[i].professionalism))) as string} />)
@@ -185,11 +186,13 @@ export const GraphSelf = ({ data, grade }) => {
         const StyledIcon = styled(NodeSvg)`
         ${styles.circle}`
         ReactDOM.render(<><span onClick = {(e) => {
-          setIsModalOpen(n[i])
+          // setIsModalOpen({ ...n[i], isChecked: isFinished(n[i].technology_name) })
         }}
           id={n[i].technology_name} className='titleNode'>{n[i].technology_name}</span><StyledIcon
           onClick = {(e) => {
-            setIsModalOpen(n[i])
+            // eslint-disable-next-line no-debugger
+
+            setIsModalOpen({ ...n[i], isChecked: isFinished(n[i].technology_name) })
           }}
           id={n[i].professionalism} /></>, circleArray[i])
         // svgsArray.push(
@@ -235,6 +238,7 @@ export const GraphSelf = ({ data, grade }) => {
         {renderContainers(data)}
         </div></Draggable>
         {(isModalOpen) && <NodeModal
+            isChecked={isCheckNode}
             node={isModalOpen}
             onClose={() => {
               setIsModalOpen(null)

@@ -1,5 +1,5 @@
 import styles from './Tag.module.css'
-const Tag = ({ title, className, setTitleTag, id, setGrade }): any => {
+const Tag = ({ style, title, className, setTitleTag, id, setGrade }): any => {
   const setColorClick = (e): void => {
     const els = document.getElementsByClassName(styles.tagActive)
     for (const el of els) {
@@ -13,16 +13,22 @@ const Tag = ({ title, className, setTitleTag, id, setGrade }): any => {
       (e?.target.classList.contains(styles.tagActive)) ? setGrade({ begin: title.id, end: 1 + title.id }) : setGrade({ begin: 0, end: title.id })
       return
     }
-    (e?.target.classList.contains(styles.tagActive)) ? setTitleTag(title.profession) : setTitleTag('')
+    (e?.target.classList.contains(styles.tagActive)) ? setTitleTag(title?.profession) : setTitleTag('')
   }
   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  return (<div
+  return (<div style={style}
       className={`${styles.tag} ${className}`}
       id={id}
       onClick={setColorClick}
           >
       {title.profession || title.title}
           </div>)
+}
+
+Tag.defaultProps = {
+  style: {},
+  setGrade: () => {},
+  setTitleTag: () => {}
 }
 
 export default Tag

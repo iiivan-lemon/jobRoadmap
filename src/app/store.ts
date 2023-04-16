@@ -4,7 +4,7 @@ import gradeReducer from '../models/gradeFilter/gradeSlice'
 // Import user from '../models/user/UserSlice'
 import { UserReducer } from '../models/user/userReducer'
 import { AuthReducer } from '../models/auth/authReducer'
-import topsReducer from '../models/tops/topsSlice'
+import { TopsSlice, ListJobsSlice } from '../models/tops/topsSlice'
 import recommendReducer from '../models/recommend/recommendSlice'
 import jobsReducer from '../models/dataJobs/dataJobsSlice'
 import favsReducer from '../models/favs/favsSlice'
@@ -16,11 +16,12 @@ export const store = configureStore({
     grade: gradeReducer,
     auth: AuthReducer,
     user: UserReducer,
-    top: topsReducer,
+    top: TopsSlice.reducer,
     fav: favsReducer,
     recommend: recommendReducer,
     jobs: jobsReducer,
-    resume: resumeReducer
+    resume: resumeReducer,
+    listJob: ListJobsSlice.reducer
   })
 })
 
@@ -32,4 +33,4 @@ RootState,
 unknown,
 Action<string>
 >
-export const apiUrl = 'http://89.208.85.17:1323/api/v1'
+export const apiUrl = 'http://job-roadmap.ru:1323/api/v1'

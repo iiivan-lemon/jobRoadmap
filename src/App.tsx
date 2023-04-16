@@ -7,7 +7,7 @@ import HomePage from './pages/homePage/HomePage'
  * Import NewUserPage from './pages/newUserPage/NewUserPage'
  * import axios from 'axios'
  */
-import Header from '../src/features/header/Header'
+import Header from './components/header/Header'
 // Import ProfilePage from '../src/pages/profilePage/ProfilePage'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import { getDataGraph } from './models/dataGraph/dataGraphSlice'
@@ -34,7 +34,7 @@ import { ResumeFixPage } from './pages/resumeFixPage/ResumeFixPage'
 import { JobLetterPage } from './pages/jobLetterPage/jobLetterPage'
 
 /*
- * Import { PrivateRoute } from './features/privateRoute/PrivateRoute'
+ * Import { PrivateRoute } from './components/privateRoute/PrivateRoute'
  * import { history } from './authApp/_helpers'
  */
 
