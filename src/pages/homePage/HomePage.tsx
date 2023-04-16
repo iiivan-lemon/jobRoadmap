@@ -29,7 +29,6 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
-          // @ts-expect-error adawd
           setData(dataJob.payload)
         }
       }

@@ -24,14 +24,15 @@ export const ResumeFixPage = () => {
   const dispatch = useAppDispatch()
   const [selectedFile, setSelectedFile] = React.useState(null)
   const [data, setData] = React.useState([])
-  // React.useEffect(() => {
-  //   // eslint-disable-next-line no-debugger
-  //   if (!data) {
-  //     nav('/')
-  //   } else if (data.length > 0) {
-  //     setLoad(0)
-  //   } else { setLoad(2) }
-  // }, [data])
+  const [selectedJob, setSelectedJob] = React.useState(null)
+  const handleJobSelect = (event) => {
+    if (!event.target.value.trim()) {
+      setSelectedJob(null)
+    } else {
+      setLoad(loadState.base)
+      setSelectedJob(event.target.value)
+    }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -41,7 +42,7 @@ export const ResumeFixPage = () => {
     formData.append('file', selectedFile)
     try {
       setLoad(loadState.load)
-      void dispatch(getResResume(formData.get('file')))
+      void dispatch(getResResume({ file: formData.get('file'), name: selectedJob }))
         .then(data => {
           if (!data.payload) {
             setLoad(loadState.error)
@@ -61,7 +62,9 @@ export const ResumeFixPage = () => {
 
   const renderResumeRes = (data) => {
     if (data) {
-      return data.map(el => <div className='rec'><span className='profession'>{el.profession} </span><span className='match'> Совпадение: {(el.simularity).toFixed(2) * 100}% </span><span> Ваши навыки: {el.learned.join(' ') }</span><span> Что стоит изучить: {el.to_learn.join(' ') }</span></div>)
+      return data.filter(el => (el.profession === selectedJob)).map(el =>
+          <div className='rec'><span className='profession'>{el.profession} </span><span className='match'> Совпадение: {(el.simularity).toFixed(2) * 100}% </span><span> Ваши навыки: {el.learned.join(' ') }</span><span> Что стоит изучить: {el.to_learn.join(' ') }</span></div>
+      )
     }
   }
 
@@ -69,10 +72,13 @@ export const ResumeFixPage = () => {
   return (
     <div className='resumePage'>
       <div className='resumeInput'>
-      <span>добавьте резюме PDF</span>
-      <form onSubmit={handleSubmit}>
+
+      <form className='resumeBlock' onSubmit={handleSubmit}>
+        <span>добавьте резюме PDF</span>
         <input placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
-        <input type="submit" id='inputScan' value="сканировать резюме" style={ selectedFile ? { visibility: 'visible' } : { visibility: 'hidden' }} />
+        <span>введите вашу специальность</span>
+        <input type="text" onChange={handleJobSelect}/>
+        <input type="submit" id='inputScan' value="сканировать резюме" style={ (selectedJob && selectedFile) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
       </form>
       </div>
       <div className='preloader'>

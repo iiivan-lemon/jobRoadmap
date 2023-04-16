@@ -33,6 +33,11 @@
     padding: 6px;
     margin-block-end: 10px;
 }
+.resumeBlock{
+    row-gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
 
 .resumeInput{
     border-radius: 10px;
