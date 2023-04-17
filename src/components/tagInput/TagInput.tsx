@@ -33,9 +33,10 @@ export const TagInput = ({ subJob }) => {
     if (e.key !== 'Enter') return
     const value = e.target.value
     if (!value.trim()) return
-
-    // @ts-expect-error qwe
-    setTags([...tags, value])
+    if (tags.length <= 5) {
+      // @ts-expect-error qwe
+      setTags([...tags, value])
+    }
     e.target.value = ''
   }
 
@@ -46,14 +47,14 @@ export const TagInput = ({ subJob }) => {
   return (
    <><div className="tags-input-container">
       { tags.map((tag, index) => (
-        <div className="tag-item" key={index}>
+        <form className="tag-item" key={index}>
           <span className="text">{tag}</span>
           <span className="close" onClick={() => { removeTag(index) }}>&times;</span>
-        </div>
+        </form>
       )) }
       <input onChange={
         debounce(sendSearchValue)
-      } onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="введите навыки или стек технологий" />
+      } onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="введите навыки" />
      { null && <div className={styles.dropDown}>{renderRecommends(recommends)}</div> }
    </div>
   <div className={styles.searchSvg}>

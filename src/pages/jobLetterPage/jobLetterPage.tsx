@@ -3,8 +3,10 @@ import { loadState } from '../../utils/utils'
 import { getResResume } from '../../models/resume/resumeFixSlice'
 import { useAppDispatch } from '../../app/hooks'
 import './jobLetter.css'
+import styles from './../newUserPage/NewUserPage.module.css'
 import { getJobLetter } from '../../models/jobLetter/jobLetterSlice'
 import { PushSpinner } from 'react-spinners-kit'
+import styleSearch from './../../components/search/Search.module.css'
 export const JobLetterPage = () => {
   const dispatch = useAppDispatch()
   const [
@@ -85,9 +87,9 @@ export const JobLetterPage = () => {
         <form className='letterBlock' onSubmit={handleSubmit}>
           <span>добавьте резюме PDF</span>
           <input type="file" onChange={handleFileSelect} accept=".pdf"/>
-          <span>добавьте ссылку на вакансию</span>
-          <input type="text" onChange={handleUrlSelect}/>
-          <input type="submit" value="получить сопроводительное письмо" style={ (selectedFile && selectedUrl) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
+          <span>введите ссылку на вакансию</span>
+          <input className={styleSearch.search} type="text" onChange={handleUrlSelect}/>
+          <input type="submit" className={styles.tag + ' submit'} value="получить сопроводительное письмо" style={ (selectedFile && selectedUrl) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
         </form>
       </div>
       <div className='preloader'>
@@ -100,9 +102,9 @@ export const JobLetterPage = () => {
       </div>
       {(loading === loadState.res) &&
           <>
-              <textarea ref={refTextArea}>{renderLetter(data)}</textarea>
-              <div>
-                  <button onClick={copyToClipboard}>Copy</button>
+              <div className='letter'>
+                  <button className='copy' onClick={copyToClipboard}>Copy</button>
+                  <textarea className={styleSearch.search + ' letterArea'} ref={refTextArea}>{renderLetter(data)}</textarea>
                 {copySuccess}
               </div></>
       }

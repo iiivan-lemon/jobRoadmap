@@ -71,6 +71,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                       changeData={changeData}
                       setGrade={setGrade}
                   />
+                <div className={styles.titles}>
                 <span
                   className={styles.favorite}
                   onClick={() => { goTo('/resumeFix') }}
@@ -156,7 +157,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                   >
                       войти
                   </span>}
-
+                </div>
               </div>
 
               <div id="header-options" />

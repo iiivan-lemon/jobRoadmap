@@ -149,7 +149,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
                       placeholder="введите профессию или должность"
                       autoFocus
                       autoComplete="off"
-                      className={styles.search}
+                      className={styles.search + ' ' + styles.searchHeader}
                       id="search"
                       name="searchTerm"
                       onChange={

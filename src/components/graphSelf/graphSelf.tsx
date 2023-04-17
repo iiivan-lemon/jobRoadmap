@@ -6,7 +6,7 @@ import { ReactComponent as NodeSvg } from '../../static/images/svg-hex.svg'
 // import { ScrollZoom } from './zoom/Zoom'
 import Draggable from 'react-draggable'
 import ReactDOM from 'react-dom'
-import styled from 'styled-components'
+import styled, { type CSSObject } from 'styled-components'
 import NodeModal from '../nodeModal/NodeModal'
 
 export const GraphSelf = ({ data, grade, finishedNodes }) => {
@@ -181,7 +181,7 @@ export const GraphSelf = ({ data, grade, finishedNodes }) => {
             height: n[i].distance * 500 + 'px',
             width: n[i].distance * 500 + 'px',
             fill: (pSBC(0, setNodeGradient(coloration, n[i].professionalism)))
-          }
+          } as CSSObject
         }
         const StyledIcon = styled(NodeSvg)`
         ${styles.circle}`

@@ -19,14 +19,17 @@
     font-size: 32px;
     line-height: 37px;
     text-align: center;
-    flex-grow: 1;
     color: #FFFFFF;
 }
+
+.titles{
+    display: flex;
+}
+
 
 .favorite {
     cursor: pointer;
     z-index: 20;
-    flex-grow: 1;
     text-decoration: none;
     padding-inline: 10px;
     font-style: normal;
@@ -55,6 +58,7 @@
 
 
 .mainHeader {
+    justify-content: space-between;
     align-items: center;
     padding-block: 14px;
     display: flex;
@@ -75,3 +79,21 @@
     margin-inline: 1rem;
 }
 
+@media (max-width: 1500px) {
+    .favorite{
+        padding-inline: 1rem;
+    }
+}
+
+@media (max-width: 1500px) and (min-width: 1300px) {
+    .favorite{
+        padding-inline: 1rem;
+    }
+}
+
+@media (max-width: 2000px) {
+    .favorite{
+        padding-inline: 2rem;
+    }
+
+}

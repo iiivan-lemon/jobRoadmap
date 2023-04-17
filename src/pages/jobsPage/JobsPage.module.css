@@ -15,3 +15,17 @@
     margin: 1rem;
     background-color: grey;
 }
+
+g > text {
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.tooltip {
+    position: absolute;
+    visibility: hidden;
+    background-color: #111;
+    display: flex;
+    font-family: sans-serif;
+    max-width: 500px;
+}

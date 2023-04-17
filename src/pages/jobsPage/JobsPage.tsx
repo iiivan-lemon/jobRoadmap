@@ -4,8 +4,10 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PushSpinner } from 'react-spinners-kit'
 import styles from './JobsPage.module.css'
+import './../../components/bubbleChart/bubble.css'
 import { loadState } from '../../utils/utils'
-
+import { generateChart } from '../../components/bubbleChart/bubbleChart'
+import Draggable from 'react-draggable'
 export const JobsPage = ({ inputData }) => {
   const [data, setData] = useState([])
   const dispatch = useAppDispatch()
@@ -18,6 +20,7 @@ export const JobsPage = ({ inputData }) => {
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
+          // @ts-expect-error sefse
           setData(dataJob.payload)
         }
       }
@@ -41,6 +44,17 @@ export const JobsPage = ({ inputData }) => {
   const renderJobs = (data): any => {
     return data.map(el => <div className={styles.job}><span>{el.job_name} </span><span> {el.percent}%</span></div>)
   }
+
+  React.useEffect(() => {
+    if (loading === loadState.res) {
+      renderBubbles(data)
+    }
+  }, [loading])
+
+  const renderBubbles = (data) => {
+    generateChart(data)
+  }
+
   return (
     <div className={styles.page}>
       <div className='preloader'>
@@ -53,7 +67,18 @@ export const JobsPage = ({ inputData }) => {
       </div>
       <>
       {((loading === loadState.res)) &&
-      <>{renderJobs(data)}</>
+      <>{null && renderJobs(data)}
+          <Draggable>
+              <svg id="bubble-chart"/>
+          </Draggable>
+          <div className='tooltip'>
+              <img alt=""/>
+              <div>
+                  <a></a>
+                  <span></span>
+              </div>
+          </div>
+      </>
       }
       </>
     </div>

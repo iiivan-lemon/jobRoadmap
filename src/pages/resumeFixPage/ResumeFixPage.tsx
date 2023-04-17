@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { PdfReader } from '../../components/pdfReader/pdfReader'
 import { pdfjs } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
@@ -9,6 +8,8 @@ import { useNavigate } from 'react-router-dom'
 import { PushSpinner } from 'react-spinners-kit'
 import './resumeFixPage.css'
 import { loadState } from '../../utils/utils'
+import styles from '../newUserPage/NewUserPage.module.css'
+import styleSearch from '../../components/search/Search.module.css'
 // eslint-disable-next-line no-template-curly-in-string
 pdfjs.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -77,8 +78,8 @@ export const ResumeFixPage = () => {
         <span>добавьте резюме PDF</span>
         <input placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
         <span>введите вашу специальность</span>
-        <input type="text" onChange={handleJobSelect}/>
-        <input type="submit" id='inputScan' value="сканировать резюме" style={ (selectedJob && selectedFile) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
+        <input className={styleSearch.search} type="text" onChange={handleJobSelect}/>
+        <input className={styles.tag + ' submit'} type="submit" id='inputScan' value="сканировать резюме" style={ (selectedJob && selectedFile) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
       </form>
       </div>
       <div className='preloader'>

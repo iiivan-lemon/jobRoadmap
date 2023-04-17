@@ -24,6 +24,17 @@
     align-items: center;
 }
 
+.authModal  > h4{
+    color: white;
+}
+.form-group > label{
+    color: white;
+}
+.authModal > span{
+    color: white;
+}
+
+
 .form-group{
     column-gap: 1rem;
     display: flex;

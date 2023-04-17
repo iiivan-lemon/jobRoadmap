@@ -5,7 +5,7 @@ import './../../App.css'
 import GradientGrade from '../../components/gradientGrade/GradientGrade'
 import NodeFav from '../../components/nodeFav/nodeFav'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 import { ReactComponent as NodeSvg } from '../../static/images/svg-hex.svg'
 import pSBC from 'shade-blend-color'
 const NewUserPage: FC = () => {
@@ -30,7 +30,7 @@ const NewUserPage: FC = () => {
                   >
                       Cервис, который поможет вам узнать и изучить необходимые навыки для подготовки к собеседованиям по выбранной Вами профессии
                   </span>
-                  <button type='button' className={styles.tag} onClick={openHeader}>начать поиск!</button>
+                  <button type='button' className={styles.tag + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button>
                   </div>
                   <svg className={styles.tasks} width="937" height="198" viewBox="0 0 937 198" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g filter="url(#filter0_b_149_3491)">

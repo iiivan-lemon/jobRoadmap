@@ -1,20 +1,25 @@
 .tags-input-container{
+    width: 22rem;
+    overflow-x: overlay;
+    display: inline-flex;
     color: black;
-    width: 100%;
     background: #E8F1F2;
     border: 3px solid #9cb1ff;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     border-radius: 10px;
-
+    height: 2rem;
     padding-inline-start: 0.8rem;
     outline-color: #0047ff;
+}
+.tags-input-container input{
+    color: black;
 }
 
 .tag-item{
     margin: 2px;
     font-size: 1rem;
     background-color: rgb(218, 216, 216);
-    display: inline-block;
+    display: flex;
     padding: 0.3em 0.5em;
     border-radius: 20px;
 }
@@ -33,15 +38,14 @@
 }
 
 .tags-input{
-    font-size: 20px;
-    background: #E8F1F2;
+    font-size: 1rem;
+    background: transparent;
     flex-grow: 1;
     border: none;
     outline: none;
 }
 
-.searchSvg{
+.searchSvg {
     cursor: pointer;
     margin-inline-start: 10px;
-
 }
