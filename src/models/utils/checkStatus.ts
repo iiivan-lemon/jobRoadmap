@@ -1,19 +1,10 @@
-export function checkStatus (status: number): string {
+export function checkStatus (status: number): string | null {
   switch (Math.round(status / 100)) {
-    case 1: {
-      return 'Information'
-    }
-    case 2: {
-      return 'Success'
-    }
-    case 3: {
-      return 'Redirect'
-    }
     case 4: {
-      return 'Client Error'
+      return 'ошибка'
     }
     case 5: {
-      return 'Server Error'
+      return 'ошибка сервера'
     }
     default: {
       return ''

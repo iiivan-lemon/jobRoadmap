@@ -8,19 +8,25 @@ import './../../components/bubbleChart/bubble.css'
 import { loadState } from '../../utils/utils'
 import { generateChart } from '../../components/bubbleChart/bubbleChart'
 import Draggable from 'react-draggable'
+import { ErrorModal } from '../../components/errorModal/errorModal'
 export const JobsPage = ({ inputData }) => {
   const [data, setData] = useState([])
   const dispatch = useAppDispatch()
   const nav = useNavigate()
+  const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
+
+  React.useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    document.getElementById('header')?.classList.remove('headerFix')
+  }, [])
   React.useEffect(() => {
     setLoad(loadState.load)
     void dispatch(getJobs(inputData)).then(
       dataJob => {
-        if (!dataJob.payload) {
+        if (dataJob.payload.errMessage) {
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
-          // @ts-expect-error sefse
           setData(dataJob.payload)
         }
       }
@@ -55,6 +61,13 @@ export const JobsPage = ({ inputData }) => {
     generateChart(data)
   }
 
+  const [zoom, setZoom] = React.useState(1)
+  const zoomOptions = {
+    min: 0.1,
+    max: 1.5,
+    step: 0.05
+  }
+
   return (
     <div className={styles.page}>
       <div className='preloader'>
@@ -65,12 +78,25 @@ export const JobsPage = ({ inputData }) => {
           size={30}
         />
       </div>
+      { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
       <>
       {((loading === loadState.res)) &&
       <>{null && renderJobs(data)}
-          <Draggable>
+          <div onWheel={ (event) => {
+            // // eslint-disable-next-line no-debugger
+            if ((event.target as HTMLElement).classList.contains('profList')) {
+              return
+            }
+            // event.preventDefault()
+            if (event.deltaY < 0) {
+              setZoom(zoom >= zoomOptions.max ? zoomOptions.max : zoom + zoomOptions.step)
+            } else if (event.deltaY > 0) {
+              setZoom(zoom <= zoomOptions.min ? zoomOptions.min : zoom - zoomOptions.step)
+            }
+            if (event.currentTarget.children[0] as HTMLElement) { (event.currentTarget.children[0] as HTMLElement).style.scale = `${zoom} ` }
+          }}><Draggable >
               <svg id="bubble-chart"/>
-          </Draggable>
+          </Draggable></div>
           <div className='tooltip'>
               <img alt=""/>
               <div>

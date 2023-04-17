@@ -7,6 +7,7 @@ import {
 // import { fetchDataGraph } from './dataGraphService'
 import { type RootState } from '../../app/store'
 import { fetchResResume } from './resumeFixService'
+import { checkStatus } from '../utils/checkStatus'
 
 // export interface Recommend {
 //   profession: string
@@ -32,7 +33,7 @@ export const getResResume = createAsyncThunk(
     // return string
     // eslint-disable-next-line no-debugger
     const response = await fetchResResume(inputResume).then().catch(() => null)
-    return (response && (response.status) === 200 ? response.data.recommend : null)
+    return ((response && !checkStatus(response.status)) ? response.data.recommend : { errMessage: checkStatus(response.status) })
   }
 )
 

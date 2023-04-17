@@ -49,14 +49,15 @@ function checkStatus (status: number): string {
 export const getJobs = createAsyncThunk(
   'dataJobs/fetchDataJobs',
   async (input: string) => {
-    const jobs = { techs: 'angular,js,react', job_number: 6, additional: [{ job_name: 'frontend developer', percent: 86 }, { job_name: 'backend developer', percent: 74 }, { job_name: 'python developer', percent: 52 }, { job_name: 'frontend developer', percent: 36 }, { job_name: 'backend developer', percent: 34 }, { job_name: 'python developer', percent: 12 }] }
+    // const jobs = { techs: 'angular,js,react', job_number: 6, additional: [{ job_name: 'frontend developer', percent: 86 }, { job_name: 'backend developer', percent: 74 }, { job_name: 'python developer', percent: 52 }, { job_name: 'frontend developer', percent: 36 }, { job_name: 'backend developer', percent: 34 }, { job_name: 'python developer', percent: 12 }] }
     // const data = { job_name: 'frontend developer', technology_number: 13, additional: [{ technology_name: 'JavaScript', distance: 1.0, professionalism: 0 }, { technology_name: 'Vue.js', distance: 0.6666666666666666, professionalism: 2 }, { technology_name: 'Git', distance: 0.6666666666666666, professionalism: 1 }, { technology_name: 'CSS', distance: 0.6555555555555556, professionalism: 0 }, { technology_name: 'TypeScript', distance: 0.55, professionalism: 3 }, { technology_name: 'HTML', distance: 0.4916666666666667, professionalism: 0 }, { technology_name: 'CSS3', distance: 0.45, professionalism: 0 }, { technology_name: 'HTML5', distance: 0.45, professionalism: 0 }, { technology_name: 'React', distance: 0.43333333333333335, professionalism: 0 }, { technology_name: 'React.js', distance: 0.4, professionalism: 0 }, { technology_name: 'ReactJS', distance: 0.3333333333333333, professionalism: 1 }, { technology_name: 'Node.js', distance: 0.3333333333333333, professionalism: 1 }, { technology_name: 'Angular', distance: 0.3333333333333333, professionalism: 1 }] }
     // return data.additional
-    return jobs.additional
-    // const response = await fetchDataJobs(input).then().catch(() => null)
+    // return jobs.additional
+    const response = await fetchDataJobs(input).then().catch(() => null)
     // if (response.position_data.detail) {
     //   return { technology_name: input, distance: 1, professionalism: 0 }
     // }
+    return ((response && !checkStatus(response.status)) ? response.data.professions.additional : { errMessage: checkStatus(response.status) })
 
     // return (response && (response.status) === 200 ? response.data.professions.additional : null)
     // The value we return becomes the `fulfilled` action payload

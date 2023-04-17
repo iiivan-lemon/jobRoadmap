@@ -7,15 +7,17 @@ import { useAppDispatch } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { GraphSelf } from '../../components/graphSelf/graphSelf'
 import GradientGrade from '../../components/gradientGrade/GradientGrade'
-// import 'react-double-range-slider/dist/cjs/index.css'
+import styles from '../newUserPage/NewUserPage.module.css'
 import { RangeSlider } from 'react-double-range-slider'
 import { loadState } from '../../utils/utils'
 import { getFinished }
   from '../../models/check/checkNodeSlice'
+import { ErrorModal } from '../../components/errorModal/errorModal'
 
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
   const [data, setData] = React.useState([])
+  const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
   const [finishedNodes, setFinished] = React.useState(new Set([]))
   const dispatch = useAppDispatch()
   React.useEffect(() => {
@@ -24,8 +26,8 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     setLoad(loadState.load)
     void dispatch(getDataGraph(inputData)).then(
       dataJob => {
-        // eslint-disable-next-line no-debugger
-        if (!dataJob.payload) {
+        if (dataJob.payload.errMessage) {
+          setErrMessage(dataJob.payload.errMessage)
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
@@ -34,6 +36,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
       }
     )
       .catch(() => {
+        // eslint-disable-next-line no-debugger
         setLoad(loadState.error)
       })
     void dispatch(getFinished(inputData)).then(data => {
@@ -57,16 +60,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     document.body.style.overflow = 'hidden'
     document.getElementById('header')?.classList.remove('headerFix')
   }, [])
-  // React.useEffect(() => {
-  //   // eslint-disable-next-line no-debugger
-  //   debugger
-  //   if (!data) {
-  //     setLoad(loadState.error)
-  //     nav('/')
-  //   } else if (data.length > 0) {
-  //     setLoad(loadState.res)
-  //   }
-  // }, [data])
+
   React.useEffect(() => {
     setGrade(headerGrade)
   }, [headerGrade])
@@ -113,6 +107,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
                   size={30}
               />
             </div>
+        { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
             {(loading === loadState.res) && <>
                 <div className='btnOptions'>
               <span className='gradeTitle'>

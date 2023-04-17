@@ -1,9 +1,13 @@
 .authPage{
     height: 100%;
-    background-size: cover;
-    background-image: url("../../static/images/back-pattern-home.png");
+    background-image: url("../../static/images/back-pattern-home.png"), linear-gradient(141.03deg, #3A3A3A -0.42%, #000000 30.16%);;
+    background-size: contain;
 }
 .authModal{
+    box-shadow: 0px 0px 5px 1px rgb(255 255 255);
+    height: -moz-fit-content;
+    background: #d3d3d324;
+    -webkit-backdrop-filter: blur(3px);
     position: absolute;
     top: 0;
     bottom: 0;
@@ -12,7 +16,6 @@
     margin: auto;
     color: white;
     padding: 1rem 2rem;
-    background: #1B1B1B;
     border: 1px solid #FFFFFF;
     backdrop-filter: blur(5px);
     border-radius: 20px;
@@ -31,6 +34,7 @@
     color: white;
 }
 .authModal > span{
+    cursor: pointer;
     color: white;
 }
 
@@ -49,9 +53,7 @@
     left: 681px;
     top: 544px;
     margin: 1rem;
-    background: #E8F1F2;
     mix-blend-mode: normal;
-    border: 3px solid #3A3A3A;
     border-radius: 10px;
     font-size: 1rem;
 }

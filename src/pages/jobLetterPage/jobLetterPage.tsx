@@ -14,7 +14,7 @@ export const JobLetterPage = () => {
     setLoad
   ] = React.useState(loadState.base)
   const [selectedFile, setSelectedFile] = React.useState(null)
-
+  const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
   const [selectedUrl, setSelectedUrl] = React.useState(null)
   const [data, setData] = React.useState(null)
   const refTextArea = React.useRef<HTMLTextAreaElement>(null)
@@ -52,12 +52,11 @@ export const JobLetterPage = () => {
       setLoad(loadState.load)
       void dispatch(getJobLetter({ file: formData.get('file'), link: selectedUrl }))
         .then(data => {
-          if (!data.payload) {
+          if (data.payload.errMessage) {
+            setErrMessage(data.payload.errMessage)
             setLoad(loadState.error)
           } else {
             setLoad(loadState.res)
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error faefsf
             setData(data.payload)
           }
         }).catch(() => { setLoad(loadState.error) })
@@ -90,6 +89,7 @@ export const JobLetterPage = () => {
           <span>введите ссылку на вакансию</span>
           <input className={styleSearch.search} type="text" onChange={handleUrlSelect}/>
           <input type="submit" className={styles.tag + ' submit'} value="получить сопроводительное письмо" style={ (selectedFile && selectedUrl) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
+          { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
         </form>
       </div>
       <div className='preloader'>

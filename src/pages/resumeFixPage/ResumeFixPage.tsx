@@ -10,6 +10,7 @@ import './resumeFixPage.css'
 import { loadState } from '../../utils/utils'
 import styles from '../newUserPage/NewUserPage.module.css'
 import styleSearch from '../../components/search/Search.module.css'
+import { ErrorModal } from '../../components/errorModal/errorModal'
 // eslint-disable-next-line no-template-curly-in-string
 pdfjs.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -20,7 +21,7 @@ export const ResumeFixPage = () => {
   ] = React.useState(loadState.base)
 
   const nav = useNavigate()
-
+  const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
   const [file, setFile] = useState('')
   const dispatch = useAppDispatch()
   const [selectedFile, setSelectedFile] = React.useState(null)
@@ -45,7 +46,8 @@ export const ResumeFixPage = () => {
       setLoad(loadState.load)
       void dispatch(getResResume({ file: formData.get('file'), name: selectedJob }))
         .then(data => {
-          if (!data.payload) {
+          if (data.payload.errMessage) {
+            setErrMessage(data.payload.errMessage)
             setLoad(loadState.error)
           } else {
             setLoad(loadState.res)
@@ -80,6 +82,7 @@ export const ResumeFixPage = () => {
         <span>введите вашу специальность</span>
         <input className={styleSearch.search} type="text" onChange={handleJobSelect}/>
         <input className={styles.tag + ' submit'} type="submit" id='inputScan' value="сканировать резюме" style={ (selectedJob && selectedFile) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
+        { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
       </form>
       </div>
       <div className='preloader'>
@@ -90,7 +93,6 @@ export const ResumeFixPage = () => {
           size={30}
         />
       </div>
-
       {(loading === loadState.res) &&
           <>
               <div className='allrecs'>{renderResumeRes(data)}</div></>

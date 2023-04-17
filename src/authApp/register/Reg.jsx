@@ -11,6 +11,8 @@ import {useNavigate} from "react-router-dom";
 import {loadingProfile, registration} from "../../models/user/userActions";
 import {loginOrLogout} from "../../models/auth/authActions";
 import './reg.css'
+import styles from "../../pages/newUserPage/NewUserPage.module.css";
+import styleSearch from "../../components/search/Search.module.css";
 // export { Reg };
 
 export const Reg = () => {
@@ -74,21 +76,21 @@ export const Reg = () => {
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
-                            <label>Username</label>
-                            <input name="username" type="username" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
+                            <label>Ваше имя</label>
+                            <input className={styleSearch.search + ` ${errors.username ? 'is-invalid' : ''}`} name="username" type="username" {...register('username')}  />
                             <div className="invalid-feedback">{errors.username?.message}</div>
                         </div>
                         <div className="form-group">
-                            <label>email</label>
-                            <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+                            <label>Электронная почта</label>
+                            <input className={styleSearch.search + ` ${errors.email ? 'is-invalid' : ''}`} name="email" type="text" {...register('email')}  />
                             <div className="invalid-feedback">{errors.email?.message}</div>
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
-                            <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
+                            <label>Пароль</label>
+                            <input className={styleSearch.search +  ` ${errors.password ? 'is-invalid' : ''}`} name="password" type="password" {...register('password')}  />
                             <div className="invalid-feedback">{errors.password?.message}</div>
                         </div>
-                        <button disabled={isSubmitting} className="submitBtn">
+                        <button disabled={isSubmitting} className={styles.tag + ' submitBtn'}>
                             {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                             зарегистрироваться
                         </button>
