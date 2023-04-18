@@ -28,6 +28,9 @@
 }
 
 .letterArea{
+    width: 60vw;
+    height: 70vh;
+    resize: none;
 font-size: 1rem;
 padding: 1rem;
 }

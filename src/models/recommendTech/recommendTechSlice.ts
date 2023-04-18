@@ -6,16 +6,15 @@ import {
 
 // import { fetchDataGraph } from './dataGraphService'
 import { type RootState } from '../../app/store'
-import { fetchResResume } from './resumeFixService'
-import { checkStatus } from '../utils/checkStatus'
+import { fetchRecommendTech } from './recommendTechService'
 
 // export interface Recommend {
 //   profession: string
 // }
 
-export interface Recommends {professions: string[] }
+export interface Recommends {techs: string[] }
 
-const initialState: Recommends | null = { professions: [] }
+const initialState: Recommends = { techs: [] }
 
 /*
  * The function below is called a thunk and allows us to perform async logic. It
@@ -25,22 +24,21 @@ const initialState: Recommends | null = { professions: [] }
  * typically used to make async requests.
  */
 
-export const getResResume = createAsyncThunk(
-  'resume/fetchResResume',
-  async (inputResume: any) => {
+export const getRecommendsTech = createAsyncThunk(
+  'recommendsTech/fetchRecommendTech',
+  async (input: string) => {
     //
     // const string = { professions: [input] }
     // return string
-    // eslint-disable-next-line no-debugger
-    // const mock = { status: 200, recommend: [{ learned: ['Python', 'Git', 'Linux', 'SQL', 'Teamleading'], 'to learn': ['PostgreSQL', 'Elasticsearch', 'MySQL', 'Erlang', 'Redis'] }] }
-    const response = await fetchResResume(inputResume).then().catch(e => e.response)
-
-    return ((!checkStatus(response.status)) ? response.data.recommend : { errMessage: checkStatus(response.status) })
+    const response = await fetchRecommendTech(input)
+    if (response.status === 200) {
+      return response.data
+    }
   }
 )
 
-export const ResumeSlice = createSlice({
-  name: 'resume',
+export const RecommendTechSlice = createSlice({
+  name: 'recommendsTech',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -63,14 +61,14 @@ export const ResumeSlice = createSlice({
      */
   extraReducers: (builder) => {
     builder
-      .addCase(getResResume.pending, (state) => {
-        return { professions: [] }
+      .addCase(getRecommendsTech.pending, (state) => {
+        return { techs: [] }
       })
-      .addCase(getResResume.fulfilled, (state, action) => {
+      .addCase(getRecommendsTech.fulfilled, (state, action) => {
         return ((action.payload) ? action.payload : state)
       })
-      .addCase(getResResume.rejected, (state) => {
-        return { professions: [] }
+      .addCase(getRecommendsTech.rejected, (state) => {
+        return { techs: [] }
       })
   }
 })
@@ -82,7 +80,7 @@ export const ResumeSlice = createSlice({
  * the state. Selectors can also be defined inline where they're used instead of
  * in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
  */
-export const selectResumeRes = (state: RootState): Recommends => state.resume
+export const selectDataRecommendsTech = (state: RootState): Recommends => state.recommendTech
 //
 // // We can also write thunks by hand, which may contain both sync and async logic.
 // // Here's an example of conditionally dispatching actions based on current state.
@@ -95,4 +93,4 @@ export const selectResumeRes = (state: RootState): Recommends => state.resume
 //         }
 //       }
 
-export default ResumeSlice.reducer
+export default RecommendTechSlice.reducer

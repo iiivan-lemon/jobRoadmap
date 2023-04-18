@@ -6,6 +6,7 @@ import { UserReducer } from '../models/user/userReducer'
 import { AuthReducer } from '../models/auth/authReducer'
 import { TopsSlice, ListJobsSlice } from '../models/tops/topsSlice'
 import recommendReducer from '../models/recommend/recommendSlice'
+import recommendTechReducer from '../models/recommendTech/recommendTechSlice'
 import jobsReducer from '../models/dataJobs/dataJobsSlice'
 // import favsReducer from '../models/favs/favsSlice'
 import resumeReducer from '../models/resume/resumeFixSlice'
@@ -18,6 +19,7 @@ export const store = configureStore({
     top: TopsSlice.reducer,
     // fav: favsReducer,
     recommend: recommendReducer,
+    recommendTech: recommendTechReducer,
     jobs: jobsReducer,
     resume: resumeReducer,
     listJob: ListJobsSlice.reducer
@@ -32,4 +34,4 @@ RootState,
 unknown,
 Action<string>
 >
-export const apiUrl = 'http://job-roadmap.ru:1323/api/v1'
+export const apiUrl = 'https://job-roadmap.ru/api/v1'

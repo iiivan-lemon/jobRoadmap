@@ -36,7 +36,7 @@ export const getJobLetter = createAsyncThunk(
     // eslint-disable-next-line no-debugger
 
     const response = await fetchJobLetter(input).then().catch(e => e.response)
-    return ((!checkStatus(response.status)) ? response.data.recommend : { errMessage: checkStatus(response.status) })
+    return ((!checkStatus(response.status)) ? response.data.cover_letter : { errMessage: checkStatus(response.status) })
 
     // return (response && (response.status) === 200 ? response.data.recommend : null)
     // const mockText = 'Hello!\naselkfhnapoufhbfhsrduginhsdtugdnlgorinhsuioflhsefhusef'

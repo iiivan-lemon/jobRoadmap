@@ -3,7 +3,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://job-roadmap.ru:1323/',
+      target: 'https://job-roadmap.ru/',
       changeOrigin: true
     })
   )

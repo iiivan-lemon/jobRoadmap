@@ -1,5 +1,5 @@
 import axios from 'axios'
-const ip = 'http://job-roadmap.ru:1323/'
+const ip = 'https://job-roadmap.ru/'
 export async function fetchFavs (): Promise<any> {
   return await axios.get(`${ip}api/v1/likes`)
     .then((response) => response)

@@ -70,7 +70,7 @@ export const JobLetterPage = () => {
   }
 
   const isValidUrl = urlString => {
-    const urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
+    const urlPattern = new RegExp('^(https?:\\/\\/)' + // validate protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
       '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
       '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // validate port and path
@@ -86,7 +86,7 @@ export const JobLetterPage = () => {
         <form className='letterBlock' onSubmit={handleSubmit}>
           <span>добавьте резюме PDF</span>
           <input type="file" onChange={handleFileSelect} accept=".pdf"/>
-          <span>введите ссылку на вакансию</span>
+          <span>введите ссылку на вакансию hh.ru</span>
           <input className={styleSearch.search} type="text" onChange={handleUrlSelect}/>
           <input type="submit" className={styles.tag + ' submit'} value="получить сопроводительное письмо" style={ (selectedFile && selectedUrl) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
           { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}

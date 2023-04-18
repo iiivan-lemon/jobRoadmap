@@ -44,7 +44,7 @@ export const ResumeFixPage = () => {
     formData.append('file', selectedFile)
     try {
       setLoad(loadState.load)
-      void dispatch(getResResume({ file: formData.get('file'), name: selectedJob }))
+      void dispatch(getResResume({ file: formData.get('file'), role: selectedJob, n_tech: 5 }))
         .then(data => {
           // eslint-disable-next-line no-debugger
 
@@ -69,8 +69,8 @@ export const ResumeFixPage = () => {
 
   const renderResumeRes = (data) => {
     if (data) {
-      return data.filter(el => (el.profession === selectedJob)).map(el =>
-          <div className='rec'><span className='profession'>{el.profession} </span><span className='match'> Совпадение: {(el.simularity).toFixed(2) * 100}% </span><span> Ваши навыки: {el.learned.join(' ') }</span><span> Что стоит изучить: {el.to_learn.join(' ') }</span></div>
+      return (
+          <div className='rec'><span> Ваши навыки: {data[0].learned.join(' ') }</span><span> Что стоит изучить: {data[0]['to learn'].join(' ') }</span></div>
       )
     }
   }
