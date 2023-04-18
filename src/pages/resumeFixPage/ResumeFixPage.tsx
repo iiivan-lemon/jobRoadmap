@@ -46,6 +46,8 @@ export const ResumeFixPage = () => {
       setLoad(loadState.load)
       void dispatch(getResResume({ file: formData.get('file'), name: selectedJob }))
         .then(data => {
+          // eslint-disable-next-line no-debugger
+
           if (data.payload.errMessage) {
             setErrMessage(data.payload.errMessage)
             setLoad(loadState.error)
@@ -55,6 +57,8 @@ export const ResumeFixPage = () => {
           }
         }).catch(() => { setLoad(loadState.error) })
     } catch (error) {
+      // eslint-disable-next-line no-debugger
+
       setLoad(loadState.error)
     }
   }

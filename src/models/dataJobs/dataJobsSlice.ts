@@ -8,6 +8,7 @@ import {
 import { type RootState } from '../../app/store'
 import { fetchDataJobs } from './dataJobsService'
 import { fetchDataGraph } from '../dataGraph/dataGraphService'
+import { checkStatus } from '../utils/checkStatus'
 
 export interface DataJobsState {
   // name: string
@@ -24,28 +25,7 @@ const initialState: DataJobsState[] | null = []
  * code can then be executed and other actions can be dispatched. Thunks are
  * typically used to make async requests.
  */
-function checkStatus (status: number): string {
-  switch (Math.round(status / 100)) {
-    case 1: {
-      return 'Information'
-    }
-    case 2: {
-      return 'Success'
-    }
-    case 3: {
-      return 'Redirect'
-    }
-    case 4: {
-      return 'Client Error'
-    }
-    case 5: {
-      return 'Server Error'
-    }
-    default: {
-      return ''
-    }
-  }
-}
+
 export const getJobs = createAsyncThunk(
   'dataJobs/fetchDataJobs',
   async (input: string) => {
@@ -57,7 +37,9 @@ export const getJobs = createAsyncThunk(
     // if (response.position_data.detail) {
     //   return { technology_name: input, distance: 1, professionalism: 0 }
     // }
-    return ((response && !checkStatus(response.status)) ? response.data.professions.additional : { errMessage: checkStatus(response.status) })
+    // eslint-disable-next-line no-debugger
+
+    return (!checkStatus(response.status)) ? response.data.professions.additional : { errMessage: checkStatus(response.status) }
 
     // return (response && (response.status) === 200 ? response.data.professions.additional : null)
     // The value we return becomes the `fulfilled` action payload

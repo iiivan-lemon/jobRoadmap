@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { fetchDataJobs } from '../dataJobs/dataJobsService'
 import { fetchChecked, setChecked, unSetChecked } from './checkNodeService'
+import { checkStatus } from '../utils/checkStatus'
 
 export const getFinished = createAsyncThunk(
   'checkNode/fetchChecked',
@@ -26,7 +26,8 @@ export const setFinished = createAsyncThunk(
     // return data.additional
 
     // return jobs.additional
-    await setChecked(input).then().catch(() => null)
+    const response = await setChecked(input).then()
+    return ((!checkStatus(response.status)) ? null : { errMessage: checkStatus(response.status) })
     // if (response.position_data.detail) {
     //   return { technology_name: input, distance: 1, professionalism: 0 }
     // }
@@ -45,8 +46,8 @@ export const unSetFinished = createAsyncThunk(
     // return data.additional
 
     // return jobs.additional
-    await unSetChecked(input).then().catch(() => null)
-    // if (response.position_data.detail) {
+    const response = await unSetChecked(input).then()
+    return ((!checkStatus(response.status)) ? null : { errMessage: checkStatus(response.status) })
     //   return { technology_name: input, distance: 1, professionalism: 0 }
     // }
 

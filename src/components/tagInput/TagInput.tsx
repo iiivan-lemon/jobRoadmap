@@ -24,8 +24,7 @@ export const TagInput = ({ subJob }) => {
     }
   }
   const sendSearchValue = (e) => {
-    // eslint-disable-next-line no-debugger
-    // if (!e.target.value) { }
+    // if (!e.target.value) { return }
     // void (dispatch(getRecommends(e.target.value)))
   }
   function handleKeyDown (e) {

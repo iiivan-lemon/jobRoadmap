@@ -34,8 +34,9 @@ export const getJobLetter = createAsyncThunk(
     // const string = { professions: [input] }
     // return string
     // eslint-disable-next-line no-debugger
-    const response = await fetchResResume(input).then().catch(() => null)
-    return ((response && !checkStatus(response.status)) ? response.data.recommend : { errMessage: checkStatus(response.status) })
+
+    const response = await fetchJobLetter(input).then().catch(e => e.response)
+    return ((!checkStatus(response.status)) ? response.data.recommend : { errMessage: checkStatus(response.status) })
 
     // return (response && (response.status) === 200 ? response.data.recommend : null)
     // const mockText = 'Hello!\naselkfhnapoufhbfhsrduginhsdtugdnlgorinhsuioflhsefhusef'

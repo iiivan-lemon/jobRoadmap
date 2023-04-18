@@ -32,8 +32,10 @@ export const getResResume = createAsyncThunk(
     // const string = { professions: [input] }
     // return string
     // eslint-disable-next-line no-debugger
-    const response = await fetchResResume(inputResume).then().catch(() => null)
-    return ((response && !checkStatus(response.status)) ? response.data.recommend : { errMessage: checkStatus(response.status) })
+
+    const response = await fetchResResume(inputResume).then().catch(e => e.response)
+
+    return ((!checkStatus(response.status)) ? response.data.recommend : { errMessage: checkStatus(response.status) })
   }
 )
 

@@ -33,7 +33,7 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
   React.useEffect(() => {
     if (node) {
       setChecked(node.isChecked)
-      void dispatch(getNodeProf(node))
+      void dispatch(getNodeProf(node.technology_name))
       void dispatch(getNodeData(node.technology_name))
         .then(data => {
           if (!data.payload) {
@@ -88,13 +88,23 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
   const [checked, setChecked] = useState(node.isChecked)
 
   const toggleChecked = () => {
-    setChecked(!checked)
     if (!checked) {
-      void dispatch(setFinished(node.technology_name))
+      void dispatch(setFinished(node.technology_name)).then((data) => {
+        // @ts-expect-error awd
+        if (!data.payload.errMessage) {
+          isChecked(node.technology_name)
+          setChecked(!checked)
+        }
+      })
     } else {
-      void dispatch(unSetFinished(node.technology_name))
+      void dispatch(unSetFinished(node.technology_name)).then((data) => {
+        // @ts-expect-error awd
+        if (!data.payload.errMessage) {
+          isChecked(node.technology_name)
+          setChecked(!checked)
+        }
+      })
     }
-    isChecked(node.technology_name)
   }
 
   return (<div

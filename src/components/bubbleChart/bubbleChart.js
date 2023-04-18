@@ -49,7 +49,7 @@ export const generateChart = data => {
     // image.attr('src', svgNode)
     const label = node.append('text')
         .attr('dy', 2)
-        .text(d => (d.data.job_name.length < d.r / 3 ) ? d.data.job_name.substring(0, d.r / 4) : d.data.job_name.substring(0, 0) )
+        .text(d => (d.data.job_name.length < d.r / 4 ) ? d.data.job_name.substring(0, d.r / 4) : d.data.job_name.substring(0, 0) )
         .on('mouseover', function (e, d) {
             // tooltip.select('img').attr('src', d.data.img);
             tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');

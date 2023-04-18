@@ -8,7 +8,7 @@ export async function fetchJobLetter (data): Promise<any> {
     }
   })
     .then((response) => response)
-    .catch((error) => {
-      console.log(error)
-    })
+    .catch((error) =>
+      error.response
+    )
 }

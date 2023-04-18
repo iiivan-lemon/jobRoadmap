@@ -21,8 +21,10 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const [finishedNodes, setFinished] = React.useState(new Set([]))
   const dispatch = useAppDispatch()
   React.useEffect(() => {
-    // setData([])
-    // eslint-disable-next-line no-debugger
+    if (inputData === '') {
+      nav('/')
+    }
+
     setLoad(loadState.load)
     void dispatch(getDataGraph(inputData)).then(
       dataJob => {
