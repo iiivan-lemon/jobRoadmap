@@ -107,7 +107,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     setHavRecommends(false)
   }, [])
   useEffect(() => {
-    if (recommends.professions.length) { setHavRecommends(true) } else setHavRecommends(false)
+    if (recommends.professions.length && (document.getElementById('search') as HTMLInputElement).value) { setHavRecommends(true) } else setHavRecommends(false)
   }, [recommends])
   // const [recommends, setRecommends] = useState([])
   const renderRecommends = (recommends) => {

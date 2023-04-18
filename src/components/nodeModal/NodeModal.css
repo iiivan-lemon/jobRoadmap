@@ -41,7 +41,7 @@ height: 2rem;
 }
 
 .profList{
-    height: 11rem;
+    height: 5rem;
     overflow-y: scroll;
     margin-block: 2rem;
     display: flex;
@@ -52,10 +52,16 @@ height: 2rem;
     font-size: 1rem;
 }
 .tips{
-    height: fit-content;
+    color: white;
+    overflow-y: overlay;
+    font-size: 1rem;
+    height: -moz-fit-content;
+    height: 10rem;
     margin-block: 2rem;
     display: flex;
     flex-direction: column;
+    width: inherit;
+    overflow-x: hidden;
 }
 .profTitle{
     color:white;

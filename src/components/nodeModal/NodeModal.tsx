@@ -21,11 +21,12 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
   React.useEffect(() => {
 
   }, [])
-  const listJobs = useAppSelector(selectListJobs).professions
+
   const ref = React.useRef<HTMLDivElement | null>(null)
   const dispatch = useAppDispatch()
   const [data, setData] = useState([])
   const [tips, setTips] = useState('')
+  const [listJobs, setListJobs] = useState([])
   const [
     loading,
     setLoad
@@ -33,18 +34,16 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
   React.useEffect(() => {
     if (node) {
       setChecked(node.isChecked)
-      void dispatch(getNodeProf(node.technology_name))
-      void dispatch(getNodeData(node.technology_name))
-        .then(data => {
-          if (!data.payload) {
-            setLoad(loadState.error)
-          } else {
-            setLoad(loadState.res)
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error awdawd
-            setTips(data.payload)
-          }
-        }).catch(() => { setLoad(loadState.error) })
+      void dispatch(getNodeProf(node.technology_name)).then(data => {
+        if (!data.payload) {
+          setLoad(loadState.error)
+        } else {
+          setLoad(loadState.res)
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          setTips(data.payload.tips_to_learn)
+          setListJobs(data.payload.professions)
+        }
+      })
     }
   }, [node])
 
@@ -141,7 +140,7 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
       />
     </div>
     {(loading === loadState.res) &&
-        <div className='tips'>{tips}</div>
+        <div className='tips' onWheel={(e) => { e.stopPropagation() }}>{tips}</div>
     }
         <div className='profList' onWheel={(e) => { e.stopPropagation() }}>{renderJobs(listJobs)}</div>
 
