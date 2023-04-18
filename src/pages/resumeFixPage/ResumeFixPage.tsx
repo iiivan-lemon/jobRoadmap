@@ -10,9 +10,10 @@ import './resumeFixPage.css'
 import { debounce, loadState } from '../../utils/utils'
 import styles from '../newUserPage/NewUserPage.module.css'
 import styleSearch from '../../components/search/Search.module.css'
-import { ErrorModal } from '../../components/errorModal/errorModal'
 import { getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
 import { getNodeProf } from '../../models/tops/topsSlice'
+import Tag from '../../components/Tag/Tag'
+import stylesTag from '../../components/Tag/Tag.module.css'
 // eslint-disable-next-line no-template-curly-in-string
 pdfjs.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -30,6 +31,7 @@ export const ResumeFixPage = () => {
   const [data, setData] = React.useState([])
   const [selectedJob, setSelectedJob] = React.useState(null)
   const [tips, setTips] = useState('')
+  const [toLearn, setToLearn] = useState('')
   const handleJobSelect = (event) => {
     if (!event.target.value.trim()) {
       setSelectedJob(null)
@@ -38,6 +40,11 @@ export const ResumeFixPage = () => {
       setSelectedJob(event.target.value)
     }
   }
+
+  React.useEffect(() => {
+    setLoad(loadState.base)
+    setTips('')
+  }, [selectedJob, selectedFile])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -50,13 +57,20 @@ export const ResumeFixPage = () => {
       void dispatch(getResResume({ file: formData.get('file'), role: selectedJob, n_tech: 5 }))
         .then(data => {
           // eslint-disable-next-line no-debugger
-
           if (data.payload.errMessage) {
             setErrMessage(data.payload.errMessage)
             setLoad(loadState.error)
           } else {
             setLoad(loadState.res)
             setData(data.payload)
+            // @ts-expect-error aefa
+            setToLearn(data.payload[0]['to learn'].map(el => <Tag
+                                                                  setTitleTag={getTips}
+                                                                  className={
+                                                                    stylesTag.profTag}
+                                                                  id='1'
+                                                                  title={{ profession: el }}
+            >{el}</Tag>))
           }
         }).catch(() => { setLoad(loadState.error) })
     } catch (error) {
@@ -83,11 +97,13 @@ export const ResumeFixPage = () => {
   }
 
   const getTips = (skill: string) => {
+    if (!skill) { setTips(''); return }
     void dispatch(getNodeProf(skill)).then(data => {
       if (!data.payload) {
         setLoad(loadState.error)
       } else {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // eslint-disable-next-line no-debugger
         setTips(data.payload.tips_to_learn)
       }
     })
@@ -95,11 +111,8 @@ export const ResumeFixPage = () => {
 
   const renderResumeRes = (data) => {
     if (data) {
-      const toLearn = data[0]['to learn'].map(el => <span onClick={ () => {
-        getTips(el)
-      } }>{el}</span>)
       return (
-          <div className='rec'><span> Ваши навыки: {data[0].learned.join(' ') }</span><span> Что стоит изучить:</span> {toLearn}</div>
+          <div className='rec'><span> Ваши навыки: {data[0].learned.join(' ') }</span></div>
       )
     }
   }
@@ -117,7 +130,7 @@ export const ResumeFixPage = () => {
   React.useEffect(() => { pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js` })
   return (
     <div className='resumePage'>
-      <div className='resumeInput'>
+      <div className='resumeInput blurBlock'>
 
       <form className='resumeBlock' onSubmit={handleSubmit}>
         <span>добавьте резюме PDF</span>
@@ -146,9 +159,14 @@ export const ResumeFixPage = () => {
         />
       </div>
       {(loading === loadState.res) &&
-          <>
-              <div className='tipsText' style={{ visibility: (tips) ? 'visible' : 'hidden' }}>{tips}</div>
-          </>
+      <div className='blurBlock resResumeBlock'>
+        <div style={{ padding: '1rem' }} id='toLearn'><span>Что Вам стоит изучить: </span><div className='tagToLearn'>{toLearn}</div>
+          </div>
+            <>
+                <div className='tipsText' style={{ visibility: (tips) ? 'visible' : 'hidden' }}>{tips}</div>
+            </>
+
+      </div>
       }
     </div>
   )

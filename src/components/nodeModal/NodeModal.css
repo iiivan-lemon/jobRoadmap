@@ -1,9 +1,11 @@
 .nodeModal{
+    overflow-x: hidden;
+    overflow-y: overlay;
     display: flex;
     z-index: 20;
     position: absolute;
     right: 0;
-    height: 100vh;
+    height: -webkit-fill-available;
     width: 20rem;
     background-color: #1B1B1B;
     font-size: 1.4rem;
@@ -12,12 +14,11 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    flex-wrap: wrap;
 }
 
 .closeBtn{
     width: 2rem;
-height: 2rem;
+    height: 2rem;
     cursor: pointer;
 }
 
@@ -25,7 +26,8 @@ height: 2rem;
     margin-block: 1rem;
     display: inline-flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    column-gap: 1rem;
 }
 
 .checkNode{
@@ -41,11 +43,11 @@ height: 2rem;
 }
 
 .profList{
-    height: 5rem;
     overflow-y: scroll;
     margin-block: 2rem;
     display: flex;
     flex-direction: column;
+    display: contents;
 }
 .profList > span {
     font-weight: 300;
@@ -53,42 +55,39 @@ height: 2rem;
 }
 .tips{
     color: white;
-    overflow-y: overlay;
     font-size: 1rem;
     height: -moz-fit-content;
-    height: 10rem;
     margin-block: 2rem;
     display: flex;
     flex-direction: column;
     width: inherit;
-    overflow-x: hidden;
 }
 .profTitle{
-    color:white;
+color:white;
 }
 
 .percentTitle{
-    color:white;
+color:white;
 }
 .gradeTitle{
-    color: white;
+color: white;
 }
 .gradeTitle:hover:before {
-    z-index: 20;
-    font-size: medium;
-    position: absolute;
-    width: fit-content;
-    color: #fff;
-    background: #000;
-    padding: 5px;
-    border-radius: 4px;
-    top: 9rem;
-    content: "этот навык чаще всего упоминается на таком опыте работы";
+z-index: 20;
+font-size: medium;
+position: absolute;
+width: fit-content;
+color: #fff;
+background: #000;
+padding: 5px;
+border-radius: 4px;
+top: 9rem;
+content: "этот навык чаще всего упоминается на таком опыте работы";
 }
 
 
 .checkBtn{
-    line-height: 2rem;
-    border-radius: 20px;
-    border: none;
+line-height: 2rem;
+border-radius: 20px;
+border: none;
 }

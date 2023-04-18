@@ -81,7 +81,7 @@ export const JobLetterPage = () => {
 
   return (
     <div className='letterPage'>
-      <div className='resumeInput'>
+      <div className='resumeInput blurBlock'>
 
         <form className='letterBlock' onSubmit={handleSubmit}>
           <span>добавьте резюме PDF</span>

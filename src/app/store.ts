@@ -9,7 +9,7 @@ import recommendReducer from '../models/recommend/recommendSlice'
 import recommendTechReducer from '../models/recommendTech/recommendTechSlice'
 import jobsReducer from '../models/dataJobs/dataJobsSlice'
 // import favsReducer from '../models/favs/favsSlice'
-import resumeReducer from '../models/resume/resumeFixSlice'
+// import resumeReducer from '../models/resume/resumeFixSlice'
 // Import { auth } from '../models/auth/authSlice'
 export const store = configureStore({
   reducer: combineReducers({
@@ -21,7 +21,7 @@ export const store = configureStore({
     recommend: recommendReducer,
     recommendTech: recommendTechReducer,
     jobs: jobsReducer,
-    resume: resumeReducer,
+    // resume: resumeReducer,
     listJob: ListJobsSlice.reducer
   })
 })
