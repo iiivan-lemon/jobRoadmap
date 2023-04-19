@@ -11,7 +11,7 @@ export const TagInput = ({ subJob }) => {
     setHavRecommends(false)
   }, [])
   const recommends = useAppSelector(selectDataRecommendsTech)
-  const [tags, setTags] = React.useState(new Set([]))
+  const [tags, setTags] = React.useState([] as string[])
   const dispatch = useAppDispatch()
   const [haveRecommends, setHavRecommends] = useState(false)
   useEffect(() => {
@@ -31,26 +31,22 @@ export const TagInput = ({ subJob }) => {
   }
 
   function takeRecommend (value: string) {
-    // eslint-disable-next-line no-debugger
-    if (tags.size <= 5) {
+    if (tags.length <= 5) {
       setHavRecommends(false)
-      // @ts-expect-error qwe
-      tags.add(value);
-      (document.getElementsByClassName('tags-input')[0] as HTMLInputElement).value = ''
+      setTags([...(new Set([...tags, value.toLowerCase()]))])
+      if ((document.getElementById('tagSearch') as HTMLInputElement)) {
+        (document.getElementById('tagSearch') as HTMLInputElement).value = ''
+      }
     }
   }
 
   function handleKeyDown (e) {
-    if (e.target.value === '') {
-      setHavRecommends(false)
-    }
     e.target.placeholder = ''
     if (e.key !== 'Enter') return
     const value = e.target.value
     if (!value.trim()) return
-    if (tags.size <= 5) {
-      // @ts-expect-error qwe
-      tags.add(e.target.value)
+    if (tags.length <= 5) {
+      setTags([...(new Set([...tags, value.toLowerCase()]))])
       setHavRecommends(false)
     }
     e.target.value = ''
@@ -58,26 +54,25 @@ export const TagInput = ({ subJob }) => {
   const history = useNavigate()
   const location = useLocation()
   React.useEffect(() => {
-    // eslint-disable-next-line no-debugger
     if (location.pathname !== '/search' && location.pathname !== '/searchjob') {
-      setTags(new Set([]))
+      setTags([])
     }
   }, [history])
 
   function removeTag (index) {
-    setTags(new Set([...tags].filter((el, i) => i !== index)))
+    setTags(tags.filter((el, i) => i !== index))
   }
 
   return (
    <><div className="tags-input-container" onClick={(e) => { e.stopPropagation() }}>
-      { [...tags].map((tag, index) => (
+      { tags && [...tags].map((tag, index) => (
         <form className="tag-item" key={index}>
           <span className="text">{tag}</span>
           <span className="close" onClick={() => { removeTag(index) }}>&times;</span>
         </form>
       )) }
      <div style={{ alignSelf: 'center' }}>
-      <input onChange={
+      <input autoComplete="off" onChange={
         debounce(sendSearchValue)
       } onKeyDown={handleKeyDown} type="text" className="tags-input" id='tagSearch' placeholder="введите навыки"></input>
      { haveRecommends && <div className={styles.dropDown}>{renderRecommends(recommends)}</div> }

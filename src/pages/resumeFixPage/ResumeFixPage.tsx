@@ -87,13 +87,8 @@ export const ResumeFixPage = () => {
     if (recommends.professions.length) { setHavRecommends(true) } else setHavRecommends(false)
   }, [recommends])
   const sendSearchValue = (e) => {
+    setSelectedJob(null)
     void (dispatch(getRecommends(e.target.value)))
-    if (!e.target.value.trim()) {
-      setSelectedJob(null)
-    } else {
-      setLoad(loadState.base)
-      setSelectedJob(e.target.value)
-    }
   }
 
   const getTips = (skill: string) => {
@@ -111,6 +106,11 @@ export const ResumeFixPage = () => {
 
   const renderResumeRes = (data) => {
     if (data) {
+      // if (!data[0].learned.length && data[0]['to learn'].length) {
+      //   setLoad(loadState.error)
+      //   setErrMessage('По вашему резюме/специальности ничего не найдено')
+      //   // return <div className='rec'><span> По вашей специальности ничего не найдено</span></div>
+      // }
       return (
           <div className='rec'><span> Ваши навыки: {data[0].learned.join(' ') }</span></div>
       )
@@ -121,7 +121,16 @@ export const ResumeFixPage = () => {
     if (recommends.professions.length) {
       return recommends.professions.map((el) =>
         <div className={styleSearch.titleRecommend} onClick={ (e) => {
-          (document.getElementById('searchResume') as HTMLInputElement).value = el
+          if ((document.getElementById('searchResume') as HTMLInputElement)) {
+            (document.getElementById('searchResume') as HTMLInputElement).value = el
+            if (!el.trim()) {
+              setSelectedJob(null)
+            } else {
+              setLoad(loadState.base)
+              setSelectedJob(el)
+            }
+          }
+
           setHavRecommends(false)
         }}>{el}</div>)
     }
@@ -137,7 +146,7 @@ export const ResumeFixPage = () => {
         <input placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
         <span>введите вашу специальность</span>
         <div style={{ position: 'relative' }}>
-        <input id='searchResume' className={styleSearch.search} type="text" onChange={
+        <input autoComplete="off" id='searchResume' className={styleSearch.search} type="text" onChange={
           debounce(sendSearchValue)
         }/>
         { !tips && haveRecommends && <div>{renderRecommends(recommends)}</div> }

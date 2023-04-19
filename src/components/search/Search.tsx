@@ -51,8 +51,8 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
   ] = useState(true)
 
   const sendFav = () => {
-    if ((document.getElementById('search') as HTMLInputElement).value !== '') {
-      void dispatch(setFavs((document.getElementById('search') as HTMLInputElement).value))
+    if ((document.getElementById('search') as HTMLInputElement)?.value !== '') {
+      void dispatch(setFavs((document.getElementById('search') as HTMLInputElement)?.value))
       setFavorite(true)
     }
   }
@@ -107,14 +107,16 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     setHavRecommends(false)
   }, [])
   useEffect(() => {
-    if (recommends.professions.length && (document.getElementById('search') as HTMLInputElement).value) { setHavRecommends(true) } else setHavRecommends(false)
+    if (recommends.professions.length && (document.getElementById('search') as HTMLInputElement)?.value) { setHavRecommends(true) } else setHavRecommends(false)
   }, [recommends])
   // const [recommends, setRecommends] = useState([])
   const renderRecommends = (recommends) => {
     if (recommends.professions.length) {
       return recommends.professions.map((el) =>
     <div className={styles.titleRecommend} onClick={ (e) => {
-      (document.getElementById('search') as HTMLInputElement).value = el
+      if ((document.getElementById('search') as HTMLInputElement)) {
+        (document.getElementById('search') as HTMLInputElement).value = el
+      }
       sub(e)
     }}>{el}</div>)
     }
@@ -142,7 +144,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
             {isTechSearch && <>
               <form
                   className={styles.formSearch}
-                  onSubmit={sub}
+                  // onSubmit={sub}
               >
                   <input
                       ref={refSearch}
