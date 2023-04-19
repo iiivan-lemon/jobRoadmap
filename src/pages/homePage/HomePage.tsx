@@ -19,6 +19,14 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const [data, setData] = React.useState([])
   const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
   const [finishedNodes, setFinished] = React.useState(new Set([]))
+  const [isHard, setIsHard] = React.useState(true)
+
+  const changeSkills = (data) => {
+    // eslint-disable-next-line no-debugger
+    return (data.filter((el:
+    { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
+  }
+
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     if (inputData === '') {
@@ -112,15 +120,16 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
         { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
             {(loading === loadState.res) && <>
                 <div className='btnOptions'>
-              <span className='gradeTitle'>
+                  { isHard && <><span className='gradeTitle'>
                   опыт работы
               </span>
                     <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
                       setGrade({ begin: e.minIndex, end: +e.maxIndex })
                     }} value={[0, 1, 2, 3]}></RangeSlider>
-                    <GradientGrade width={'14rem'}/>
+                    <GradientGrade width={'14rem'}/></> }
+                    <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>
                 </div>
-                <GraphSelf data={data} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
+                <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
                                             </>}
       </div>
 

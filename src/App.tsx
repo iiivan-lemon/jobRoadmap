@@ -90,8 +90,10 @@ function App (): JSX.Element {
               {/* Private */}
               <Route
                   element={
+                <PrivateRoute>
                           <ProfilePage />
-                        }
+                  </PrivateRoute>
+                  }
                   path="/favorites"
               />
               {/* Public */}

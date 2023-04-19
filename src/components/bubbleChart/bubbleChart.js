@@ -11,7 +11,7 @@ import svgNode from './svg-hex.svg'
 export const generateChart = data => {
     const bubble = data => d3.pack()
         .size([width, height])
-        .padding(10)(d3.hierarchy({ children: data }).sum(d => d.percent * 0.1));
+        .padding(10)(d3.hierarchy({ children: data }).sum(d => d.percent * 100));
 
     const svg = d3.select('#bubble-chart')
         .style('width', width)

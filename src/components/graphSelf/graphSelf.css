@@ -22,6 +22,7 @@
 
 
 .svgTitle{
+    cursor: pointer;
     max-inline-size: fit-content;
     animation: pulse 3s linear infinite;
     padding: 1rem;
@@ -49,6 +50,7 @@
     transition: scale 0.5s ease;
 }
 .titleNode{
+    cursor: pointer;
     box-shadow: 0 0 20px 0px #ffffff59;
     filter: blur(-1px);
     width: min-content;

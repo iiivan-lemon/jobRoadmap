@@ -9,12 +9,12 @@ import ReactDOM from 'react-dom'
 import styled, { type CSSObject } from 'styled-components'
 import NodeModal from '../nodeModal/NodeModal'
 
-export const GraphSelf = ({ data, grade, finishedNodes }) => {
+export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
   const [finished, setFinished] = React.useState(new Set(finishedNodes))
   // React.useEffect(() => {
   //   setFinished(new Set(finishedNodes))
   // }, [finishedNodes])
-
+  const [dataSkill, setDataSkill] = React.useState([])
   React.useEffect(() => {
     const svgs = ref.current?.getElementsByTagName('svg');
     [].forEach.call(svgs, function (el: SVGSVGElement) {
@@ -27,7 +27,7 @@ export const GraphSelf = ({ data, grade, finishedNodes }) => {
         (el.parentElement as HTMLElement).style.filter = 'brightness(0.2) grayscale(1)'
       } else {
         (el.parentElement as HTMLElement).style.filter = ''
-        el.style.fill = pSBC(0, setNodeGradient(coloration, +el.id)) as string
+        el.style.fill = isHard ? pSBC(0, setNodeGradient(coloration, +el.id)) as string : '#6771e8'
       }
       // styled(el)`
       //   ${styles.grade}`
@@ -85,7 +85,12 @@ export const GraphSelf = ({ data, grade, finishedNodes }) => {
     }
     // const mainNode = data[0]
 
-    if (!refMainNode.current?.children.length) {
+    if (data.length !== dataSkill.length) {
+      const list = document.getElementsByClassName('container');
+      [].forEach.call(list, function (el: HTMLElement) {
+        el.innerHTML = ''
+      })
+      setDataSkill(data)
       const dataCircles = []
       let t = 0
       for (let i = 1; i < data.length; i += 2) {
@@ -180,13 +185,13 @@ export const GraphSelf = ({ data, grade, finishedNodes }) => {
           circle: {
             height: n[i].distance * 500 + 'px',
             width: n[i].distance * 500 + 'px',
-            fill: (pSBC(0, setNodeGradient(coloration, n[i].professionalism)))
+            fill: isHard ? (pSBC(0, setNodeGradient(coloration, n[i].professionalism))) : '#6771e8'
           } as CSSObject
         }
         const StyledIcon = styled(NodeSvg)`
         ${styles.circle}`
         ReactDOM.render(<><span onClick = {(e) => {
-          // setIsModalOpen({ ...n[i], isChecked: isFinished(n[i].technology_name) })
+          setIsModalOpen({ ...n[i], isChecked: isFinished(n[i].technology_name) })
         }}
           id={n[i].technology_name} className='titleNode'>{n[i].technology_name}</span><StyledIcon
           onClick = {(e) => {

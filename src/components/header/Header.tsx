@@ -3,7 +3,7 @@ import Search from '../search/Search'
 import styles from './Header.module.css'
 // Import { useHistory } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { authActions } from '../../authApp/_store'
 import { loginOrLogout } from '../../models/auth/authActions'
 import { getTops } from '../../models/tops/topsSlice'
@@ -39,19 +39,30 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   }
 
   function goTo (path: string): void {
-    if ((document.getElementById('search') as HTMLInputElement)) {
-      (document.getElementById('search') as HTMLInputElement).value = ''
-    }
-    if (
-      (document.getElementById('searchJob') as HTMLInputElement)
-    ) {
-      (document.getElementById('searchJob') as HTMLInputElement).value = ''
-    }
+    // if ((document.getElementById('search') as HTMLInputElement)) {
+    //   (document.getElementById('search') as HTMLInputElement).value = ''
+    // }
+    // if (
+    //   (document.getElementById('searchJob') as HTMLInputElement)
+    // ) {
+    //   (document.getElementById('searchJob') as HTMLInputElement).value = ''
+    // }
 
     history(path)
   }
-
+  const location = useLocation()
   const history = useNavigate()
+  React.useEffect(() => {
+    if (location.pathname !== '/search' && location.pathname !== '/searchjob') {
+      if ((document.getElementById('search') as HTMLInputElement)) {
+        (document.getElementById('search') as HTMLInputElement).value = ''
+      }
+      if ((document.getElementById('tagSearch') as HTMLInputElement)) {
+        (document.getElementById('tagSearch') as HTMLInputElement).value = ''
+      }
+    }
+  }, [history])
+
   return (
       <React.Fragment>
           <div
