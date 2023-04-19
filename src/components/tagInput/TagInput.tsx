@@ -54,7 +54,7 @@ export const TagInput = ({ subJob }) => {
   }
 
   return (
-   <><div className="tags-input-container">
+   <><div className="tags-input-container" onClick={(e) => { e.stopPropagation() }}>
       { tags.map((tag, index) => (
         <form className="tag-item" key={index}>
           <span className="text">{tag}</span>
