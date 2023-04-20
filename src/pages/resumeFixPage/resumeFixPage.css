@@ -1,5 +1,4 @@
 .rec{
-    margin-inline-end: 10px;
     border-radius: 1rem;
     margin-block: 10px;
     background-color: #7d8a97;
@@ -25,6 +24,7 @@
 }
 
 .tipsText {
+    white-space: pre-line;
     height: 100%;
     background: #1b1b1b;
     visibility: visible;

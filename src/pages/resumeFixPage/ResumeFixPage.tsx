@@ -63,14 +63,12 @@ export const ResumeFixPage = () => {
           } else {
             setLoad(loadState.res)
             setData(data.payload)
-            // @ts-expect-error aefa
             setToLearn(data.payload[0]['to learn'].map(el => <Tag
                                                                   setTitleTag={getTips}
                                                                   className={
                                                                     stylesTag.profTag}
                                                                   id='1'
-                                                                  title={{ profession: el }}
-            >{el}</Tag>))
+                                                                  title={{ profession: el }} />))
           }
         }).catch(() => { setLoad(loadState.error) })
     } catch (error) {
@@ -95,7 +93,7 @@ export const ResumeFixPage = () => {
     if (!skill) { setTips(''); return }
     void dispatch(getNodeProf(skill)).then(data => {
       if (!data.payload) {
-        setLoad(loadState.error)
+        setTips('')
       } else {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // eslint-disable-next-line no-debugger
@@ -112,7 +110,7 @@ export const ResumeFixPage = () => {
       //   // return <div className='rec'><span> По вашей специальности ничего не найдено</span></div>
       // }
       return (
-          <div className='rec'><span> Ваши навыки: {data[0].learned.join(' ') }</span></div>
+        <div className='rec'><span> Ваши навыки: {data[0].learned.join(' ') }</span></div>
       )
     }
   }
@@ -122,6 +120,8 @@ export const ResumeFixPage = () => {
       return recommends.professions.map((el) =>
         <div className={styleSearch.titleRecommend} onClick={ (e) => {
           if ((document.getElementById('searchResume') as HTMLInputElement)) {
+            // eslint-disable-next-line no-debugger
+            debugger;
             (document.getElementById('searchResume') as HTMLInputElement).value = el
             if (!el.trim()) {
               setSelectedJob(null)
@@ -146,7 +146,7 @@ export const ResumeFixPage = () => {
         <input placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
         <span>введите вашу специальность</span>
         <div style={{ position: 'relative' }}>
-        <input autoComplete="off" id='searchResume' className={styleSearch.search} type="text" onChange={
+        <input autoComplete="off" id='searchResume' className={styles.tag + ' ' + styleSearch.search} type="text" onChange={
           debounce(sendSearchValue)
         }/>
         { !tips && haveRecommends && <div>{renderRecommends(recommends)}</div> }

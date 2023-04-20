@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../app/hooks'
 import './jobLetter.css'
 import styles from './../newUserPage/NewUserPage.module.css'
 import { getJobLetter } from '../../models/jobLetter/jobLetterSlice'
+import './../resumeFixPage/resumeFixPage.css'
 import { PushSpinner } from 'react-spinners-kit'
 import styleSearch from './../../components/search/Search.module.css'
 export const JobLetterPage = () => {
@@ -104,7 +105,7 @@ export const JobLetterPage = () => {
           <>
               <div className='letter'>
                   <button className='copy' onClick={copyToClipboard}>Copy</button>
-                  <textarea className={styleSearch.search + ' letterArea'} ref={refTextArea}>{renderLetter(data)}</textarea>
+                  <textarea className={'blurBlock' + ' letterArea'} ref={refTextArea}>{renderLetter(data)}</textarea>
                 {copySuccess}
               </div></>
       }
