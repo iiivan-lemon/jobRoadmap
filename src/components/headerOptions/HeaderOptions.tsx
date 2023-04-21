@@ -48,7 +48,10 @@ const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
   )
 
   function renderTags (tags: any[], className: string[]): any[] {
-    return tags.map((el, index) => (<Tag
+    const input = (document.getElementById('search')) as HTMLInputElement
+    return tags.map((el, index) => (
+      <Tag
+        input = {(input) ? input?.value : null}
         className={(tags.length === className.length) ? className[index] : className[0]}
         id={(tags.length === className.length) ? 10 : 1}
         setGrade={setGrade}

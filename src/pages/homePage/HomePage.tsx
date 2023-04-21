@@ -120,12 +120,12 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
         { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
             {(loading === loadState.res) && <>
                 <div className='btnOptions'>
-                  { isHard && <><span className='gradeTitle'>
+                  { isHard && <><span className='gradeTitleLeg'>
                   опыт работы
               </span>
-                    <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
-                      setGrade({ begin: e.minIndex, end: +e.maxIndex })
-                    }} value={[0, 1, 2, 3]}></RangeSlider>
+                     <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
+                       setGrade({ begin: e.minIndex, end: +e.maxIndex })
+                     }} value={[0, 1, 2, 3]}></RangeSlider>
                     <GradientGrade width={'14rem'}/></> }
                     <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>
                 </div>

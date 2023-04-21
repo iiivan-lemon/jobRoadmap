@@ -35,78 +35,88 @@
     overflow-y: overlay;
 }
 
-.profession{
+.tipsText > a {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 10px;
     color: white;
-    font-size: 1.5rem;
-    margin-block-end: 10px;
+    text-decoration: none;
+}
+
+
+.profession{
+color: white;
+font-size: 1.5rem;
+margin-block-end: 10px;
 }
 
 .match{
-    background-color: #e8f1f2;
-    border-radius: 10px;
-    padding: 6px;
-    margin-block-end: 10px;
+background-color: #e8f1f2;
+border-radius: 10px;
+padding: 6px;
+margin-block-end: 10px;
 }
 .resumeBlock{
-    row-gap: 1rem;
-    display: flex;
-    flex-direction: column;
+row-gap: 1rem;
+display: flex;
+flex-direction: column;
 }
 .resumeBlock > span {
-    color: white;
+color: white;
 }
 
 .blurBlock{
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px 1px rgb(255 255 255);
-    background: #d3d3d324;
-    backdrop-filter: blur(3px);
+border-radius: 10px;
+box-shadow: 0px 0px 5px 1px rgb(255 255 255);
+background: #d3d3d324;
+backdrop-filter: blur(3px);
 }
 
 .resResumeBlock{
-    display: flex;
-    margin-inline-start: 2rem;
-    width: 100%;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 78%;
+display: flex;
+margin-inline-start: 2rem;
+width: 100%;
+flex-direction: column;
+justify-content: flex-start;
+height: 78%;
 }
 
 .resumeInput{
-    height: -moz-fit-content;
-    width: 14rem;
-    border-radius: 10px;
-    padding: 13px;
-    width: -moz-fit-content;
-    width: fit-content;
+height: -moz-fit-content;
+width: 14rem;
+border-radius: 10px;
+padding: 13px;
+width: -moz-fit-content;
+width: fit-content;
 }
 .errDesr{
-    align-self: center;
-    font-size: 1rem;
-    color: #ff0c0cbf;
+align-self: center;
+font-size: 1rem;
+color: #ff0c0cbf;
 }
 
 #searchResume{
-    font-size: 1.2rem;
+font-size: 1.2rem;
 }
 .dropdown{
-    box-shadow: 0 0 0 4px #9cb1ff;
-    margin-block: 10px;
-    position: absolute;
-    z-index: 200;
-    width: -moz-fit-content;
-    width: fit-content;
-    background-color: aliceblue;
-    padding: 1rem;
-    border-radius: 20px;
+box-shadow: 0 0 0 4px #9cb1ff;
+margin-block: 10px;
+position: absolute;
+z-index: 200;
+width: -moz-fit-content;
+width: fit-content;
+background-color: aliceblue;
+padding: 1rem;
+border-radius: 20px;
 }
 #toLearn > span {
-    font-size: 1.4rem;
-    color: white;
+font-size: 1.4rem;
+color: white;
 }
 
 .tagToLearn{
-    margin-block: 0.5rem;
-    display: flex;
-    flex-direction: row;
+margin-block: 0.5rem;
+display: flex;
+flex-direction: row;
 }

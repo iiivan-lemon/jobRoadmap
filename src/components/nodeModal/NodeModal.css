@@ -59,15 +59,25 @@
     font-size: 1rem;
     height: -moz-fit-content;
     margin-block: 2rem;
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     width: inherit;
+}
+.tips > a {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-block: 5px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
 }
 .profTitle{
 color:white;
 }
 
 .percentTitle{
+filter: drop-shadow(0px 0px 1rem #0047ff);
 color:white;
 }
 .gradeTitle{
@@ -91,4 +101,12 @@ content: "этот навык чаще всего упоминается на т
 line-height: 2rem;
 border-radius: 20px;
 border: none;
+}
+
+
+.jobTitle{
+color: white;
+font-size: 1.2rem;
+margin-block: 1rem;
+filter: drop-shadow(0px 0px 1rem blue);
 }

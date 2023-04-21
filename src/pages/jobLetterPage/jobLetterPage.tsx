@@ -35,6 +35,11 @@ export const JobLetterPage = () => {
     if (!isValidUrl(event.target.value)) {
       setSelectedUrl(null)
     } else {
+      const url = (new URL(event.target.value))
+      if (!~url.pathname.indexOf('vacancy') || url.hostname.indexOf('hh.ru')) {
+        setSelectedUrl(null)
+        return
+      }
       setLoad(loadState.base)
       setSelectedUrl(event.target.value)
     }
