@@ -91,6 +91,8 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
       void dispatch(setFinished(node.technology_name)).then((data) => {
         // @ts-expect-error awd
         if (!data.payload.errMessage) {
+          // eslint-disable-next-line no-debugger
+          // debugger
           isChecked(node.technology_name)
           setChecked(true)
         }

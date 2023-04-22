@@ -17,7 +17,7 @@ export async function setChecked (inputData: string): Promise<any> {
 }
 
 export async function unSetChecked (inputData: string): Promise<any> {
-  return await axios.delete(`${ip}api/v1/cancel?name=` + inputData)
+  return await axios.delete(`${ip}api/v1/cancel`, { data: { name: inputData } })
     .then((response) => response)
     .catch((error) => {
       console.log(error)
