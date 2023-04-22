@@ -18,12 +18,12 @@ const ProfilePage: FC = () => {
   React.useEffect(() => {
     void dispatch(getFavs()).then(
       dataJob => {
-        if (dataJob.payload.errMessage) {
-          setErrMessage(dataJob.payload.errMessage)
-          setLoad(loadState.error)
-        } else {
+        if (!(dataJob.payload.errMessage)) {
           setLoad(loadState.res)
           setFavs(dataJob.payload)
+        } else {
+          setErrMessage(dataJob.payload.errMessage)
+          setLoad(loadState.error)
         }
       }
     )

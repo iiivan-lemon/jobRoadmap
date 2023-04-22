@@ -9,7 +9,7 @@ export async function fetchFavs (): Promise<any> {
 }
 
 export async function setUnFav (input: string): Promise<any> {
-  return await axios.delete(`${ip}api/v1/dislike?name=` + input)
+  return await axios.delete(`${ip}api/v1/dislike`, { data: { name: input } })
     .then((response) => response)
     .catch((error) => {
       return error
