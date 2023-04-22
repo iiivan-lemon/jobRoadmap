@@ -18,7 +18,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
   const [data, setData] = React.useState([])
   const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
-  const [finishedNodes, setFinished] = React.useState(new Set([]))
+  const [finishedNodes, setFinished] = React.useState([])
   const [isHard, setIsHard] = React.useState(true)
 
   const changeSkills = (data) => {
@@ -51,10 +51,10 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
       })
     void dispatch(getFinished(inputData)).then(data => {
       if (!data.payload || !Array.isArray(data.payload)) {
-        setFinished(new Set([]))
+        setFinished([])
       } else {
         // @ts-expect-error dawd
-        setFinished(new Set(data.payload))
+        setFinished(data.payload)
       }
     })
   }, [inputData])

@@ -52,15 +52,24 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
 
   const sendFav = () => {
     if ((document.getElementById('search') as HTMLInputElement)?.value !== '') {
-      void dispatch(setFavs((document.getElementById('search') as HTMLInputElement)?.value))
-      setFavorite(true)
+      void dispatch(setFavs((document.getElementById('search') as HTMLInputElement)?.value)).then((data) => {
+        // @ts-expect-error awd
+        if (!data.payload.errMessage) {
+          setFavorite(true)
+        }
+      })
     }
   }
 
   const sendUnFav = () => {
     if ((document.getElementById('search') as HTMLInputElement).value !== '') {
       void dispatch(setUnFavs((document.getElementById('search') as HTMLInputElement).value))
-      setFavorite(false)
+        .then((data) => {
+        // @ts-expect-error awd
+          if (!data.payload.errMessage) {
+            setFavorite(false)
+          }
+        })
     }
   }
   function sub (event: any): void {

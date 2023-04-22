@@ -1,4 +1,4 @@
-import React, { type FC } from 'react'
+import React, { type FC, useState } from 'react'
 import Search from '../search/Search'
 import styles from './Header.module.css'
 // Import { useHistory } from 'react-router'
@@ -7,6 +7,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { authActions } from '../../authApp/_store'
 import { loginOrLogout } from '../../models/auth/authActions'
 import { getTops } from '../../models/tops/topsSlice'
+import { getFavs } from '../../models/favs/favsSlice'
+import { loadState } from '../../utils/utils'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -20,10 +22,25 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   const { isAuth } = useAppSelector(state => state.auth)
+  const [favs, setFavs] = useState([])
   const { username } = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     void dispatch(getTops())
+    void dispatch(getFavs()).then(
+      dataJob => {
+        // @ts-expect-error adawd
+        if (dataJob.payload.errMessage) {
+          // setErrMessage(dataJob.payload.errMessage)
+        } else {
+          // @ts-expect-error adawd
+          setFavs(dataJob.payload)
+        }
+      }
+    )
+      .catch(() => {
+        // eslint-disable-next-line no-debugger
+      })
   }, [])
   /*
    * Function submitForm (event: any): void {

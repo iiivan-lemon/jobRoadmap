@@ -7,6 +7,7 @@ import {
 // import { fetchDataGraph } from './dataGraphService'
 import { type RootState } from '../../app/store'
 import { fetchFavs, setFav, setUnFav } from './favsService'
+import {checkStatus} from "../utils/checkStatus";
 
 export interface Favs {
   name: string
@@ -28,8 +29,7 @@ export const getFavs = createAsyncThunk(
   'favs/fetchFavs',
   async () => {
     const response = await fetchFavs()
-    const tags = ['python developer']
-    return tags
+    return ((!checkStatus(response.status)) ? null : { errMessage: checkStatus(response.status) })
     // if (response.status === 200) {
     //   return response.data
     // }
@@ -40,9 +40,7 @@ export const setFavs = createAsyncThunk(
   'favs/setFavs',
   async (input: string) => {
     const response = await setFav(input)
-    if (response.status === 200) {
-      return response.data
-    }
+    return ((!checkStatus(response.status)) ? null : { errMessage: checkStatus(response.status) })
   }
 )
 
@@ -50,9 +48,7 @@ export const setUnFavs = createAsyncThunk(
   'favs/setUnFavs',
   async (input: string) => {
     const response = await setUnFav(input)
-    if (response.status === 200) {
-      return response.data
-    }
+    return ((!checkStatus(response.status)) ? null : { errMessage: checkStatus(response.status) })
   }
 )
 //

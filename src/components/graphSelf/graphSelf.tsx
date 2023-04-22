@@ -10,7 +10,7 @@ import styled, { type CSSObject } from 'styled-components'
 import NodeModal from '../nodeModal/NodeModal'
 
 export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
-  const [finished, setFinished] = React.useState(new Set(finishedNodes))
+  const [finished, setFinished] = React.useState(finishedNodes)
   // React.useEffect(() => {
   //   setFinished(new Set(finishedNodes))
   // }, [finishedNodes])
@@ -58,15 +58,15 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
   }
 
   const isFinished = (tech_name: string) => {
-    return finished.has(tech_name)
+    return !!~finished.findIndex(el => el === tech_name)
   }
 
   const isCheckNode = (tech_name: string) => {
     // eslint-disable-next-line no-debugger
 
     isFinished(tech_name)
-      ? finished.delete(tech_name)
-      : finished.add(tech_name);
+      ? setFinished(finished.filter(el => el !== tech_name))
+      : setFinished([...new Set(...finished, tech_name)]);
     ((document.getElementById(tech_name) as HTMLElement).parentElement as HTMLElement).classList.toggle('checkNode')
   }
 

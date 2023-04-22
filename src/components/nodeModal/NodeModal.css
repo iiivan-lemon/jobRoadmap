@@ -98,6 +98,7 @@ content: "этот навык чаще всего упоминается на т
 
 
 .checkBtn{
+    cursor: pointer;
 line-height: 2rem;
 border-radius: 20px;
 border: none;

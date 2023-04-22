@@ -92,7 +92,7 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
         // @ts-expect-error awd
         if (!data.payload.errMessage) {
           isChecked(node.technology_name)
-          setChecked(!checked)
+          setChecked(true)
         }
       })
     } else {
@@ -100,7 +100,7 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
         // @ts-expect-error awd
         if (!data.payload.errMessage) {
           isChecked(node.technology_name)
-          setChecked(!checked)
+          setChecked(false)
         }
       })
     }

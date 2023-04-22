@@ -26,6 +26,7 @@ export const setFinished = createAsyncThunk(
     // return data.additional
 
     // return jobs.additional
+    // return { response: { status: 200 } }
     const response = await setChecked(input).then()
     return ((!checkStatus(response.status)) ? null : { errMessage: checkStatus(response.status) })
     // if (response.position_data.detail) {
@@ -46,6 +47,7 @@ export const unSetFinished = createAsyncThunk(
     // return data.additional
 
     // return jobs.additional
+    // return { response: { status: 200 } }
     const response = await unSetChecked(input).then()
     return ((!checkStatus(response.status)) ? null : { errMessage: checkStatus(response.status) })
     //   return { technology_name: input, distance: 1, professionalism: 0 }
