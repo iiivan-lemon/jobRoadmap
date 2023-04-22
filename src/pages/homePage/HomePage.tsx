@@ -58,6 +58,17 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
       }
     })
   }, [inputData])
+
+  React.useEffect(() => {
+    void dispatch(getFinished(inputData)).then(data => {
+      if (!data.payload || !Array.isArray(data.payload)) {
+        setFinished([])
+      } else {
+        // @ts-expect-error dawd
+        setFinished(data.payload)
+      }
+    })
+  }, [isHard])
   const [
     loading,
     setLoad
