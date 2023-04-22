@@ -1,0 +1,14 @@
+.tooltip {
+    border-radius: 2rem;
+    position: absolute;
+    visibility: hidden;
+    background-color: #1b1b1b;
+    display: flex;
+    font-family: sans-serif;
+    max-width: 500px;
+    padding: 1rem;
+}
+
+.tooltip > div > span{
+    color: white;
+}

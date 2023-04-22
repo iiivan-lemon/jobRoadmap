@@ -1,3 +1,4 @@
 !.storybook
 src/authApp/
-src/features/pdfReader/
+src/components/pdfReader/
+src/components/bubbleChart/bubbleChart.js

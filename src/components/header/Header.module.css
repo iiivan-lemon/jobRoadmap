@@ -1,0 +1,99 @@
+.header {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    background: #1B1B1B;
+    flex-direction: column;
+}
+
+.logoHref {
+    /*flex-grow: 1;*/
+    text-decoration: none;
+}
+
+.title {
+    cursor: pointer;
+    font-family: 'GT Eesti Pro Display', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 37px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.titles{
+    display: flex;
+}
+
+
+.favorite {
+    cursor: pointer;
+    z-index: 20;
+    text-decoration: none;
+    padding-inline: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.username {
+    cursor: pointer;
+    text-decoration: none;
+    padding-inline: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.mainHeader {
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 14px;
+    display: flex;
+    padding-inline: 80px;
+}
+
+.headerTags {
+    z-index: 10;
+    background: #1B1B1B;
+    position: absolute;
+    display: flex;
+    padding: 1rem 80px;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.logout{
+    margin-inline: 1rem;
+}
+
+@media (max-width: 1500px) {
+    .favorite{
+        padding-inline: 1rem;
+    }
+}
+
+@media (max-width: 1500px) and (min-width: 1300px) {
+    .favorite{
+        padding-inline: 1rem;
+    }
+}
+
+@media (max-width: 2000px) {
+    .favorite{
+        padding-inline: 2rem;
+    }
+
+}

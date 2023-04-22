@@ -1,0 +1,112 @@
+.nodeModal{
+    overflow-x: hidden;
+    overflow-y: overlay;
+    display: flex;
+    z-index: 20;
+    position: absolute;
+    right: 0;
+    height: -webkit-fill-available;
+    width: 20rem;
+    background-color: #1B1B1B;
+    font-size: 1.4rem;
+    color: white;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.closeBtn{
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.titleBlock{
+    margin-block: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 1rem;
+}
+
+.checkNode{
+    filter: brightness(5);
+}
+
+.nodeTitle{
+    padding: 10px;
+    border-radius: 30px;
+    color: white;
+    background-color: #4d5b7a;
+    font-size: 22px;
+}
+
+.profList{
+    overflow-y: scroll;
+    margin-block: 2rem;
+    display: flex;
+    flex-direction: column;
+    display: contents;
+}
+.profList > span {
+    font-weight: 300;
+    font-size: 1rem;
+}
+.tips{
+    white-space: pre-line;
+    color: white;
+    font-size: 1rem;
+    height: -moz-fit-content;
+    margin-block: 2rem;
+    display: inline-block;
+    flex-direction: column;
+    width: inherit;
+}
+.tips > a {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-block: 5px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+.profTitle{
+color:white;
+}
+
+.percentTitle{
+filter: drop-shadow(0px 0px 1rem #0047ff);
+color:white;
+}
+.gradeTitle{
+color: white;
+}
+.gradeTitle:hover:before {
+z-index: 20;
+font-size: medium;
+position: absolute;
+width: fit-content;
+color: #fff;
+background: #000;
+padding: 5px;
+border-radius: 4px;
+top: 9rem;
+content: "этот навык чаще всего упоминается на таком опыте работы";
+}
+
+
+.checkBtn{
+line-height: 2rem;
+border-radius: 20px;
+border: none;
+}
+
+
+.jobTitle{
+color: white;
+font-size: 1.2rem;
+margin-block: 1rem;
+filter: drop-shadow(0px 0px 1rem blue);
+}

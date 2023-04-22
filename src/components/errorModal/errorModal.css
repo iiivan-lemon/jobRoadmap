@@ -1,0 +1,15 @@
+.errorModal {
+    align-items: center;
+    row-gap: 1rem;
+    display: flex;
+    position: absolute;
+    top: 10rem;
+    border-radius: 1rem;
+    background-color: #1b1b1b;
+
+    padding: 1rem;
+    flex-direction: column;
+}
+.errorModal > span {
+    color: white;
+}

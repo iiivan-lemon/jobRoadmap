@@ -1,37 +1,67 @@
 import React from 'react'
-import Graph from '../../features/visGraph/Graph'
 import './HomePage.css'
 import './../../App.css'
 import { PushSpinner } from 'react-spinners-kit'
-import { getDataGraph, selectDataGraph } from '../../models/dataGraph/dataGraphSlice'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { getDataGraph } from '../../models/dataGraph/dataGraphSlice'
+import { useAppDispatch } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
-import { GraphSelf } from '../../features/graphSelf/graphSelf'
-import Draggable from 'react-draggable'
-import GradientGrade from '../../features/gradientGrade/GradientGrade'
-// import 'react-double-range-slider/dist/cjs/index.css'
+import { GraphSelf } from '../../components/graphSelf/graphSelf'
+import GradientGrade from '../../components/gradientGrade/GradientGrade'
+import styles from '../newUserPage/NewUserPage.module.css'
 import { RangeSlider } from 'react-double-range-slider'
-import { getJobs } from '../../models/dataJobs/dataJobsSlice'
+import { loadState } from '../../utils/utils'
+import { getFinished }
+  from '../../models/check/checkNodeSlice'
+import { ErrorModal } from '../../components/errorModal/errorModal'
+
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
   const [data, setData] = React.useState([])
+  const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
+  const [finishedNodes, setFinished] = React.useState(new Set([]))
+  const [isHard, setIsHard] = React.useState(true)
+
+  const changeSkills = (data) => {
+    // eslint-disable-next-line no-debugger
+    return (data.filter((el:
+    { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
+  }
+
   const dispatch = useAppDispatch()
   React.useEffect(() => {
-    // setData([])
-    // eslint-disable-next-line no-debugger
-    setLoad(true)
+    if (inputData === '') {
+      nav('/')
+    }
+
+    setLoad(loadState.load)
     void dispatch(getDataGraph(inputData)).then(
       dataJob => {
-        setLoad(false)
-        setData(dataJob.payload)
+        if (dataJob.payload.errMessage) {
+          setErrMessage(dataJob.payload.errMessage)
+          setLoad(loadState.error)
+        } else {
+          setLoad(loadState.res)
+          setData(dataJob.payload)
+        }
       }
     )
-      .catch(() => { setLoad(true); setData([]) })
+      .catch(() => {
+        // eslint-disable-next-line no-debugger
+        setLoad(loadState.error)
+      })
+    void dispatch(getFinished(inputData)).then(data => {
+      if (!data.payload || !Array.isArray(data.payload)) {
+        setFinished(new Set([]))
+      } else {
+        // @ts-expect-error dawd
+        setFinished(new Set(data.payload))
+      }
+    })
   }, [inputData])
   const [
     loading,
     setLoad
-  ] = React.useState(true)
+  ] = React.useState(loadState.base)
   const [
     grade,
     setGrade
@@ -40,14 +70,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     document.body.style.overflow = 'hidden'
     document.getElementById('header')?.classList.remove('headerFix')
   }, [])
-  React.useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    if (!data) {
-      nav('/')
-    } else if (data.length > 0) {
-      setLoad(false)
-    } else { setLoad(true) }
-  }, [data])
+
   React.useEffect(() => {
     setGrade(headerGrade)
   }, [headerGrade])
@@ -90,21 +113,23 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
               <PushSpinner
                   color="#686769"
                   id="preloader"
-                  loading={loading}
+                  loading={loading === loadState.load}
                   size={30}
               />
             </div>
-            {(!loading) && <>
+        { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
+            {(loading === loadState.res) && <>
                 <div className='btnOptions'>
-              <span className='gradeTitle'>
+                  { isHard && <><span className='gradeTitleLeg'>
                   опыт работы
               </span>
-                    <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
-                      setGrade({ begin: e.minIndex, end: +e.maxIndex })
-                    }} value={[0, 1, 2, 3]}></RangeSlider>
-                    <GradientGrade width={'14rem'}/>
+                     <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
+                       setGrade({ begin: e.minIndex, end: +e.maxIndex })
+                     }} value={[0, 1, 2, 3]}></RangeSlider>
+                    <GradientGrade width={'14rem'}/></> }
+                    <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>
                 </div>
-                <GraphSelf data={data} grade={grade} ></GraphSelf>
+                <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
                                             </>}
       </div>
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const ip = 'http://89.208.85.17:1323/'
+const ip = 'https://job-roadmap.ru/'
 export async function fetchTop (): Promise<any> {
   return await axios.get(`${ip}api/v1/top`)
     .then((response) => response)

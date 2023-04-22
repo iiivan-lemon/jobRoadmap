@@ -1,0 +1,106 @@
+.search{
+    color: black;
+    background: #E8F1F2;
+    border: 3px solid #9cb1ff;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    outline-color: #0047ff;
+}
+.searchHeader{
+    width: 22rem;
+    font-size: 1rem;
+    padding-inline-start: 0.8rem;
+}
+
+.searchBlock{
+    align-items: center;
+    display: flex;
+
+}
+
+.formSearch{
+    display: flex;
+}
+
+.favorite{
+    margin-inline: 2rem;
+    /*visibility: visible;*/
+}
+
+/* Задаем общий стиль всплывающей подсказки для нужных элементов*/
+.favorite:hover:before{
+    z-index: 20;
+    font-size: medium;
+    position: absolute;
+    width: 6rem;
+    color: #fff;
+    background: #000;
+    padding: 5px;
+    border-radius: 4px;
+    top: 3.4rem;
+}
+
+/* Добавляем текст в конкретной всплывающей подсказке */
+.favorite:hover:before {
+    content: "добавьте роадмап в избранное";
+}
+
+.changeSearch{
+    cursor: pointer;
+    width: 3rem;
+    margin-inline: 1rem;
+}
+
+.changeIconSearch:hover:before{
+    z-index: 20;
+    font-size: medium;
+    position: absolute;
+    width: 4rem;
+    color: #fff;
+    background: #000;
+    padding: 5px;
+    border-radius: 4px;
+    top: 3.4rem;
+}
+
+/* Добавляем текст в конкретной всплывающей подсказке */
+.changeIconSearch:hover:before {
+    content: "смена поиска";
+}
+
+.dropDown{
+    box-shadow: 0 0 0 4px #9cb1ff;
+    top: 4rem;
+    margin-block: 10px;
+    position: absolute;
+    z-index: 200;
+    width: fit-content;
+    background-color: aliceblue;
+    padding: 1rem;
+    border-radius: 20px;
+}
+
+.titleRecommend{
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #c7d9f9;
+    margin: 10px 0px;
+    padding: 10px;
+}
+
+.searchSvg{
+    transition: filter 0.5s ease;
+    cursor: pointer;
+    margin-inline-start: 10px;
+
+}
+
+.searchSvg:hover{
+    filter: brightness(0.5);
+}
+
+@media (min-width: 1500px) and (max-width: 2000px) {
+    .searchHeader{
+        width: 26vw;
+    }
+}
