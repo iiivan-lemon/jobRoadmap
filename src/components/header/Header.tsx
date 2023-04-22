@@ -29,11 +29,9 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
     void dispatch(getTops())
     void dispatch(getFavs()).then(
       dataJob => {
-        // @ts-expect-error adawd
         if (dataJob.payload.errMessage) {
           // setErrMessage(dataJob.payload.errMessage)
         } else {
-          // @ts-expect-error adawd
           setFavs(dataJob.payload)
         }
       }

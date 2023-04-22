@@ -6,11 +6,12 @@ import HeaderOptions from '../headerOptions/HeaderOptions'
 import './Search.module.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getTops } from '../../models/tops/topsSlice'
-import { setFavs, setUnFavs } from '../../models/favs/favsSlice'
+import { getFavs, setFavs, setUnFavs } from '../../models/favs/favsSlice'
 import { getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
 import { selectGrade } from '../../models/gradeFilter/gradeSlice'
-import { debounce } from '../../utils/utils'
+import { debounce, loadState } from '../../utils/utils'
 import { TagInput } from '../tagInput/TagInput'
+import { useLocation } from 'react-router-dom'
 
 /*
  * Interface SearchProps {
@@ -52,12 +53,15 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
 
   const sendFav = () => {
     if ((document.getElementById('search') as HTMLInputElement)?.value !== '') {
-      void dispatch(setFavs((document.getElementById('search') as HTMLInputElement)?.value)).then((data) => {
-        // @ts-expect-error awd
-        if (!data.payload.errMessage) {
-          setFavorite(true)
-        }
-      })
+      void dispatch(setFavs((document.getElementById('search') as HTMLInputElement).value))
+        .then((data) => {
+          // @ts-expect-error awd
+          if (!data.payload.errMessage) {
+            // const input: string = (document.getElementById('search') as HTMLInputElement).value
+            // setFav([...new Set(...favs, { name: input })])
+            setFavorite(true)
+          }
+        })
     }
   }
 
@@ -67,6 +71,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
         .then((data) => {
         // @ts-expect-error awd
           if (!data.payload.errMessage) {
+            // setFav(favs.filter((el: any) => el.name !== (document.getElementById('search') as HTMLInputElement).value))
             setFavorite(false)
           }
         })
@@ -94,9 +99,38 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     }
   }
 
+  const isInFavs = () => {
+
+    if ((document.getElementById('search') as HTMLInputElement)) {
+      if (~favs.findIndex((el: any) => el.name === (document.getElementById('search') as HTMLInputElement).value)) {
+        setFavorite(true)
+      } else { setFavorite(false) }
+    }
+  }
+
+  const [favs, setFav] = useState([])
+  const location = useLocation()
   React.useEffect(() => {
-    setFavorite(false)
+    if (location.pathname === '/search') {
+      void dispatch(getFavs()).then(
+        dataJob => {
+          if (dataJob.payload.errMessage) {
+          // @ts-expect-error adawd
+            setErrMessage(dataJob.payload.errMessage)
+          } else {
+            setFav(dataJob.payload)
+            isInFavs()
+          }
+        }
+      )
+        .catch(() => {
+        })
+    }
   }, [changeData])
+
+  // React.useEffect(() => {
+  //   setFavorite(false)
+  // }, [changeData])
   useEffect(() => {
     setHavRecommends(false)
 
@@ -137,6 +171,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
   }
   const refSearchJob = useRef<HTMLInputElement | null>(null)
   const refSearch = useRef<HTMLInputElement | null>(null)
+
   return (
       <React.Fragment>
 
@@ -163,8 +198,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
                       className={styles.search + ' ' + styles.searchHeader}
                       id="search"
                       name="searchTerm"
-                      onChange={
-                        debounce(sendSearchValue)
+                      onChange= {debounce(sendSearchValue)
                       }
                   /><div className={styles.searchSvg}>
                   <svg width='2rem' onClick={sub} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Search_Magnifying_Glass"> <path id="Vector" d="M15 15L21 21M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
@@ -186,12 +220,12 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
 
             {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
             </>}
-            <div style = {{ visibility: (isTechSearch) ? 'visible' : 'hidden' }} className={isFavorite ? '' : styles.favorite}>
+            <div style = {{ visibility: (location.pathname === '/search') ? 'visible' : 'hidden' }} className={isFavorite ? '' : styles.favorite}>
               { isFavorite
                 ? <svg
                   fill="none"
                   height="29"
-                  onClick={(e) => { e.stopPropagation(); sendUnFav() }}
+                  onClick={(e) => { if (isAuth) { e.stopPropagation(); sendUnFav() } }}
                   viewBox="0 0 24 29"
                   width="24"
                   xmlns="http://www.w3.org/2000/svg"

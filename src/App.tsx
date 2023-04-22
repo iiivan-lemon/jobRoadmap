@@ -32,6 +32,8 @@ import { JobsPage } from './pages/jobsPage/JobsPage'
 import { getJobs } from './models/dataJobs/dataJobsSlice'
 import { ResumeFixPage } from './pages/resumeFixPage/ResumeFixPage'
 import { JobLetterPage } from './pages/jobLetterPage/jobLetterPage'
+import {getFavs} from "./models/favs/favsSlice";
+import {loadState} from "./utils/utils";
 
 /*
  * Import { PrivateRoute } from './components/privateRoute/PrivateRoute'
@@ -47,16 +49,6 @@ function App (): JSX.Element {
     changeInputData
   ] = useState('')
 
-  // History.navigate = useNavigate()
-  // // @ts-expect-error errors
-  // History.location = useLocation()
-  // Const coursesPage = (): void => {
-  //   If (window.location.href !== '/search') {
-  //     History.ts.push('/search')
-  //   } else {
-  //     Change(inputData)
-  //   }
-  // }
 
   function change (inputData: { value: string, isTechSearch: boolean }): void {
     // If (inputData.includes('python')) {

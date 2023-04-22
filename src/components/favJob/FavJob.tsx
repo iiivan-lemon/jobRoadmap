@@ -4,7 +4,7 @@ import { setFav } from '../../models/favs/favsService'
 import { setUnFavs } from '../../models/favs/favsSlice'
 import { useAppDispatch } from '../../app/hooks'
 
-export const FavJob = ({ jobTitle }) => {
+export const FavJob = ({ jobTitle, checkData }) => {
   const [
     isFavorite,
     setFavorite
@@ -17,7 +17,11 @@ export const FavJob = ({ jobTitle }) => {
     isFavorite
       // eslint-disable-next-line multiline-ternary
       ? <div className='saveGraph' >
+
+      <div className='dataFav'>
     <span>{jobTitle}</span>
+        <span>Изучено навыков: {checkData.count_finished}/{checkData.count_all}</span>
+      </div>
     <div className={isFavorite ? '' : 'favorite'}>
       { <svg
           onClick={() => { setFavorite(false); unSetFav(jobTitle) }}

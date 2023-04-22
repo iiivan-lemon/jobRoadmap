@@ -18,14 +18,11 @@ const ProfilePage: FC = () => {
   React.useEffect(() => {
     void dispatch(getFavs()).then(
       dataJob => {
-        // @ts-expect-error adawd
         if (dataJob.payload.errMessage) {
-          // @ts-expect-error adawd
           setErrMessage(dataJob.payload.errMessage)
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
-          // @ts-expect-error adawd
           setFavs(dataJob.payload)
         }
       }
@@ -49,8 +46,8 @@ const ProfilePage: FC = () => {
   //     setFavorite(false)
   //   }
   // }
-  function renderGraphBlock (tags: string[]): any[] {
-    return tags.map((el, index) => (<FavJob jobTitle={el}/>))
+  function renderGraphBlock (tags: Array<{ id: number, name: string, count_all: number, count_finished: number }>): any[] {
+    return tags.map((el: { id: number, name: string, count_all: number, count_finished: number }, index) => (<FavJob jobTitle={el.name} checkData={{ count_all: el.count_all, count_finished: el.count_finished }}/>))
   }
 
   return (

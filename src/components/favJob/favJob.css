@@ -12,9 +12,14 @@
     justify-content: space-between;
 }
 
-.saveGraph > span{
+.dataFav > span{
     color: white;
     font-size: 1rem;
+}
+
+.dataFav{
+    display: flex;
+    flex-direction: column;
 }
 
 .svgFav{
