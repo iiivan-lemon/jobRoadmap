@@ -15,6 +15,8 @@ import { getNodeProf } from '../../models/tops/topsSlice'
 import Tag from '../../components/Tag/Tag'
 import stylesTag from '../../components/Tag/Tag.module.css'
 import Linkify from 'linkify-react'
+
+import { Basic } from '../../components/dropZone/dropZone'
 // eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-duplicates
 // eslint-disable-next-line no-template-curly-in-string
 pdfjs.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js'
@@ -148,10 +150,9 @@ export const ResumeFixPage = () => {
   return (
     <div className='resumePage'>
       <div className='resumeInput blurBlock'>
-
       <form className='resumeBlock' onSubmit={handleSubmit}>
         <span>добавьте резюме PDF</span>
-        <input placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
+         <input placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
         <span>введите вашу специальность</span>
         <div style={{ position: 'relative' }}>
         <input autoComplete="off" id='searchResume' className={styleSearch.search} type="text" onChange={
@@ -159,7 +160,8 @@ export const ResumeFixPage = () => {
         }/>
         { !tips && haveRecommends && <div>{renderRecommends(recommends)}</div> }
         </div>
-        <input className={styles.tag + ' submit'} type="submit" id='inputScan' value="сканировать резюме" style={ (selectedJob && selectedFile) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
+
+        <input className={styles.tag + ' submit'} type="submit" id='inputScan' value="сканировать резюме" disabled={(!(selectedJob && selectedFile))} />
         { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
       </form>
         {(loading === loadState.res) &&

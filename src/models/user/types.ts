@@ -2,6 +2,7 @@ export interface UserState {
   username: string
   email: string
   photo: string
+  csrf: string
 }
 
 export enum UserActionEnum {
@@ -10,6 +11,7 @@ export enum UserActionEnum {
   SET_EMAIL = 'SET_EMAIL',
   SET_AGE = 'SET_AGE',
   SET_PHOTO = 'SET_PHOTO',
+  SET_CSRF = 'SET_CSRF'
 }
 
 export interface SetNameAction {
@@ -37,4 +39,9 @@ export interface SetPhotoAction {
   payload: string
 }
 
-export type UserActions = SetEmailAction | SetAgeAction | SetNameAction | SetPhotoAction | SetSurnameAction
+export interface SetCsrfAction {
+  type: UserActionEnum.SET_CSRF
+  payload: string
+}
+
+export type UserActions = SetEmailAction | SetAgeAction | SetNameAction | SetPhotoAction | SetSurnameAction | SetCsrfAction

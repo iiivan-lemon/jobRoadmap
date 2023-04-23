@@ -94,7 +94,7 @@ export const JobLetterPage = () => {
           <input type="file" onChange={handleFileSelect} accept=".pdf"/>
           <span>введите ссылку на вакансию hh.ru</span>
           <input className={styleSearch.search} type="text" onChange={handleUrlSelect}/>
-          <input type="submit" className={styles.tag + ' submit'} value="получить сопроводительное письмо" style={ (selectedFile && selectedUrl) ? { visibility: 'visible' } : { visibility: 'hidden' }} />
+          <input type="submit" className={styles.tag + ' submit'} value="получить сопроводительное письмо" disabled={!(selectedFile && selectedUrl)} />
           { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
         </form>
       </div>

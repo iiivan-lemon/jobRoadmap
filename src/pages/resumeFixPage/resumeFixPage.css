@@ -120,3 +120,8 @@ margin-block: 0.5rem;
 display: flex;
 flex-direction: row;
 }
+
+.submit[disabled]{
+    filter: grayscale(1);
+    pointer-events: none;
+}

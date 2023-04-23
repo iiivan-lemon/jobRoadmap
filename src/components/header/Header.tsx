@@ -9,6 +9,7 @@ import { loginOrLogout } from '../../models/auth/authActions'
 import { getTops } from '../../models/tops/topsSlice'
 import { getFavs } from '../../models/favs/favsSlice'
 import { loadState } from '../../utils/utils'
+import { Avatar } from '@mui/material'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -111,20 +112,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                   >
                       {username}
                   </span>
-                  <svg
-                      fill="none"
-                      height="35"
-                      viewBox="0 0 56 56"
-                      width="35"
-                      xmlns="http://www.w3.org/2000/svg"
-                  >
-                      <path
-                          d="M28 54.5C42.6355 54.5 54.5 42.6355 54.5 28C54.5 13.3645 42.6355 1.5 28 1.5C13.3645 1.5 1.5 13.3645 1.5 28C1.5 42.6355 13.3645 54.5 28 54.5Z"
-                          fill="white"
-                          stroke="#3A3A3A"
-                          strokeWidth="3"
-                      />
-                  </svg>
+                    <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                   <svg
                       className={styles.logout}
                       fill="none"

@@ -18,10 +18,13 @@ const ProfilePage: FC = () => {
   React.useEffect(() => {
     void dispatch(getFavs()).then(
       dataJob => {
+        // @ts-expect-error qwdqfwd
         if (!(dataJob.payload.errMessage)) {
           setLoad(loadState.res)
+          // @ts-expect-error qwdqfwd
           setFavs(dataJob.payload)
         } else {
+          // @ts-expect-error qwdqfwd
           setErrMessage(dataJob.payload.errMessage)
           setLoad(loadState.error)
         }

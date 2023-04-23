@@ -113,10 +113,12 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     if (location.pathname === '/search') {
       void dispatch(getFavs()).then(
         dataJob => {
+          // @ts-expect-error adawd
           if (dataJob.payload.errMessage) {
           // @ts-expect-error adawd
             setErrMessage(dataJob.payload.errMessage)
           } else {
+            // @ts-expect-error adawd
             setFav(dataJob.payload)
             isInFavs()
           }

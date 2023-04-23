@@ -36,6 +36,7 @@ import { getFavs } from './models/favs/favsSlice'
 import { loadState } from './utils/utils'
 import ValidatedLoginForm from './authApp/login/Formik'
 import ValidatedRegForm from './authApp/register/FormikReg'
+import { ProfileUser } from './authApp/profile/profileUser'
 
 /*
  * Import { PrivateRoute } from './components/privateRoute/PrivateRoute'
@@ -89,6 +90,14 @@ function App (): JSX.Element {
                   }
                   path="/favorites"
               />
+            <Route
+              element={
+                <PrivateRoute>
+                  <ProfileUser />
+                </PrivateRoute>
+              }
+              path="/profile"
+            />
               {/* Public */}
               <Route
                   element={<NewUserPage />}

@@ -3,7 +3,8 @@ import { UserActionEnum, type UserActions, type UserState } from './types'
 const defaultState: UserState = {
   username: '',
   email: '',
-  photo: ''
+  photo: '',
+  csrf: ''
 }
 
 export const UserReducer = (state = defaultState, action: UserActions): UserState => {
@@ -16,6 +17,9 @@ export const UserReducer = (state = defaultState, action: UserActions): UserStat
     }
     case UserActionEnum.SET_PHOTO: {
       return { ...state, photo: action.payload }
+    }
+    case UserActionEnum.SET_CSRF: {
+      return { ...state, csrf: action.payload }
     }
     default:
       return state
@@ -44,5 +48,10 @@ export const userActionAge = (payload) => ({
 
 export const userActionPhoto = (payload) => ({
   type: UserActionEnum.SET_PHOTO,
+  payload
+})
+
+export const userActionCsrf = (payload) => ({
+  type: UserActionEnum.SET_CSRF,
   payload
 })

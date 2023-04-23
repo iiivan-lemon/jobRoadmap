@@ -42,7 +42,7 @@ function Login() {
                 }
             });
     }, [])
-    // form validation rules
+    // form validation rulesв
     const validationSchema = Yup.object().shape({
         email: Yup.string().required('введите эл. почту'),
         password: Yup.string().required('введите пароль')
