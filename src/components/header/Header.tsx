@@ -4,7 +4,7 @@ import styles from './Header.module.css'
 // Import { useHistory } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { authActions } from '../../authApp/_store'
+// import { authActions } from
 import { loginOrLogout } from '../../models/auth/authActions'
 import { getTops } from '../../models/tops/topsSlice'
 import { getFavs } from '../../models/favs/favsSlice'
@@ -27,18 +27,6 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     void dispatch(getTops())
-    void dispatch(getFavs()).then(
-      dataJob => {
-        if (dataJob.payload.errMessage) {
-          // setErrMessage(dataJob.payload.errMessage)
-        } else {
-          setFavs(dataJob.payload)
-        }
-      }
-    )
-      .catch(() => {
-        // eslint-disable-next-line no-debugger
-      })
   }, [])
   /*
    * Function submitForm (event: any): void {

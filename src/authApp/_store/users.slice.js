@@ -46,7 +46,6 @@ function createExtraActions() {
                     const res = await axios.post(`${baseUrl}/signup`, {username, email, password});
                     
                     if (res.data.message) {
-                        alert('Подтвердите вашу почту  ' + email)
                         // history('/favorites');
                     }
 
@@ -63,11 +62,9 @@ function createExtraActions() {
                         return 401
                     }
                     if (error.response.data.status === 400) {
-                        alert('эта почта уже зарегистрирована  ' + email)
                     }
 
                     if (Math.trunc(error.response.data.status / 100) === 5) {
-                        alert('ошибка на сервере')
                         return 500;
                     }
                 }

@@ -100,7 +100,6 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
   }
 
   const isInFavs = () => {
-
     if ((document.getElementById('search') as HTMLInputElement)) {
       if (~favs.findIndex((el: any) => el.name === (document.getElementById('search') as HTMLInputElement).value)) {
         setFavorite(true)

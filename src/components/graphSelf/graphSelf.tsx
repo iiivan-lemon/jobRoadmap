@@ -183,8 +183,8 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
         // circleArray[i].style.backgroundImage = `url("data:image/svg+xml;charset=utf-8,${encodeURIComponent(newSvg)}")`
         const styles = {
           circle: {
-            height: n[i].distance * 500 + 'px',
-            width: n[i].distance * 500 + 'px',
+            height: 500 + 'px',
+            width: 500 + 'px',
             fill: isHard ? (pSBC(0, setNodeGradient(coloration, n[i].professionalism))) : '#6771e8'
           } as CSSObject
         }

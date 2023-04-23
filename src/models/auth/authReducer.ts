@@ -1,4 +1,6 @@
 import { type AuthAction, AuthActionEnum, type AuthState } from './types'
+import { RootState } from '../../app/store'
+import { GradeState } from '../gradeFilter/gradeSlice'
 
 const defaultState: AuthState = {
   isAuth: false,

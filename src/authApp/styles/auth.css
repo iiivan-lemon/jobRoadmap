@@ -38,6 +38,14 @@
     color: white;
 }
 
+.invalid-feedback{
+    color: #ff0c0cbf;
+}
+.back-feedback{
+    padding-block-start: 1rem;
+    text-align: center;
+}
+
 
 .form-group{
     column-gap: 1rem;

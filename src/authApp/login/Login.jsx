@@ -20,6 +20,9 @@ function Login() {
     const dispatch = useDispatch();
     const authUser = useSelector(x => x?.auth?.user);
     const authError = useSelector(x => x?.auth?.error);
+
+
+
     useEffect(() => {
         document.body.style.overflow = 'hidden'
         document.getElementById('header')?.classList.remove('headerFix')
@@ -36,14 +39,13 @@ function Login() {
                 }
 
                 if (res === 500) {
-                    alert('ошибка сервера')
                 }
             });
     }, [])
     // form validation rules
     const validationSchema = Yup.object().shape({
-        email: Yup.string().required('email is required'),
-        password: Yup.string().required('Password is required')
+        email: Yup.string().required('введите эл. почту'),
+        password: Yup.string().required('введите пароль')
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -66,13 +68,11 @@ function Login() {
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
-                            <label>Электронная почта</label>
-                            <input name="email" type="text" {...register('email')} className={styleSearch.search + ` ${errors.email ? 'is-invalid' : ''}`} />
+                            <input placeholder='электронная почта' name="email" type="text" {...register('email')} className={styleSearch.search + ` ${errors.email ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.email?.message}</div>
                         </div>
                         <div className="form-group">
-                            <label>Пароль</label>
-                            <input name="password" type="password" {...register('password')} className={styleSearch.search + ` ${errors.password ? 'is-invalid' : ''}`} />
+                            <input placeholder='пароль' name="password" type="password" {...register('password')} className={styleSearch.search + ` ${errors.password ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.password?.message}</div>
                         </div>
                         <button disabled={isSubmitting} className={styles.tag + ' submitBtn'}>
@@ -84,7 +84,7 @@ function Login() {
                         }
                     </form>
                 </div>
-                <span onClick={()=>{ history('/signup')}}> зарегистрироваться</span>
+                <span onClick={()=>{ history('/signup')}}>зарегистрироваться</span>
             </div>
         </div>
     )

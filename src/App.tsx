@@ -32,8 +32,10 @@ import { JobsPage } from './pages/jobsPage/JobsPage'
 import { getJobs } from './models/dataJobs/dataJobsSlice'
 import { ResumeFixPage } from './pages/resumeFixPage/ResumeFixPage'
 import { JobLetterPage } from './pages/jobLetterPage/jobLetterPage'
-import {getFavs} from "./models/favs/favsSlice";
-import {loadState} from "./utils/utils";
+import { getFavs } from './models/favs/favsSlice'
+import { loadState } from './utils/utils'
+import ValidatedLoginForm from './authApp/login/Formik'
+import ValidatedRegForm from './authApp/register/FormikReg'
 
 /*
  * Import { PrivateRoute } from './components/privateRoute/PrivateRoute'
@@ -48,7 +50,6 @@ function App (): JSX.Element {
     inputData,
     changeInputData
   ] = useState('')
-
 
   function change (inputData: { value: string, isTechSearch: boolean }): void {
     // If (inputData.includes('python')) {
@@ -117,11 +118,11 @@ function App (): JSX.Element {
               path="/resumeFix"
             />
               <Route
-                  element={<Login />}
+                  element={<ValidatedLoginForm />}
                   path="/login"
               />
               <Route
-                  element={<Reg />}
+                  element={<ValidatedRegForm />}
                   path="/signup"
               />
           </Routes>

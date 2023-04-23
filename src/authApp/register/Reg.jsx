@@ -39,9 +39,9 @@ export const Reg = () => {
 
     // form validation rules
     const validationSchema = Yup.object().shape({
-        username: Yup.string().required('username is required'),
-        email: Yup.string().required('email is required'),
-        password: Yup.string().required('Password is required')
+        username: Yup.string().required('введите имя'),
+        email: Yup.string().required('введите эл. почту'),
+        password: Yup.string().required('введите пароль')
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -52,11 +52,10 @@ export const Reg = () => {
         dispatch(loadingProfile())
             .then((res) => {
                 if (res === true) {
-                    history('/favorites');
+                    history('/');
                 }
 
                 if (res === 500) {
-                    alert('ошибка сервера')
                 }
             });
     }, [])
@@ -76,18 +75,15 @@ export const Reg = () => {
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
-                            <label>Ваше имя</label>
-                            <input className={styleSearch.search + ` ${errors.username ? 'is-invalid' : ''}`} name="username" type="username" {...register('username')}  />
+                            <input placeholder='имя' className={styleSearch.search + ` ${errors.username ? 'is-invalid' : ''}`} name="username" type="username" {...register('username')}  />
                             <div className="invalid-feedback">{errors.username?.message}</div>
                         </div>
                         <div className="form-group">
-                            <label>Электронная почта</label>
-                            <input className={styleSearch.search + ` ${errors.email ? 'is-invalid' : ''}`} name="email" type="text" {...register('email')}  />
+                            <input placeholder='электронная почта' className={styleSearch.search + ` ${errors.email ? 'is-invalid' : ''}`} name="email" type="text" {...register('email')}  />
                             <div className="invalid-feedback">{errors.email?.message}</div>
                         </div>
                         <div className="form-group">
-                            <label>Пароль</label>
-                            <input className={styleSearch.search +  ` ${errors.password ? 'is-invalid' : ''}`} name="password" type="password" {...register('password')}  />
+                            <input placeholder='пароль' className={styleSearch.search +  ` ${errors.password ? 'is-invalid' : ''}`} name="password" type="password" {...register('password')}  />
                             <div className="invalid-feedback">{errors.password?.message}</div>
                         </div>
                         <button disabled={isSubmitting} className={styles.tag + ' submitBtn'}>
