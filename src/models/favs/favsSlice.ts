@@ -28,9 +28,9 @@ const initialState: Favs[] = []
 export const getFavs = createAsyncThunk(
   'favs/fetchFavs',
   async () => {
-    // const response = await fetchFavs()
+    const response = await fetchFavs()
 
-    const response = { status: 200, favorites: [{ id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }] }
+    // const response = { status: 200, favorites: [{ id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }] }
     return ((!checkStatus(response.status)) ? response.favorites : { errMessage: checkStatus(response.status) })
     // if (response.status === 200) {
     //   return response.data

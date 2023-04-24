@@ -49,7 +49,7 @@ export const ValidatedProfileForm = () =>  {
         document.body.style.overflow = 'hidden'
         document.getElementById('header')?.classList.remove('headerFix')
         // redirect to home if already logged in
-        if (authUser) history('/');
+        if (!authUser) history('/');
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

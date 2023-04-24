@@ -1,4 +1,4 @@
-import React, { type FC, useState } from 'react'
+import React, { type FC, useEffect, useState } from 'react'
 import Search from '../search/Search'
 import styles from './Header.module.css'
 // Import { useHistory } from 'react-router'
@@ -10,6 +10,7 @@ import { getTops } from '../../models/tops/topsSlice'
 import { getFavs } from '../../models/favs/favsSlice'
 import { loadState } from '../../utils/utils'
 import { Avatar } from '@mui/material'
+import { loadingProfile } from '../../models/user/userActions'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -28,6 +29,13 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     void dispatch(getTops())
+    void dispatch(loadingProfile())
+      .then((res) => {
+        if (res === true) {
+          history('/favorites')
+        }
+        if (res === 500) { /* empty */ }
+      })
   }, [])
   /*
    * Function submitForm (event: any): void {
