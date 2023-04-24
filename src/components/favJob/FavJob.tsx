@@ -11,7 +11,7 @@ export const FavJob = ({ jobTitle, checkData }) => {
   ] = useState(true)
   const dispatch = useAppDispatch()
   const unSetFav = (title: string) => {
-    void dispatch(setUnFavs(title))
+    void dispatch(setUnFavs(title)).then(() => { setFavorite(false) })
   }
   return (
     isFavorite
@@ -24,7 +24,7 @@ export const FavJob = ({ jobTitle, checkData }) => {
       </div>
     <div className={isFavorite ? '' : 'favorite'}>
       { <svg
-          onClick={() => { setFavorite(false); unSetFav(jobTitle) }}
+          onClick={() => { unSetFav(jobTitle) }}
           className='svgFav'
           fill="none"
           height="29"

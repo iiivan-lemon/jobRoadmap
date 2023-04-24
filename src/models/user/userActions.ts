@@ -136,7 +136,10 @@ export const editAvatar = (user) => async (dispatch) => {
       url: '/avatar',
       method: 'PUT',
       data: user,
-      headers: { 'Content-Type': 'application/json', 'csrf-token': csrfToken },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'csrf-token': csrfToken
+      },
       withCredentials: true
     })
     // csrf-token

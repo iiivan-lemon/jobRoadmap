@@ -69,7 +69,7 @@ const ValidatedRegForm = () => {
             //********Using Yum for validation********/
 
             validationSchema={Yup.object().shape({
-                username: Yup.string().required('обязательное поле'),
+                username: Yup.string().required('обязательное поле').max(15, "максимум 15 символов"),
                 email: Yup.string()
                     .email()
                     .required("обязательное поле"),
