@@ -80,6 +80,26 @@
     margin-inline: 1rem;
 }
 
+.avatar{
+    cursor: pointer;
+    position: relative;
+}
+.avatar:hover:before {
+    margin-inline: -1rem;
+    left: 0;
+    z-index: 20;
+    font-size: medium;
+    position: absolute;
+    width: fit-content;
+    color: #fff;
+    background: #000;
+    padding: 5px;
+    border-radius: 4px;
+    top: 2rem;
+    content: "профиль";
+    cursor: pointer;
+}
+
 @media (max-width: 1500px) {
     .favorite{
         padding-inline: 1rem;

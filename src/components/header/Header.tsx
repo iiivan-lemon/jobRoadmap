@@ -113,13 +113,13 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                       Избранное
                   </span>
                   {/* eslint-disable-next-line multiline-ternary */}
-                  {(isAuth) ? (<><span
-                      className={styles.username}
-                      // onClick={() => { goTo('/profile') }}
-                  >
-                      {user.username}
-                  </span>
-                    <Avatar alt="Cindy Baker" src={user.photo} />
+                  {(isAuth) ? (<>
+                    <div onClick={() => {
+                      history('/profile')
+                    }
+                    } className={styles.avatar}>
+                    <Avatar alt="Cindy Baker" src={user.avatar} />
+                    </div>
                   <svg
                       className={styles.logout}
                       fill="none"
