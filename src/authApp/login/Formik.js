@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loadingProfile} from "../../models/user/userActions";
-import {loginOrLogout} from "../../models/auth/authActions";
+import {deleteError, loginOrLogout} from "../../models/auth/authActions";
 import  './../styles/auth.css'
 import styleSearch from "../../components/search/Search.module.css";
 import styles from './../../pages/newUserPage/NewUserPage.module.css'
@@ -128,7 +128,7 @@ const ValidatedLoginForm = () => {
                         Войти
                     </button>
                 </form>
-                        <span onClick={()=>{ history('/signup')}}>зарегистрироваться</span>
+                        <span onClick={()=>{ history('/signup'); dispatch(deleteError()) }}>зарегистрироваться</span>
                             <div style={{visibility: (isError) ? 'visible' : 'hidden'}} className="invalid-feedback back-feedback">{isError}</div>
 
                     </div></div>

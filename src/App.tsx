@@ -85,7 +85,7 @@ function App (): JSX.Element {
               <Route
                   element={
                 <PrivateRoute>
-                          <ProfilePage />
+                          <ProfilePage chooseRoadmap={change}/>
                   </PrivateRoute>
                   }
                   path="/favorites"

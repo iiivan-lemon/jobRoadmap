@@ -143,6 +143,12 @@ export const editAvatar = (user) => async (dispatch) => {
       withCredentials: true
     })
     // csrf-token
+    if (res.data.status === 200) {
+      dispatch(authActionAuth(true))
+      dispatch(loadingProfile())
+
+      return true
+    }
     return res.data.message
   } catch (error: any) {
     if (error.response.data.status === 400) {

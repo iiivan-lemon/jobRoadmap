@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loadingProfile} from "../../models/user/userActions";
-import {loginOrLogout} from "../../models/auth/authActions";
+import {deleteError, loginOrLogout} from "../../models/auth/authActions";
 import './reg.css'
 import styleSearch from "../../components/search/Search.module.css";
 import styles from './../../pages/newUserPage/NewUserPage.module.css'
@@ -140,7 +140,7 @@ const ValidatedRegForm = () => {
                                     зарегистрироваться
                                 </button>
                             </form>
-                            <span onClick={()=>{ history('/login')}}> у вас есть аккаунт? Войти</span>
+                            <span onClick={()=>{ history('/login'); dispatch(deleteError())}}> у вас есть аккаунт? Войти</span>
                             <div style={{visibility: (isError) ? 'visible' : 'hidden'}} className="invalid-feedback back-feedback">{isError}</div>
                             { !isError && <div ref={refLinkCon} className='conf-container conf-container-hidden'>
                                 <div className='log-h1' style={{textAlign: 'center'}}> Подтвердите почту </div>

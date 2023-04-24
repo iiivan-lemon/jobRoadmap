@@ -35,6 +35,7 @@ export const ProfileUser = () => {
     const history = useNavigate()
     const dispatch = useDispatch();
     const { user } = useAppSelector(state => state)
+    const {isError}= useAppSelector(state => state.auth)
     useEffect(() => {
 
         document.body.style.overflow = 'hidden'
@@ -76,6 +77,7 @@ export const ProfileUser = () => {
                         </label>
                     </div>
                     <ValidatedProfileForm submit={submit} />
+                    <div style={{visibility: (isError) ? 'visible' : 'hidden'}} className="invalid-feedback back-feedback">{isError}</div>
                 </div>
             </div>
         </div>

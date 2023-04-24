@@ -4,7 +4,7 @@ import { setFav } from '../../models/favs/favsService'
 import { setUnFavs } from '../../models/favs/favsSlice'
 import { useAppDispatch } from '../../app/hooks'
 
-export const FavJob = ({ jobTitle, checkData }) => {
+export const FavJob = ({ jobTitle, checkData, chooseRoadmap }) => {
   const [
     isFavorite,
     setFavorite
@@ -19,7 +19,9 @@ export const FavJob = ({ jobTitle, checkData }) => {
       ? <div className='saveGraph' >
 
       <div className='dataFav'>
-    <span>{jobTitle}</span>
+    <span onClick={() => {
+      chooseRoadmap({ value: jobTitle, isTechSearch: true })
+    }}>{jobTitle}</span>
         <span>Изучено навыков: {checkData.count_finished}/{checkData.count_all}</span>
       </div>
     <div className={isFavorite ? '' : 'favorite'}>

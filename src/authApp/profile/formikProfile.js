@@ -24,7 +24,7 @@ export const ValidatedProfileForm = ({submit}) =>  {
 
 
 
-    const {isError}= useAppSelector(state => state.auth)
+
 
 
     useEffect(() => {
@@ -124,7 +124,6 @@ export const ValidatedProfileForm = ({submit}) =>  {
                                     Сохранить
                                 </button>
                             </form>
-                            <div style={{visibility: (isError) ? 'visible' : 'hidden'}} className="invalid-feedback back-feedback">{isError}</div>
                     </>
                         );
             }}

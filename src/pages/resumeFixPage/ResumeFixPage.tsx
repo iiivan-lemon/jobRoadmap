@@ -152,7 +152,8 @@ export const ResumeFixPage = () => {
       <div className='resumeInput blurBlock'>
       <form className='resumeBlock' onSubmit={handleSubmit}>
         <span>добавьте резюме PDF</span>
-         <input placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
+        <label htmlFor="upload-photo" className={styles.tag + ' submit'}>{ !selectedFile ? 'выбрать файл' : (selectedFile as File).name}</label>
+         <input id="upload-photo" style={{ display: 'none' }} placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
         <span>введите вашу специальность</span>
         <div style={{ position: 'relative' }}>
         <input autoComplete="off" id='searchResume' className={styleSearch.search} type="text" onChange={
