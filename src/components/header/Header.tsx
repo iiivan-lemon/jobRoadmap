@@ -31,9 +31,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
     void dispatch(getTops())
     void dispatch(loadingProfile())
       .then((res) => {
-        if (res === true) {
-          history('/favorites')
-        }
+        if (res === true) {}
         if (res === 500) { /* empty */ }
       })
   }, [])
