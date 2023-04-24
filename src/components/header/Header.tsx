@@ -24,10 +24,9 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
-  // @ts-expect-error awdawd
-  const authUser = useSelector(x => x?.auth?.user)
+  const { isAuth } = useAppSelector(x => x?.auth)
   const [favs, setFavs] = useState([])
-  const { username } = useAppSelector(state => state.user)
+  const user = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     void dispatch(getTops())
@@ -114,11 +113,11 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                       Избранное
                   </span>
                   {/* eslint-disable-next-line multiline-ternary */}
-                  {(authUser) ? (<><span
+                  {(isAuth) ? (<><span
                       className={styles.username}
                       // onClick={() => { goTo('/profile') }}
                   >
-                      {username}
+                      {user.username}
                   </span>
                     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                   <svg

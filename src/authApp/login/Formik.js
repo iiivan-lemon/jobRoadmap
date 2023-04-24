@@ -13,14 +13,14 @@ import {useAppSelector} from "../../app/hooks";
 const ValidatedLoginForm = () => {
     const history = useNavigate()
     const dispatch = useDispatch();
-    const authUser = useSelector(x => x?.auth?.user)
-    const {isError}= useAppSelector(state => state.auth)
+    const {isAuth} = useAppSelector(x => x?.auth)
+    const {isError}= useAppSelector(state => state?.auth)
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
         document.getElementById('header')?.classList.remove('headerFix')
         // redirect to home if already logged in
-        if (authUser) history('/');
+        if (isAuth) history('/');
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -41,7 +41,7 @@ const ValidatedLoginForm = () => {
         onSubmit={async (values, {setSubmitting}) => {
             const res = await dispatch(loginOrLogout(true, values));
             if (res === true) {
-                nav('/favorite');
+                history('/favorite');
             }
             setSubmitting(false);
             // setTimeout(() => {

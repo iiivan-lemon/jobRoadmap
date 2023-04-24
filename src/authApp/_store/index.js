@@ -5,10 +5,3 @@ import { usersReducer } from './users.slice';
 
 export * from './auth.slice';
 export * from './users.slice';
-
-export const store = configureStore({
-    reducer: {
-        auth: authReducer,
-        users: usersReducer
-    },
-});
