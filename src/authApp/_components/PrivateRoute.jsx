@@ -7,8 +7,8 @@ import {useAppSelector} from "../../app/hooks";
 export { PrivateRoute };
 
 function PrivateRoute({ children }) {
-    const authUser = useSelector(x => x?.auth?.user);
-    if (!authUser) {
+    const {isAuth} = useAppSelector(x => x?.auth)
+    if (!isAuth) {
         // not logged in so redirect to login page with the return url
         return <Navigate to="/login" state={{ from: history.location }} />
     }
