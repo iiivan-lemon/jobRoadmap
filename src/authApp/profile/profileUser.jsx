@@ -48,7 +48,7 @@ export const ProfileUser = () => {
     },[isAuth])
     const [avatar, setAvatar] = React.useState(user.avatar)
     const subImage = (e) => {
-        setAvatar(e.target.files[0])
+        setAvatar( e.target.files[0])
     }
 
     const submit =  async (values) => {
@@ -71,7 +71,7 @@ export const ProfileUser = () => {
                         <input accept="image/*" className={classes.input} onChange={subImage} id="icon-button-file" type="file" />
                         <label htmlFor="icon-button-file">
                             <IconButton color="primary" aria-label="upload picture" component="span">
-                                <Avatar alt="https://www.w3schools.com/howto/img_avatar.png" src={URL.createObjectURL(avatar)} className={classes.large} />
+                                <Avatar alt="https://www.w3schools.com/howto/img_avatar.png" src={(typeof avatar === 'string') ? avatar : URL.createObjectURL(avatar)} className={classes.large} />
                             </IconButton>
                         </label>
                     </div>
