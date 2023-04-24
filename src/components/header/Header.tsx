@@ -26,7 +26,7 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   const { isAuth } = useAppSelector(x => x?.auth)
   const [favs, setFavs] = useState([])
-  const user = useAppSelector(state => state.user)
+  const { user } = useAppSelector(state => state)
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     void dispatch(getTops())
@@ -119,7 +119,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                   >
                       {user.username}
                   </span>
-                    <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+                    <Avatar alt="Cindy Baker" src={user.photo} />
                   <svg
                       className={styles.logout}
                       fill="none"

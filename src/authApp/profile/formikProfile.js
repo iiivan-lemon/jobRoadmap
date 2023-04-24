@@ -37,18 +37,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ValidatedProfileForm = () =>  {
-    const { csrf } = useAppSelector(state => state.user)
-    const { photo } = useAppSelector(state => state.user)
+    const { user } = useAppSelector(state => state)
     const classes = useStyles();
     const history = useNavigate()
     const dispatch = useDispatch();
-    const authUser = useSelector(x => x?.auth?.user);
+
+    const {isAuth} = useAppSelector(x => x?.auth)
     const {isError}= useAppSelector(state => state.auth)
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
         document.getElementById('header')?.classList.remove('headerFix')
-        // if (!authUser) history('/login');
+        if (!isAuth) history('/login')
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -65,7 +65,7 @@ export const ValidatedProfileForm = () =>  {
         <Formik
             initialValues={{ password: "", passwordConfirm: "" }}
             onSubmit={async (values, {setSubmitting}) => {
-                if( photo !== avatar) {
+                if( user.avatar !== avatar) {
 
                     const formData = new FormData()
                     formData.append('file', avatar)
@@ -135,7 +135,7 @@ export const ValidatedProfileForm = () =>  {
                                     </label>
                                 </div>
                                 <div className="form-group">
-                                    <span className={stylesUser.emailData}>ваша эл. почта:  <>email@ya.ru</></span>
+                                    <span className={stylesUser.emailData}>ваша эл. почта:  <>{user.email}</></span>
                                     <input
                                         name="password"
                                         type="password"

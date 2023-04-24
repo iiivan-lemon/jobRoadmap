@@ -80,11 +80,9 @@ export const loadingProfile = () => async (dispatch) => {
 
     if (res.data.status === 200) {
       dispatch(authActionAuth(true))
-      dispatch(userActionName(res.data.user.name))
-      dispatch(userActionSurname(res.data.user.surname))
+      dispatch(userActionName(res.data.user.username))
       dispatch(userActionEmail(res.data.user.email))
-      dispatch(userActionAge(res.data.user.date))
-      dispatch(userActionPhoto(res.data.user.photo))
+      dispatch(userActionPhoto(res.data.user.avatar))
 
       return true
     }

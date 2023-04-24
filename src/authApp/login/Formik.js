@@ -41,7 +41,7 @@ const ValidatedLoginForm = () => {
         onSubmit={async (values, {setSubmitting}) => {
             const res = await dispatch(loginOrLogout(true, values));
             if (res === true) {
-                history('/favorite');
+                history('/favorites');
             }
             setSubmitting(false);
             // setTimeout(() => {

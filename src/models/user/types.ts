@@ -1,7 +1,7 @@
 export interface UserState {
   username: string
   email: string
-  photo: string
+  avatar: string
   csrf: string
 }
 

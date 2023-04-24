@@ -3,7 +3,7 @@ import { UserActionEnum, type UserActions, type UserState } from './types'
 const defaultState: UserState = {
   username: '',
   email: '',
-  photo: '',
+  avatar: '',
   csrf: ''
 }
 
@@ -16,7 +16,7 @@ export const UserReducer = (state = defaultState, action: UserActions): UserStat
       return { ...state, email: action.payload }
     }
     case UserActionEnum.SET_PHOTO: {
-      return { ...state, photo: action.payload }
+      return { ...state, avatar: action.payload }
     }
     case UserActionEnum.SET_CSRF: {
       return { ...state, csrf: action.payload }
