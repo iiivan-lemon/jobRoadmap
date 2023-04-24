@@ -13,7 +13,7 @@ import {useAppSelector} from "../../app/hooks";
 const ValidatedLoginForm = () => {
     const history = useNavigate()
     const dispatch = useDispatch();
-    const authUser = useSelector(x => x?.auth?.user);
+    const authUser = useSelector(x => x?.auth?.user)
     const {isError}= useAppSelector(state => state.auth)
 
     useEffect(() => {
@@ -25,14 +25,14 @@ const ValidatedLoginForm = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     useEffect(() => {
-        dispatch(loadingProfile())
-            .then((res) => {
-                if (res === true) {
-                    history('/favorites');
-                }
-                if (res === 500) {
-                }
-            });
+        // dispatch(loadingProfile())
+        //     .then((res) => {
+        //         if (res === true) {
+        //             history('/favorites');
+        //         }
+        //         if (res === 500) {
+        //         }
+        //     });
     }, [])
     return (
 

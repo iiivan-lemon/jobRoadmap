@@ -11,6 +11,7 @@ import { getFavs } from '../../models/favs/favsSlice'
 import { loadState } from '../../utils/utils'
 import { Avatar } from '@mui/material'
 import { loadingProfile } from '../../models/user/userActions'
+import { useSelector } from 'react-redux'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -23,7 +24,8 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
-  const { isAuth } = useAppSelector(state => state.auth)
+  // @ts-expect-error awdawd
+  const authUser = useSelector(x => x?.auth?.user)
   const [favs, setFavs] = useState([])
   const { username } = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
@@ -31,7 +33,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
     void dispatch(getTops())
     void dispatch(loadingProfile())
       .then((res) => {
-        if (res === true) {}
+        if (res === true) { /* empty */ }
         if (res === 500) { /* empty */ }
       })
   }, [])
@@ -112,7 +114,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                       Избранное
                   </span>
                   {/* eslint-disable-next-line multiline-ternary */}
-                  {(isAuth) ? (<><span
+                  {(authUser) ? (<><span
                       className={styles.username}
                       // onClick={() => { goTo('/profile') }}
                   >
