@@ -22,6 +22,10 @@
 
 
 .svgTitle{
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
     cursor: pointer;
     max-inline-size: fit-content;
     animation: pulse 3s linear infinite;
@@ -50,6 +54,11 @@
     transition: scale 0.5s ease;
 }
 .titleNode{
+    font-weight: 600;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
     cursor: pointer;
     box-shadow: 0 0 20px 0px #ffffff59;
     filter: blur(-1px);

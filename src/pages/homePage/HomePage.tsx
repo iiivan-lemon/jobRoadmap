@@ -1,6 +1,7 @@
 import React from 'react'
 import './HomePage.css'
 import './../../App.css'
+import Draggable from 'react-draggable'
 import { PushSpinner } from 'react-spinners-kit'
 import { getDataGraph } from '../../models/dataGraph/dataGraphSlice'
 import { useAppDispatch } from '../../app/hooks'
@@ -140,7 +141,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
                     <GradientGrade width={'14rem'}/></> }
                     <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>
                 </div>
-                <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
+                    <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
                                             </>}
       </div>
 

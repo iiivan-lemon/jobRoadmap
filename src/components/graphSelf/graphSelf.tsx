@@ -111,10 +111,10 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
       // @ts-expect-error sef
       dataCircles.filter(el => el.length).forEach((el, i) => {
         if (!i) {
-          generate(el, 0, 0, 'graph' + i)
+          generate(el, 0, 0, 'graph' + i, i)
           return
         }
-        generate(el, (i - 1) * 600 + 700, (i - 1) * 600 + 700, 'graph' + i)
+        generate(el, (i - 1) * 400 + 700, (i - 1) * 400 + 700, 'graph' + i, i)
       })
       // if (!refMainNode.current?.children.length) {
 
@@ -149,14 +149,16 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
     return (grade.begin <= value && value <= grade.end)
   }
 
-  const generate = function (n, rx, ry, id) {
+  const generate = function (n, rx, ry, id, index) {
     const theta = []
     const setup = function (n, rx, ry, id) {
       const main = document.getElementById(id) as HTMLElement
       const mainHeight = parseInt(window.getComputedStyle(main).height.slice(0, -2))
       const circleArray: any[] = []
       for (let i = 0; i < n.length; i++) {
-        // const c = <div></div>
+        if (!index) {
+          n[i].professionalism = 0
+        }
         const circle = document.createElement('div')
         circle.className = 'svgTitle circle number' + i
         circle.before('')
@@ -183,8 +185,8 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
         // circleArray[i].style.backgroundImage = `url("data:image/svg+xml;charset=utf-8,${encodeURIComponent(newSvg)}")`
         const styles = {
           circle: {
-            height: 500 + 'px',
-            width: 500 + 'px',
+            height: 500 / (index + 1) + 'px',
+            width: 500 / (index + 1) + 'px',
             fill: isHard ? (pSBC(0, setNodeGradient(coloration, n[i].professionalism))) : '#6771e8'
           } as CSSObject
         }

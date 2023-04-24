@@ -36,6 +36,7 @@ export const ProfileUser = () => {
     const dispatch = useDispatch();
     const { user } = useAppSelector(state => state)
     useEffect(() => {
+
         document.body.style.overflow = 'hidden'
         document.getElementById('header')?.classList.remove('headerFix')
 
@@ -43,11 +44,11 @@ export const ProfileUser = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     useEffect(() => {
-        if (!isAuth) history('/login')
+        if (!isAuth) history('/')
     },[isAuth])
     const [avatar, setAvatar] = React.useState(user.avatar)
     const subImage = (e) => {
-        setAvatar(e.target.files[0] && URL.createObjectURL(e.target.files[0]))
+        setAvatar(e.target.files[0])
     }
 
     const submit =  async (values) => {
@@ -70,7 +71,7 @@ export const ProfileUser = () => {
                         <input accept="image/*" className={classes.input} onChange={subImage} id="icon-button-file" type="file" />
                         <label htmlFor="icon-button-file">
                             <IconButton color="primary" aria-label="upload picture" component="span">
-                                <Avatar alt="https://www.w3schools.com/howto/img_avatar.png" src={avatar} className={classes.large} />
+                                <Avatar alt="https://www.w3schools.com/howto/img_avatar.png" src={URL.createObjectURL(avatar)} className={classes.large} />
                             </IconButton>
                         </label>
                     </div>
