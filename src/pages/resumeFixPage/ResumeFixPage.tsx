@@ -7,7 +7,7 @@ import { getResResume } from '../../models/resume/resumeFixSlice'
 import { useNavigate } from 'react-router-dom'
 import { PushSpinner } from 'react-spinners-kit'
 import './resumeFixPage.css'
-import { debounce, loadState, replaceURLs } from '../../utils/utils'
+import { debounce, loadState, replaceURLs, updTips } from '../../utils/utils'
 import styles from '../newUserPage/NewUserPage.module.css'
 import styleSearch from '../../components/search/Search.module.css'
 import { getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
@@ -99,8 +99,8 @@ export const ResumeFixPage = () => {
         setTips('')
       } else {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // eslint-disable-next-line no-debugger
-        setTips(data.payload.tips_to_learn)
+
+        setTips(updTips(data.payload.tips_to_learn))
       }
     })
   }

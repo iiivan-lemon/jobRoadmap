@@ -239,7 +239,7 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
 
   return (
       <>
-        <Draggable scale={1}>
+        <Draggable scale={1} >
         <div id='zoom' ref={ref}
         >
         {renderContainers(data)}

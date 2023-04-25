@@ -157,7 +157,8 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
                     <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>
                 </div>
                 <div className='jobOptions'><span className='gradeTitleLeg'>найдено: {jobBack}</span><span className='gradeTitleLeg'>всего навыков: {skillCount}</span></div>
-                    <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
+
+                <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
                                             </>}
       </div>
 

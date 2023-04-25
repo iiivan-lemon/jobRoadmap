@@ -5,7 +5,7 @@ import { getNodeProf, selectDataTops, selectListJobs } from '../../models/tops/t
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { PushSpinner } from 'react-spinners-kit'
 import { fetchNodeTips } from '../../models/nodeData/nodeDataService'
-import { loadState } from '../../utils/utils'
+import { loadState, updTips } from '../../utils/utils'
 import { getNodeData } from '../../models/nodeData/nodeDataSlice'
 import Tag from '../Tag/Tag'
 import stylesTag from '../Tag/Tag.module.css'
@@ -40,7 +40,7 @@ const NodeModal = ({ onClose, node, isChecked }): JSX.Element => {
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
-          setTips(data.payload.tips_to_learn)
+          setTips(updTips(data.payload.tips_to_learn))
           setListJobs(data.payload.professions)
         }
       })

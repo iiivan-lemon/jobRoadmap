@@ -20,6 +20,9 @@
     /*background-image: url('../../../src/static/images/node.svg')*/
 }
 
+.svgTitle:active{
+    cursor: grabbing;
+}
 
 .svgTitle{
     -webkit-backface-visibility: hidden;
