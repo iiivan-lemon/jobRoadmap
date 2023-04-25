@@ -213,11 +213,12 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
       }
       // ReactDOM.render(svgsArray, main)
     }
-
+    // eslint-disable-next-line no-debugger
+    debugger
     const frags = 360 / (n.length)
     for (let i = 0; i <= n.length; i++) {
       // @ts-expect-error dffge
-      theta.push((frags / 180) * i * Math.PI)
+      theta.push((frags / 180) * (i) * Math.PI)
     }
     setup(n, rx, ry, id)
   }

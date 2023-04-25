@@ -26,7 +26,6 @@ export const JobsPage = ({ inputData, sendJob }) => {
         if (dataJob.payload.errMessage) {
           setLoad(loadState.error)
         } else {
-          // eslint-disable-next-line no-debugger
           setLoad(loadState.res)
           setData(dataJob.payload)
         }

@@ -72,7 +72,7 @@
 }
 
 .double-range-slider-track {
-    background-color: #f3bc3e;
+    background-color: #0231ab;
     width: 14rem;
     height: 10px;
     border-radius: 50px;
@@ -82,13 +82,13 @@
 
 .double-range-slider-ball {
     background-color: #f5f5f5;
-    outline: #f3bc3e 5px solid;
+    outline: #0231ab 5px solid;
     z-index: 2;
-    width: 25px;
-    height: 25px;
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
     position: absolute;
-    top: -7.5px;
+    top: -4.5px;
 }
 
 .double-range-slider-active {

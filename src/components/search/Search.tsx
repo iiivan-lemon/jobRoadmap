@@ -222,11 +222,16 @@ const Search = ({ changeData, setGrade, isMainSearch }): JSX.Element => {
 
             {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
             </>}
-            <div id='favSvg' style = {{ visibility: (location.pathname === '/search') ? 'visible' : 'hidden' }} className={isFavorite ? '' : styles.favorite}>
-              {<svg
-                  fill={(isFavorite) ? 'white' : 'none'}
+            <div onClick={(e) => {
+              if (isAuth) {
+                e.stopPropagation(); sendFav()
+              }
+            }} id='favSvg' style = {{ visibility: (location.pathname === '/search') ? 'visible' : 'hidden' }} className={isFavorite ? '' : styles.favorite}>
+              { isFavorite
+                ? <svg
+                  fill='white'
                   height="29"
-                  onClick={(e) => { if (isAuth) { e.stopPropagation(); sendFav() } }}
+
                   viewBox="0 0 24 29"
                   width="24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -236,6 +241,20 @@ const Search = ({ changeData, setGrade, isMainSearch }): JSX.Element => {
                     stroke="white"
                     strokeWidth="2"
                   />
+                </svg>
+                : <svg
+                fill='none'
+                height="29"
+
+                viewBox="0 0 24 29"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+                >
+                <path
+                d="M22.2487 1.08846L22.2625 1.09449L22.2764 1.10011C22.5105 1.19437 22.6789 1.33196 22.8079 1.52139C22.9382 1.71256 23 1.91236 23 2.14673V26.8533C23 27.0876 22.9382 27.2874 22.8079 27.4786C22.6789 27.668 22.5105 27.8056 22.2764 27.8999L22.2655 27.9043L22.2546 27.909C22.1652 27.9475 22.0293 27.9808 21.825 27.9808C21.4817 27.9808 21.2093 27.8746 20.9597 27.6444L12.701 19.5274L12 18.8384L11.299 19.5274L3.0397 27.645C2.76741 27.8973 2.49193 28 2.175 28C2.02518 28 1.88685 27.9709 1.75129 27.9115L1.73751 27.9055L1.72355 27.8999C1.48949 27.8056 1.32112 27.668 1.19206 27.4786C1.06182 27.2874 1 27.0876 1 26.8533V2.14673C1 1.91236 1.06182 1.71256 1.19206 1.52139C1.32112 1.33196 1.48949 1.19437 1.72355 1.10011L1.73751 1.09449L1.75129 1.08846C1.88685 1.02907 2.02518 1 2.175 1H21.825C21.9748 1 22.1132 1.02907 22.2487 1.08846Z"
+                stroke="white"
+                strokeWidth="2"
+                />
                 </svg>
 
               }

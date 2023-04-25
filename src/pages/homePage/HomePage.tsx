@@ -14,6 +14,7 @@ import { loadState } from '../../utils/utils'
 import { getFinished }
   from '../../models/check/checkNodeSlice'
 import { ErrorModal } from '../../components/errorModal/errorModal'
+import { generateGraph } from '../../components/bubbleChart/graphChart'
 
 const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const nav = useNavigate()
@@ -28,8 +29,9 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     if (!data.length) {
       return []
     }
-    return (data.filter((el:
-    { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
+    return data
+    // return (data.filter((el:
+    // { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
   }
 
   const dispatch = useAppDispatch()
@@ -55,7 +57,6 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
       }
     )
       .catch(() => {
-        // eslint-disable-next-line no-debugger
         setLoad(loadState.error)
       })
     void dispatch(getFinished(inputData)).then(data => {
@@ -68,6 +69,12 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     })
   }, [inputData])
 
+  // React.useEffect(() => {
+  //   if (data.length) {
+  //     generateGraph(data)
+  //   }
+  // }, [data])
+
   React.useEffect(() => {
     void dispatch(getFinished(inputData)).then(data => {
       if (!data.payload || !Array.isArray(data.payload)) {
@@ -77,6 +84,9 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
         setFinished(data.payload)
       }
     })
+    if (!isHard) {
+      setGrade({ begin: 0, end: 3 })
+    }
   }, [isHard])
   const [
     loading,
@@ -94,6 +104,14 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   React.useEffect(() => {
     setGrade(headerGrade)
   }, [headerGrade])
+
+  const renderRangeSlider = () => {
+    return <RangeSlider onChange={(e) => {
+      // eslint-disable-next-line no-debugger
+      debugger
+      setGrade({ begin: e.minIndex, end: e.maxIndex })
+    }} value={[0, 1, 2, 3]}></RangeSlider>
+  }
 
   React.useEffect(() => {
     const fav = document.getElementById('favSvg') as HTMLElement
@@ -150,15 +168,13 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
                   { isHard && <><span className='gradeTitleLeg'>
                   опыт работы
               </span>
-                     <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
-                       setGrade({ begin: e.minIndex, end: +e.maxIndex })
-                     }} value={[0, 1, 2, 3]}></RangeSlider>
+                  {renderRangeSlider()}
                     <GradientGrade width={'14rem'}/></> }
                     <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>
                 </div>
                 <div className='jobOptions'><span className='gradeTitleLeg'>найдено: {jobBack}</span><span className='gradeTitleLeg'>всего навыков: {skillCount}</span></div>
-
-                <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
+                {/* <svg id="graph-chart"/> */}
+                 <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
                                             </>}
       </div>
 
