@@ -12,6 +12,8 @@ import { loadState } from '../../utils/utils'
 import { Avatar } from '@mui/material'
 import { loadingProfile } from '../../models/user/userActions'
 import { useSelector } from 'react-redux'
+import { clearRecommendsTech } from '../../models/recommendTech/recommendTechSlice'
+import { clearRecommends } from '../../models/recommend/recommendSlice'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -21,9 +23,10 @@ interface HeaderProps {
   title?: string
   changeData?: any
   setGrade?: any
+  isMainSearch?: any
 }
 
-const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
+const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch }) => {
   const { isAuth } = useAppSelector(x => x?.auth)
   const [favs, setFavs] = useState([])
   const { user } = useAppSelector(state => state)
@@ -64,11 +67,13 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   const location = useLocation()
   const history = useNavigate()
   React.useEffect(() => {
-    if (location.pathname !== '/search' && location.pathname !== '/searchjob') {
+    if (location.pathname !== ('/search' + (window.location.href).split('/search')) && location.pathname !== '/searchjob') {
       if ((document.getElementById('search') as HTMLInputElement)) {
+        void dispatch(clearRecommends());
         (document.getElementById('search') as HTMLInputElement).value = ''
       }
       if ((document.getElementById('tagSearch') as HTMLInputElement)) {
+        void dispatch(clearRecommendsTech());
         (document.getElementById('tagSearch') as HTMLInputElement).value = ''
       }
     }
@@ -90,6 +95,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                       </span>
                   </span>
                   <Search
+                      isMainSearch={isMainSearch}
                       changeData={changeData}
                       setGrade={setGrade}
                   />

@@ -1,14 +1,15 @@
 import {useNavigate} from "react-router-dom";
 
 const colors = {
-    main: 'rgba(28,136,199,0.76)',
+    main: 'rgba(28,136,199,0.85)',
     others: 'rgba(18,83,121,0.76)'
 };
 import * as d3 from "d3";
 const width = window.innerWidth;
 const height = window.innerHeight;
 import svgNode from './svg-hex.svg'
-export const generateChart = data => {
+export const generateChart = (data, sendJob) => {
+
     const bubble = data => d3.pack()
         .size([width, height])
         .padding(10)(d3.hierarchy({ children: data }).sum(d => d.percent * 100));
@@ -31,10 +32,10 @@ export const generateChart = data => {
         .style('stroke', d => d.data.percent > 60 ? colors.main : colors.others)
         .on('mouseover', function (e, d) {
             // tooltip.select('img').attr('src', d.data.img);
-            tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
-            // tooltip.select('span').attr('class', d.data.category).text(d.data.category);
-            tooltip.style('visibility', 'visible');
-
+            // tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
+            // // tooltip.select('span').attr('class', d.data.category).text(d.data.category);
+            // tooltip.style('visibility', 'visible');
+            d3.select(this).style('cursor', 'pointer');
             d3.select(this).style('stroke', '#FFFFFFFF');
         })
         .on('mousemove', e => tooltip.style('top', `${e.pageY - 100}px`)
@@ -43,7 +44,6 @@ export const generateChart = data => {
             d3.select(this).style('stroke', 'none');
             return tooltip.style('visibility', 'hidden');
         })
-        .on('click', (e, d) => {} );
 
     const image = node.append('svg').children = svgNode
     // image.attr('src', svgNode)
@@ -51,13 +51,21 @@ export const generateChart = data => {
         .attr('dy', 2)
         .text(d => (d.data.job_name.length < d.r / 4 ) ? d.data.job_name.substring(0, d.r / 4) : d.data.job_name.substring(0, 0) )
         .on('mouseover', function (e, d) {
+            d3.select(this).style('cursor', 'pointer');
+            d3.select(this).style('fill', 'white')
             // tooltip.select('img').attr('src', d.data.img);
             tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
-            // tooltip.select('span').attr('class', d.data.category).text(d.data.category);
-            tooltip.style('visibility', 'visible');
+            tooltip.select('span').attr('class', d.data.category).text(d.data.category);
         })
         .on('mousemove', e => tooltip.style('top', `${e.pageY - 100}px`)
-            .style('left', `${e.pageX}px`));
+            .style('left', `${e.pageX}px`))
+        .on('click', function(e,d){
+            sendJob({ value: d.data.job_name, isTechSearch: true })
+            })
+        .on('mouseout', function () {
+            d3.select(this).style('fill', 'black')
+
+        })
 
     node.transition()
         .ease(d3.easeExpInOut)

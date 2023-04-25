@@ -54,7 +54,7 @@ export const TagInput = ({ subJob }) => {
   const history = useNavigate()
   const location = useLocation()
   React.useEffect(() => {
-    if (location.pathname !== '/search' && location.pathname !== '/searchjob') {
+    if (location.pathname !== ('/search') && location.pathname !== '/searchjob') {
       setTags([])
     }
   }, [history])

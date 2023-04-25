@@ -9,7 +9,7 @@ import { loadState } from '../../utils/utils'
 import { generateChart } from '../../components/bubbleChart/bubbleChart'
 import Draggable from 'react-draggable'
 import { ErrorModal } from '../../components/errorModal/errorModal'
-export const JobsPage = ({ inputData }) => {
+export const JobsPage = ({ inputData, sendJob }) => {
   const [data, setData] = useState([])
   const dispatch = useAppDispatch()
   const nav = useNavigate()
@@ -61,7 +61,7 @@ export const JobsPage = ({ inputData }) => {
   }, [loading])
 
   const renderBubbles = (data) => {
-    generateChart(data)
+    generateChart(data, sendJob)
   }
 
   const [zoom, setZoom] = React.useState(1)

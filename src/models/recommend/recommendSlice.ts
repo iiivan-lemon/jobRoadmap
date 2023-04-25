@@ -37,6 +37,13 @@ export const getRecommends = createAsyncThunk(
   }
 )
 
+export const clearRecommends = createAsyncThunk(
+  'recommends/fetchRecommend',
+  async () => {
+    return { professions: [] }
+  }
+)
+
 export const RecommendSlice = createSlice({
   name: 'recommends',
   initialState,

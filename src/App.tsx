@@ -52,14 +52,19 @@ function App (): JSX.Element {
     changeInputData
   ] = useState('')
 
+  const [isMainSearch, setIsMainSearch] = React.useState(true)
+
   function change (inputData: { value: string, isTechSearch: boolean }): void {
     // If (inputData.includes('python')) {
     // CoursesPage()
     // // @ts-expect-error errors
     if (inputData.isTechSearch) {
+      setIsMainSearch(true)
       changeInputData(inputData.value)
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       history('/search')
     } else {
+      setIsMainSearch(false)
       changeInputData(inputData.value)
       history('/searchjob')
     }
@@ -77,6 +82,7 @@ function App (): JSX.Element {
   const routes = (
       <React.Fragment>
           <Header
+              isMainSearch={isMainSearch}
               changeData={change}
               setGrade={setGrade}
           />
@@ -108,11 +114,12 @@ function App (): JSX.Element {
                       headerGrade={headerGrade}
                       inputData={inputData}
                            />}
-                  path="/search"
+                  path={'/search'}
               />
             <Route
               element={<JobsPage
                 inputData={inputData}
+                sendJob={change}
               />}
               path="/searchJob"
             />

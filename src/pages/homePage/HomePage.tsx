@@ -22,6 +22,8 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const [finishedNodes, setFinished] = React.useState([])
   const [isHard, setIsHard] = React.useState(true)
   const [isInBase, setInBase] = React.useState(1)
+  const [jobBack, setJobBack] = React.useState('')
+  const [skillCount, setSkillCount] = React.useState(0)
   const changeSkills = (data) => {
     if (!data.length) {
       return []
@@ -47,6 +49,8 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
           setLoad(loadState.res)
           setData((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.additional)
           setInBase((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).in_base)
+          setJobBack((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.job_name)
+          setSkillCount((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.technology_number)
         }
       }
     )
@@ -124,7 +128,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
              // if (ref.current) { (ref.current as HTMLElement).style.transformOrigin = xPerc + '%' + ' ' + yPerc + '%' }
 
              //
-             if (event.currentTarget.children[2] as HTMLElement) { (event.currentTarget.children[2] as HTMLElement).style.scale = `${zoom} ` }
+             if (event.currentTarget.children[3] as HTMLElement) { (event.currentTarget.children[3] as HTMLElement).style.scale = `${zoom} ` }
            }
              // } onMouseMove={(e) => {
              //   x = e.clientX - (e.currentTarget as HTMLElement).offsetLeft
@@ -152,6 +156,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
                     <GradientGrade width={'14rem'}/></> }
                     <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>
                 </div>
+                <div className='jobOptions'><span className='gradeTitleLeg'>найдено: {jobBack}</span><span className='gradeTitleLeg'>всего навыков: {skillCount}</span></div>
                     <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
                                             </>}
       </div>

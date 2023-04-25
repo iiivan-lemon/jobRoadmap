@@ -21,7 +21,7 @@ import { useLocation } from 'react-router-dom'
  * }
  */
 
-const Search = ({ changeData, setGrade }): JSX.Element => {
+const Search = ({ changeData, setGrade, isMainSearch }): JSX.Element => {
   const dispatch = useAppDispatch()
   const { isAuth } = useAppSelector(state => state.auth)
 
@@ -50,6 +50,10 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
     isTechSearch,
     setSearch
   ] = useState(true)
+
+  React.useEffect(() => {
+    setSearch(isMainSearch)
+  }, [isMainSearch])
 
   const sendFav = () => {
     if ((document.getElementById('search') as HTMLInputElement)?.value !== '') {
