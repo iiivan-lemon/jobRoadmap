@@ -164,8 +164,8 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
         circle.before('')
         circleArray.push(circle)
 
-        circleArray[i].posx = Math.round(rx * (Math.cos(theta[i]))) + 'px'
-        circleArray[i].posy = Math.round(ry * (Math.sin(theta[i]))) + 'px'
+        circleArray[i].posx = Math.round(rx * (Math.cos(theta[i] /* + Math.random() * 0.1 */))) + 'px'
+        circleArray[i].posy = Math.round(ry * (Math.sin(theta[i] /* + Math.random() * 0.1 */))) + 'px'
         circleArray[i].style.filter = !(filterGrade(n[i].professionalism)) ? 'brightness(0.2) grayscale(1) ' : ''
         circleArray[i].style.position = 'absolute'
         circleArray[i].style.width = n[i].distance * 900 * (i + 1) + 'px'
@@ -214,7 +214,7 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
       // ReactDOM.render(svgsArray, main)
     }
 
-    const frags = 360 / n.length
+    const frags = 360 / (n.length)
     for (let i = 0; i <= n.length; i++) {
       // @ts-expect-error dffge
       theta.push((frags / 180) * i * Math.PI)

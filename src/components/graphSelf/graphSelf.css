@@ -62,14 +62,26 @@
     cursor: pointer;
     box-shadow: 0 0 20px 0px #ffffff59;
     filter: blur(-1px);
-    width: min-content;
+    max-width: 18vw;
     top: 0;
     background-color: #1B1B1B;
     color: white;
     left: 0;
-    font-size: 4rem;
+    font-size: 3.5vw;
     padding: 1rem;
     border-radius: 4rem;
+    text-align: -webkit-center;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.svgTitle:hover > .titleNode{
+    max-width: 30vw;
+    overflow-x: visible;
+    /* text-overflow: clip; */
+    white-space: break-spaces;
 }
 
 

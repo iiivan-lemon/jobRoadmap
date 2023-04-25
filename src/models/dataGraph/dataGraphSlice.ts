@@ -33,7 +33,7 @@ export const getDataGraph = createAsyncThunk(
     // return data.additional
     // eslint-disable-next-line no-debugger
     // return { errMessage: 'server error' }
-    return ((response && !checkStatus(response.status)) ? response.data.position_data.additional : { errMessage: checkStatus(response.status) })
+    return ((response && !checkStatus(response.status)) ? { position_data: response.data.position_data, in_base: +response.data.in_base } : { errMessage: checkStatus(response.status) })
     // if (response.position_data.detail) {
     //   return { technology_name: input, distance: 1, professionalism: 0 }
     // }

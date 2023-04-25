@@ -21,9 +21,11 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
   const [finishedNodes, setFinished] = React.useState([])
   const [isHard, setIsHard] = React.useState(true)
-
+  const [isInBase, setInBase] = React.useState(1)
   const changeSkills = (data) => {
-    // eslint-disable-next-line no-debugger
+    if (!data.length) {
+      return []
+    }
     return (data.filter((el:
     { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
   }
@@ -35,14 +37,16 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     }
 
     setLoad(loadState.load)
+
     void dispatch(getDataGraph(inputData)).then(
-      dataJob => {
-        if (dataJob.payload.errMessage) {
-          setErrMessage(dataJob.payload.errMessage)
+      (dataJob) => {
+        if ((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).errMessage) {
+          setErrMessage((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).errMessage)
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
-          setData(dataJob.payload)
+          setData((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.additional)
+          setInBase((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).in_base)
         }
       }
     )
@@ -86,6 +90,13 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   React.useEffect(() => {
     setGrade(headerGrade)
   }, [headerGrade])
+
+  React.useEffect(() => {
+    const fav = document.getElementById('favSvg') as HTMLElement
+    if (fav) {
+      fav.style.visibility = isInBase ? 'visible' : 'hidden'
+    }
+  }, [isInBase])
 
   const [zoom, setZoom] = React.useState(1)
   const zoomOptions = {

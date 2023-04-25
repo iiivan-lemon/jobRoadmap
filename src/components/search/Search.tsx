@@ -218,7 +218,7 @@ const Search = ({ changeData, setGrade }): JSX.Element => {
 
             {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
             </>}
-            <div style = {{ visibility: (location.pathname === '/search') ? 'visible' : 'hidden' }} className={isFavorite ? '' : styles.favorite}>
+            <div id='favSvg' style = {{ visibility: (location.pathname === '/search') ? 'visible' : 'hidden' }} className={isFavorite ? '' : styles.favorite}>
               {<svg
                   fill={(isFavorite) ? 'white' : 'none'}
                   height="29"

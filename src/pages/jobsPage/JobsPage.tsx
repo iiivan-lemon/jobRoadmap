@@ -26,6 +26,7 @@ export const JobsPage = ({ inputData }) => {
         if (dataJob.payload.errMessage) {
           setLoad(loadState.error)
         } else {
+          // eslint-disable-next-line no-debugger
           setLoad(loadState.res)
           setData(dataJob.payload)
         }
@@ -53,7 +54,9 @@ export const JobsPage = ({ inputData }) => {
 
   React.useEffect(() => {
     if (loading === loadState.res) {
-      renderBubbles(data)
+      if (data.length) {
+        renderBubbles(data)
+      } else { setErrMessage('по вашим навыкам профессии не найдены') }
     }
   }, [loading])
 
@@ -104,6 +107,7 @@ export const JobsPage = ({ inputData }) => {
                   <span></span>
               </div>
           </div>
+        {!data.length && <ErrorModal message={errMessage}/>}
       </>
       }
       </>
