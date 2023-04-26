@@ -116,9 +116,11 @@ color: white;
 }
 
 .tagToLearn{
-margin-block: 0.5rem;
-display: flex;
-flex-direction: row;
+    row-gap: 1rem;
+    margin-block: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .submit[disabled]{

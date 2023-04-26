@@ -1,5 +1,5 @@
 .startBlock{
-    height: 100vh;
+    height: 105vh;
     display: flex;
     flex-direction: row;
     background-image: url("../../static/images/back-pattern-home.png"), linear-gradient(141.03deg, #3A3A3A -0.42%, #000000 30.16%);;
@@ -152,12 +152,15 @@
 
 @keyframes pulse {
     0% {
+        fill: #1f51d2;
         transform: scale(1, 1);
     }
     50% {
+        fill: #92a4d5;
         transform: scale(1.1, 1.1);
     }
     100% {
+        fill: #1f51d2;
         transform: scale(1, 1);
     }
 }
