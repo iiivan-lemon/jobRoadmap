@@ -7,7 +7,7 @@ import './Search.module.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getTops } from '../../models/tops/topsSlice'
 import { getFavs, setFavs, setUnFavs } from '../../models/favs/favsSlice'
-import { getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
+import { clearRecommends, getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
 import { selectGrade } from '../../models/gradeFilter/gradeSlice'
 import { debounce, loadState } from '../../utils/utils'
 import { TagInput } from '../tagInput/TagInput'
@@ -83,6 +83,7 @@ const Search = ({ changeData, setGrade, isMainSearch }): JSX.Element => {
   }
   function sub (event: any): void {
     event?.preventDefault()
+    void dispatch(clearRecommends())
     if (changeData != null) {
       const { value } = document.getElementById('search') as HTMLInputElement
       changeData({ value, isTechSearch })
@@ -192,7 +193,7 @@ const Search = ({ changeData, setGrade, isMainSearch }): JSX.Element => {
             {isTechSearch && <>
               <form
                   className={styles.formSearch}
-                  // onSubmit={sub}
+                  onSubmit={sub}
               >
                   <input
                       ref={refSearch}
