@@ -19,10 +19,11 @@ export const TagInput = ({ subJob }) => {
   }, [recommends])
   const renderRecommends = (recommends) => {
     if (recommends.techs.length) {
-      return recommends.techs.map((el) =>
+      const updRec = [...new Set(recommends.techs.map(el => el.toLowerCase()))] as string[]
+      return updRec.map((el: string) => (
         <div className={styles.titleRecommend} onClick={ (e) => {
           takeRecommend(el)
-        }}>{el}</div>)
+        }}>{el}</div>))
     }
   }
   const sendSearchValue = (e) => {
