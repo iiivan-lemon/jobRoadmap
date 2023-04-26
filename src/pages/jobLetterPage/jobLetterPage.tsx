@@ -36,7 +36,7 @@ export const JobLetterPage = () => {
       setSelectedUrl(null)
     } else {
       const url = (new URL(event.target.value))
-      if (!~url.pathname.indexOf('vacancy') || url.hostname.indexOf('hh.ru')) {
+      if (!url.origin.includes('hh.ru')) {
         setSelectedUrl(null)
         return
       }

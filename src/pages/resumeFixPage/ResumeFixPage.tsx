@@ -10,7 +10,7 @@ import './resumeFixPage.css'
 import { debounce, loadState, replaceURLs, updTips } from '../../utils/utils'
 import styles from '../newUserPage/NewUserPage.module.css'
 import styleSearch from '../../components/search/Search.module.css'
-import { getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
+import { clearRecommends, getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
 import { getNodeProf } from '../../models/tops/topsSlice'
 import Tag from '../../components/Tag/Tag'
 import stylesTag from '../../components/Tag/Tag.module.css'
@@ -52,13 +52,14 @@ export const ResumeFixPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    void dispatch(clearRecommends())
     // eslint-disable-next-line no-debugger
     const formData = new FormData()
     // @ts-expect-error qwer
     formData.append('file', selectedFile)
     try {
       setLoad(loadState.load)
-      void dispatch(getResResume({ file: formData.get('file'), role: selectedJob, n_tech: 8 }))
+      void dispatch(getResResume({ file: formData.get('file'), role: selectedJob, n_tech: 10 }))
         .then(data => {
           // eslint-disable-next-line no-debugger
           if (data.payload.errMessage) {
@@ -67,12 +68,21 @@ export const ResumeFixPage = () => {
           } else {
             setLoad(loadState.res)
             setData(data.payload)
-            setToLearn(data.payload[0]['to learn'].map(el => <Tag
-                                                                  setTitleTag={getTips}
-                                                                  className={
-                                                                    stylesTag.profTag}
-                                                                  id='1'
-                                                                  title={{ profession: el }} />))
+            if (data.payload[0].to_learn) {
+              setToLearn(data.payload[0].to_learn.map(el => <Tag
+                setTitleTag={getTips}
+                className={
+                  stylesTag.profTag}
+                id='1'
+                title={{ profession: el }} />))
+            } else if (data.payload[0]['to learn']) {
+              setToLearn(data.payload[0]['to learn'].map(el => <Tag
+                setTitleTag={getTips}
+                className={
+                  stylesTag.profTag}
+                id='1'
+                title={{ profession: el }} />))
+            }
           }
         }).catch(() => { setLoad(loadState.error) })
     } catch (error) {
@@ -223,8 +233,8 @@ export const ResumeFixPage = () => {
           size={30}
         />
       </div>
-      {(loading === loadState.res) &&
-      <div className='blurBlock resResumeBlock'>
+      {(loading === loadState.res && toLearn) &&
+        <div className='blurBlock resResumeBlock'>
         <div style={{ padding: '1rem' }} id='toLearn'><span>Что Вам стоит изучить: </span><div className='tagToLearn'>{toLearn}</div>
           </div>
             <>
@@ -232,6 +242,7 @@ export const ResumeFixPage = () => {
             </>
 
       </div>
+
       }
     </div>
   )

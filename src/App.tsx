@@ -37,7 +37,7 @@ import { loadState } from './utils/utils'
 import ValidatedLoginForm from './authApp/login/Formik'
 import ValidatedRegForm from './authApp/register/FormikReg'
 import { ProfileUser } from './authApp/profile/profileUser'
-
+import { ReactComponent as NodeSvg } from '../src/static/images/svg-hex.svg'
 /*
  * Import { PrivateRoute } from './components/privateRoute/PrivateRoute'
  * import { history } from './authApp/_helpers'
@@ -166,7 +166,7 @@ function App (): JSX.Element {
    */
   return (
       <React.Fragment>
-          {routes}
+          {(window.innerWidth > 1000) ? routes : <><div className='mockPhone'>{'Мобильная версия скоро будет доступна\n'}</div><NodeSvg className='firstNode' /></>}
       </React.Fragment>
   )
 }
