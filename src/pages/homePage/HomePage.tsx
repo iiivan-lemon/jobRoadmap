@@ -29,9 +29,9 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     if (!data.length) {
       return []
     }
-    return data
-    // return (data.filter((el:
-    // { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
+    // return data
+    return (data.filter((el:
+    { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
   }
 
   const dispatch = useAppDispatch()

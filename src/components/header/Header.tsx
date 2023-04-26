@@ -67,7 +67,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch }) 
   const location = useLocation()
   const history = useNavigate()
   React.useEffect(() => {
-    if (location.pathname !== ('/search' + (window.location.href).split('/search')) && location.pathname !== '/searchjob') {
+    if (location.pathname !== ('/search') && location.pathname !== '/searchjob') {
       if ((document.getElementById('search') as HTMLInputElement)) {
         void dispatch(clearRecommends());
         (document.getElementById('search') as HTMLInputElement).value = ''

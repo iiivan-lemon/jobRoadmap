@@ -8,6 +8,8 @@ export const sendUrl = createAsyncThunk(
   async (input: string) => {
     const response = await checkUrl(input)
     console.log(response.data)
+    // eslint-disable-next-line no-debugger
+    debugger
     if (response.status === 200) {
       return response.data
     }

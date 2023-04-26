@@ -23,6 +23,7 @@
 }
 
 .favorite{
+    cursor: pointer;
     margin-inline: 2rem;
     /*visibility: visible;*/
 }
