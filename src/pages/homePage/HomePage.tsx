@@ -107,8 +107,6 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
 
   const renderRangeSlider = () => {
     return <RangeSlider onChange={(e) => {
-      // eslint-disable-next-line no-debugger
-      debugger
       setGrade({ begin: e.minIndex, end: e.maxIndex })
     }} value={[0, 1, 2, 3]}></RangeSlider>
   }
