@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom'
 import styled, { type CSSObject } from 'styled-components'
 import NodeModal from '../nodeModal/NodeModal'
 
-export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
+export const GraphSelf = ({ isHard, data, grade, finishedNodes, sendJob }) => {
   const [finished, setFinished] = React.useState(finishedNodes)
   // React.useEffect(() => {
   //   setFinished(new Set(finishedNodes))
@@ -131,6 +131,7 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
 
   React.useEffect(() => {
     setContainersRender(true)
+    if (document.getElementById('zoom') as HTMLElement) { (document.getElementById('zoom') as HTMLElement).style.scale = '0.3' }
   }, [])
 
   function renderContainers (data) {
@@ -164,8 +165,9 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
         circle.before('')
         circleArray.push(circle)
 
-        circleArray[i].posx = Math.round(rx * (Math.cos(theta[i] /* + Math.random() * 0.1 */))) + 'px'
-        circleArray[i].posy = Math.round(ry * (Math.sin(theta[i] /* + Math.random() * 0.1 */))) + 'px'
+        circleArray[i].posx = Math.round(rx * (Math.cos(theta[i] + 1.57))) + 'px'
+
+        circleArray[i].posy = Math.round(ry * (Math.sin(theta[i] + 1.57))) + 'px'
         circleArray[i].style.filter = !(filterGrade(n[i].professionalism)) ? 'brightness(0.2) grayscale(1) ' : ''
         circleArray[i].style.position = 'absolute'
         circleArray[i].style.width = n[i].distance * 900 * (i + 1) + 'px'
@@ -213,10 +215,8 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
       }
       // ReactDOM.render(svgsArray, main)
     }
-    // eslint-disable-next-line no-debugger
-    debugger
     const frags = 360 / (n.length)
-    for (let i = 0; i <= n.length; i++) {
+    for (let i = 0; i <= (n.length); i++) {
       // @ts-expect-error dffge
       theta.push((frags / 180) * (i) * Math.PI)
     }
@@ -246,6 +246,7 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
         {renderContainers(data)}
         </div></Draggable>
         {(isModalOpen) && <NodeModal
+            sendJob={sendJob}
             isChecked={isCheckNode}
             node={isModalOpen}
             onClose={() => {

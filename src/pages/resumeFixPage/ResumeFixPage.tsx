@@ -138,6 +138,37 @@ export const ResumeFixPage = () => {
     }
   }
 
+  const textToLink = () => {
+    // if (textURls) {
+    //   return textURls.tips
+    // }
+    return <Linkify options={{ render: renderLink }}>{tips}</Linkify>
+  }
+
+  React.useEffect(() => {
+    checkLinks()
+  }, [textToLink])
+
+  const checkLinks = () => {
+    const tipsHTML = document.getElementById('tips') as HTMLElement
+    if (tipsHTML) {
+      const listLinks = tipsHTML.getElementsByTagName('a');
+      [].forEach.call(listLinks, function (el: HTMLAnchorElement) {
+        if (el) {
+          void dispatch(sendUrl(el.href)).then(data => {
+            if (data.payload) {
+              if (data.payload.is_work) {
+                el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#5452ff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Link"> <path id="Vector" d="M9.1718 14.8288L14.8287 9.17192M7.05086 11.293L5.63664 12.7072C4.07455 14.2693 4.07409 16.8022 5.63619 18.3643C7.19829 19.9264 9.7317 19.9259 11.2938 18.3638L12.7065 16.9498M11.2929 7.05L12.7071 5.63579C14.2692 4.07369 16.8016 4.07397 18.3637 5.63607C19.9258 7.19816 19.9257 9.73085 18.3636 11.2929L16.9501 12.7071" stroke="#0400ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>'
+              } else { el.innerHTML = '' }
+            }
+          }
+          )
+        }
+      })
+    }
+    // void dispatch(sendText(tipsHTML?.innerHTML))
+  }
+
   const renderLink = ({ attributes, content }) => {
     const urlPattern = /^(https?:\/\/)/
     if (!urlPattern.test(content as string)) {
@@ -145,16 +176,18 @@ export const ResumeFixPage = () => {
     }
     const { href, ...props } = attributes
     let updHref = <></>
-    void dispatch(sendUrl(href)).then(data => {
-      if (data.payload) {
-        if (!data.payload.is_work) {
-          updHref = <></>
-        } else {
-          updHref = (<a href={href} {...props}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#5452ff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Link"> <path id="Vector" d="M9.1718 14.8288L14.8287 9.17192M7.05086 11.293L5.63664 12.7072C4.07455 14.2693 4.07409 16.8022 5.63619 18.3643C7.19829 19.9264 9.7317 19.9259 11.2938 18.3638L12.7065 16.9498M11.2929 7.05L12.7071 5.63579C14.2692 4.07369 16.8016 4.07397 18.3637 5.63607C19.9258 7.19816 19.9257 9.73085 18.3636 11.2929L16.9501 12.7071" stroke="#0400ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></a>)
-        }
-      }
-    }
-    )
+    // void dispatch(sendUrl(href)).then(data => {
+    //   if (data.payload) {
+    //     if (!data.payload.is_work) {
+    //       updHref = <></>
+    //     } else {
+    //       updHref = (<a href={href} {...props}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#5452ff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Link"> <path id="Vector" d="M9.1718 14.8288L14.8287 9.17192M7.05086 11.293L5.63664 12.7072C4.07455 14.2693 4.07409 16.8022 5.63619 18.3643C7.19829 19.9264 9.7317 19.9259 11.2938 18.3638L12.7065 16.9498M11.2929 7.05L12.7071 5.63579C14.2692 4.07369 16.8016 4.07397 18.3637 5.63607C19.9258 7.19816 19.9257 9.73085 18.3636 11.2929L16.9501 12.7071" stroke="#0400ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></a>)
+    //     }
+    //   }
+    // }
+    // )
+    updHref = (<a href={href} {...props}></a>)
+
     return updHref
   }
 
@@ -195,7 +228,7 @@ export const ResumeFixPage = () => {
         <div style={{ padding: '1rem' }} id='toLearn'><span>Что Вам стоит изучить: </span><div className='tagToLearn'>{toLearn}</div>
           </div>
             <>
-                <div className='tipsText' style={{ visibility: (tips) ? 'visible' : 'hidden' }}><Linkify options={{ render: renderLink }}>{tips}</Linkify></div>
+                <div id='tips' className='tipsText' style={{ visibility: (tips) ? 'visible' : 'hidden' }}>{textToLink()}</div>
             </>
 
       </div>

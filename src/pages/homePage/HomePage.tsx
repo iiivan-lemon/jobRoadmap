@@ -16,7 +16,7 @@ import { getFinished }
 import { ErrorModal } from '../../components/errorModal/errorModal'
 import { generateGraph } from '../../components/bubbleChart/graphChart'
 
-const HomePage = ({ inputData, headerGrade }): JSX.Element => {
+const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   const nav = useNavigate()
   const [data, setData] = React.useState([])
   const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
@@ -25,7 +25,7 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
   const [isInBase, setInBase] = React.useState(1)
   const [jobBack, setJobBack] = React.useState('')
   const [skillCount, setSkillCount] = React.useState(0)
-  const changeSkills = (data) => {
+  const changeSkills = (data, isHard) => {
     if (!data.length) {
       return []
     }
@@ -69,11 +69,11 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     })
   }, [inputData])
 
-  // React.useEffect(() => {
-  //   if (data.length) {
-  //     generateGraph(data)
-  //   }
-  // }, [data])
+  React.useEffect(() => {
+    if (data.length) {
+      generateGraph(changeSkills(data, isHard))
+    }
+  }, [data, isHard])
 
   React.useEffect(() => {
     void dispatch(getFinished(inputData)).then(data => {
@@ -118,10 +118,10 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
     }
   }, [isInBase])
 
-  const [zoom, setZoom] = React.useState(1)
+  const [zoom, setZoom] = React.useState(0.3)
   const zoomOptions = {
     min: 0.1,
-    max: 1.5,
+    max: 1.2,
     step: 0.05
   }
 
@@ -168,11 +168,20 @@ const HomePage = ({ inputData, headerGrade }): JSX.Element => {
               </span>
                   {renderRangeSlider()}
                     <GradientGrade width={'14rem'}/></> }
-                    <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>
+                  { !!changeSkills(data, false).length && <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>}
                 </div>
                 <div className='jobOptions'><span className='gradeTitleLeg'>найдено: {jobBack}</span><span className='gradeTitleLeg'>всего навыков: {skillCount}</span></div>
+                {/* <Draggable scale={1} > */}
                 {/* <svg id="graph-chart"/> */}
-                 <GraphSelf isHard={isHard} data={changeSkills(data)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
+                {/* </Draggable> */}
+                {/* <div className='tooltip'> */}
+                {/*    <img alt=""/> */}
+                {/*    <div> */}
+                {/*        <a></a> */}
+                {/*        <span></span> */}
+                {/*    </div> */}
+                {/* </div> */}
+                  <GraphSelf sendJob={sendJob} isHard={isHard} data={changeSkills(data, isHard)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf>
                                             </>}
       </div>
 

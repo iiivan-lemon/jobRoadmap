@@ -45,7 +45,6 @@ export const generateChart = (data, sendJob) => {
             // return tooltip.style('visibility', 'hidden');
         })
 
-    const image = node.append('svg').children = svgNode
     // image.attr('src', svgNode)
     const label = node.append('text')
         .attr('dy', 2)

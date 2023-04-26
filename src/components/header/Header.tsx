@@ -24,9 +24,10 @@ interface HeaderProps {
   changeData?: any
   setGrade?: any
   isMainSearch?: any
+  takeInput?: any
 }
 
-const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch }) => {
+const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, takeInput }) => {
   const { isAuth } = useAppSelector(x => x?.auth)
   const [favs, setFavs] = useState([])
   const { user } = useAppSelector(state => state)
@@ -66,6 +67,12 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch }) 
   }
   const location = useLocation()
   const history = useNavigate()
+
+  React.useEffect(() => {
+    if ((document.getElementById('search') as HTMLInputElement)) {
+      (document.getElementById('search') as HTMLInputElement).value = takeInput
+    }
+  }, [takeInput])
   React.useEffect(() => {
     if (location.pathname !== ('/search') && location.pathname !== '/searchjob') {
       if ((document.getElementById('search') as HTMLInputElement)) {

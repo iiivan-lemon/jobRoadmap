@@ -24,6 +24,10 @@
     cursor: grabbing;
 }
 
+.svgAni{
+    animation: pulse 3s linear infinite;
+}
+
 .svgTitle{
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
@@ -65,16 +69,16 @@
     cursor: pointer;
     box-shadow: 0 0 20px 0px #ffffff59;
     filter: blur(-1px);
-    max-width: 18vw;
+    /* max-width: 18vw; */
     top: 0;
     background-color: #1B1B1B;
     color: white;
     left: 0;
-    font-size: 3.5vw;
+    font-size: 4vw;
     padding: 1rem;
     border-radius: 4rem;
     text-align: -webkit-center;
-    white-space: nowrap;
+    white-space: break-spaces;
     overflow-x: hidden;
     text-overflow: ellipsis;
 }

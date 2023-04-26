@@ -78,6 +78,8 @@
     text-decoration: none;
 }
 .profTitle{
+    margin-block-end: 1rem;
+    cursor: pointer;
 color:white;
 }
 

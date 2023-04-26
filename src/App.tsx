@@ -53,12 +53,14 @@ function App (): JSX.Element {
   ] = useState('')
 
   const [isMainSearch, setIsMainSearch] = React.useState(true)
-
+  const [takeInput, setTakeInput] = React.useState('')
   function change (inputData: { value: string, isTechSearch: boolean }): void {
     // If (inputData.includes('python')) {
     // CoursesPage()
     // // @ts-expect-error errors
+
     if (inputData.isTechSearch) {
+      setTakeInput(inputData.value)
       setIsMainSearch(true)
       changeInputData(inputData.value)
       // eslint-disable-next-line @typescript-eslint/no-base-to-string
@@ -82,6 +84,7 @@ function App (): JSX.Element {
   const routes = (
       <React.Fragment>
           <Header
+              takeInput={takeInput}
               isMainSearch={isMainSearch}
               changeData={change}
               setGrade={setGrade}
@@ -111,6 +114,7 @@ function App (): JSX.Element {
               />
               <Route
                   element={<HomePage
+                      sendJob={change}
                       headerGrade={headerGrade}
                       inputData={inputData}
                            />}
