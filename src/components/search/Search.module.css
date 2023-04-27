@@ -24,7 +24,7 @@
 
 .favorite{
     cursor: pointer;
-    margin-inline: 2rem;
+    margin-inline: 1rem;
     /*visibility: visible;*/
 }
 
@@ -107,4 +107,11 @@ top: 3.4rem;
     .searchHeader{
         width: 26vw;
     }
+}
+
+@media (max-width: 1500px) and (min-width: 900px) {
+    .searchHeader{
+        width: 18rem;
+    }
+
 }

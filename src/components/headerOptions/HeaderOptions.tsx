@@ -61,39 +61,6 @@ const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
   }
 
   return ReactDOM.createPortal(<>
-      <svg
-          className={stylesOps.spaceLine}
-          fill="none"
-          height="1"
-          viewBox="0 0 1418 1"
-          width="1418"
-          xmlns="http://www.w3.org/2000/svg"
-      >
-          <rect
-              fill="url(#paint0_linear_120_572)"
-              height="1"
-              transform="rotate(-180 1418 1)"
-              width="1418"
-              x="1418"
-              y="1"
-          />
-          <defs>
-              <linearGradient
-                  gradientUnits="userSpaceOnUse"
-                  id="paint0_linear_120_572"
-                  x1="3027.87"
-                  x2="1647.1"
-                  y1="3.01352"
-                  y2="1.40684"
-              >
-                  <stop stopColor="#D9D9D9" />
-                  <stop
-                      offset="1"
-                      stopColor="#1B1B1B"
-                  />
-              </linearGradient>
-          </defs>
-      </svg>
       <div
           className={styles.headerTags}
           ref={ref}
