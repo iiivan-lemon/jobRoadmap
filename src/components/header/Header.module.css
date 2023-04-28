@@ -71,12 +71,13 @@
 
 .headerTags {
     z-index: 10;
-    background: #1B1B1B;
+    background: linear-gradient(180deg, #1B1B1B 1.1%, #0f083a 91.05%);
     position: absolute;
     display: flex;
     padding: 1rem 80px;
     flex-direction: column;
     width: 100vw;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 .logout{
@@ -129,6 +130,11 @@
     }
     .username{
         font-size: 1rem;
+    }
+
+    .title{
+        font-size: 1.4rem;
+        line-height: 1.5rem;
     }
 
 }
