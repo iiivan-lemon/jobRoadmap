@@ -22,7 +22,7 @@ const NewUserPage: FC = () => {
       <React.Fragment>
           <div className={styles.startBlock}>
             <div className={styles.backCircle}></div>
-            <div style={{ top: '48%', left: '64%' }} className={styles.backCircle}></div>
+            <div style={{ top: '29%', left: '64%' }} className={styles.backCircle}></div>
               <div className={styles.description}>
                   <span className={styles.title}>
                       Job Roadmap
