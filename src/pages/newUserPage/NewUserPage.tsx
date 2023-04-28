@@ -21,8 +21,8 @@ const NewUserPage: FC = () => {
   return (
       <React.Fragment>
           <div className={styles.startBlock}>
+            <div className={styles.backCircle}></div>
               <div className={styles.description}>
-                <div className={styles.backCircle}></div>
                   <span className={styles.title}>
                       Job Roadmap
                   </span>
@@ -37,17 +37,9 @@ const NewUserPage: FC = () => {
               </div>
               <div className={styles.description}>
                 <div style={{ top: '22%', left: '35%' }} className={styles.backCircle}></div>
-                <div className={styles.widjet}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div>
-                <div className={styles.widjet} style={{
-                  top: '4rem',
-                  position: 'absolute',
-                  right: '6rem'
-                }}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
-                <div className={styles.widjet} style={{
-                  position: 'absolute',
-                  right: '18rem',
-                  top: '10rem'
-                }}><span className={styles.widjetText}>Анализ резюме</span></div>
+                <div className={`${styles.widjet} ${styles.widjetSkill}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div>
+                <div className={`${styles.widjet} ${styles.widjetLetter}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
+                <div className={`${styles.widjet} ${styles.widjetResume}`}><span className={styles.widjetText}>Анализ резюме</span></div>
                 <svg
                   style={{
                     position: 'absolute',

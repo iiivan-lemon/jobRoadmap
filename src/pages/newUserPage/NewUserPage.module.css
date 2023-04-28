@@ -40,16 +40,14 @@
 .description{
     width: 50%;
     line-height: 2.4rem;
-    width: 50%;
     text-overflow: ellipsis;
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
     align-items: flex-start;
     position: relative;
     padding: 10px;
-    margin: 70px;
+    margin: 5rem 70px;
     display: flex;
     flex-direction: column;
 
@@ -114,10 +112,9 @@
 
 .tag{
     background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #1f51d2;
-    border: 0;
     color: black;
     cursor: pointer;
-    box-shadow: 0 0 0 1px #000000;
+    border: 3px solid rgba(255, 255, 255, 0.24);
     border-radius: 20px;
     box-sizing: border-box;
     transition: 0.5s ease;
@@ -139,7 +136,7 @@
     z-index: 10;
     line-height: 1.2rem;
     text-align: -webkit-center;
-    width: 9rem;
+    width: 10rem;
     padding: 2rem 1rem;
     background: linear-gradient(234.93deg, rgba(0, 0, 0, 0.51) 11.48%, rgba(0, 0, 0, 0) 100%), rgba(91, 94, 172, 0.38);
     border: 3px solid rgba(255, 255, 255, 0.2);
@@ -148,14 +145,31 @@
     border-radius: 30px;
 }
 
+.widjetResume{
+    position: absolute;
+    right: 19rem;
+    top: 10rem;
+}
+
+.widjetSkill{
+
+}
+
+.widjetLetter{
+    top: 4rem;
+    position: absolute;
+    right: 6rem;
+}
+
 
 
 .widjetText{
 
-    font-weight: 400;
-    font-size: 1rem;
+    font-size: 1.2rem;
     text-align: center;
     color: #FFFFFF;
+    font-style: normal;
+    font-weight: 300;
 
 }
 
@@ -183,11 +197,11 @@
 
 .backCircle{
     position: absolute;
-    width: 10rem;
-    height: 10rem;
-    background-color: #090d89bf;
+    width: 12rem;
+    height: 12rem;
+    background-color: rgba(146, 129, 248, 0.3);
     border-radius: 14rem;
-    filter: blur(80px);
+    filter: blur(70px);
     top: 29%;
     left: 18%;
     z-index: 1;
@@ -196,14 +210,43 @@
 @keyframes pulse {
     0% {
         fill: #1f51d2;
-        transform: scale(1, 1);
+        transform: scale(1, 1) translate3d( 0, 0, 0) perspective(1px);
     }
     50% {
         fill: #92a4d5;
-        transform: scale(1.1, 1.1);
+        transform: scale(1.1, 1.1) translate3d( 0, 0, 0) perspective(1px);
     }
     100% {
         fill: #1f51d2;
-        transform: scale(1, 1);
+        transform: scale(1, 1) translate3d( 0, 0, 0) perspective(1px);
     }
+}
+
+
+@media (min-width: 1600px) and (max-width: 2000px) {
+    .widjet{
+        line-height: 1.5rem;
+        width: 15rem;
+    }
+    .widjetText{
+
+        font-size: 1.5rem;
+    }
+
+    .titleDescr{
+        font-size: 1.5rem;
+    }
+
+    .newPageBtn{
+        font-size: 1.5rem;
+    }
+
+    .widjetResume{
+        right: 24rem;
+    }
+
+    .widjetTitle{
+        font-size: 1.4rem;
+    }
+
 }

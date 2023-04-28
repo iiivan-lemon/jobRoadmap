@@ -1,4 +1,5 @@
 .header {
+    overflow-x: clip;
     position: relative;
     z-index: 100;
     display: flex;
