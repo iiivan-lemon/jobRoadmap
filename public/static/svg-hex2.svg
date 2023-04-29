@@ -1,0 +1,9 @@
+<svg fill='#faf754' xmlns="http://www.w3.org/2000/svg" width="512" height="512">
+    <path fill-opacity="0.8" d="M256 40v216L72 144z"/>
+    <path fill-opacity="0.6" d="M256 256 72 368V144z"/>
+    <path fill-opacity="0.4" d="M256 256v216L72 368z"/>
+    <path fill-opacity="1" d="M440 144 256 256V40z"/>
+    <path fill-opacity="0.8" d="M440 144v224L256 256z"/>
+    <path fill-opacity="0.6" d="M440 368 256 472V256z"/>
+<!--    <path fill='grey' d="M256 40 72 144v224l184 104 184-104V144z"/>-->
+</svg>

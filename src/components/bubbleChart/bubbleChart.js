@@ -7,7 +7,6 @@ const colors = {
 import * as d3 from "d3";
 const width = window.innerWidth;
 const height = window.innerHeight;
-import svgNode from './svg-hex.svg'
 export const generateChart = (data, sendJob) => {
 
     const bubble = data => d3.pack()
