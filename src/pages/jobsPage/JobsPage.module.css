@@ -18,8 +18,10 @@
 }
 
 g > text {
+    font-size: 0.8rem;
     text-anchor: middle;
     dominant-baseline: middle;
+    filter: drop-shadow(1px 1px 1px black);
 }
 
 .tooltip {

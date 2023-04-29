@@ -72,7 +72,9 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
 
   React.useEffect(() => {
     if (data.length) {
-      generateGraph(changeSkills(data, isHard).slice(0, 20), clickNode)
+      (isHard)
+        ? generateGraph(changeSkills(data, isHard).slice(0, 20), clickNode, grade)
+        : generateGraph(changeSkills(data, isHard).slice(0, 20), clickNode, { begin: 0, end: 3 })
     }
   }, [data, isHard])
 
@@ -93,6 +95,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     loading,
     setLoad
   ] = React.useState(loadState.base)
+
   const [
     grade,
     setGrade
@@ -105,6 +108,30 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   React.useEffect(() => {
     setGrade(headerGrade)
   }, [headerGrade])
+
+  const refGraph: React.RefObject<SVGSVGElement> | null = React.useRef(null)
+
+  React.useEffect(() => {
+    if (refGraph?.current) {
+      // eslint-disable-next-line no-debugger
+      debugger
+      const list = refGraph.current?.getElementsByTagName('image')
+      const text = refGraph.current?.getElementsByTagName('text')
+      if (list && text && isHard) {
+        [].forEach.call(list, function (el: HTMLElement) {
+          if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
+            el.style.filter = 'none'
+          }
+        });
+        [].forEach.call(text, function (el: HTMLElement) {
+          if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
+            el.style.filter = 'none'
+            el.style.filter = 'drop-shadow(1px 1px 1px black)'
+          }
+        })
+      }
+    }
+  }, [grade])
 
   const renderRangeSlider = () => {
     return <RangeSlider onChange={(e) => {
@@ -194,6 +221,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                 </div>
                 <div className='jobOptions'><span className='gradeTitleLeg'>найдено: {jobBack}</span><span className='gradeTitleLeg'>всего навыков: {skillCount}</span></div>
                 <div onWheel={ (event) => {
+                  event.stopPropagation()
                   // // eslint-disable-next-line no-debugger
                   if ((event.target as HTMLElement).classList.contains('profList')) {
                     return
@@ -207,7 +235,9 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                   if (event.currentTarget.children[0] as HTMLElement) { (event.currentTarget.children[0] as HTMLElement).style.scale = `${zoom} ` }
                 }}>
                 <Draggable scale={1} >
-                 <svg id="graph-chart"/>
+                    <div style={{ position: 'relative', zIndex: '10' }}>
+                 <svg ref={refGraph} id="graph-chart"/>
+                    </div>
                  </Draggable>
                  <div className='tooltip'>
                     <img alt=""/>
@@ -227,6 +257,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
               setIsModalOpen(null)
             }}
         />}
+        <div className={styles.backCircleHome}></div>
       </div>
 
   )

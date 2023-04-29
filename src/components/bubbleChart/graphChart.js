@@ -27,10 +27,13 @@ function processData(data) {
     };
 }
 
-export const generateGraph = (data, showModal) => {
+export const generateGraph = (data, showModal, grade) => {
     const bubble = data => d3.pack()
         .size([width, height])
-        .padding(25)(d3.hierarchy({ children: data }).sum(d => d.distance * 1000));
+        .padding(5)(d3.hierarchy({ children: data.map((el,i) => {
+            el['index'] = i
+                return el
+        })}).sum(d => d.distance * 1000));
 
     if (document.getElementById('graph-chart'))
     document.getElementById('graph-chart').innerHTML = ''
@@ -45,6 +48,7 @@ export const generateGraph = (data, showModal) => {
     const node = svg.selectAll()
         .data(root.children)
         .enter().append('g')
+        .attr("id", d => d.data.professionalism)
         .attr('transform', `translate(${width / 2}, ${height / 2})`)
         .on('mouseover', function (e, d) {
                 d3.select(this).style('cursor', 'pointer');
@@ -59,39 +63,51 @@ export const generateGraph = (data, showModal) => {
             tooltip.style('visibility', 'hidden');
 
         })
-        .on('click', function(e,d){
-            showModal(d.data)
-        })
 
 
-    const circle = node.append('circle')
-        .style('fill', d => d.data.distance > 0.5 ? colors.main : colors.others)
-        .style('filter', d => `drop-shadow(0px 0px 5px ${ d.data.distance > 0.5 ? colors.main : colors.others})`)
-        .style('stroke', d => d.data.distance > 0.5 ? colors.main : colors.others)
-        .on('mouseover', function (e, d) {
-            // tooltip.select('img').attr('src', d.data.img);
-            // tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
-            // // tooltip.select('span').attr('class', d.data.category).text(d.data.category);
-            // tooltip.style('visibility', 'visible');
-            d3.select(this).style('cursor', 'pointer');
-            // d3.select(this).style('stroke', '#FFFFFFFF');
-        })
+
+
 
     node.append("image")
         .attr("class", "svgAni")
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : 'brightness(1)'  )
         .attr('dy', 2)
-        .attr("xlink:href", d => ( d.data.distance === 1000) ? "static/svg-hex0.svg" : "static/svg-hex" + d.data.professionalism  + ".svg" )
+        .attr("id", d => d.data.professionalism)
+        .attr("xlink:href", d => ( d.data.index === 0) ? "static/svg-hex0.svg" : "static/svg-hex" + d.data.professionalism  + ".svg" )
         //     .attr("x", function (d, i) { return -mugDiameter / 2 - mugDiameter * (i % 9); })
         //.attr("y", function (d, i) { return -mugDiameter / 2 - mugDiameter * (i / 9 | 0); })
         .attr("width", d =>  d.data.distance * 100)
         .attr("height", d =>  d.data.distance * 100)
        .attr('x', d => -(d.r/1.5)/2)
         .attr('y', d => -(d.r/1.5)/2)
+        .on('click', function(e,d){
+            showModal(d.data)
+        })
+    let text = node
+        .selectAll("text")
+        .data(d => d)
+        .enter()
+        .append("text")
+        .attr('fill', 'white')
+        .attr("id", d => d.data.professionalism)
+        .on('click', function(e,d){
+            showModal(d.data)
+        })
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : 'drop-shadow(1px 1px 1px black)'  )
     // image.attr('src', svgNode)
-    node.append('text')
-        .style('fill', 'white')
-        // .attr('dy', 2)
-        .text(d => (d.data.technology_name).substring(0, d.r / 2))
+    text.selectAll("tspan.text")
+        .data(d => d.data.technology_name.split('-').join(' ').split(' ').slice(0,3))
+        .enter()
+        .append("tspan")
+        .attr("class", "text")
+        .text(d => d)
+        .attr("x", 20)
+        .attr("dy", 12)
+    // node.append('text')
+    //     .attr("id", d => d.data.professionalism)
+    //     .style('fill', 'white')
+    //     // .attr('dy', 2)
+    //     .text(d => (d.data.technology_name).substring(0, d.r / 2))
 
 
 

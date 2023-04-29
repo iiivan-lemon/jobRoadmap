@@ -26,9 +26,9 @@
     margin: 0.5rem;
     display: flex;
     position: absolute;
-    z-index: 9;
     flex-direction: column;
     align-items: center;
+    z-index: 20;
 }
 
 .jobOptions{
@@ -175,6 +175,10 @@
 
 #graph-chart:active{
     cursor: grabbing;
+}
+
+g > text > tspan {
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 /*# sourceMappingURL=index.css.map */
