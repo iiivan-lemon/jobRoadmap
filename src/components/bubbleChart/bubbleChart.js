@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-
+import styles from './../../pages/jobsPage/JobsPage.module.css'
 const colors = {
     main: 'rgba(28,136,199,0.85)',
     others: 'rgba(18,83,121,0.76)'
@@ -26,8 +26,8 @@ export const generateChart = (data, sendJob) => {
         .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
     const circle = node.append('circle')
-        .style('fill', d => d.data.percent > 60 ? colors.main : colors.others)
-        .style('filter', d => `drop-shadow(0px 0px 5px ${ d.data.percent > 60 ? colors.main : colors.others})`)
+        .style('fill', d => d.data.percent > 40 ? colors.main : colors.others)
+        .style('filter', d => `drop-shadow(0px 0px 5px ${ d.data.percent > 40 ? colors.main : colors.others})`)
         .style('stroke', d => d.data.percent > 60 ? colors.main : colors.others)
         .on('mouseover', function (e, d) {
             // tooltip.select('img').attr('src', d.data.img);
@@ -46,11 +46,11 @@ export const generateChart = (data, sendJob) => {
 
     // image.attr('src', svgNode)
     const label = node.append('text')
+        .attr('class', styles.labelJob)
         .attr('dy', 2)
-        .text(d => d.data.job_name.substring(0, d.r / 4))
+        .text(d => (d.data.job_name.length < ( d.r/ 5)) ? d.data.job_name : (d.data.job_name.substring(0, d.r / 4) + '...'))
         .on('mouseover', function (e, d) {
             d3.select(this).style('cursor', 'pointer');
-            d3.select(this).style('fill', 'white')
             // tooltip.select('img').attr('src', d.data.img);
             tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
             // tooltip.select('span').attr('class', d.data.category).text(d.data.category);
@@ -64,7 +64,6 @@ export const generateChart = (data, sendJob) => {
             })
         .on('mouseout', function () {
             tooltip.style('visibility', 'hidden');
-            d3.select(this).style('fill', 'black')
 
         })
 

@@ -40,10 +40,26 @@ export const generateGraph = (data, showModal, grade) => {
 
     const svg = d3.select('#graph-chart')
         .style('width', width)
-        .style('height', height);
+        .style('height', height)
+        .on('mouseover', function (e, d) {
+
+            text.style('font-size', '0.6rem')
+            // d3.select(this).style('fill', 'white')
+            // tooltip.select('img').attr('src', d.data.img);
+            // tooltip.select('span').text(d.data.technology_name + ' ' +  d.data.distance * 100 + ' %');
+            // tooltip.select('span').attr('class', d.data.technology_name).text(d.data.technology_name);
+
+        })
+
 
     const root = bubble(data);
-    const tooltip = d3.select('.tooltip');
+
+    const tooltip = d3.selectAll('.tooltip')
+        .data(root.children)
+        .style('visibility', 'visible')
+        .select('span').text(d => d.data.technology_name + ' ' +  d.data.distance * 100 + ' %')
+        .select('span').attr('class', d => d.data.technology_name)
+        .text(d => d.data.technology_name)
 
     const node = svg.selectAll()
         .data(root.children)
@@ -52,17 +68,20 @@ export const generateGraph = (data, showModal, grade) => {
         .attr('transform', `translate(${width / 2}, ${height / 2})`)
         .on('mouseover', function (e, d) {
                 d3.select(this).style('cursor', 'pointer');
+                text.style('font-size', '0.6rem')
                 // d3.select(this).style('fill', 'white')
                 // tooltip.select('img').attr('src', d.data.img);
-                tooltip.select('span').text(d.data.technology_name + ' ' +  d.data.distance * 100 + ' %');
-                tooltip.select('span').attr('class', d.data.technology_name).text(d.data.technology_name);
-                tooltip.style('visibility', 'visible');
+                // tooltip.select('span').text(d.data.technology_name + ' ' +  d.data.distance * 100 + ' %');
+                // tooltip.select('span').attr('class', d.data.technology_name).text(d.data.technology_name);
+
             })
         .on('mouseout', function () {
             // d3.select(this).style('fill', 'black')
-            tooltip.style('visibility', 'hidden');
 
         })
+
+
+
 
 
 
@@ -83,12 +102,14 @@ export const generateGraph = (data, showModal, grade) => {
         .on('click', function(e,d){
             showModal(d.data)
         })
+
     let text = node
         .selectAll("text")
         .data(d => d)
         .enter()
         .append("text")
         .attr('fill', 'white')
+        .style('font-size', '0.6rem')
         .attr("id", d => d.data.professionalism)
         .on('click', function(e,d){
             showModal(d.data)
@@ -108,7 +129,10 @@ export const generateGraph = (data, showModal, grade) => {
     //     .style('fill', 'white')
     //     // .attr('dy', 2)
     //     .text(d => (d.data.technology_name).substring(0, d.r / 2))
-
+    // d3.select(window).on("click", function() {
+    //     d3.selectAll("#graph-chart").select("text")
+    //         .style("font-size", "10px")
+    // })
 
 
     node.transition()

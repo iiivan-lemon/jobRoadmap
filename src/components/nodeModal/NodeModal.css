@@ -7,13 +7,19 @@
     right: 0;
     height: -webkit-fill-available;
     width: 20rem;
-    background-color: #1B1B1B;
+    background: linear-gradient(180deg, #1B1B1B 1.1%, #0f083a 91.05%);
     font-size: 1.4rem;
     color: white;
     padding: 1rem;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
+}
+
+.linkTip{
+    cursor: pointer;
+    background: white;
+    padding: 1px;
 }
 
 .closeBtn{
@@ -76,6 +82,7 @@
     border-radius: 10px;
     color: white;
     text-decoration: none;
+    vertical-align: middle;
 }
 .profTitle{
     margin-block-end: 1rem;

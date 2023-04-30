@@ -177,8 +177,24 @@
     cursor: grabbing;
 }
 
+#graph-chart{
+    /*transform-origin:top left;*/
+}
+
+g > text {
+    font-size: 0.6rem;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    filter: drop-shadow(1px 1px 1px black);
+}
+
 g > text > tspan {
     filter: drop-shadow(2px 4px 6px black);
 }
 
+/*@media (min-width: 900px) {*/
+/*    g > text {*/
+/*        font-size: 12px;*/
+/*    }*/
+/*}*/
 /*# sourceMappingURL=index.css.map */

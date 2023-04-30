@@ -5,8 +5,15 @@
     flex-direction: row;
     align-items: flex-start;
     height:  100%;
-    background: url("../../static/images/back-pattern-grade.png"), linear-gradient(180deg, rgb(0 0 0) 0%, #08041c 100%);
+    /*background: url("../../static/images/back-pattern-grade.png"), linear-gradient(180deg, rgb(0 0 0) 0%, #08041c 100%);*/
     background-size: contain;
+}
+
+.copySvg{
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
 }
 
 .letterBlock{
@@ -16,6 +23,8 @@
 }
 
 .copy{
+    background-color: transparent;
+    border: none;
     position: absolute;
     right: 0;
     z-index: 10;
@@ -28,7 +37,7 @@
 }
 
 .letterArea{
-    color: white;
+    color: black;
     width: 60vw;
     height: 70vh;
     resize: none;
