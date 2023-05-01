@@ -48,7 +48,9 @@ export const JobsPage = ({ inputData, sendJob }) => {
   // }, [data])
 
   const renderJobs = (data): any => {
-    return data.map(el => <div className={styles.job}><span>{el.job_name} </span><span> {el.percent}%</span></div>)
+    if (data.length) {
+      return data.map(el => <div className={styles.job}><span>{el.job_name} </span><span> {el.percent}%</span></div>)
+    }
   }
 
   React.useEffect(() => {
@@ -60,7 +62,9 @@ export const JobsPage = ({ inputData, sendJob }) => {
   }, [loading])
 
   const renderBubbles = (data) => {
-    generateChart(data, sendJob)
+    if (data.length) {
+      generateChart(data.slice(0, 7), sendJob)
+    }
   }
 
   const [zoom, setZoom] = React.useState(1)

@@ -138,7 +138,9 @@ function App (): JSX.Element {
               path="/resumeFix"
             />
               <Route
-                  element={<ValidatedLoginForm />}
+                  element={
+                    <ValidatedLoginForm />
+                  }
                   path="/login"
               />
               <Route

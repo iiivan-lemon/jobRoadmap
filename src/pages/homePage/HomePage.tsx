@@ -30,7 +30,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     if (!data.length) {
       return []
     }
-    // return data
+
     return (data.filter((el:
     { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
   }
@@ -71,7 +71,8 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   }, [inputData])
 
   React.useEffect(() => {
-    if (data.length) {
+    if (document.getElementById('graph-chart')) { (document.getElementById('graph-chart') as HTMLElement).innerHTML = '' }
+    if (changeSkills(data, isHard).length) {
       (isHard)
         ? generateGraph(changeSkills(data, isHard).slice(0, 20), clickNode, grade)
         : generateGraph(changeSkills(data, isHard).slice(0, 20), clickNode, { begin: 0, end: 3 })
@@ -154,8 +155,6 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     return !!~finished.findIndex(el => el === tech_name)
   }
   const isCheckNode = (tech_name: string) => {
-    // eslint-disable-next-line no-debugger
-
     isFinished(tech_name)
       ? setFinished(finished.filter(el => el !== tech_name))
       // @ts-expect-error awdawd
@@ -178,8 +177,6 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
       const gs = refGraph.current?.getElementsByTagName('g')
 
       if (gs) {
-        // eslint-disable-next-line no-debugger
-        debugger
         [].forEach.call(gs, function (el: HTMLElement) {
           el.getBoundingClientRect()
           titles.push(
@@ -241,7 +238,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
               </span>
                   {renderRangeSlider()}
                     <GradientGrade width={'14rem'}/></> }
-                  { !!changeSkills(data, false).length && <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>}
+                  { ((!!changeSkills(data, !isHard).length || (!!changeSkills(data, isHard).length)) && <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>)}
                 </div>
                 <div className='jobOptions'><span className='gradeTitleLeg'>найдено: {jobBack}</span><span className='gradeTitleLeg'>всего навыков: {skillCount}</span></div>
                 <div

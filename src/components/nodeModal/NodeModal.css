@@ -1,4 +1,8 @@
 .nodeModal{
+    border-width: 0;
+    border-image: linear-gradient(#ffffff8c, #ffffff00) 30;
+    border-left: 1px;
+    border-style: solid;
     overflow-x: hidden;
     overflow-y: overlay;
     display: flex;

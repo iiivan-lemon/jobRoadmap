@@ -28,6 +28,7 @@ function processData(data) {
 }
 
 export const generateGraph = (data, showModal, grade) => {
+
     const bubble = data => d3.pack()
         .size([width, height])
         .padding(5)(d3.hierarchy({ children: data.map((el,i) => {
@@ -35,8 +36,7 @@ export const generateGraph = (data, showModal, grade) => {
                 return el
         })}).sum(d => d.distance * 1000));
 
-    if (document.getElementById('graph-chart'))
-    document.getElementById('graph-chart').innerHTML = ''
+
 
     const svg = d3.select('#graph-chart')
         .style('width', width)
@@ -54,12 +54,12 @@ export const generateGraph = (data, showModal, grade) => {
 
     const root = bubble(data);
 
-    const tooltip = d3.selectAll('.tooltip')
-        .data(root.children)
-        .style('visibility', 'visible')
-        .select('span').text(d => d.data.technology_name + ' ' +  d.data.distance * 100 + ' %')
-        .select('span').attr('class', d => d.data.technology_name)
-        .text(d => d.data.technology_name)
+    // const tooltip = d3.selectAll('.tooltip')
+    //     .data(root.children)
+    //     .style('visibility', 'visible')
+    //     .select('span').text(d => d.data.technology_name + ' ' +  d.data.distance * 100 + ' %')
+    //     .select('span').attr('class', d => d.data.technology_name)
+    //     .text(d => d.data.technology_name)
 
     const node = svg.selectAll()
         .data(root.children)

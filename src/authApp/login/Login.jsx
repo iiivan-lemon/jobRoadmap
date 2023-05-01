@@ -63,7 +63,7 @@ function Login() {
 
     return (
         <div className='authPage'>
-            <div className='authModal'>
+            <div className={'authModal ' + styles.widjet}>
                 <h4 className="card-header">Вход</h4>
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
