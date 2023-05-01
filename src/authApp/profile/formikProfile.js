@@ -94,6 +94,7 @@ export const ValidatedProfileForm = ({submit}) =>  {
                                 <div className="form-group">
                                     <span className={stylesUser.emailData}>ваша эл. почта:  <>{user.email}</></span>
                                     <input
+                                        autoComplete="off"
                                         name="password"
                                         type="password"
                                         placeholder="введите новый пароль"
@@ -108,6 +109,7 @@ export const ValidatedProfileForm = ({submit}) =>  {
                                 </div>
                                 <div className="form-group">
                                     <input
+                                        autoComplete="off"
                                         name="passwordConfirm"
                                         type="password"
                                         placeholder="повторите пароль"

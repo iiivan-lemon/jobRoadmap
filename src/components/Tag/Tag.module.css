@@ -4,7 +4,7 @@
     padding: 0.4rem 0.5rem;
     cursor: pointer;
     box-shadow: 0 0 0 1px #000000;
-    border-radius: 10px;
+    border-radius: 45px;
     box-sizing: border-box;
     font-style: normal;
     font-weight: 400;
@@ -25,26 +25,29 @@
 .tagActive{
     color: white;
     box-shadow: 0 0 0 3px #FFFFFF;
-    border-radius: 10px;
+    border-radius: 45px;
 }
 
 .gradeTag{
+    /*color: white;*/
+    /*border: 3px solid transparent;*/
     width: 12rem;
 }
 
 .zeroTag {
-    background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #6ad13b;
+    background: linear-gradient(270deg, #3325ff -125.58%, rgb(125 121 255 / 0%) 73.6%), #62c037;
 }
+
 .junTag{
-    background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #7F9F23;
+    background: linear-gradient(270deg, #3325ff -125.58%, rgba(255, 255, 255, 0) 73.6%), #7F9F23;
 }
 
 .midTag{
-    background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #cfbf35;
+    background: linear-gradient(270deg, #3325ff -125.58%, rgba(255, 255, 255, 0) 73.6%), #cfbf35;
 }
 
 .senTag{
-    background: linear-gradient(242.29deg, #000000 -125.58%, rgba(255, 255, 255, 0) 73.6%), #d34848;
+    background: linear-gradient(270deg, #3325ff -125.58%, rgba(255, 255, 255, 0) 73.6%), #d34848;
 
 }
 

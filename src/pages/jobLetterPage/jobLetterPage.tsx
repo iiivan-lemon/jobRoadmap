@@ -102,7 +102,7 @@ export const JobLetterPage = () => {
           <label htmlFor="upload-photo" className={styles.tag + ' submit'}>{ !selectedFile ? 'выбрать файл' : (selectedFile as File).name}</label>
           <input id="upload-photo" style={{ display: 'none' }} type="file" onChange={handleFileSelect} accept=".pdf" />
           <span>введите ссылку на вакансию hh.ru</span>
-          <input className={styleSearch.search} type="text" onChange={handleUrlSelect}/>
+          <input id='jobLetter' className={styleSearch.search} type="text" onChange={handleUrlSelect}/>
           <input type="submit" className={styles.tag + ' submit'} value="получить сопроводительное письмо" disabled={!(selectedFile && selectedUrl)} />
           { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
         </form>

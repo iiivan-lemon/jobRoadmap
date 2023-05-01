@@ -6,10 +6,7 @@
     background-size: contain;
 }
 .authModal{
-    box-shadow: 0px 0px 5px 1px rgb(255 255 255);
-    height: -moz-fit-content;
-    background: #d3d3d324;
-    -webkit-backdrop-filter: blur(3px);
+
     position: absolute;
     top: 0;
     bottom: 0;
@@ -18,11 +15,9 @@
     margin: auto;
     color: white;
     padding: 1rem 2rem;
-    border: 1px solid #FFFFFF;
-    backdrop-filter: blur(5px);
-    border-radius: 20px;
     display: flex;
     flex-direction: column;
+    width: -moz-fit-content;
     width: fit-content;
     height: fit-content;
     align-content: space-around;
@@ -35,13 +30,21 @@
 .form-group > label{
     color: white;
 }
+.form-group > input {
+    line-height: 1.2rem;
+    font-size: 1rem;
+    padding-inline-start: 0.8rem;
+}
 .authModal > span{
     cursor: pointer;
     color: white;
 }
 
 .invalid-feedback{
-    color: #ff0c0cbf;
+    filter: drop-shadow(2px 4px 6px black);
+    color: #ff2b2bbf;
+    align-self: start;
+    padding-block-start: 0.2rem;
 }
 .back-feedback{
     padding-block-start: 1rem;

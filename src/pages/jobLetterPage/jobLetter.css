@@ -9,6 +9,9 @@
     background-size: contain;
     justify-content: center;
 }
+#jobLetter{
+    font-size: 1.2rem;
+}
 
 .copySvg{
     cursor: pointer;

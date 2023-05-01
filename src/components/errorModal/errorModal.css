@@ -1,4 +1,5 @@
 .errorModal {
+    border: 1px solid white;
     align-items: center;
     row-gap: 1rem;
     display: flex;

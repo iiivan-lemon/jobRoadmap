@@ -52,9 +52,22 @@ const Search = ({ changeData, setGrade, isMainSearch }): JSX.Element => {
   ] = useState(true)
 
   React.useEffect(() => {
+    const el = (document.getElementById('spaceLine') as HTMLElement)
+    if (!isTechSearch) {
+      el.style.visibility = 'visible'
+    }
+  }, [isTechSearch])
+
+  React.useEffect(() => {
     setSearch(isMainSearch)
   }, [isMainSearch])
 
+  React.useEffect(() => {
+    const el = (document.getElementById('spaceLine') as HTMLElement)
+    if (el) {
+      (!isModalOpen || !isTechSearch) ? el.style.visibility = 'visible' : el.style.visibility = 'hidden'
+    }
+  }, [isModalOpen])
   const sendFav = () => {
     if ((document.getElementById('search') as HTMLInputElement)?.value !== '') {
       void dispatch(setFavs((document.getElementById('search') as HTMLInputElement).value))

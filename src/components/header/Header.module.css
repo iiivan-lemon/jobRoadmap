@@ -51,7 +51,7 @@
     padding-inline: 10px;
     font-style: normal;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.2rem;
     line-height: 23px;
     display: flex;
     align-items: flex-end;
@@ -78,6 +78,17 @@
     flex-direction: column;
     width: 100vw;
     border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    border-width: 0;
+    border-image: linear-gradient(90deg, #ffffff00, #ffffff8c, #ffffff00) 30;
+    border-bottom: 1px;
+    border-style: solid;
+}
+
+.chooseTitle{
+    color: #6d54ff;
+}
+.baseTitle {
+    transition: color 0.4s ease;
 }
 
 .logout{

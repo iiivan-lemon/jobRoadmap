@@ -85,7 +85,20 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
         (document.getElementById('tagSearch') as HTMLInputElement).value = ''
       }
     }
+    resumeRef.current?.classList.remove(styles.chooseTitle)
+    letterRef.current?.classList.remove(styles.chooseTitle)
+    switch (location.pathname) {
+      case '/resumeFix':
+        resumeRef.current?.classList.add(styles.chooseTitle)
+        break
+      case '/jobLetter':
+        letterRef.current?.classList.add(styles.chooseTitle)
+        break
+    }
   }, [history])
+
+  const resumeRef = React.useRef<HTMLElement>(null)
+  const letterRef = React.useRef<HTMLElement>(null)
 
   return (
       <React.Fragment>
@@ -109,19 +122,23 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                   />
                 <div className={styles.titles}>
                 <span
-                  className={styles.favorite}
-                  onClick={() => { goTo('/resumeFix') }}
+                  ref={resumeRef}
+                  className={styles.favorite + ' ' + styles.baseTitle }
+                  onClick={(e) => {
+                    goTo('/resumeFix')
+                  }}
                 >
                       Резюме
                   </span>
                 <span
-                  className={styles.favorite}
+                  ref={letterRef}
+                  className={styles.favorite + ' ' + styles.baseTitle }
                   onClick={() => { goTo('/jobLetter') }}
                 >
                       Письмо
                   </span>
                   <span
-                      className={styles.favorite}
+                      className={styles.favorite + ' ' + styles.baseTitle }
                       onClick={() => { goTo('/favorites') }}
                   >
                       Избранное
@@ -183,6 +200,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                 </div>
               </div>
             <svg
+              id='spaceLine'
               className={stylesOps.spaceLine}
               fill="none"
               height="1"
