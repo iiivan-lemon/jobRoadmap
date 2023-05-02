@@ -63,6 +63,7 @@ export const generateGraph = (data, showModal, grade) => {
         .data(root.children)
         .enter().append('g')
         .attr("id", d => d.data.professionalism)
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : ''  )
         .attr('transform', `translate(${width / 2}, ${height / 2})`)
         .on('mouseover', function (e, d) {
                 d3.select(this).style('cursor', 'pointer');
@@ -87,7 +88,6 @@ export const generateGraph = (data, showModal, grade) => {
 
     node.append("image")
         .attr("class", "svgAni")
-        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : 'none'  )
         .attr('dy', 2)
         .attr("id", d => d.data.professionalism)
         .attr("xlink:href", d => ( d.data.index === 0) ? "static/svg-hex0.svg" : "static/svg-hex" + d.data.professionalism  + ".svg" )
@@ -143,9 +143,24 @@ export const generateGraph = (data, showModal, grade) => {
     //     .duration(1000)
     //     .attr('r', d => d.r);
 
-    // label.transition()
-    //     .delay(700)
-    //     .ease(d3.easeExpInOut)
-    //     .duration(1000)
-    //     .style('opacity', 1)
+    // function transition() {
+    //     const d = data[Math.floor(Math.random() * data.length)];
+    //     const i =  d3.zoom()
+    //         .interpolate(d3.interpolate)(currentTransform, [...d, radius * 2 + 1]);
+    //
+    //     g.transition()
+    //         .delay(1000)
+    //         .duration(i.duration)
+    //         .attrTween("transform", () => t => transform(currentTransform = i(t)))
+    //         .on("end", transition);
+    // }
+    //
+    // function transform([x, y, r]) {
+    //     return `
+    //   translate(${width / 2}, ${height / 2})
+    //   scale(${height / r})
+    //   translate(${-x}, ${-y})
+    // `;
+    // }
+    // svg.call(transition).node()
 };

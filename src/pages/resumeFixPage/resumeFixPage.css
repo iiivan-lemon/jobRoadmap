@@ -1,13 +1,32 @@
 .rec{
+    width: auto;
+    z-index: 10;
+    position: relative;
     border-radius: 1rem;
     margin-block: 10px;
-    background-color: #7d8a97;
     padding: 1rem;
     inline-size: -moz-fit-content;
-    inline-size: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    text-align: left;
+}
+
+.learnedTag{
+pointer-events: none;
+    padding: 0.5rem;
+    /* border: none; */
+    width: fit-content;
+}
+.learnedTags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-start: 1rem;
+}
+
+.rec > span {
+    color: white;
 }
 
 .linkTip{
@@ -135,6 +154,6 @@ color: white;
 }
 
 .submit[disabled]{
-    filter: grayscale(1);
+    filter: grayscale(1) drop-shadow(2px 4px 6px black);
     pointer-events: none;
 }

@@ -17,6 +17,8 @@
 
 
 .btnOptions{
+    z-index: 15;
+    width: fit-content;
     left: 0;
     row-gap: 0.5rem;
     padding: 1rem;
@@ -28,10 +30,10 @@
     position: absolute;
     flex-direction: column;
     align-items: center;
-    z-index: 20;
 }
 
 .jobOptions{
+    z-index: 15;
     right: 0;
     row-gap: 0.5rem;
     padding: 1rem;
@@ -41,18 +43,25 @@
     margin: 0.5rem;
     display: flex;
     position: absolute;
-    z-index: 9;
     flex-direction: column;
     align-items: center;
 }
 
 .gradeTitleLeg{
-    filter: drop-shadow(0px 0px 1rem #0047ff);
     color: white;
-    margin-inline-end: 1rem;
 }
 
+.countTitle{
+    font-size: 1.5rem;
+    color: #6d54ff;
+    font-weight: 700;
+}
 
+.jobBackTitle{
+    font-size: 1.2rem;
+    color: #6d54ff;
+    font-weight: 500;
+}
 
 .double-range-slider-container {
     position: relative;

@@ -29,6 +29,7 @@
 }
 
 .gradeTag{
+    filter: drop-shadow(2px 4px 2px #000000c7);
     /*color: white;*/
     /*border: 3px solid transparent;*/
     width: 12rem;

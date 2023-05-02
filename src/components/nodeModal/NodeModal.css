@@ -47,14 +47,15 @@
 }
 
 .nodeTitle{
+    text-align-last: left;
+    background-image: linear-gradient(180deg, #ffffff, #4454ff);
+    color: transparent;
+    -webkit-background-clip: text;
     text-align: -webkit-center;
     width: -moz-fit-content;
-    width: min-content;
-    padding: 10px;
-    border-radius: 30px;
-    color: white;
-    background-color: #4d5b7a;
-    font-size: 1rem;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .profList{
@@ -88,6 +89,7 @@
     text-decoration: none;
     vertical-align: middle;
 }
+
 .profTitle{
     margin-block-end: 1rem;
     cursor: pointer;
@@ -95,7 +97,6 @@ color:white;
 }
 
 .percentTitle{
-filter: drop-shadow(0px 0px 1rem #0047ff);
 color:white;
 }
 .gradeTitle{
@@ -127,5 +128,4 @@ border: none;
 color: white;
 font-size: 1.2rem;
 margin-block: 1rem;
-filter: drop-shadow(0px 0px 1rem blue);
 }

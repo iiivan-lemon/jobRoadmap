@@ -63,6 +63,7 @@
 }
 
 .submit[disabled]{
-    filter: grayscale(1);
+    filter: grayscale(1) drop-shadow(2px 4px 6px black);
+
     pointer-events: none;
 }

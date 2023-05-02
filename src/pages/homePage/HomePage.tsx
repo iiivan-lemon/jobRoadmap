@@ -119,12 +119,12 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
       if (list && text && isHard) {
         [].forEach.call(list, function (el: HTMLElement) {
           if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
-            el.style.filter = 'none'
+            el.style.filter = ''
           }
         });
         [].forEach.call(text, function (el: HTMLElement) {
           if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
-            el.style.filter = 'none'
+            el.style.filter = ''
             el.style.filter = 'drop-shadow(1px 1px 1px black)'
           }
         })
@@ -232,7 +232,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
             </div>
         { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
             {(loading === loadState.res) && <>
-                <div className='btnOptions'>
+                <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + styles.widjet}>
                   { isHard && <><span className='gradeTitleLeg'>
                   опыт работы
               </span>
@@ -240,7 +240,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                     <GradientGrade width={'14rem'}/></> }
                   { ((!!changeSkills(data, !isHard).length || (!!changeSkills(data, isHard).length)) && <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>)}
                 </div>
-                <div className='jobOptions'><span className='gradeTitleLeg'>найдено: {jobBack}</span><span className='gradeTitleLeg'>всего навыков: {skillCount}</span></div>
+                <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'jobOptions ' + styles.widjet}><span className='gradeTitleLeg'>найдено: <span className='jobBackTitle'>{jobBack}</span></span><span className='gradeTitleLeg'>всего навыков: <span className='countTitle'>{skillCount}</span></span></div>
                 <div
                     style={{ width: '100%', height: '100%' }}
                 onWheel={ (event) => {
