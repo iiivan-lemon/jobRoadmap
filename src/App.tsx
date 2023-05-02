@@ -52,6 +52,19 @@ function App (): JSX.Element {
     changeInputData
   ] = useState('')
 
+  React.useEffect(() => {
+    const script = document.createElement('script')
+
+    script.src = 'https://d3js.org/d3.v6.js'
+    script.async = true
+    script.type = 'text/javascript'
+    document.body.appendChild(script)
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
+
   const [isMainSearch, setIsMainSearch] = React.useState(true)
   const [takeInput, setTakeInput] = React.useState('')
   function change (inputData: { value: string, isTechSearch: boolean }): void {

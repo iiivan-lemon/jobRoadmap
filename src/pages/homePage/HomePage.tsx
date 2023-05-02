@@ -176,21 +176,21 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     if (refGraph?.current) {
       const gs = refGraph.current?.getElementsByTagName('g')
 
-      if (gs) {
-        [].forEach.call(gs, function (el: HTMLElement) {
-          el.getBoundingClientRect()
-          titles.push(
-            <div className='tooltip'
-                 // style={{ top: el.getBoundingClientRect().top, left: el.getBoundingClientRect().left }}
-            >
-              <img alt=""/>
-              <div>
-                <a></a>
-                <span></span>
-              </div>
-            </div>)
-        })
-      }
+      // if (gs) {
+      //   [].forEach.call(gs, function (el: HTMLElement) {
+      //     el.getBoundingClientRect()
+      //     titles.push(
+      //       <div className='tooltip'
+      //            // style={{ top: el.getBoundingClientRect().top, left: el.getBoundingClientRect().left }}
+      //       >
+      //         <img alt=""/>
+      //         <div>
+      //           <a></a>
+      //           <span></span>
+      //         </div>
+      //       </div>)
+      //   })
+      // }
     }
     return titles
   }
@@ -242,41 +242,42 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                 </div>
                 <div className='jobOptions'><span className='gradeTitleLeg'>найдено: {jobBack}</span><span className='gradeTitleLeg'>всего навыков: {skillCount}</span></div>
                 <div
-                    onWheel={ (event) => {
-                      event.stopPropagation()
-                      const texts = event.currentTarget.getElementsByTagName('text')
-                      if (texts) {
-                        [].forEach.call(texts, function (el: HTMLElement) {
-                          el.style.fontSize = '0.6rem'
-                        })
-                      }
-                      // // eslint-disable-next-line no-debugger
-                      if ((event.target as HTMLElement).classList.contains('profList')) {
-                        return
-                      }
-                      // event.preventDefault()
-                      if (event.deltaY < 0) {
-                        setZoom(zoom >= zoomOptions.max ? zoomOptions.max : zoom + zoomOptions.step)
-                      } else if (event.deltaY > 0) {
-                        setZoom(zoom <= zoomOptions.min ? zoomOptions.min : zoom - zoomOptions.step)
-                      }
-                      if (event.currentTarget.children[0] as HTMLElement) {
-                        // eslint-disable-next-line @typescript-eslint/func-call-spacing
-                        (event.currentTarget.children[0] as HTMLElement).style.scale = `${zoom} `
-                        const gs = (event.currentTarget.children[0] as HTMLElement).getElementsByTagName('g')
-                        if (gs) {
-                          [].forEach.call(gs, function (el: HTMLElement) {
-                            // el.style.scale = `${1 / zoom}`
-                          })
-                        }
-                        const texts = event.currentTarget.getElementsByTagName('text')
-                        if (texts) {
-                          [].forEach.call(texts, function (el: HTMLElement) {
-                            el.style.fontSize = '0.6rem'
-                          })
-                        }
-                      }
-                    }}
+                    style={{ width: '100%', height: '100%' }}
+                onWheel={ (event) => {
+                  event.stopPropagation()
+                  const texts = event.currentTarget.getElementsByTagName('text')
+                  if (texts) {
+                    [].forEach.call(texts, function (el: HTMLElement) {
+                      el.style.fontSize = '0.8rem'
+                    })
+                  }
+                  // // eslint-disable-next-line no-debugger
+                  if ((event.target as HTMLElement).classList.contains('profList')) {
+                    return
+                  }
+                  // event.preventDefault()
+                  if (event.deltaY < 0) {
+                    setZoom(zoom >= zoomOptions.max ? zoomOptions.max : zoom + zoomOptions.step)
+                  } else if (event.deltaY > 0) {
+                    setZoom(zoom <= zoomOptions.min ? zoomOptions.min : zoom - zoomOptions.step)
+                  }
+                  if (event.currentTarget.children[0] as HTMLElement) {
+                    // eslint-disable-next-line @typescript-eslint/func-call-spacing
+                    (event.currentTarget.children[0] as HTMLElement).style.scale = `${zoom} `
+                    const gs = (event.currentTarget.children[0] as HTMLElement).getElementsByTagName('g')
+                    if (gs) {
+                      [].forEach.call(gs, function (el: HTMLElement) {
+                        // el.style.scale = `${1 / zoom}`
+                      })
+                    }
+                    const texts = event.currentTarget.getElementsByTagName('text')
+                    if (texts) {
+                      [].forEach.call(texts, function (el: HTMLElement) {
+                        el.style.fontSize = '0.8rem'
+                      })
+                    }
+                  }
+                }}
                 >
                 <Draggable scale={1} onStart={(event) => {
                   const e = event.currentTarget as HTMLElement
@@ -284,14 +285,20 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                     const texts = e.getElementsByTagName('text')
                     if (texts) {
                       [].forEach.call(texts, function (el: HTMLElement) {
-                        el.style.fontSize = '0.6rem'
+                        el.style.fontSize = '0.8rem'
                       })
                     }
                   }
                 }
                 } >
                     <div style={{ position: 'relative', zIndex: '10' }}>
-                 <svg ref={refGraph} id="graph-chart"/>
+                 <svg ref={refGraph} id="graph-chart"
+                      xmlns="http://www.w3.org/2000/svg"
+                      // xlink = "http://www.w3.org/2000/xlink"
+                      width="100%"
+                      height="100%"
+                      viewBox={'0 0 ' + window.innerWidth + ' ' + window.innerHeight}
+                        />
                     </div>
                  </Draggable>
                   {null && renderTitle()}
@@ -306,7 +313,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
               setIsModalOpen(null)
             }}
         />}
-        <div className={styles.backCircleHome}></div>
+        {/* <div className={styles.backCircleHome}></div> */}
       </div>
 
   )

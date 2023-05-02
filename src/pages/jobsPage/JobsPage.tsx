@@ -88,20 +88,27 @@ export const JobsPage = ({ inputData, sendJob }) => {
       <>
       {((loading === loadState.res)) &&
       <>{null && renderJobs(data)}
-          <div onWheel={ (event) => {
-            // // eslint-disable-next-line no-debugger
-            if ((event.target as HTMLElement).classList.contains('profList')) {
-              return
-            }
-            // event.preventDefault()
-            if (event.deltaY < 0) {
-              setZoom(zoom >= zoomOptions.max ? zoomOptions.max : zoom + zoomOptions.step)
-            } else if (event.deltaY > 0) {
-              setZoom(zoom <= zoomOptions.min ? zoomOptions.min : zoom - zoomOptions.step)
-            }
-            if (event.currentTarget.children[0] as HTMLElement) { (event.currentTarget.children[0] as HTMLElement).style.scale = `${zoom} ` }
-          }}><Draggable >
-              <svg id="bubble-chart"/>
+          <div style={{ width: '100%', height: '100%' }}
+              onWheel={ (event) => {
+                // // eslint-disable-next-line no-debugger
+                if ((event.target as HTMLElement).classList.contains('profList')) {
+                  return
+                }
+                // event.preventDefault()
+                if (event.deltaY < 0) {
+                  setZoom(zoom >= zoomOptions.max ? zoomOptions.max : zoom + zoomOptions.step)
+                } else if (event.deltaY > 0) {
+                  setZoom(zoom <= zoomOptions.min ? zoomOptions.min : zoom - zoomOptions.step)
+                }
+                if (event.currentTarget.children[0] as HTMLElement) { (event.currentTarget.children[0] as HTMLElement).style.scale = `${zoom} ` }
+              }}><Draggable >
+              <svg id="bubble-chart"
+                   xmlns="http://www.w3.org/2000/svg"
+                // xlink = "http://www.w3.org/2000/xlink"
+                   width="100%"
+                   height="100%"
+                   viewBox={'0 0 ' + window.innerWidth + ' ' + window.innerHeight}
+              />
           </Draggable></div>
           <div className='tooltip'>
               <img alt=""/>

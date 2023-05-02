@@ -36,14 +36,12 @@ export const generateGraph = (data, showModal, grade) => {
                 return el
         })}).sum(d => d.distance * 1000));
 
-
-
     const svg = d3.select('#graph-chart')
         .style('width', width)
         .style('height', height)
         .on('mouseover', function (e, d) {
 
-            text.style('font-size', '0.6rem')
+            text.style('font-size', '0.8rem')
             // d3.select(this).style('fill', 'white')
             // tooltip.select('img').attr('src', d.data.img);
             // tooltip.select('span').text(d.data.technology_name + ' ' +  d.data.distance * 100 + ' %');
@@ -68,7 +66,7 @@ export const generateGraph = (data, showModal, grade) => {
         .attr('transform', `translate(${width / 2}, ${height / 2})`)
         .on('mouseover', function (e, d) {
                 d3.select(this).style('cursor', 'pointer');
-                text.style('font-size', '0.6rem')
+                text.style('font-size', '0.8rem')
                 // d3.select(this).style('fill', 'white')
                 // tooltip.select('img').attr('src', d.data.img);
                 // tooltip.select('span').text(d.data.technology_name + ' ' +  d.data.distance * 100 + ' %');
@@ -89,7 +87,7 @@ export const generateGraph = (data, showModal, grade) => {
 
     node.append("image")
         .attr("class", "svgAni")
-        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : 'brightness(1)'  )
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : 'none'  )
         .attr('dy', 2)
         .attr("id", d => d.data.professionalism)
         .attr("xlink:href", d => ( d.data.index === 0) ? "static/svg-hex0.svg" : "static/svg-hex" + d.data.professionalism  + ".svg" )
@@ -109,7 +107,7 @@ export const generateGraph = (data, showModal, grade) => {
         .enter()
         .append("text")
         .attr('fill', 'white')
-        .style('font-size', '0.6rem')
+        .style('font-size', '0.8rem')
         .attr("id", d => d.data.professionalism)
         .on('click', function(e,d){
             showModal(d.data)
