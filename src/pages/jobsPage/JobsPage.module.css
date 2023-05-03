@@ -17,6 +17,9 @@
     margin: 1rem;
     background-color: grey;
 }
+.jobs:active{
+    cursor: grabbing;
+}
 
 g > text {
 

@@ -4,11 +4,13 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PushSpinner } from 'react-spinners-kit'
 import styles from './JobsPage.module.css'
+import stylesNew from '../newUserPage/NewUserPage.module.css'
 import './../../components/bubbleChart/bubble.css'
 import { loadState } from '../../utils/utils'
 import { generateChart } from '../../components/bubbleChart/bubbleChart'
 import Draggable from 'react-draggable'
 import { ErrorModal } from '../../components/errorModal/errorModal'
+import GradientGrade from '../../components/gradientGrade/GradientGrade'
 export const JobsPage = ({ inputData, sendJob }) => {
   const [data, setData] = useState([])
   const dispatch = useAppDispatch()
@@ -88,7 +90,10 @@ export const JobsPage = ({ inputData, sendJob }) => {
       <>
       {((loading === loadState.res)) &&
       <>{null && renderJobs(data)}
-          <div style={{ width: '100%', height: '100%' }}
+          <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + stylesNew.widjet}>
+              <span className='gradeTitleLeg'>самая подходящая специальность: <span className='jobBackTitle'>{(data[0] as any).job_name}</span></span>
+          </div>
+          <div className={styles.jobs} style={{ width: '100%', height: '100%' }}
               onWheel={ (event) => {
                 // // eslint-disable-next-line no-debugger
                 if ((event.target as HTMLElement).classList.contains('profList')) {

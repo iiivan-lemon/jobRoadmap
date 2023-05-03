@@ -1,6 +1,6 @@
 .tags-input-container{
     width: 22rem;
-    overflow-x: overlay;
+    overflow: overlay;
     display: inline-flex;
     color: black;
     background: #E8F1F2;
@@ -13,7 +13,7 @@
 }
 
 .tags-input-container::-webkit-scrollbar {
-    width: 2px;
+    width: 1px;
 }
 
 /* Track */
@@ -24,12 +24,14 @@
 
 /* Handle */
 .tags-input-container::-webkit-scrollbar-thumb {
+    cursor: pointer;
     background: rgba(128, 128, 128, 0);
     border-radius: 10px;
 }
 
 /* Handle on hover */
 .tags-input-container::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
     background: rgba(19, 15, 160, 0.29);
 }
 .tags-input-container input{

@@ -159,7 +159,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
       ? setFinished(finished.filter(el => el !== tech_name))
       // @ts-expect-error awdawd
       : setFinished([...new Set(...finished, tech_name)]);
-    ((document.getElementById(tech_name) as HTMLElement).parentElement as HTMLElement).classList.toggle('checkNode')
+    ((document.getElementsByClassName(tech_name)[0] as HTMLElement)).classList.toggle('checkNode')
   }
 
   const clickNode = (el) => {

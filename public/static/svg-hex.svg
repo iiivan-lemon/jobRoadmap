@@ -1,5 +1,5 @@
 
-    <svg fill='grey' xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+    <svg fill='#6187E7' xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
         <path fill-opacity="0.8" d="M256 40v216L72 144z"/>
         <path fill-opacity="0.6" d="M256 256 72 368V144z"/>
         <path fill-opacity="0.4" d="M256 256v216L72 368z"/>

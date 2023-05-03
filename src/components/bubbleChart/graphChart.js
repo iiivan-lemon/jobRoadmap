@@ -88,6 +88,7 @@ export const generateGraph = (data, showModal, grade) => {
 
     node.append("image")
         .attr("class", "svgAni")
+        .attr("class", d => d.data.technology_name)
         .attr('dy', 2)
         .attr("id", d => d.data.professionalism)
         .attr("xlink:href", d => ( d.data.index === 0) ? "static/svg-hex0.svg" : "static/svg-hex" + d.data.professionalism  + ".svg" )
