@@ -90,9 +90,9 @@ export const JobsPage = ({ inputData, sendJob }) => {
       <>
       {((loading === loadState.res)) &&
       <>{null && renderJobs(data)}
-          <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + stylesNew.widjet}>
+        {!!data.length && <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + stylesNew.widjet}>
               <span className='gradeTitleLeg'>самая подходящая специальность: <span className='jobBackTitle'>{(data[0] as any).job_name}</span></span>
-          </div>
+          </div>}
           <div className={styles.jobs} style={{ width: '100%', height: '100%' }}
               onWheel={ (event) => {
                 // // eslint-disable-next-line no-debugger

@@ -31,7 +31,8 @@ export const generateGraph = (data, showModal, grade) => {
 
     const bubble = data => d3.pack()
         .size([width, height])
-        .padding(5)(d3.hierarchy({ children: data.map((el,i) => {
+        .padding(25)
+        (d3.hierarchy({ children: data.map((el,i) => {
             el['index'] = i
                 return el
         })}).sum(d => d.distance * 1000));
@@ -40,7 +41,6 @@ export const generateGraph = (data, showModal, grade) => {
         .style('width', width)
         .style('height', height)
         .on('mouseover', function (e, d) {
-
             text.style('font-size', '0.8rem')
             // d3.select(this).style('fill', 'white')
             // tooltip.select('img').attr('src', d.data.img);

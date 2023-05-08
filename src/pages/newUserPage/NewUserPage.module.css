@@ -43,7 +43,7 @@
 
 .description{
     width: 50%;
-    line-height: 2.4rem;
+    line-height: 2rem;
     text-overflow: ellipsis;
     display: -webkit-box;
     overflow: hidden;

@@ -74,8 +74,8 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     if (document.getElementById('graph-chart')) { (document.getElementById('graph-chart') as HTMLElement).innerHTML = '' }
     if (changeSkills(data, isHard).length) {
       (isHard)
-        ? generateGraph(changeSkills(data, isHard).slice(0, 20), clickNode, grade)
-        : generateGraph(changeSkills(data, isHard).slice(0, 20), clickNode, { begin: 0, end: 3 })
+        ? generateGraph(changeSkills(data, isHard).filter(el => el.distance >= 0.2), clickNode, grade)
+        : generateGraph(changeSkills(data, isHard).filter(el => el.distance >= 0.2), clickNode, { begin: 0, end: 3 })
     }
   }, [data, isHard])
 
@@ -155,11 +155,14 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     return !!~finished.findIndex(el => el === tech_name)
   }
   const isCheckNode = (tech_name: string) => {
-    isFinished(tech_name)
-      ? setFinished(finished.filter(el => el !== tech_name))
-      // @ts-expect-error awdawd
-      : setFinished([...new Set(...finished, tech_name)]);
-    ((document.getElementsByClassName(tech_name)[0] as HTMLElement)).classList.toggle('checkNode')
+    if (isFinished(tech_name)) {
+      setFinished(finished.filter(el => el !== tech_name));
+      ((document.getElementsByClassName(tech_name)[0] as HTMLElement)).classList.remove('checkNode')
+    } else {
+      // @ts-expect-error w3qrfre
+      setFinished([...new Set(...finished, tech_name)]);
+      ((document.getElementsByClassName(tech_name)[0] as HTMLElement)).classList.add('checkNode')
+    }
   }
 
   const clickNode = (el) => {
@@ -238,7 +241,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
               </span>
                   {renderRangeSlider()}
                     <GradientGrade width={'14rem'}/></> }
-                  { ((!!changeSkills(data, !isHard).length || (!!changeSkills(data, isHard).length)) && <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>)}
+                  { null && ((!!changeSkills(data, !isHard).length || (!!changeSkills(data, isHard).length)) && <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>)}
                 </div>
                 <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'jobOptions ' + styles.widjet}><span className='gradeTitleLeg'>найдено: <span className='jobBackTitle'>{jobBack}</span></span><span className='gradeTitleLeg'>всего навыков: <span className='countTitle'>{skillCount}</span></span></div>
                 <div
