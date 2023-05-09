@@ -208,7 +208,6 @@ const NodeModal = ({ onClose, node, isChecked, sendJob }): JSX.Element => {
     {(loading === loadState.res) &&
         <div id='tips' className='tips' onWheel={(e) => { e.stopPropagation() }}>{textToLink()}</div>
     }
-    <div className='profList' onWheel={(e) => { e.stopPropagation() }}> <div className='jobTitle'>этот навык также требуется в специальностях:</div>{renderJobs(listJobs)}</div>
 
   </div>)
 }

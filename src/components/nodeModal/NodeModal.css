@@ -51,7 +51,6 @@
     background-image: linear-gradient(180deg, #ffffff, #4454ff);
     color: transparent;
     -webkit-background-clip: text;
-    text-align: -webkit-center;
     width: -moz-fit-content;
     width: 100%;
     font-size: 1.5rem;
