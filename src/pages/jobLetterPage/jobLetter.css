@@ -67,3 +67,22 @@
 
     pointer-events: none;
 }
+
+.baseStateModal{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    align-content: space-around;
+    align-items: center;
+}

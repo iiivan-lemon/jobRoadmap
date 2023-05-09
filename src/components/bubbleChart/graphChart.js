@@ -63,7 +63,6 @@ export const generateGraph = (data, showModal, grade, finished) => {
         .data(root.children)
         .enter().append('g')
         .attr("id", d => d.data.professionalism)
-        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : ''  )
         .attr('transform', `translate(${width / 2}, ${height / 2})`)
         .on('mouseover', function (e, d) {
                 d3.select(this).style('cursor', 'pointer');
@@ -95,7 +94,8 @@ export const generateGraph = (data, showModal, grade, finished) => {
         //.attr("y", function (d, i) { return -mugDiameter / 2 - mugDiameter * (i / 9 | 0); })
         .attr("width", d =>  d.data.distance * 100)
         .attr("height", d =>  d.data.distance * 100)
-       .attr('x', d => -(d.r/1.5)/2)
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : ''  )
+        .attr('x', d => -(d.r/1.5)/2)
         .attr('y', d => -(d.r/1.5)/2)
         .on('click', function(e,d){
             showModal(d.data)

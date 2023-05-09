@@ -72,6 +72,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
         setFinished(data.payload)
       }
     })
+    setGrade(headerGrade)
   }, [inputData])
 
   React.useEffect(() => {
@@ -111,7 +112,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   }, [])
 
   React.useEffect(() => {
-    setGrade(headerGrade)
+
   }, [headerGrade])
 
   const refGraph: React.RefObject<SVGSVGElement> | null = React.useRef(null)
@@ -136,11 +137,11 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     }
   }, [grade])
 
-  const renderRangeSlider = () => {
-    return <RangeSlider onChange={(e) => {
-      setGrade({ begin: e.minIndex, end: e.maxIndex })
-    }} value={[0, 1, 2, 3]}></RangeSlider>
-  }
+  // const renderRangeSlider = () => {
+  //   // eslint-disable-next-line no-debugger
+  //   debugger
+  //   return
+  // }
 
   React.useEffect(() => {
     const fav = document.getElementById('favSvg') as HTMLElement
@@ -244,7 +245,9 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                   { isHard && <><span className='gradeTitleLeg'>
                   опыт работы
               </span>
-                  {renderRangeSlider()}
+                      <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
+                        setGrade({ begin: e.minIndex, end: e.maxIndex })
+                      }} value={[0, 1, 2, 3]}></RangeSlider>
                     <GradientGrade width={'14rem'}/></> }
                   { null && ((!!changeSkills(data, !isHard).length || (!!changeSkills(data, isHard).length)) && <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>)}
                 </div>
