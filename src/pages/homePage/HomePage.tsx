@@ -72,7 +72,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
 
   React.useEffect(() => {
     if (document.getElementById('graph-chart')) { (document.getElementById('graph-chart') as HTMLElement).innerHTML = '' }
-    if (changeSkills(data, isHard).length) {
+    if (changeSkills(data, isHard).length && changeSkills(data, isHard).filter(el => el.distance >= 0.2)?.length) {
       (isHard)
         ? generateGraph(changeSkills(data, isHard).filter(el => el.distance >= 0.2), clickNode, grade)
         : generateGraph(changeSkills(data, isHard).filter(el => el.distance >= 0.2), clickNode, { begin: 0, end: 3 })
