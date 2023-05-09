@@ -178,7 +178,7 @@
 }
 
 .checkNode{
-    filter: 'grayscale(1)'
+    filter: 'brightness(5)'
 }
 
 

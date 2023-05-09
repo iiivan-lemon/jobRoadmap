@@ -165,6 +165,9 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
       // @ts-expect-error w3qrfre
       setFinished([...new Set(...finished, tech_name)])
     }
+    if ((document.getElementsByClassName(tech_name)[0] as HTMLElement)) {
+      (document.getElementsByClassName(tech_name)[0] as HTMLElement).classList.toggle('checkNode')
+    }
   }
 
   const clickNode = (el) => {
