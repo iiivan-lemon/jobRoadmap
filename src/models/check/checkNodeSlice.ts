@@ -10,8 +10,8 @@ export const getFinished = createAsyncThunk(
     // return data.additional
 
     // return ['Git']
-    const response = { status: 200, data: { finished: ['Redis', 'PostgreSQL', 'Python'] } }
-    // const response = await fetchChecked(input).then().catch(() => null)
+    // const response = { status: 200, data: { finished: ['Redis', 'PostgreSQL', 'Python'] } }
+    const response = await fetchChecked(input).then().catch(() => null)
 
     return (response && (response.status) === 200 ? response.data.finished : null)
     // The value we return becomes the `fulfilled` action payload
