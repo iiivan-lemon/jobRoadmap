@@ -64,9 +64,9 @@ export const JobsPage = ({ inputData, sendJob }) => {
   }, [loading])
 
   const renderBubbles = (data) => {
-    if (data.length) {
-      generateChart(data.slice(0, 7), sendJob)
-    }
+    if (data.length && data.filter(el => el.percent >= 10)) {
+      generateChart(data.filter(el => el.percent >= 10), sendJob)
+    } else { setErrMessage('по вашим навыкам не найдены подходящие профессии') }
   }
 
   const [zoom, setZoom] = React.useState(1)

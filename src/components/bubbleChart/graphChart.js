@@ -8,7 +8,7 @@ import * as d3 from "d3";
 const width = window.innerWidth;
 const height = window.innerHeight;
 const svgNode = require('../../../src/static/images/svg-hex.svg')
-import './../graphSelf/graphSelf.css'
+import '../../pages/homePage/HomePage.css'
 function processData(data) {
     var obj = data.call_data;
 
@@ -27,7 +27,7 @@ function processData(data) {
     };
 }
 
-export const generateGraph = (data, showModal, grade) => {
+export const generateGraph = (data, showModal, grade, finished) => {
 
     const bubble = data => d3.pack()
         .size([width, height])
@@ -87,9 +87,8 @@ export const generateGraph = (data, showModal, grade) => {
 
 
     node.append("image")
-        .attr("class", "svgAni")
-        .attr("class", d => d.data.technology_name)
         .attr('dy', 2)
+        .attr('class', d => !!~finished.findIndex(el => el === d.data.technology_name) ? d.data.technology_name + " svgAni checkNode" : d.data.technology_name + " svgAni")
         .attr("id", d => d.data.professionalism)
         .attr("xlink:href", d => ( d.data.index === 0) ? "static/svg-hex0.svg" : "static/svg-hex" + d.data.professionalism  + ".svg" )
         //     .attr("x", function (d, i) { return -mugDiameter / 2 - mugDiameter * (i % 9); })

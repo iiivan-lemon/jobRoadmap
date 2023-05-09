@@ -50,10 +50,14 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
           setLoad(loadState.error)
         } else {
           setLoad(loadState.res)
-          setData((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.additional)
+          const rawData = (dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.additional
+          if (changeSkills(rawData, isHard).length && changeSkills(rawData, isHard).filter(el => el.distance >= 0.1)?.length) {
+            setData(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1))
+            setSkillCount(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1).length)
+          }
           setInBase((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).in_base)
           setJobBack((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.job_name)
-          setSkillCount((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.technology_number)
+          // setSkillCount((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.technology_number)
         }
       }
     )
@@ -72,10 +76,10 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
 
   React.useEffect(() => {
     if (document.getElementById('graph-chart')) { (document.getElementById('graph-chart') as HTMLElement).innerHTML = '' }
-    if (changeSkills(data, isHard).length && changeSkills(data, isHard).filter(el => el.distance >= 0.2)?.length) {
+    if (data.length) {
       (isHard)
-        ? generateGraph(changeSkills(data, isHard).filter(el => el.distance >= 0.2), clickNode, grade)
-        : generateGraph(changeSkills(data, isHard).filter(el => el.distance >= 0.2), clickNode, { begin: 0, end: 3 })
+        ? generateGraph(data, clickNode, grade, finished)
+        : generateGraph(data, clickNode, { begin: 0, end: 3 }, finished)
     }
   }, [data, isHard])
 
@@ -148,7 +152,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   const [zoom, setZoom] = React.useState(1)
   const zoomOptions = {
     min: 1,
-    max: 1.5,
+    max: 1.2,
     step: 0.05
   }
   const isFinished = (tech_name: string) => {
@@ -156,12 +160,10 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   }
   const isCheckNode = (tech_name: string) => {
     if (isFinished(tech_name)) {
-      setFinished(finished.filter(el => el !== tech_name));
-      ((document.getElementsByClassName(tech_name)[0] as HTMLElement)).classList.remove('checkNode')
+      setFinished(finished.filter(el => el !== tech_name))
     } else {
       // @ts-expect-error w3qrfre
-      setFinished([...new Set(...finished, tech_name)]);
-      ((document.getElementsByClassName(tech_name)[0] as HTMLElement)).classList.add('checkNode')
+      setFinished([...new Set(...finished, tech_name)])
     }
   }
 
