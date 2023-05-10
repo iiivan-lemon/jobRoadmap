@@ -6,7 +6,7 @@ import styles from './../newUserPage/NewUserPage.module.css'
 import { getJobLetter } from '../../models/jobLetter/jobLetterSlice'
 import './../resumeFixPage/resumeFixPage.css'
 import styleSearch from './../../components/search/Search.module.css'
-import { WhisperSpinner } from 'react-spinners-kit'
+import { PushSpinner, WhisperSpinner } from 'react-spinners-kit'
 
 export const JobLetterPage = () => {
   const dispatch = useAppDispatch()
@@ -96,12 +96,11 @@ export const JobLetterPage = () => {
       </div>
     <div className='letterPage' style={ (loading === loadState.res) ? { justifyContent: 'center' } : { justifyContent: 'initial' }}>
       <div className='preloader'>
-        <WhisperSpinner
-          backColor='6187e7'
-          frontColor="#1f51d2"
+        <PushSpinner
+          color="#686769"
           id="preloader"
           loading={loading === loadState.load}
-          size={100}
+          size={30}
         />
       </div>
       <div className={'resumeInput ' + styles.widjet}>

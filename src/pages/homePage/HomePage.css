@@ -212,7 +212,12 @@ g > text > tspan {
 }
 
 g:hover  .svgAni{
+    animation: none;
     filter: contrast(6);
+}
+
+.svgAni{
+    animation: pulse 3s linear infinite;
 }
 /*@media (min-width: 900px) {*/
 /*    g > text {*/
@@ -220,3 +225,15 @@ g:hover  .svgAni{
 /*    }*/
 /*}*/
 /*# sourceMappingURL=index.css.map */
+
+@keyframes pulse {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.1, 1.1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}

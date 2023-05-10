@@ -26,6 +26,18 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   const [isInBase, setInBase] = React.useState(1)
   const [jobBack, setJobBack] = React.useState('')
   const [skillCount, setSkillCount] = React.useState(0)
+  const [
+    loading,
+    setLoad
+  ] = React.useState(loadState.base)
+  const [
+    grade,
+    setGrade
+  ] = React.useState({ begin: 0, end: 3 })
+  const [
+    isModalOpen,
+    setIsModalOpen
+  ] = useState(null)
   const changeSkills = (data, isHard) => {
     if (!data.length) {
       return []
@@ -35,130 +47,6 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     { technology_name: string, distance: number, professionalism: number, hard_skill: boolean }) => el.hard_skill === isHard))
   }
 
-  const dispatch = useAppDispatch()
-  React.useEffect(() => {
-    if (inputData === '') {
-      nav('/')
-    }
-
-    setLoad(loadState.load)
-
-    void dispatch(getDataGraph(inputData)).then(
-      (dataJob) => {
-        if ((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).errMessage) {
-          setErrMessage((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).errMessage)
-          setLoad(loadState.error)
-        } else {
-          setLoad(loadState.res)
-          const rawData = (dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.additional
-          if (changeSkills(rawData, isHard).length && changeSkills(rawData, isHard).filter(el => el.distance >= 0.1)?.length) {
-            setData(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1))
-            setSkillCount(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1).length)
-          }
-          setInBase((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).in_base)
-          setJobBack((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.job_name)
-          // setSkillCount((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.technology_number)
-        }
-      }
-    )
-      .catch(() => {
-        setLoad(loadState.error)
-      })
-    void dispatch(getFinished(inputData)).then(data => {
-      if (!data.payload || !Array.isArray(data.payload)) {
-        setFinished([])
-      } else {
-        // @ts-expect-error dawd
-        setFinished(data.payload)
-      }
-    })
-    setGrade(headerGrade)
-  }, [inputData])
-
-  React.useEffect(() => {
-    if (document.getElementById('graph-chart')) { (document.getElementById('graph-chart') as HTMLElement).innerHTML = '' }
-    if (data.length) {
-      (isHard)
-        ? generateGraph(data, clickNode, grade, finished)
-        : generateGraph(data, clickNode, { begin: 0, end: 3 }, finished)
-    }
-  }, [data, isHard])
-
-  React.useEffect(() => {
-    void dispatch(getFinished(inputData)).then(data => {
-      if (!data.payload || !Array.isArray(data.payload)) {
-        setFinished([])
-      } else {
-        // @ts-expect-error dawd
-        setFinished(data.payload)
-      }
-    })
-    if (!isHard) {
-      setGrade({ begin: 0, end: 3 })
-    }
-  }, [isHard])
-  const [
-    loading,
-    setLoad
-  ] = React.useState(loadState.base)
-
-  const [
-    grade,
-    setGrade
-  ] = React.useState({ begin: 0, end: 3 })
-  React.useEffect(() => {
-    document.body.style.overflow = 'hidden'
-    document.getElementById('header')?.classList.remove('headerFix')
-  }, [])
-
-  React.useEffect(() => {
-
-  }, [headerGrade])
-
-  const refGraph: React.RefObject<SVGSVGElement> | null = React.useRef(null)
-
-  React.useEffect(() => {
-    if (refGraph?.current) {
-      const list = refGraph.current?.getElementsByTagName('image')
-      const text = refGraph.current?.getElementsByTagName('text')
-      if (list && text && isHard) {
-        [].forEach.call(list, function (el: HTMLElement) {
-          if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
-            el.style.filter = ''
-          }
-        });
-        [].forEach.call(text, function (el: HTMLElement) {
-          if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
-            el.style.filter = ''
-            el.style.filter = 'drop-shadow(1px 1px 1px black)'
-          }
-        })
-      }
-    }
-  }, [grade])
-
-  // const renderRangeSlider = () => {
-  //   // eslint-disable-next-line no-debugger
-  //   debugger
-  //   return
-  // }
-
-  React.useEffect(() => {
-    const fav = document.getElementById('favSvg') as HTMLElement
-    if (fav) {
-      fav.style.visibility = isInBase ? 'visible' : 'hidden'
-    }
-  }, [isInBase])
-
-  const [zoom, setZoom] = React.useState(1)
-  const zoomOptions = {
-    min: 1,
-    max: 1.2,
-    step: 0.05
-  }
-  const isFinished = (tech_name: string) => {
-    return !!~finished.findIndex(el => el === tech_name)
-  }
   const isCheckNode = (tech_name: string) => {
     if (isFinished(tech_name)) {
       setFinished(finished.filter(el => el !== tech_name))
@@ -171,19 +59,126 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
     }
   }
 
-  const clickNode = (el) => {
-    setIsModalOpen({ ...el, isChecked: isFinished(el.technology_name) })
+  const isFinished = (tech_name: string) => {
+    return !!~finished.findIndex(el => el === tech_name)
   }
 
-  const [
-    isModalOpen,
-    setIsModalOpen
-  ] = useState(null)
+  const refGraph: React.RefObject<SVGSVGElement> | null = React.useRef(null)
 
-  const renderTitle = () => {
-    const titles: JSX.Element[] = []
-    if (refGraph?.current) {
-      const gs = refGraph.current?.getElementsByTagName('g')
+  try {
+    const dispatch = useAppDispatch()
+    React.useEffect(() => {
+      if (inputData === '') {
+        nav('/')
+      }
+
+      setLoad(loadState.load)
+
+      void dispatch(getDataGraph(inputData)).then(
+        (dataJob) => {
+          if ((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).errMessage) {
+            setErrMessage((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).errMessage)
+            setLoad(loadState.error)
+          } else {
+            setLoad(loadState.res)
+            const rawData = (dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.additional
+            if (changeSkills(rawData, isHard).length && changeSkills(rawData, isHard).filter(el => el.distance >= 0.1)?.length) {
+              setData(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1))
+              setSkillCount(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1).length)
+            }
+            setInBase((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).in_base)
+            setJobBack((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.job_name)
+          // setSkillCount((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.technology_number)
+          }
+        }
+      )
+        .catch(() => {
+          setLoad(loadState.error)
+        })
+      void dispatch(getFinished(inputData)).then(data => {
+        if (!data.payload || !Array.isArray(data.payload)) {
+          setFinished([])
+        } else {
+        // @ts-expect-error dawd
+          setFinished(data.payload)
+        }
+      })
+      setGrade(headerGrade)
+    }, [inputData])
+
+    React.useEffect(() => {
+      if (document.getElementById('graph-chart')) { (document.getElementById('graph-chart') as HTMLElement).innerHTML = '' }
+      if (data.length) {
+        (isHard)
+          ? generateGraph(data, clickNode, grade, finished)
+          : generateGraph(data, clickNode, { begin: 0, end: 3 }, finished)
+      }
+    }, [data, isHard])
+
+    React.useEffect(() => {
+      void dispatch(getFinished(inputData)).then(data => {
+        if (!data.payload || !Array.isArray(data.payload)) {
+          setFinished([])
+        } else {
+        // @ts-expect-error dawd
+          setFinished(data.payload)
+        }
+      })
+      if (!isHard) {
+        setGrade({ begin: 0, end: 3 })
+      }
+    }, [isHard])
+
+    React.useEffect(() => {
+      document.body.style.overflow = 'hidden'
+      document.getElementById('header')?.classList.remove('headerFix')
+    }, [])
+
+    React.useEffect(() => {
+
+    }, [headerGrade])
+
+    React.useEffect(() => {
+      if (refGraph?.current) {
+        const list = refGraph.current?.getElementsByTagName('image')
+        const text = refGraph.current?.getElementsByTagName('text')
+        if (list && text && isHard) {
+          [].forEach.call(list, function (el: HTMLElement) {
+            if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
+              el.style.filter = ''
+            }
+          });
+          [].forEach.call(text, function (el: HTMLElement) {
+            if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
+              el.style.filter = ''
+              el.style.filter = 'drop-shadow(1px 1px 1px black)'
+            }
+          })
+        }
+      }
+    }, [grade])
+
+    // const renderRangeSlider = () => {
+    //   // eslint-disable-next-line no-debugger
+
+    //   return
+    // }
+
+    React.useEffect(() => {
+      const fav = document.getElementById('favSvg') as HTMLElement
+      if (fav) {
+        fav.style.visibility = isInBase ? 'visible' : 'hidden'
+      }
+    }, [isInBase])
+
+    const clickNode = (el) => {
+      setIsModalOpen({ ...el, isChecked: isFinished(el.technology_name) })
+    }
+
+    const renderTitle = () => {
+      const titles: JSX.Element[] = []
+      if (refGraph?.current) {
+        const gs = refGraph.current?.getElementsByTagName('g')
 
       // if (gs) {
       //   [].forEach.call(gs, function (el: HTMLElement) {
@@ -200,10 +195,18 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
       //       </div>)
       //   })
       // }
+      }
+      return titles
     }
-    return titles
+  } catch (e) {
+    setLoad(loadState.error)
   }
-
+  const [zoom, setZoom] = React.useState(1)
+  const zoomOptions = {
+    min: 1,
+    max: 1.2,
+    step: 0.05
+  }
   return (
 
       <div id='page' className='page'
@@ -312,7 +315,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                         />
                     </div>
                  </Draggable>
-                  {null && renderTitle()}
+                  {null}
                 </div>
                 {/*  <GraphSelf sendJob={sendJob} isHard={isHard} data={changeSkills(data, isHard)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf> */}
                                             </>}

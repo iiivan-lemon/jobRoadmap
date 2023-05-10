@@ -71,7 +71,6 @@ function App (): JSX.Element {
     // If (inputData.includes('python')) {
     // CoursesPage()
     // // @ts-expect-error errors
-
     if (inputData.isTechSearch) {
       setTakeInput(inputData.value)
       setIsMainSearch(true)

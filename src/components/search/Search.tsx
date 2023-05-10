@@ -21,7 +21,7 @@ import { useLocation } from 'react-router-dom'
  * }
  */
 
-const Search = ({ changeData, setGrade, isMainSearch }): JSX.Element => {
+const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
   const dispatch = useAppDispatch()
   const { isAuth } = useAppSelector(state => state.auth)
 
@@ -55,6 +55,11 @@ const Search = ({ changeData, setGrade, isMainSearch }): JSX.Element => {
     const el = (document.getElementById('spaceLine') as HTMLElement)
     if (!isTechSearch) {
       el.style.visibility = 'visible'
+    }
+    if (title && isTechSearch) {
+      if ((document.getElementById('search') as HTMLInputElement)) {
+        (document.getElementById('search') as HTMLInputElement).value = title
+      }
     }
   }, [isTechSearch])
 

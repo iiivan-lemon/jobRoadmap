@@ -16,29 +16,52 @@ export const JobsPage = ({ inputData, sendJob }) => {
   const dispatch = useAppDispatch()
   const nav = useNavigate()
   const [errMessage, setErrMessage] = React.useState('что-то пошло не так')
-
-  React.useEffect(() => {
-    document.body.style.overflow = 'hidden'
-    document.getElementById('header')?.classList.remove('headerFix')
-  }, [])
-  React.useEffect(() => {
-    setLoad(loadState.load)
-    void dispatch(getJobs(inputData)).then(
-      dataJob => {
-        if (dataJob.payload.errMessage) {
-          setLoad(loadState.error)
-        } else {
-          setLoad(loadState.res)
-          setData(dataJob.payload)
-        }
-      }
-    ).catch(() => { setLoad(loadState.error) })
-  }, [inputData])
-
   const [
     loading,
     setLoad
   ] = React.useState(loadState.base)
+  try {
+    React.useEffect(() => {
+      document.body.style.overflow = 'hidden'
+      document.getElementById('header')?.classList.remove('headerFix')
+    }, [])
+    React.useEffect(() => {
+      setLoad(loadState.load)
+      void dispatch(getJobs(inputData)).then(
+        dataJob => {
+          if (dataJob.payload.errMessage) {
+            setLoad(loadState.error)
+          } else {
+            setLoad(loadState.res)
+            setData(dataJob.payload)
+          }
+        }
+      ).catch(() => { setLoad(loadState.error) })
+    }, [inputData])
+
+    const renderJobs = (data): any => {
+      if (data.length) {
+        return data.map(el => <div className={styles.job}><span>{el.job_name} </span><span> {el.percent}%</span></div>)
+      }
+    }
+
+    React.useEffect(() => {
+      if (loading === loadState.res) {
+        if (data.length) {
+          renderBubbles(data)
+        } else { setErrMessage('по вашим навыкам профессии не найдены') }
+      }
+    }, [loading])
+
+    const renderBubbles = (data) => {
+      if (data.length && data.filter(el => el.percent >= 10)) {
+        generateChart(data.filter(el => el.percent >= 10), sendJob)
+      } else { setErrMessage('по вашим навыкам не найдены подходящие профессии') }
+    }
+  } catch (e) {
+    setLoad(loadState.error)
+  }
+
   //
   // React.useEffect(() => {
   //   // eslint-disable-next-line no-debugger
@@ -48,26 +71,6 @@ export const JobsPage = ({ inputData, sendJob }) => {
   //     setLoad(false)
   //   } else { setLoad(true) }
   // }, [data])
-
-  const renderJobs = (data): any => {
-    if (data.length) {
-      return data.map(el => <div className={styles.job}><span>{el.job_name} </span><span> {el.percent}%</span></div>)
-    }
-  }
-
-  React.useEffect(() => {
-    if (loading === loadState.res) {
-      if (data.length) {
-        renderBubbles(data)
-      } else { setErrMessage('по вашим навыкам профессии не найдены') }
-    }
-  }, [loading])
-
-  const renderBubbles = (data) => {
-    if (data.length && data.filter(el => el.percent >= 10)) {
-      generateChart(data.filter(el => el.percent >= 10), sendJob)
-    } else { setErrMessage('по вашим навыкам не найдены подходящие профессии') }
-  }
 
   const [zoom, setZoom] = React.useState(1)
   const zoomOptions = {
@@ -89,7 +92,7 @@ export const JobsPage = ({ inputData, sendJob }) => {
       { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
       <>
       {((loading === loadState.res)) &&
-      <>{null && renderJobs(data)}
+      <>{null}
         {!!data.length && <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + stylesNew.widjet}>
               <span className='gradeTitleLeg'>самая подходящая специальность: <span className='jobBackTitle'>{(data[0] as any).job_name}</span></span>
           </div>}

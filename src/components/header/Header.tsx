@@ -70,9 +70,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
   const history = useNavigate()
 
   React.useEffect(() => {
-    if ((document.getElementById('search') as HTMLInputElement)) {
-      (document.getElementById('search') as HTMLInputElement).value = takeInput
-    }
+
   }, [takeInput])
   React.useEffect(() => {
     if (location.pathname !== ('/search') && location.pathname !== '/searchjob') {
@@ -116,6 +114,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                       </span>
                   </span>
                   <Search
+                    title = {takeInput}
                       isMainSearch={isMainSearch}
                       changeData={changeData}
                       setGrade={setGrade}
