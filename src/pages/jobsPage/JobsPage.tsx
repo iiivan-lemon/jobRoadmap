@@ -10,7 +10,7 @@ import { loadState } from '../../utils/utils'
 import { generateChart } from '../../components/bubbleChart/bubbleChart'
 import Draggable from 'react-draggable'
 import { ErrorModal } from '../../components/errorModal/errorModal'
-import GradientGrade from '../../components/gradientGrade/GradientGrade'
+
 export const JobsPage = ({ inputData, sendJob }) => {
   const [data, setData] = useState([])
   const dispatch = useAppDispatch()
@@ -49,14 +49,20 @@ export const JobsPage = ({ inputData, sendJob }) => {
       if (loading === loadState.res) {
         if (data.length) {
           renderBubbles(data)
-        } else { setErrMessage('по вашим навыкам профессии не найдены') }
+        } else {
+          setLoad(loadState.error)
+          setErrMessage('по вашим навыкам профессии не найдены')
+        }
       }
     }, [loading])
 
     const renderBubbles = (data) => {
-      if (data.length && data.filter(el => el.percent >= 10)) {
+      if (data.length && data.filter(el => el.percent >= 10).length) {
         generateChart(data.filter(el => el.percent >= 10), sendJob)
-      } else { setErrMessage('по вашим навыкам не найдены подходящие профессии') }
+      } else {
+        setLoad(loadState.error)
+        setErrMessage('по вашим навыкам не найдены подходящие профессии')
+      }
     }
   } catch (e) {
     setLoad(loadState.error)
@@ -92,8 +98,8 @@ export const JobsPage = ({ inputData, sendJob }) => {
       { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
       <>
       {((loading === loadState.res)) &&
-      <>{null}
-        {!!data.length && <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + stylesNew.widjet}>
+      <>{/* @ts-expect-error awdawd */}
+        {!!data.filter(el => el.percent >= 10).length && <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + stylesNew.widjet}>
               <span className='gradeTitleLeg'>самая подходящая специальность: <span className='jobBackTitle'>{(data[0] as any).job_name}</span></span>
           </div>}
           <div className={styles.jobs} style={{ width: '100%', height: '100%' }}

@@ -34,7 +34,7 @@ const NewUserPage: FC = () => {
                   <span
                       className={styles.titleDescr}
                   >
-                      Cервис, который поможет вам узнать и изучить необходимые навыки для подготовки к собеседованиям по выбранной Вами профессии
+                      Cервис, который поможет вам узнать и изучить необходимые навыки для подготовки к собеседованиям по выбранной IT профессии
                   </span>
                   </div>
                   <button type='button' className={styles.tag + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button>

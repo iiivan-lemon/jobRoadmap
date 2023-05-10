@@ -42,15 +42,15 @@ export const TagInput = ({ subJob }) => {
   }
 
   function handleKeyDown (e) {
-    e.target.placeholder = ''
-    if (e.key !== 'Enter') return
-    const value = e.target.value
-    if (!value.trim()) return
-    if (tags.length <= 5) {
-      setTags([...(new Set([...tags, value.toLowerCase()]))])
-      setHavRecommends(false)
-    }
-    e.target.value = ''
+    // e.target.placeholder = ''
+    // if (e.key !== 'Enter') return
+    // const value = e.target.value
+    // if (!value.trim()) return
+    // // if (tags.length <= 5) {
+    // //   setTags([...(new Set([...tags, value.toLowerCase()]))])
+    // //   setHavRecommends(false)
+    // // }
+    // e.target.value = ''
   }
   const history = useNavigate()
   const location = useLocation()
