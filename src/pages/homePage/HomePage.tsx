@@ -82,9 +82,9 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
           } else {
             setLoad(loadState.res)
             const rawData = (dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.additional
-            if (changeSkills(rawData, isHard).length && changeSkills(rawData, isHard).filter(el => el.distance >= 0.1)?.length) {
-              setData(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1))
-              setSkillCount(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1).length)
+            if (rawData.length && changeSkills(rawData, isHard).filter(el => el.distance >= 0.1)?.length) {
+              setData(rawData.filter(el => el.distance >= 0.1))
+              setSkillCount(rawData.filter(el => el.distance >= 0.1).length)
             }
             setInBase((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).in_base)
             setJobBack((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.job_name)
@@ -108,10 +108,14 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
 
     React.useEffect(() => {
       if (document.getElementById('graph-chart')) { (document.getElementById('graph-chart') as HTMLElement).innerHTML = '' }
-      if (data.length) {
-        (isHard)
-          ? generateGraph(data, clickNode, grade, finished)
-          : generateGraph(data, clickNode, { begin: 0, end: 3 }, finished)
+      if (data.length && changeSkills(data, isHard).length) {
+        if (isHard) {
+          generateGraph(changeSkills(data, isHard), clickNode, grade, finished)
+        } else {
+          if (changeSkills(data, isHard).length > 2) {
+            generateGraph(changeSkills(data, isHard), clickNode, { begin: 0, end: 3 }, finished)
+          }
+        }
       }
     }, [data, isHard])
 
@@ -252,7 +256,10 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                         setGrade({ begin: e.minIndex, end: e.maxIndex })
                       }} value={[0, 1, 2, 3]}></RangeSlider>
                     <GradientGrade width={'14rem'}/></> }
-                  { null && ((!!changeSkills(data, !isHard).length || (!!changeSkills(data, isHard).length)) && <button className={styles.tag + ' skillBtn'} onClick={() => { setIsHard(!isHard) }}> показать { (!isHard) ? 'hard ' : 'soft ' } скиллы</button>)}
+                  { (((changeSkills(data, false).length > 2)) &&
+                      <button className={styles.tag + ' skillBtn'} onClick={() => {
+                        setIsHard(!isHard)
+                      }}> показать {(!isHard) ? 'hard ' : 'soft '} скиллы</button>)}
                 </div>
                 <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'jobOptions ' + styles.widjet}><span className='gradeTitleLeg'>найдено: <span className='jobBackTitle'>{jobBack}</span></span><span className='gradeTitleLeg'>всего навыков: <span className='countTitle'>{skillCount}</span></span></div>
                 <div
