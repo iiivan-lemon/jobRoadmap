@@ -67,7 +67,6 @@ const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
           className={styles.headerTags}
           ref={ref}
       >
-        <div className='backDarkBlueNoiseLeft'></div>
           {/* <Divider orientation="left">Custom</Divider> */}
           <Space
               className={stylesOps.headerOpsStrings}

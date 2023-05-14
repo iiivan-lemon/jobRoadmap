@@ -52,10 +52,10 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
   ] = useState(true)
 
   React.useEffect(() => {
-    const el = (document.getElementById('spaceLine') as HTMLElement)
-    if (!isTechSearch) {
-      el.style.visibility = 'visible'
-    }
+    // const el = (document.getElementById('spaceLine') as HTMLElement)
+    // if (!isTechSearch) {
+    //   el.style.visibility = 'visible'
+    // }
     if (title && isTechSearch) {
       if ((document.getElementById('search') as HTMLInputElement)) {
         (document.getElementById('search') as HTMLInputElement).value = title
@@ -68,10 +68,10 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
   }, [isMainSearch])
 
   React.useEffect(() => {
-    const el = (document.getElementById('spaceLine') as HTMLElement)
-    if (el) {
-      (!isModalOpen || !isTechSearch) ? el.style.visibility = 'visible' : el.style.visibility = 'hidden'
-    }
+    // const el = (document.getElementById('spaceLine') as HTMLElement)
+    // if (el) {
+    //   (!isModalOpen || !isTechSearch) ? el.style.visibility = 'visible' : el.style.visibility = 'hidden'
+    // }
   }, [isModalOpen])
   const sendFav = () => {
     if ((document.getElementById('search') as HTMLInputElement)?.value !== '') {
