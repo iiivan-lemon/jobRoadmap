@@ -3,13 +3,12 @@
     z-index: 10;
     position: relative;
     border-radius: 1rem;
-    margin-block: 10px;
-    padding: 1rem;
     inline-size: -moz-fit-content;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
+    margin-block-end: 1rem;
 }
 
 .posModalInput{
@@ -116,12 +115,17 @@ padding: 6px;
 margin-block-end: 10px;
 }
 .resumeBlock{
-row-gap: 1rem;
-display: flex;
-flex-direction: column;
+    width: 100%;
+    row-gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem;
 }
-.resumeBlock > span {
-color: white;
+.resumeBlock > div > span {
+    color: white;
+    font-size: 0.8rem;
 }
 
 .blurBlock{
@@ -132,9 +136,9 @@ backdrop-filter: blur(3px);
 }
 
 .resResumeBlock{
+    box-sizing: border-box;
     padding-block-start: 1rem;
     display: flex;
-    margin-inline-start: 2rem;
     width: 100%;
     flex-direction: column;
     justify-content: flex-start;
@@ -143,14 +147,38 @@ backdrop-filter: blur(3px);
     text-align: justify;
 }
 
+.fullResBlock{
+    height: -webkit-fill-available;
+    row-gap: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.uploadBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fileUpload{
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 12rem;
+    max-height: 3rem;
+}
+
 .resumeInput{
+    width: fit-content;
+    align-self: center;
+    box-sizing: border-box;
     text-align: justify;
 height: -moz-fit-content;
-width: 14rem;
 border-radius: 10px;
 padding: 13px;
 width: -moz-fit-content;
-width: fit-content;
 }
 .errDesr{
 align-self: center;
@@ -159,7 +187,8 @@ color: #ff0c0cbf;
 }
 
 #searchResume{
-font-size: 1.2rem;
+    padding-inline-start: 1rem;
+font-size: 1rem;
 }
 .dropdown{
 box-shadow: 0 0 0 4px #9cb1ff;

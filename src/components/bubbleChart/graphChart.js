@@ -28,7 +28,7 @@ function processData(data) {
 }
 
 export const generateGraph = (data, showModal, grade, finished) => {
-
+    const tooltip = d3.select('.tooltip');
     const bubble = data => d3.pack()
         .size([width, height])
         .padding(25)
@@ -78,28 +78,54 @@ export const generateGraph = (data, showModal, grade, finished) => {
 
         })
 
-
-
-
-
-
-
-
-    node.append("image")
-        .attr('dy', 2)
+    const circle = node.append('circle')
         .attr('class', d => !!~finished.findIndex(el => el === d.data.technology_name) ? d.data.technology_name + " svgAni checkNode" : d.data.technology_name + " svgAni")
         .attr("id", d => d.data.professionalism)
-        .attr("xlink:href", d => ( d.data.index === 0) ? "static/svg-hex0.svg" : "static/svg-hex" + d.data.professionalism  + ".svg" )
-        //     .attr("x", function (d, i) { return -mugDiameter / 2 - mugDiameter * (i % 9); })
-        //.attr("y", function (d, i) { return -mugDiameter / 2 - mugDiameter * (i / 9 | 0); })
-        .attr("width", d =>  d.data.distance * 100)
-        .attr("height", d =>  d.data.distance * 100)
-        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : ''  )
-        .attr('x', d => -(d.r/1.5)/2)
-        .attr('y', d => -(d.r/1.5)/2)
+        .style('fill', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
+        .style('filter', d => `drop-shadow(rgba(0, 0, 0, 0.8) 2px 4px 6px)`)
+        .style('stroke', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
+        .style('stroke', '#FFFFFFFF')
+        .style('stroke-width', '0px')
+        .on('mouseover', function (e, d) {
+            // tooltip.select('img').attr('src', d.data.img);
+            // tooltip.select('span').text(d.data.technology_name + ' ' +  Math.floor(d.data.distance * 100) + ' %');
+            // tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
+            // tooltip.select('span').attr('class', d.data.category).text(d.data.category);
+            // tooltip.style('visibility', 'visible');
+            d3.select(this).style('stroke-width', '3px');
+        })
+        .on('mousemove', e => tooltip.style('top', `${e.pageY - 60}px`)
+            .style('left', `${e.pageX}px`))
+        .on('mouseout', function () {
+            d3.select(this).style('stroke-width', '0px');
+            // return tooltip.style('visibility', 'hidden');
+        })
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : 'drop-shadow(1px 1px 1px black)'  )
         .on('click', function(e,d){
             showModal(d.data)
         })
+
+
+
+
+
+
+
+    // node.append("image")
+    //     .attr('dy', 2)
+    //     .attr('class', d => !!~finished.findIndex(el => el === d.data.technology_name) ? d.data.technology_name + " svgAni checkNode" : d.data.technology_name + " svgAni")
+    //     .attr("id", d => d.data.professionalism)
+    //     .attr("xlink:href", d => ( d.data.index === 0) ? "static/svg-hex0.svg" : "static/svg-hex" + d.data.professionalism  + ".svg" )
+    //     //     .attr("x", function (d, i) { return -mugDiameter / 2 - mugDiameter * (i % 9); })
+    //     //.attr("y", function (d, i) { return -mugDiameter / 2 - mugDiameter * (i / 9 | 0); })
+    //     .attr("width", d =>  d.data.distance * 100)
+    //     .attr("height", d =>  d.data.distance * 100)
+    //     .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : ''  )
+    //     .attr('x', d => -(d.r/1.5)/2)
+    //     .attr('y', d => -(d.r/1.5)/2)
+    //     .on('click', function(e,d){
+    //         showModal(d.data)
+    //     })
 
     let text = node
         .selectAll("text")
@@ -112,16 +138,23 @@ export const generateGraph = (data, showModal, grade, finished) => {
         .on('click', function(e,d){
             showModal(d.data)
         })
-        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : 'drop-shadow(1px 1px 1px black)'  )
-    // image.attr('src', svgNode)
-    text.selectAll("tspan.text")
-        .data(d => d.data.technology_name.split('-').join(' ').split(' ').slice(0,3))
-        .enter()
-        .append("tspan")
-        .attr("class", "text")
-        .text(d => d)
-        .attr("x", 20)
-        .attr("dy", 12)
+        .text(d => d.data.technology_name.length < ( d.r/ 5) ? d.data.technology_name : (d.data.technology_name.substring(0, d.r / 4) + '...'))
+        .on('mouseover', function (e, d) {
+            d3.select(this).style('cursor', 'pointer');
+            tooltip.select('span').text(d.data.technology_name + ' ' +  Math.floor(d.data.distance * 100) + ' %');
+            tooltip.style('visibility', 'visible');
+        })
+        .on('mouseout', function () {
+            return tooltip.style('visibility', 'hidden');
+        })
+    // text.selectAll("tspan.text")
+    //     .data(d => d.data.technology_name.length < ( d.r/ 5) ? d.data.technology_name : (d.data.technology_name.substring(0, d.r / 4) + '...'))
+    //     .enter()
+    //     .append("tspan")
+    //     .attr("class", "text")
+    //     .text(d => d)
+    //     .attr("x", 0)
+    //     .attr("dy", 15)
     // node.append('text')
     //     .attr("id", d => d.data.professionalism)
     //     .style('fill', 'white')
@@ -138,10 +171,10 @@ export const generateGraph = (data, showModal, grade, finished) => {
         .duration(1000)
         .attr('transform', d => `translate(${d.x}, ${d.y})`);
 
-    // circle.transition()
-    //     .ease(d3.easeExpInOut)
-    //     .duration(1000)
-    //     .attr('r', d => d.r);
+    circle.transition()
+        .ease(d3.easeExpInOut)
+        .duration(1000)
+        .attr('r', d => d.r);
 
     // function transition() {
     //     const d = data[Math.floor(Math.random() * data.length)];

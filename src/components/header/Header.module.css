@@ -18,7 +18,7 @@
     color: transparent;
     -webkit-background-clip: text;
     cursor: pointer;
-    font-family: 'GT Eesti Pro Display', serif;
+    font-family: 'Minipax', 'GT Eesti Pro Display', serif;
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
@@ -38,8 +38,8 @@
     text-decoration: none;
     padding-inline: 10px;
     font-style: normal;
-    font-weight: 500;
-    font-size: 1.2rem;
+    font-weight: 400;
+    font-size: 1rem;
     line-height: 23px;
     display: flex;
     align-items: flex-end;
@@ -53,7 +53,7 @@
     padding-inline: 10px;
     font-style: normal;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 23px;
     display: flex;
     align-items: flex-end;

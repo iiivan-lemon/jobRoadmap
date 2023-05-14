@@ -10,7 +10,7 @@
     justify-content: center;
 }
 #jobLetter{
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .copySvg{
@@ -37,19 +37,20 @@
 }
 
 .letter{
-    width: min-content;
+    width: 100%;
     position: relative;
 }
 
 .letterArea{
     border-radius: 10px;
     color: white;
-    width: 60vw;
-    height: 70vh;
+    width: 100%;
+    height: 60vh;
     resize: none;
     font-size: 1rem;
     padding: 1rem;
     text-align: initial;
+    box-sizing: border-box;
 }
 .letterBlock > span{
     color: white;

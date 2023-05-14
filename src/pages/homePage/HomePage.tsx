@@ -322,6 +322,13 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                         />
                     </div>
                  </Draggable>
+                    <div className='tooltip' style={{ zIndex: 100 }}>
+                        <img alt=""/>
+                        <div>
+                            <a></a>
+                            <span></span>
+                        </div>
+                    </div>
                   {null}
                 </div>
                 {/*  <GraphSelf sendJob={sendJob} isHard={isHard} data={changeSkills(data, isHard)} grade={grade} finishedNodes={finishedNodes} ></GraphSelf> */}

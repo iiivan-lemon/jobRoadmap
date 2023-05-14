@@ -1,4 +1,5 @@
 .tags-input-container{
+    box-sizing: border-box;
     width: 22rem;
     overflow: overlay;
     display: inline-flex;
