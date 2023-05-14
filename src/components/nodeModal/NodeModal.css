@@ -13,7 +13,7 @@
     width: 20rem;
     background: linear-gradient(180deg, #1B1B1B 1.1%, #0f083a 91.05%);
     font-size: 1.4rem;
-    color: white;
+    color: #3a3a3a;
     padding: 1rem;
     flex-direction: column;
     align-items: stretch;
@@ -70,7 +70,7 @@
 }
 .tips{
     white-space: pre-line;
-    color: white;
+    color: #3a3a3a;
     font-size: 1rem;
     height: -moz-fit-content;
     margin-block: 2rem;
@@ -84,7 +84,7 @@
     height: 1rem;
     margin-block: 5px;
     border-radius: 10px;
-    color: white;
+    color: #3a3a3a;
     text-decoration: none;
     vertical-align: middle;
 }
@@ -99,7 +99,7 @@ color:white;
 color:white;
 }
 .gradeTitle{
-color: white;
+color: #3a3a3a;
 }
 .gradeTitle:hover:before {
 z-index: 20;
@@ -124,7 +124,7 @@ border: none;
 
 
 .jobTitle{
-color: white;
+color: #3a3a3a;
 font-size: 1rem;
 margin-block: 1rem;
 }

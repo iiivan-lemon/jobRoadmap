@@ -1,10 +1,9 @@
 .search{
+    border: 1px solid #3A3A3A;
+    border-radius: 10px;
     color: black;
     background: #E8F1F2;
-    border: 3px solid #9cb1ff;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    border-radius: 10px;
-    outline-color: #0047ff;
+    outline-color: black;
 }
 .searchHeader{
     width: 22rem;
@@ -49,7 +48,7 @@
 .changeSearch{
     height: 2rem;
     stroke: none;
-    fill: #0047ff;
+    fill: #3a3a3a;
     cursor: pointer;
     margin-inline: 1rem;
 
@@ -93,15 +92,16 @@ top: 3.4rem;
 }
 
 .searchSvg{
+    filter: brightness(0.1);
     transition: filter 0.5s ease;
     cursor: pointer;
     margin-inline-start: 10px;
 
 }
-
 .searchSvg:hover{
     filter: brightness(0.5);
 }
+
 
 @media (min-width: 1500px) and (max-width: 2000px) {
     .searchHeader{

@@ -21,18 +21,18 @@
 }
 
 .tag:hover{
-    color: white;
+    color: #3a3a3a;
     /*border: 1px solid white;*/
 }
 .tagActive{
-    color: white;
+    color: #3a3a3a;
     box-shadow: 0 0 0 3px #FFFFFF;
     border-radius: 45px;
 }
 
 .gradeTag{
     filter: drop-shadow(2px 4px 2px #000000c7);
-    /*color: white;*/
+    /*color: #3a3a3a;*/
     /*border: 3px solid transparent;*/
     width: 12rem;
 }

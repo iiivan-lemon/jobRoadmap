@@ -15,6 +15,25 @@
     text-align: -webkit-center;
 }
 
+.backBlueNoise{
+    width: 23rem;
+    height: 23rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-size: cover;
+    background-image: url("./static/images/img.png");
+}
+.backDarkBlueNoiseLeft{
+    width: 23rem;
+    height: 23rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-image: url("./static/images/img_3.png");
+}
+
 .firstNode{
     width: -webkit-fill-available;
     animation: pulse 3s linear infinite;

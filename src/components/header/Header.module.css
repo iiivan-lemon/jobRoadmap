@@ -1,7 +1,7 @@
 .header {
+    background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%);
     overflow-x: clip;
     position: relative;
-    z-index: 100;
     display: flex;
     /*background: #1B1B1B;*/
     flex-direction: column;
@@ -9,14 +9,14 @@
 }
 
 .logoHref {
+    z-index: 12;
     /*flex-grow: 1;*/
     text-decoration: none;
 }
 
+
 .title {
-    background-image: linear-gradient(180deg, #ffffff, #4454ff);
-    color: transparent;
-    -webkit-background-clip: text;
+    color: #3a3a3a;
     cursor: pointer;
     font-family: 'Minipax', 'GT Eesti Pro Display', serif;
     font-style: normal;
@@ -27,6 +27,7 @@
 }
 
 .titles{
+    flex-grow: 0.5;
     display: flex;
     align-items: center;
 }
@@ -44,7 +45,7 @@
     display: flex;
     align-items: flex-end;
     text-align: center;
-    color: #FFFFFF;
+    color: #3a3a3a;
 }
 
 .username {
@@ -58,32 +59,49 @@
     display: flex;
     align-items: flex-end;
     text-align: center;
-    color: #FFFFFF;
+    color: #3a3a3a;
 }
 
 
 .mainHeader {
+    z-index: 11;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(0.25turn, #3a3a3a, rgb(131 131 131 / 0%));
+    border-image-slice: 1;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding-block: 14px;
     display: flex;
     padding-inline: 80px;
-    background: #1B1B1B;
+    /*background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%);*/
 }
 
 .headerTags {
-    z-index: 10;
-    background: linear-gradient(180deg, #1B1B1B -10.9%, #252240 100%);
+    width: -webkit-fill-available;
+    align-items: center;
+    z-index: 11;
+    border: none;
+    background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%);
     position: absolute;
     display: flex;
     padding: 1rem 80px;
     flex-direction: column;
-    width: 100vw;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
-    border-width: 0;
-    border-image: linear-gradient(90deg, #ffffff00, #ffffff8c, #ffffff00) 30;
-    border-bottom: 1px;
-    border-style: solid;
+    /*background: rgba(255, 255, 255, 0.37);*/
+    /*box-shadow: 0px 0px 20px 10px rgb(85 85 85 / 21%);*/
+    /*-webkit-backdrop-filter: blur(5px);*/
+    /*backdrop-filter: blur(5px);*/
+    /*border-radius: 45px;*/
+    /*width: -webkit-fill-available;*/
+    /*align-items: center;*/
+    /*z-index: 22;*/
+    /*border: none;*/
+
+    /*!*background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%);*!*/
+    /*position: absolute;*/
+    /*display: flex;*/
+    /*padding: 1rem 80px;*/
+    /*flex-direction: column;*/
+    /*width: 100vw;*/
 }
 
 .chooseTitle{

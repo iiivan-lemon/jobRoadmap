@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { selectGrade } from '../../models/gradeFilter/gradeSlice'
 import { getTops, selectDataTops } from '../../models/tops/topsSlice'
 import { getDataGraph } from '../../models/dataGraph/dataGraphSlice'
+import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.css'
 const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
   const top = useAppSelector(selectDataTops)
 
@@ -66,6 +67,7 @@ const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
           className={styles.headerTags}
           ref={ref}
       >
+        <div className='backDarkBlueNoiseLeft'></div>
           {/* <Divider orientation="left">Custom</Divider> */}
           <Space
               className={stylesOps.headerOpsStrings}

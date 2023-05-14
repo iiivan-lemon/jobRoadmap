@@ -42,6 +42,7 @@
 }
 
 .description{
+    z-index: 11;
     width: 50%;
     line-height: 2rem;
     text-overflow: ellipsis;
@@ -63,9 +64,7 @@
 }
 
 .title{
-    background-image: linear-gradient(180deg, #ffffff, #4454ff);
-    color: transparent;
-    -webkit-background-clip: text;
+    color: #3a3a3a;
     margin-block-end: 3rem;
     font-style: normal;
     font-weight: 600;
@@ -83,7 +82,7 @@
     font-size: 32px;
     line-height: 37px;
     /* text-align: center; */
-    color: #FFFFFF;
+    color: #3a3a3a;
 }
 
 .titleDescr{
@@ -92,12 +91,12 @@
     width: 30rem;
     font-style: normal;
     font-weight: 400;
-    color: #FFFFFF;
+    color: #3a3a3a;
 }
 
 .widjetTitle{
     font-style: normal;
-    color: #FFFFFF;
+    color: #3a3a3a;
     bottom: 5%;
     position: absolute;
 }
@@ -124,10 +123,15 @@
     border-radius: 20px;
     box-sizing: border-box;
     transition: 0.5s ease;
-    color: white;
+    color: #3a3a3a;
     filter: drop-shadow(2px 4px 6px black);
 }
 
+.newPageColorBtn{
+    border: none;
+    background: #313131;
+    border-radius: 50px;
+}
 .newPageBtn{
     z-index: 2;
     color: white;
@@ -140,17 +144,43 @@
     text-align: center;
 }
 
+.noiseWidgetBack{
+    height: 100%;
+    width: 70%;
+    right: 0;
+    top: 0;
+    z-index: 9;
+}
+
+.noiseBackHeaderOps{
+    z-index: 0;
+    top: 0;
+    left: 0;
+}
+
+.noiseBlueNew{
+    top: 0;
+}
+.noiseBack{
+    position: absolute;
+}
+.noiseBackHeader{
+    z-index: 0;
+}
+
 .widjet{
-    z-index: 10;
+    z-index: 9;
     line-height: 1.2rem;
     text-align: -webkit-center;
     width: 10rem;
     padding: 2rem 1rem;
-    background: linear-gradient(234.93deg, rgba(0, 0, 0, 0.51) 11.48%, rgba(0, 0, 0, 0) 100%), rgba(91, 94, 172, 0.38);
-    border: 3px solid rgba(255, 255, 255, 0.2);
     -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.37);
+    /* widgetEff */
+    box-shadow: 0px 0px 20px 10px rgba(85, 85, 85, 0.21);
+    backdrop-filter: blur(5px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 45px;
 }
 
 .widjetResume{
@@ -175,7 +205,7 @@
 
     font-size: 1rem;
     text-align: center;
-    color: #FFFFFF;
+    color: #3a3a3a;
     font-style: normal;
     font-weight: 300;
 

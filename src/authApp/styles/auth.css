@@ -13,7 +13,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    color: white;
+    color: #3a3a3a;
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
@@ -25,10 +25,10 @@
 }
 
 .authModal  > h4{
-    color: white;
+    color: #3a3a3a;
 }
 .form-group > label{
-    color: white;
+    color: #3a3a3a;
 }
 .form-group > input {
     line-height: 1.2rem;
@@ -37,7 +37,7 @@
 }
 .authModal > span{
     cursor: pointer;
-    color: white;
+    color: #3a3a3a;
 }
 
 .invalid-feedback{

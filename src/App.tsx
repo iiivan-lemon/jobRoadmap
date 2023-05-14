@@ -38,6 +38,8 @@ import ValidatedLoginForm from './authApp/login/Formik'
 import ValidatedRegForm from './authApp/register/FormikReg'
 import { ProfileUser } from './authApp/profile/profileUser'
 import { ReactComponent as NodeSvg } from '../src/static/images/svg-hex.svg'
+import styles from './pages/newUserPage/NewUserPage.module.css'
+
 /*
  * Import { PrivateRoute } from './components/privateRoute/PrivateRoute'
  * import { history } from './authApp/_helpers'
@@ -95,6 +97,8 @@ function App (): JSX.Element {
 
   const routes = (
       <React.Fragment>
+        <div className='backBlueNoise'></div>
+        <div className='backDarkBlueNoiseLeft'></div>
           <Header
               takeInput={takeInput}
               isMainSearch={isMainSearch}

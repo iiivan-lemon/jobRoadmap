@@ -2,9 +2,10 @@
 }
 
 .headerOpsStrings{
+    z-index: 11;
     margin-block-end: 1rem;
 }
 .gradeDesr{
-    color: white;
+    color: #3a3a3a;
     margin-inline-end: 1rem;
 }
