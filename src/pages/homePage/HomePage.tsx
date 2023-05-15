@@ -148,16 +148,16 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
         const text = refGraph.current?.getElementsByTagName('text')
         if (list && text && isHard) {
           [].forEach.call(list, function (el: HTMLElement) {
-            if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
+            if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.5)' } else {
               el.style.filter = ''
-            }
-          });
-          [].forEach.call(text, function (el: HTMLElement) {
-            if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
-              el.style.filter = ''
-              el.style.filter = 'drop-shadow(1px 1px 1px black)'
             }
           })
+          // [].forEach.call(text, function (el: HTMLElement) {
+          //   if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
+          //     el.style.filter = ''
+          //     el.style.filter = 'brightness(0.5)'
+          //   }
+          // })
         }
       }
     }, [grade])

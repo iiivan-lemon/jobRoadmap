@@ -50,6 +50,7 @@ export const generateGraph = (data, showModal, grade, finished) => {
         })
 
 
+
     const root = bubble(data);
 
     // const tooltip = d3.selectAll('.tooltip')
@@ -78,29 +79,80 @@ export const generateGraph = (data, showModal, grade, finished) => {
 
         })
 
+    const colors = [
+        {front: '#e4eff6' ,main: '#6fcbff', back: '#4596c4'},
+        {front: '#cad3de' ,main: '#5a8df8', back: '#455ac4'},
+        {front: '#aeb8be' ,main: '#4b59bb', back: '#333f91'},
+        {front: '#939ba1' ,main: '#343f8c', back: '#1f2659'},
+    ]
+
+    colors.forEach( (el, i) => {
+        const gradient = svg.append('defs')
+            .append('radialGradient')
+            .attr('cx', '50%')
+            .attr('cy', '50%')
+            .attr('r', '50%')
+            .attr('fx', '30%')
+            .attr('fy', '30%')
+            .attr('id', 'grad' + i )
+        const stop1 = gradient.append('stop')
+            .attr('offset', '0%')
+            .style('stop-color', el.front)
+            .style('stop-opacity', 1)
+        const stop2 = gradient.append('stop')
+            .attr('offset', '90%')
+            .style('stop-color', el.main)
+            .style('stop-opacity', 1)
+        const stop3 = gradient.append('stop')
+            .attr('offset', '100%')
+            .style('stop-color', el.back)
+            .style('stop-opacity', 1)
+    })
+    // const def = svg.append('defs')
+    // const gradient = def.append('radialGradient')
+    //     .attr('cx', '50%')
+    //     .attr('cy', '50%')
+    //     .attr('r', '50%')
+    //     .attr('fx', '30%')
+    //     .attr('fy', '30%')
+    //     .attr('id', 'grad')
+    // const stop1 = gradient.append('stop')
+    //     .attr('offset', '0%')
+    //     .style('stop-color', '#e4eff6')
+    //     .style('stop-opacity', 1)
+    // const stop2 = gradient.append('stop')
+    //     .attr('offset', '90%')
+    //     .style('stop-color', '#6fcbff')
+    //     .style('stop-opacity', 1)
+    // const stop3 = gradient.append('stop')
+    //     .attr('offset', '100%')
+    //     .style('stop-color', '#4596c4')
+    //     .style('stop-opacity', 1)
+
     const circle = node.append('circle')
         .attr('class', d => !!~finished.findIndex(el => el === d.data.technology_name) ? d.data.technology_name + " svgAni checkNode" : d.data.technology_name + " svgAni")
         .attr("id", d => d.data.professionalism)
-        .style('fill', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
-        .style('filter', d => `drop-shadow(rgba(0, 0, 0, 0.8) 2px 4px 6px)`)
-        .style('stroke', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
-        .style('stroke', '#FFFFFFFF')
-        .style('stroke-width', '0px')
+        .style('fill', d =>  'url(#grad' +  d.data.professionalism +')')
+        // .style('fill', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
+        .style('filter', d => `brightness(0.5)`)
+        // .style('stroke', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
+        // .style('stroke', '#FFFFFFFF')
+        // .style('stroke-width', '0px')
         .on('mouseover', function (e, d) {
             // tooltip.select('img').attr('src', d.data.img);
             // tooltip.select('span').text(d.data.technology_name + ' ' +  Math.floor(d.data.distance * 100) + ' %');
             // tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
             // tooltip.select('span').attr('class', d.data.category).text(d.data.category);
             // tooltip.style('visibility', 'visible');
-            d3.select(this).style('stroke-width', '3px');
+            // d3.select(this).style('stroke-width', '3px');
         })
         .on('mousemove', e => tooltip.style('top', `${e.pageY - 60}px`)
             .style('left', `${e.pageX}px`))
         .on('mouseout', function () {
-            d3.select(this).style('stroke-width', '0px');
+            // d3.select(this).style('stroke-width', '0px');
             // return tooltip.style('visibility', 'hidden');
         })
-        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.3)' : 'drop-shadow(1px 1px 1px black)'  )
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.5)' : 'drop-shadow(1px 1px 1px black)'  )
         .on('click', function(e,d){
             showModal(d.data)
         })
@@ -133,7 +185,7 @@ export const generateGraph = (data, showModal, grade, finished) => {
         .enter()
         .append("text")
         .attr('fill', 'white')
-        .style('font-size', '0.8rem')
+        .style('font-size', '1rem')
         .attr("id", d => d.data.professionalism)
         .on('click', function(e,d){
             showModal(d.data)

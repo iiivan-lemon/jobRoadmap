@@ -1,6 +1,6 @@
 .nodeModal{
     border-width: 0;
-    border-image: linear-gradient(#ffffff8c, #ffffff00) 30;
+    border-image: linear-gradient(rgba(0, 0, 0, 0.55), #ffffff00) 30;
     border-left: 1px;
     border-style: solid;
     overflow-x: hidden;
@@ -11,7 +11,7 @@
     right: 0;
     height: -webkit-fill-available;
     width: 20rem;
-    background: linear-gradient(180deg, #1B1B1B 1.1%, #0f083a 91.05%);
+    background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%);
     font-size: 1.4rem;
     color: #3a3a3a;
     padding: 1rem;
@@ -47,9 +47,7 @@
 }
 
 .nodeTitle{
-    text-align-last: left;
-    background-image: linear-gradient(180deg, #ffffff, #4454ff);
-    color: transparent;
+    color: #3a3a3a;
     -webkit-background-clip: text;
     width: -moz-fit-content;
     width: 100%;
@@ -96,7 +94,7 @@ color:white;
 }
 
 .percentTitle{
-color:white;
+    color: #3a3a3a;
 }
 .gradeTitle{
 color: #3a3a3a;

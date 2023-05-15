@@ -25,6 +25,34 @@ export const generateChart = (data, sendJob) => {
         .enter().append('g')
         .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
+
+    const colors = [
+        {front: '#cad3de' ,main: '#5a8df8', back: '#455ac4'},
+        {front: '#939ba1' ,main: '#343f8c', back: '#1f2659'},
+    ]
+
+    colors.forEach( (el, i) => {
+        const gradient = svg.append('defs')
+            .append('radialGradient')
+            .attr('cx', '50%')
+            .attr('cy', '50%')
+            .attr('r', '50%')
+            .attr('fx', '30%')
+            .attr('fy', '30%')
+            .attr('id', 'grad' + i )
+        const stop1 = gradient.append('stop')
+            .attr('offset', '0%')
+            .style('stop-color', el.front)
+            .style('stop-opacity', 1)
+        const stop2 = gradient.append('stop')
+            .attr('offset', '90%')
+            .style('stop-color', el.main)
+            .style('stop-opacity', 1)
+        const stop3 = gradient.append('stop')
+            .attr('offset', '100%')
+            .style('stop-color', el.back)
+            .style('stop-opacity', 1)
+    })
     // node.append("image")
     //     .attr("class", "svgAni")
     //     .attr('dy', 2)
@@ -59,7 +87,9 @@ export const generateChart = (data, sendJob) => {
     //     .attr("x", 20)
     //     .attr("dy", 12)
     const circle = node.append('circle')
-        .style('fill', d => d.data.percent > 40 ? colors.main : colors.others)
+
+        .style('fill', d =>  'url(#grad' +  d.data.percent > 40 ? 0 : 1 +')')
+        // .style('fill', d => d.data.percent > 40 ? colors.main : colors.others)
         .style('filter', d => `drop-shadow(rgba(0, 0, 0, 0.8) 2px 4px 6px)`)
         .style('stroke', d => d.data.percent > 60 ? colors.main : colors.others)
         .style('stroke', '#FFFFFFFF')

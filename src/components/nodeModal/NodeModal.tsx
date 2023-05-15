@@ -173,7 +173,7 @@ const NodeModal = ({ onClose, node, isChecked, sendJob }): JSX.Element => {
       ref={ref}
           >
     <div className='titleBlock'><span className='nodeTitle'>{node.technology_name}</span>
-      <button style={!checked ? { filter: 'grayscale(1)' } : { filter: 'grayscale(0)' } } className={'checkBtn ' + styles.tag} onClick={toggleChecked}>
+      <button style={!checked ? { filter: 'grayscale(1)' } : { filter: 'grayscale(0)' } } className={stylesTag.tag} onClick={toggleChecked}>
         {!checked ? 'не изучено' : 'изучено'}
       </button>
     <svg onClick={() => {

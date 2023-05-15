@@ -201,15 +201,16 @@
 }
 
 g > text {
+    fill: #3a3a3a;
+    color: black;
     font-size: 0.8rem;
     text-anchor: middle;
     dominant-baseline: middle;
-    filter: drop-shadow(1px 1px 1px black);
 }
 
-g > text > tspan {
-    filter: drop-shadow(2px 4px 6px black);
-}
+/*g > text > tspan {*/
+/*    filter: drop-shadow(2px 4px 6px black);*/
+/*}*/
 
 g:hover  .svgAni{
     animation: none;
@@ -217,8 +218,13 @@ g:hover  .svgAni{
 }
 
 .svgAni{
+    transition: transform 0.5s ease;
     animation: pulse 3s linear infinite;
 }
+.svgAni:active {
+    transform: scale(0.95);
+}
+
 /*@media (min-width: 900px) {*/
 /*    g > text {*/
 /*        font-size: 12px;*/
@@ -231,7 +237,7 @@ g:hover  .svgAni{
         transform: scale(1, 1);
     }
     50% {
-        transform: scale(1.1, 1.1);
+        transform: scale(1.05, 1.05);
     }
     100% {
         transform: scale(1, 1);
