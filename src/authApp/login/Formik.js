@@ -10,6 +10,7 @@ import  './../styles/auth.css'
 import styleSearch from "../../components/search/Search.module.css";
 import styles from './../../pages/newUserPage/NewUserPage.module.css'
 import {useAppSelector} from "../../app/hooks";
+import stylesTag from "../../components/Tag/Tag.module.css";
 const ValidatedLoginForm = () => {
     const history = useNavigate()
     const dispatch = useDispatch();
@@ -127,7 +128,7 @@ const ValidatedLoginForm = () => {
                         <div className="invalid-feedback">{errors.password}</div>
                     )}
                     </div>
-                    <button className={styles.tag + ' submitBtn'} type="submit" disabled={isSubmitting}>
+                    <button className={stylesTag.tag + ' submitBtn'} type="submit" disabled={isSubmitting}>
                         войти
                     </button>
                 </form>

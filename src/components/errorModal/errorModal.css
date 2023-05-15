@@ -1,4 +1,5 @@
 .errorModal {
+    width: 20rem;
     border: 1px solid white;
     align-items: center;
     row-gap: 1rem;
@@ -6,7 +7,6 @@
     position: absolute;
     top: 10rem;
     border-radius: 1rem;
-    background-color: #1b1b1b;
 
     padding: 1rem;
     flex-direction: column;

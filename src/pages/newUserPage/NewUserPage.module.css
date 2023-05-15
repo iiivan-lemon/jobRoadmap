@@ -127,12 +127,17 @@
     filter: drop-shadow(2px 4px 6px black);
 }
 
+.newPageColorBtn:active{
+    transform: scale(0.95);
+}
 .newPageColorBtn{
+    transition: all 0.5s ease;
     border: none;
     background: #313131;
     border-radius: 50px;
 }
 .newPageBtn{
+    cursor: pointer;
     z-index: 2;
     color: white;
     margin-block: 1rem;
@@ -166,6 +171,14 @@
 }
 .noiseBackHeader{
     z-index: 0;
+}
+
+.widgetsDescr{
+    z-index: 20;
+    display: block;
+    position: relative;
+    width: 50%;
+    height: 90%;
 }
 
 .widjet{

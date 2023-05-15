@@ -1,9 +1,16 @@
 .search{
+    line-height: 2rem;
+    font-size: 1rem;
+    padding-inline-start: 0.8rem;
     border: 1px solid #3A3A3A;
     border-radius: 10px;
     color: black;
     background: #E8F1F2;
     outline-color: black;
+}
+
+.search:focus{
+    background: rgba(111, 203, 255, 0.37);
 }
 .searchHeader{
     width: 22rem;
@@ -29,7 +36,7 @@
 
 /* Задаем общий стиль всплывающей подсказки для нужных элементов*/
 .favorite:hover:before{
-    z-index: 20;
+    z-index: 50;
     font-size: medium;
     position: absolute;
     width: 6rem;
@@ -55,7 +62,7 @@
 }
 
 .changeIconSearch:hover:before{
-z-index: 20;
+z-index: 50;
 font-size: medium;
 position: absolute;
 width: 4rem;

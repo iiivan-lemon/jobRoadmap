@@ -10,6 +10,7 @@ import './reg.css'
 import styleSearch from "../../components/search/Search.module.css";
 import styles from './../../pages/newUserPage/NewUserPage.module.css'
 import {useAppSelector} from "../../app/hooks";
+import stylesTag from "../../components/Tag/Tag.module.css";
 const ValidatedRegForm = () => {
     const refLinkCon = useRef();
     const refRegCon = useRef();
@@ -139,7 +140,7 @@ const ValidatedRegForm = () => {
                                         <div className="invalid-feedback">{errors.password}</div>
                                     )}
                                 </div>
-                                <button className={styles.tag + ' submitBtn'} type="submit" disabled={isSubmitting}>
+                                <button className={stylesTag.tag + ' submitBtn'} type="submit" disabled={isSubmitting}>
                                     зарегистрироваться
                                 </button>
                             </form>

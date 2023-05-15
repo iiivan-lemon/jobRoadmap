@@ -102,7 +102,7 @@ color:white;
 color: #3a3a3a;
 }
 .gradeTitle:hover:before {
-z-index: 20;
+z-index: 50;
 font-size: medium;
 position: absolute;
 width: fit-content;

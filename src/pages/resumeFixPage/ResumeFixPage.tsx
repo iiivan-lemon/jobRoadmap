@@ -15,6 +15,7 @@ import { getNodeProf } from '../../models/tops/topsSlice'
 import Tag from '../../components/Tag/Tag'
 import Linkify from 'linkify-react'
 import { sendUrl } from '../../models/urlCheck/urlCheckSlice'
+import stylesTag from './../../components/Tag/Tag.module.css'
 // eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-duplicates
 // eslint-disable-next-line no-template-curly-in-string
 pdfjs.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js'
@@ -69,14 +70,14 @@ export const ResumeFixPage = () => {
               setToLearn(data.payload[0].to_learn.map(el => <Tag
                 setTitleTag={getTips}
                 className={
-                  styles.tag}
+                  stylesTag.tag}
                 id='1'
                 title={{ profession: el }} />))
             } else if (data.payload[0]['to learn']) {
               setToLearn(data.payload[0]['to learn'].map(el => <Tag
                 setTitleTag={getTips}
                 className={
-                  styles.tag}
+                  stylesTag.tagActive}
                 id='1'
                 title={{ profession: el }} />))
             }
@@ -121,7 +122,7 @@ export const ResumeFixPage = () => {
       //   // return <div className='rec'><span> По вашей специальности ничего не найдено</span></div>
       // }
       return (
-        <div className={'rec '}><span> Ваши навыки:</span> <div className={'learnedTags'}>{data[0].learned.map((el: string) => (<div style={{ filter: ' grayscale(1) drop-shadow(2px 4px 6px black)' }} className={'learnedTag ' + styles.tag}>{el}</div>)) }</div></div>
+        <div className={'rec '}><span> Ваши навыки:</span> <div className={'learnedTags'}>{data[0].learned.map((el: string) => (<div className={stylesTag.tagNotActive}>{el}</div>)) }</div></div>
       )
     }
   }
@@ -211,16 +212,16 @@ export const ResumeFixPage = () => {
           <form className='resumeBlock' onSubmit={handleSubmit}>
             <div className={'uploadBlock'}>
             <span>добавьте резюме PDF</span>
-            <label htmlFor="upload-photo" className={styles.tag + ' submit fileUpload'}>{ !selectedFile ? 'выбрать файл' : (selectedFile as File).name}</label>
+            <label style={{ margin: 0 }} htmlFor="upload-photo" className={stylesTag.tag + ' fileUpload'}>{ !selectedFile ? 'выбрать файл' : (selectedFile as File).name}</label>
              <input id="upload-photo" style={{ display: 'none' }} placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
             </div>
               <div style={{ position: 'relative' }}>
             <input placeholder='введите профессию' autoComplete="off" id='searchResume' className={styleSearch.search} type="text" onChange={
               debounce(sendSearchValue)
             }/>
-            { !tips && haveRecommends && <div>{renderRecommends(recommends)}</div> }
+            { !tips && haveRecommends && <div className={styleSearch.dropDown}>{renderRecommends(recommends)}</div> }
             </div>
-            <input className={styles.tag + ' submit'} type="submit" id='inputScan' value="сканировать резюме" disabled={(!(selectedJob && selectedFile))} />
+            <input className={styles.newPageColorBtn + ' ' + styles.newPageBtn} type="submit" id='inputScan' value="сканировать резюме" disabled={(!(selectedJob && selectedFile))} />
         { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
       </form>
 
