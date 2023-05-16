@@ -169,7 +169,7 @@ const NodeModal = ({ onClose, node, isChecked, sendJob }): JSX.Element => {
   }
 
   return (<div
-      className='nodeModal'
+      className={'nodeModal ' + styles.widjet}
       ref={ref}
           >
     <div className='titleBlock'><span className='nodeTitle'>{node.technology_name}</span>

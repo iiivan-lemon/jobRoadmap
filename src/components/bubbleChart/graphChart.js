@@ -80,10 +80,10 @@ export const generateGraph = (data, showModal, grade, finished) => {
         })
 
     const colors = [
-        {front: '#e4eff6' ,main: '#6fcbff', back: '#4596c4'},
-        {front: '#cad3de' ,main: '#5a8df8', back: '#455ac4'},
-        {front: '#aeb8be' ,main: '#4b59bb', back: '#333f91'},
-        {front: '#939ba1' ,main: '#343f8c', back: '#1f2659'},
+        {front: '#92FFFF' ,main: '#51BABA', back: '#92FFFF'},
+        {front: '#A6D4FF' ,main: '#4F85B8', back: '#A6D4FF'},
+        {front: '#A5A4FF' ,main: '#605ECA', back: '#A5A4FF'},
+        {front: '#9087d2' ,main: '#343f8c', back: '#9087d2'},
     ]
 
     colors.forEach( (el, i) => {
@@ -91,16 +91,16 @@ export const generateGraph = (data, showModal, grade, finished) => {
             .append('radialGradient')
             .attr('cx', '50%')
             .attr('cy', '50%')
-            .attr('r', '50%')
-            .attr('fx', '30%')
-            .attr('fy', '30%')
+            .attr('r', '75%')
+            .attr('fx', '28.33%')
+            .attr('fy', '24.33%')
             .attr('id', 'grad' + i )
         const stop1 = gradient.append('stop')
             .attr('offset', '0%')
             .style('stop-color', el.front)
             .style('stop-opacity', 1)
         const stop2 = gradient.append('stop')
-            .attr('offset', '90%')
+            .attr('offset', '65%')
             .style('stop-color', el.main)
             .style('stop-opacity', 1)
         const stop3 = gradient.append('stop')
@@ -134,7 +134,7 @@ export const generateGraph = (data, showModal, grade, finished) => {
         .attr("id", d => d.data.professionalism)
         .style('fill', d =>  'url(#grad' +  d.data.professionalism +')')
         // .style('fill', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
-        .style('filter', d => `brightness(0.5)`)
+        // .style('filter', d => `brightness(0.5)`)
         // .style('stroke', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
         // .style('stroke', '#FFFFFFFF')
         // .style('stroke-width', '0px')
@@ -152,7 +152,7 @@ export const generateGraph = (data, showModal, grade, finished) => {
             // d3.select(this).style('stroke-width', '0px');
             // return tooltip.style('visibility', 'hidden');
         })
-        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.5)' : 'drop-shadow(1px 1px 1px black)'  )
+        // .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.5)' : 'drop-shadow(1px 1px 1px black)'  )
         .on('click', function(e,d){
             showModal(d.data)
         })

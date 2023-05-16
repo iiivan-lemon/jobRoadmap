@@ -48,7 +48,7 @@
 }
 .svgTitle:hover{
     animation: none;
-    filter: contrast(5);
+    filter: contrast(3);
 }
 
 /*.svgTitle:after{*/

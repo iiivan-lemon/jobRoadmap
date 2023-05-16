@@ -16,6 +16,7 @@ import { getFinished }
 import { ErrorModal } from '../../components/errorModal/errorModal'
 import { generateGraph } from '../../components/bubbleChart/graphChart'
 import NodeModal from '../../components/nodeModal/NodeModal'
+import stylesTag from '../../components/Tag/Tag.module.css'
 
 const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   const nav = useNavigate()
@@ -148,9 +149,9 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
         const text = refGraph.current?.getElementsByTagName('text')
         if (list && text && isHard) {
           [].forEach.call(list, function (el: HTMLElement) {
-            if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.5)' } else {
-              el.style.filter = ''
-            }
+            // if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.5)' } else {
+            //   el.style.filter = ''
+            // }
           })
           // [].forEach.call(text, function (el: HTMLElement) {
           //   if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {
@@ -248,20 +249,24 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
             </div>
         { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
             {(loading === loadState.res) && <>
+                <div className='optionsPanel'>
                 <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + styles.widjet}>
                   { isHard && <><span className='gradeTitleLeg'>
                   опыт работы
               </span>
+
+                    <GradientGrade width={'14rem'}/>
                       <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
                         setGrade({ begin: e.minIndex, end: e.maxIndex })
-                      }} value={[0, 1, 2, 3]}></RangeSlider>
-                    <GradientGrade width={'14rem'}/></> }
+                      }} value={[0, 1, 2, 3]}></RangeSlider></> }
                   { (((changeSkills(data, false).length > 2)) &&
-                      <button className={styles.tag + ' skillBtn'} onClick={() => {
+                      <button style={{ margin: 0 }} className={stylesTag.tag + ' skillBtn'} onClick={() => {
                         setIsHard(!isHard)
                       }}> показать {(!isHard) ? 'hard ' : 'soft '} скиллы</button>)}
+                    <div className={'jobOptions'}><span className='gradeTitleLeg'>найдено: <span className='jobBackTitle'>{jobBack}</span></span><span className='gradeTitleLeg'>всего навыков: <span className='countTitle'>{skillCount}</span></span></div>
                 </div>
-                <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'jobOptions ' + styles.widjet}><span className='gradeTitleLeg'>найдено: <span className='jobBackTitle'>{jobBack}</span></span><span className='gradeTitleLeg'>всего навыков: <span className='countTitle'>{skillCount}</span></span></div>
+                {/* <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'jobOptions ' + styles.widjet}></div> */}
+                </div>
                 <div
                     style={{ width: '100%', height: '100%' }}
                 onWheel={ (event) => {
