@@ -23,6 +23,7 @@
     right: 0;
     background-size: cover;
     background-image: url("./static/images/img.png");
+    /*animation: animate 25s linear infinite;*/
 }
 .backDarkBlueNoiseLeft{
     width: 23rem;
@@ -63,4 +64,20 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #130fa099;
+}
+
+@keyframes animate {
+
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+
 }

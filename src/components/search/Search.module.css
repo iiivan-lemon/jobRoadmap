@@ -1,4 +1,5 @@
-.search{
+.search {
+    box-sizing: border-box;
     line-height: 2rem;
     font-size: 1rem;
     padding-inline-start: 0.8rem;
@@ -6,42 +7,48 @@
     border-radius: 10px;
     color: black;
     background: #E8F1F2;
-    outline-color: black;
+    /*outline-color: black;*/
+    width: 100%;
+    height: 2rem;
 }
 
-.search:focus{
+.search:focus {
     background: rgba(111, 203, 255, 0.37);
 }
-.searchHeader{
-    width: 22rem;
+
+.searchHeader {
+    width: 100%;
     font-size: 1rem;
     padding-inline-start: 0.8rem;
 }
 
-.searchBlock{
+.searchBlock {
+    width: 100%;
     align-items: center;
     display: flex;
 
 }
 
-.formSearch{
+.formSearch {
+    align-items: center;
+    width: 100%;
     display: flex;
 }
 
-.favorite{
+.favorite {
     cursor: pointer;
     margin-inline: 1rem;
     /*visibility: visible;*/
 }
 
 /* Задаем общий стиль всплывающей подсказки для нужных элементов*/
-.favorite:hover:before{
+.favorite:hover:before {
     z-index: 50;
     font-size: medium;
     position: absolute;
     width: 6rem;
     color: #fff;
-    background: #000;
+    background: #313131;
     padding: 5px;
     border-radius: 4px;
     top: 3.4rem;
@@ -52,7 +59,16 @@
     content: "добавьте роадмап в избранное";
 }
 
-.changeSearch{
+.changeSearch:hover {
+
+    filter: contrast(0.3);
+}
+
+.changeSearch:active{
+    animation: changeSearch 1s linear infinite;
+}
+.changeSearch {
+    transition: filter 0.5s ease;
     height: 2rem;
     stroke: none;
     fill: #3a3a3a;
@@ -61,16 +77,16 @@
 
 }
 
-.changeIconSearch:hover:before{
-z-index: 50;
-font-size: medium;
-position: absolute;
-width: 4rem;
-color: #fff;
-background: #000;
-padding: 5px;
-border-radius: 4px;
-top: 3.4rem;
+.changeIconSearch:hover:before {
+    z-index: 50;
+    font-size: medium;
+    position: absolute;
+    width: 4rem;
+    color: #fff;
+    background: #313131;
+    padding: 5px;
+    border-radius: 4px;
+    top: 3.4rem;
 }
 
 /* Добавляем текст в конкретной всплывающей подсказке */
@@ -78,7 +94,7 @@ top: 3.4rem;
     content: "смена поиска";
 }
 
-.dropDown{
+.dropDown {
     box-shadow: 0 0 0 4px #9cb1ff;
     top: 4rem;
     margin-block: 10px;
@@ -90,7 +106,7 @@ top: 3.4rem;
     border-radius: 20px;
 }
 
-.titleRecommend{
+.titleRecommend {
     border-radius: 10px;
     cursor: pointer;
     background-color: #c7d9f9;
@@ -98,27 +114,54 @@ top: 3.4rem;
     padding: 10px;
 }
 
-.searchSvg{
+.searchSvg {
     filter: brightness(0.1);
     transition: filter 0.5s ease;
     cursor: pointer;
     margin-inline-start: 10px;
 
 }
-.searchSvg:hover{
+
+.searchSvg:hover {
     filter: brightness(0.5);
 }
 
 
 @media (min-width: 1500px) and (max-width: 2000px) {
-    .searchHeader{
-        width: 26vw;
+    .searchHeader {
+        width: 100%;
     }
 }
 
-@media (max-width: 1500px) and (min-width: 900px) {
-    .searchHeader{
+@media (max-width: 1300px) and (min-width: 900px) {
+    .searchHeader {
         width: 18rem;
     }
 
+    .changeSearch {
+        height: 1.2rem;
+    }
+
+    .svgS {
+        height: 1.2rem;
+    }
+
+    .search {
+        font-size: 0.8rem;
+        height: 1.2rem;
+        width: 15rem;
+    }
+
+}
+
+@keyframes changeSearch {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }

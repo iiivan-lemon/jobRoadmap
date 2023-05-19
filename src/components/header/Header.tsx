@@ -194,6 +194,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                           </clipPath>
                       </defs>
                   </svg></>) : <span
+                    style={{ margin: 0 }}
                     className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn}
                       onClick={() => { goTo('/login') }}
                   >
