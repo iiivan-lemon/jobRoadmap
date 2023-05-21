@@ -99,7 +99,7 @@ export const JobsPage = ({ inputData, sendJob }) => {
       <>
       {((loading === loadState.res)) &&
       <>{/* @ts-expect-error awdawd */}
-        {!!data.filter(el => el.percent >= 10).length && <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'btnOptions ' + stylesNew.widjet}>
+        {!!data.filter(el => el.percent >= 10).length && <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15', position: 'absolute', left: '0' }} className={'btnOptions ' + stylesNew.widjet}>
               <span className='gradeTitleLeg'>самая подходящая специальность: <span className='jobBackTitle'>{(data[0] as any).job_name}</span></span>
           </div>}
           <div className={styles.jobs} style={{ width: '100%', height: '100%' }}

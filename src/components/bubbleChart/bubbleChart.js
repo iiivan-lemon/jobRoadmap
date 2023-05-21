@@ -27,8 +27,8 @@ export const generateChart = (data, sendJob) => {
 
 
     const colors = [
-        {front: '#cad3de' ,main: '#5a8df8', back: '#455ac4'},
-        {front: '#939ba1' ,main: '#343f8c', back: '#1f2659'},
+        {front: '#92FFFF' ,main: '#51BABA', back: '#92FFFF'},
+        {front: '#A6D4FF' ,main: '#4F85B8', back: '#A6D4FF'},
     ]
 
     colors.forEach( (el, i) => {
@@ -36,16 +36,16 @@ export const generateChart = (data, sendJob) => {
             .append('radialGradient')
             .attr('cx', '50%')
             .attr('cy', '50%')
-            .attr('r', '50%')
-            .attr('fx', '30%')
-            .attr('fy', '30%')
+            .attr('r', '75%')
+            .attr('fx', '28.33%')
+            .attr('fy', '24.33%')
             .attr('id', 'grad' + i )
         const stop1 = gradient.append('stop')
             .attr('offset', '0%')
             .style('stop-color', el.front)
             .style('stop-opacity', 1)
         const stop2 = gradient.append('stop')
-            .attr('offset', '90%')
+            .attr('offset', '65%')
             .style('stop-color', el.main)
             .style('stop-opacity', 1)
         const stop3 = gradient.append('stop')
@@ -87,10 +87,10 @@ export const generateChart = (data, sendJob) => {
     //     .attr("x", 20)
     //     .attr("dy", 12)
     const circle = node.append('circle')
-
-        .style('fill', d =>  'url(#grad' +  d.data.percent > 40 ? 0 : 1 +')')
+        .style('fill', d =>  'url(#grad'+ (d.data.percent > 40 ? '0' : '1')  +')')
+        // .style('fill', d =>  'url(#grad' +  (d.data.percent > 60) ? "0" : "1" +')')
         // .style('fill', d => d.data.percent > 40 ? colors.main : colors.others)
-        .style('filter', d => `drop-shadow(rgba(0, 0, 0, 0.8) 2px 4px 6px)`)
+        // .style('filter', d => `drop-shadow(rgba(0, 0, 0, 0.8) 2px 4px 6px)`)
         .style('stroke', d => d.data.percent > 60 ? colors.main : colors.others)
         .style('stroke', '#FFFFFFFF')
         .style('stroke-width', '0px')
@@ -113,8 +113,8 @@ export const generateChart = (data, sendJob) => {
     const label = node.append('text')
         .attr('class', styles.labelJob)
         .attr('dy', 2)
-        .style('filter', 'drop-shadow(2px 4px 2px black)')
-        .text(d => (d.data.job_name.length < ( d.r/ 5)) ? d.data.job_name + ' ' + d.data.percent + '%' : (d.data.job_name.substring(0, d.r / 4) + '...'))
+        // .style('filter', 'drop-shadow(2px 4px 2px black)')
+        .text(d => (d.data.job_name.length < ( d.r/ 5)) ? d.data.job_name + ' ' + d.data.percent + '%' : (d.data.job_name.substring(0, d.r / 5) + '...'))
         .on('mouseover', function (e, d) {
             d3.select(this).style('cursor', 'pointer');
             tooltip.select('span').text('перейти на карту навыков');

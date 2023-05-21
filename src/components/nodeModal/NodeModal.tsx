@@ -113,7 +113,7 @@ const NodeModal = ({ onClose, node, isChecked, sendJob }): JSX.Element => {
   const renderLink = ({ attributes, content }) => {
     const urlPattern = /^(https?:\/\/)/
     if (!urlPattern.test(content as string)) {
-      return <span style={{ color: 'white' }}>{content}</span>
+      return <span style={{ color: '#3a3a3a' }}>{content}</span>
     }
     const { href, ...props } = attributes
     let updHref = <></>
