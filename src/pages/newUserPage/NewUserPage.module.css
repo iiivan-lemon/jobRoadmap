@@ -329,10 +329,18 @@
     }
 
 }
+@media (min-width: 900px) and (max-width: 1000px) {
 
+    .widgetsDescr {
+        width: 83%;
+    }
+}
 
-@media (min-width: 901px) and (max-width: 1300px) {
+@media (min-width: 1000px) and (max-width: 1300px) {
 
+    .widgetsDescr{
+        width: 60%;
+    }
     .startBlock{
         padding: 2rem 70px 0 70px;
     }
