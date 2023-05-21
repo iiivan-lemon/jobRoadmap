@@ -145,13 +145,13 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
 
     React.useEffect(() => {
       if (refGraph?.current) {
-        const list = refGraph.current?.getElementsByTagName('image')
+        const list = refGraph.current?.getElementsByTagName('circle')
         const text = refGraph.current?.getElementsByTagName('text')
         if (list && text && isHard) {
           [].forEach.call(list, function (el: HTMLElement) {
-            // if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.5)' } else {
-            //   el.style.filter = ''
-            // }
+            if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'opacity(0.3)' } else {
+              el.style.filter = ''
+            }
           })
           // [].forEach.call(text, function (el: HTMLElement) {
           //   if (+el.id < grade.begin || +el.id > grade.end) { el.style.filter = 'brightness(0.3)' } else {

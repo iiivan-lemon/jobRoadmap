@@ -50,7 +50,7 @@
 }
 
 .checkNode{
-    filter: brightness(5);
+    filter: grayscale(1);
 }
 
 .nodeTitle{

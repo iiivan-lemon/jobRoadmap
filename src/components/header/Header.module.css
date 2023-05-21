@@ -109,6 +109,7 @@
 }
 
 .logout{
+    filter: brightness(0.2);
     margin-inline: 1rem;
 }
 

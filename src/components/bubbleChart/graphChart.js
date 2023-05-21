@@ -152,7 +152,7 @@ export const generateGraph = (data, showModal, grade, finished) => {
             // d3.select(this).style('stroke-width', '0px');
             // return tooltip.style('visibility', 'hidden');
         })
-        // .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'brightness(0.5)' : 'drop-shadow(1px 1px 1px black)'  )
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'opacity(0.3)' : ''  )
         .on('click', function(e,d){
             showModal(d.data)
         })
@@ -190,7 +190,7 @@ export const generateGraph = (data, showModal, grade, finished) => {
         .on('click', function(e,d){
             showModal(d.data)
         })
-        .text(d => d.data.technology_name.length < ( d.r/ 5) ? d.data.technology_name : (d.data.technology_name.substring(0, d.r / 4) + '...'))
+        .text(d => d.data.technology_name.length < ( d.r/ 5) ? d.data.technology_name : (d.data.technology_name.substring(0, d.r / 5) + '...'))
         .on('mouseover', function (e, d) {
             d3.select(this).style('cursor', 'pointer');
             tooltip.select('span').text(d.data.technology_name + ' ' +  Math.floor(d.data.distance * 100) + ' %');

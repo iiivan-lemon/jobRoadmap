@@ -12,6 +12,7 @@ import { selectGrade } from '../../models/gradeFilter/gradeSlice'
 import { debounce, loadState } from '../../utils/utils'
 import { TagInput } from '../tagInput/TagInput'
 import { useLocation } from 'react-router-dom'
+import stylesNew from '../../pages/newUserPage/NewUserPage.module.css'
 
 /*
  * Interface SearchProps {
@@ -254,7 +255,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
                       (isFavorite) ? sendUnFav() : sendFav()
                     }
                   }}
-                  fill = {(isFavorite) ? 'white' : 'none'}
+                  fill = {(isFavorite) ? '#3a3a3a' : 'none'}
                   height="29"
 
                   viewBox="0 0 24 29"
