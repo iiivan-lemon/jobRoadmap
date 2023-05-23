@@ -139,7 +139,7 @@ function App (): JSX.Element {
               element={
                 <PrivateRoute>
                   <ProfileUser />
-                </PrivateRoute>
+                 </PrivateRoute>
               }
               path="/profile"
             />

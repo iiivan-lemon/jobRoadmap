@@ -17,7 +17,7 @@ import Avatar from '@mui/material/Avatar';
 import {IconButton} from "@mui/material";
 import { makeStyles } from '@material-ui/core/styles';
 import stylesUser from './profileUser.module.css'
-
+import stylesTag from "../../components/Tag/Tag.module.css";
 
 export const ValidatedProfileForm = ({submit}) =>  {
     const { user } = useAppSelector(state => state)
@@ -122,7 +122,7 @@ export const ValidatedProfileForm = ({submit}) =>  {
                                         <div className="invalid-feedback">{errors.passwordConfirm}</div>
                                     )}
                                 </div>
-                                <button className={styles.tag + ' submitBtn'} type="submit" disabled={isSubmitting}>
+                                <button className={stylesTag.tag + ' submitBtn'} type="submit" disabled={isSubmitting}>
                                     Сохранить
                                 </button>
                             </form>
