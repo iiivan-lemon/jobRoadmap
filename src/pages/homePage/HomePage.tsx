@@ -85,7 +85,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
             const rawData = (dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.additional
             if (rawData.length && changeSkills(rawData, isHard).filter(el => el.distance >= 0.1)?.length) {
               setData(rawData.filter(el => el.distance >= 0.1))
-              setSkillCount(rawData.filter(el => el.distance >= 0.1).length)
+              setSkillCount(changeSkills(rawData, isHard).filter(el => el.distance >= 0.1)?.length)
             }
             setInBase((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).in_base)
             setJobBack((dataJob.payload as { errMessage: string, position_data: any, in_base: number }).position_data.job_name)

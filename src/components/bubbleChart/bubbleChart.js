@@ -4,6 +4,7 @@ const colors = {
     main: 'rgba(119,122,208,0.8)',
     others: 'rgba(56,58,107,0.8)'
 };
+import '../../pages/homePage/HomePage.css'
 import * as d3 from "d3";
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -11,7 +12,7 @@ export const generateChart = (data, sendJob) => {
 
     const bubble = data => d3.pack()
         .size([width, height])
-        .padding(10)(d3.hierarchy({ children: data }).sum(d => d.percent * 100));
+        .padding(25)(d3.hierarchy({ children: data }).sum(d => d.percent * 100));
 
     const svg = d3.select('#bubble-chart')
         .style('width', width)
@@ -87,25 +88,26 @@ export const generateChart = (data, sendJob) => {
     //     .attr("x", 20)
     //     .attr("dy", 12)
     const circle = node.append('circle')
+        .attr('class', 'svgAni')
         .style('fill', d =>  'url(#grad'+ (d.data.percent > 40 ? '0' : '1')  +')')
         // .style('fill', d =>  'url(#grad' +  (d.data.percent > 60) ? "0" : "1" +')')
         // .style('fill', d => d.data.percent > 40 ? colors.main : colors.others)
         // .style('filter', d => `drop-shadow(rgba(0, 0, 0, 0.8) 2px 4px 6px)`)
-        .style('stroke', d => d.data.percent > 60 ? colors.main : colors.others)
-        .style('stroke', '#FFFFFFFF')
-        .style('stroke-width', '0px')
+        // .style('stroke', d => d.data.percent > 60 ? colors.main : colors.others)
+        // .style('stroke', '#FFFFFFFF')
+        // .style('stroke-width', '0px')
         .on('mouseover', function (e, d) {
             // tooltip.select('img').attr('src', d.data.img);
             tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
             // tooltip.select('span').text(d.data.job_name + ' ' +  d.data.percent + ' %');
             // tooltip.select('span').attr('class', d.data.category).text(d.data.category);
             tooltip.style('visibility', 'visible');
-            d3.select(this).style('stroke-width', '3px');
+            // d3.select(this).style('stroke-width', '3px');
         })
         .on('mousemove', e => tooltip.style('top', `${e.pageY - 120}px`)
             .style('left', `${e.pageX}px`))
         .on('mouseout', function () {
-            d3.select(this).style('stroke-width', '0px');
+            // d3.select(this).style('stroke-width', '0px');
             return tooltip.style('visibility', 'hidden');
         })
 

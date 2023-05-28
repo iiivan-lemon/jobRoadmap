@@ -116,7 +116,7 @@ export const JobsPage = ({ inputData, sendJob }) => {
                 }
                 if (event.currentTarget.children[0] as HTMLElement) { (event.currentTarget.children[0] as HTMLElement).style.scale = `${zoom} ` }
               }}><Draggable >
-              <svg id="bubble-chart"
+              <svg id="bubble-chart" className={styles.bubbleChart}
                    xmlns="http://www.w3.org/2000/svg"
                 // xlink = "http://www.w3.org/2000/xlink"
                    width="100%"

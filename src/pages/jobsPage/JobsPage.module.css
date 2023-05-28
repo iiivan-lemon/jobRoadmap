@@ -40,3 +40,13 @@ g > text {
     font-family: sans-serif;
     max-width: 500px;
 }
+.bubbleChart{
+    cursor: grab;
+}
+.bubbleChart:active{
+    cursor: grabbing;
+}
+
+g{
+    cursor: default;
+}
