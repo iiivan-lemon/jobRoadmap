@@ -26,13 +26,13 @@
     /*animation: animate 25s linear infinite;*/
 }
 .backDarkBlueNoiseLeft{
-    width: 23rem;
-    height: 23rem;
+    width: 54rem;
+    height: 47rem;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -15rem;
+    left: -15rem;
     background-size: cover;
-    background-image: url("./static/images/darkBlue.png");
+    background-image: url("./static/images/img_5.png");
 }
 
 .firstNode{

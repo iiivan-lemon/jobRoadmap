@@ -10,7 +10,10 @@ body {
   background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%);
 
 }
+::-webkit-input-placeholder {
+  transition: all 0.3s ease-in-out;
 
+}
 * {
   font-family: 'Minipax', 'GT Eesti Pro Display', serif;
   font-style: normal;

@@ -13,7 +13,9 @@ import { debounce, loadState } from '../../utils/utils'
 import { TagInput } from '../tagInput/TagInput'
 import { useLocation } from 'react-router-dom'
 import stylesNew from '../../pages/newUserPage/NewUserPage.module.css'
+import { animationWorker as AnimationWorker } from './typingAnimation'
 
+const input = document.querySelector('#search')
 /*
  * Interface SearchProps {
  *   title?: string
@@ -28,6 +30,31 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
 
   const recommends = useAppSelector(selectDataRecommends)
   // Const [value, setValue] = useState('')
+
+  React.useEffect(() => {
+    const texts = ['python developer', 'frontend developer', 'data scientist']
+    const input = document.querySelector('#search') as HTMLInputElement
+
+
+    // @ts-expect-error asdasd
+    let aw = (new AnimationWorker(input, texts)).start();
+
+    (input).addEventListener('focus', (e) => {
+      // eslint-disable-next-line no-debugger
+
+      // @ts-expect-error asdasd
+      aw.stop()
+    });
+    (input).addEventListener('blur', (e) => {
+      // eslint-disable-next-line no-debugger
+
+      aw = new AnimationWorker(input, texts)
+      // eslint-disable-next-line @typescript-eslint/no-implied-eval
+      // @ts-expect-error asdasd
+      // eslint-disable-next-line @typescript-eslint/no-implied-eval
+      if ((e.target as HTMLInputElement).value === 'введите профессию или должность') setTimeout(aw.start, 2000)
+    })
+  }, [])
   const [
     isModalOpen,
     setIsModalOpen

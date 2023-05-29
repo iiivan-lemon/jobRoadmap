@@ -159,12 +159,22 @@
 
 
 .noiseWidgetBack{
-    height: 100%;
-    width: 70%;
+    position: absolute;
+    background-size: cover;
+    background-image: url("../../static/images/img_6.png");
+    height: 49rem;
+    width: 51rem;
     right: 0;
-    top: 0;
+    top: -9rem;
     z-index: 9;
 }
+
+/*.arrow{*/
+/*    position: absolute;*/
+/*    background-size: cover;*/
+/*    background-image: url("../../static/images/img_7.png");*/
+/*}*/
+
 
 .noiseBackHeaderOps{
     z-index: 0;
