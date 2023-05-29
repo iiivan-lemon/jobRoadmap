@@ -34,8 +34,6 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
   React.useEffect(() => {
     const texts = ['python developer', 'frontend developer', 'data scientist']
     const input = document.querySelector('#search') as HTMLInputElement
-
-
     // @ts-expect-error asdasd
     let aw = (new AnimationWorker(input, texts)).start();
 
