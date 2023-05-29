@@ -32,6 +32,15 @@ export const getResResume = createAsyncThunk(
     // const string = { professions: [input] }
     // return string
     // eslint-disable-next-line no-debugger
+    // const response = {
+    //   status: 200,
+    //   data: {
+    //     recommend: [{
+    //       learned: ['Python', 'Git', 'Linux', 'SQL', 'Teamleading'],
+    //       to_learn: ['PostgreSQL', 'Elasticsearch', 'MySQL', 'Erlang', 'Redis']
+    //     }]
+    //   }
+    // }
     // const mock = { status: 200, recommend: [{ learned: ['Python', 'Git', 'Linux', 'SQL', 'Teamleading'], 'to learn': ['PostgreSQL', 'Elasticsearch', 'MySQL', 'Erlang', 'Redis'] }] }
     const response = await fetchResResume(inputResume).then().catch(e => e.response)
     // return mock.recommend

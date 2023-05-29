@@ -9,8 +9,8 @@ import ReactDOM from 'react-dom'
 import styled, { type CSSObject } from 'styled-components'
 import NodeModal from '../nodeModal/NodeModal'
 
-export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
-  const [finished, setFinished] = React.useState(new Set(finishedNodes))
+export const GraphSelf = ({ isHard, data, grade, finishedNodes, sendJob }) => {
+  const [finished, setFinished] = React.useState(finishedNodes)
   // React.useEffect(() => {
   //   setFinished(new Set(finishedNodes))
   // }, [finishedNodes])
@@ -58,15 +58,15 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
   }
 
   const isFinished = (tech_name: string) => {
-    return finished.has(tech_name)
+    return !!~finished.findIndex(el => el === tech_name)
   }
 
   const isCheckNode = (tech_name: string) => {
     // eslint-disable-next-line no-debugger
 
     isFinished(tech_name)
-      ? finished.delete(tech_name)
-      : finished.add(tech_name);
+      ? setFinished(finished.filter(el => el !== tech_name))
+      : setFinished([...new Set(...finished, tech_name)]);
     ((document.getElementById(tech_name) as HTMLElement).parentElement as HTMLElement).classList.toggle('checkNode')
   }
 
@@ -111,10 +111,10 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
       // @ts-expect-error sef
       dataCircles.filter(el => el.length).forEach((el, i) => {
         if (!i) {
-          generate(el, 0, 0, 'graph' + i)
+          generate(el, 0, 0, 'graph' + i, i)
           return
         }
-        generate(el, (i - 1) * 600 + 700, (i - 1) * 600 + 700, 'graph' + i)
+        generate(el, (i - 1) * 400 + 700, (i - 1) * 400 + 700, 'graph' + i, i)
       })
       // if (!refMainNode.current?.children.length) {
 
@@ -131,6 +131,7 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
 
   React.useEffect(() => {
     setContainersRender(true)
+    if (document.getElementById('zoom') as HTMLElement) { (document.getElementById('zoom') as HTMLElement).style.scale = '0.3' }
   }, [])
 
   function renderContainers (data) {
@@ -149,21 +150,24 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
     return (grade.begin <= value && value <= grade.end)
   }
 
-  const generate = function (n, rx, ry, id) {
+  const generate = function (n, rx, ry, id, index) {
     const theta = []
     const setup = function (n, rx, ry, id) {
       const main = document.getElementById(id) as HTMLElement
       const mainHeight = parseInt(window.getComputedStyle(main).height.slice(0, -2))
       const circleArray: any[] = []
       for (let i = 0; i < n.length; i++) {
-        // const c = <div></div>
+        if (!index) {
+          n[i].professionalism = 0
+        }
         const circle = document.createElement('div')
         circle.className = 'svgTitle circle number' + i
         circle.before('')
         circleArray.push(circle)
 
-        circleArray[i].posx = Math.round(rx * (Math.cos(theta[i]))) + 'px'
-        circleArray[i].posy = Math.round(ry * (Math.sin(theta[i]))) + 'px'
+        circleArray[i].posx = Math.round(rx * (Math.cos(theta[i] + 1.57))) + 'px'
+
+        circleArray[i].posy = Math.round(ry * (Math.sin(theta[i] + 1.57))) + 'px'
         circleArray[i].style.filter = !(filterGrade(n[i].professionalism)) ? 'brightness(0.2) grayscale(1) ' : ''
         circleArray[i].style.position = 'absolute'
         circleArray[i].style.width = n[i].distance * 900 * (i + 1) + 'px'
@@ -183,8 +187,8 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
         // circleArray[i].style.backgroundImage = `url("data:image/svg+xml;charset=utf-8,${encodeURIComponent(newSvg)}")`
         const styles = {
           circle: {
-            height: n[i].distance * 500 + 'px',
-            width: n[i].distance * 500 + 'px',
+            height: 500 / (index + 1) + 'px',
+            width: 500 / (index + 1) + 'px',
             fill: isHard ? (pSBC(0, setNodeGradient(coloration, n[i].professionalism))) : '#6771e8'
           } as CSSObject
         }
@@ -211,11 +215,10 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
       }
       // ReactDOM.render(svgsArray, main)
     }
-
-    const frags = 360 / n.length
-    for (let i = 0; i <= n.length; i++) {
+    const frags = 360 / (n.length)
+    for (let i = 0; i <= (n.length); i++) {
       // @ts-expect-error dffge
-      theta.push((frags / 180) * i * Math.PI)
+      theta.push((frags / 180) * (i) * Math.PI)
     }
     setup(n, rx, ry, id)
   }
@@ -237,12 +240,13 @@ export const GraphSelf = ({ isHard, data, grade, finishedNodes }) => {
 
   return (
       <>
-        <Draggable scale={1}>
+        <Draggable scale={1} >
         <div id='zoom' ref={ref}
         >
         {renderContainers(data)}
         </div></Draggable>
         {(isModalOpen) && <NodeModal
+            sendJob={sendJob}
             isChecked={isCheckNode}
             node={isModalOpen}
             onClose={() => {

@@ -19,10 +19,11 @@ export const TagInput = ({ subJob }) => {
   }, [recommends])
   const renderRecommends = (recommends) => {
     if (recommends.techs.length) {
-      return recommends.techs.map((el) =>
+      const updRec = [...new Set(recommends.techs.map(el => el.toLowerCase()))] as string[]
+      return updRec.map((el: string) => (
         <div className={styles.titleRecommend} onClick={ (e) => {
           takeRecommend(el)
-        }}>{el}</div>)
+        }}>{el}</div>))
     }
   }
   const sendSearchValue = (e) => {
@@ -41,20 +42,20 @@ export const TagInput = ({ subJob }) => {
   }
 
   function handleKeyDown (e) {
-    e.target.placeholder = ''
-    if (e.key !== 'Enter') return
-    const value = e.target.value
-    if (!value.trim()) return
-    if (tags.length <= 5) {
-      setTags([...(new Set([...tags, value.toLowerCase()]))])
-      setHavRecommends(false)
-    }
-    e.target.value = ''
+    // e.target.placeholder = ''
+    // if (e.key !== 'Enter') return
+    // const value = e.target.value
+    // if (!value.trim()) return
+    // // if (tags.length <= 5) {
+    // //   setTags([...(new Set([...tags, value.toLowerCase()]))])
+    // //   setHavRecommends(false)
+    // // }
+    // e.target.value = ''
   }
   const history = useNavigate()
   const location = useLocation()
   React.useEffect(() => {
-    if (location.pathname !== '/search' && location.pathname !== '/searchjob') {
+    if (location.pathname !== ('/search') && location.pathname !== '/searchjob') {
       setTags([])
     }
   }, [history])

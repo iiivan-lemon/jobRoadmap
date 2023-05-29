@@ -1,4 +1,5 @@
 !.storybook
 src/authApp/
 src/components/pdfReader/
-src/components/bubbleChart/bubbleChart.js
+src/components/bubbleChart/
+src/components/dropZone/dropZone.jsx

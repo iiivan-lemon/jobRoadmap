@@ -9,7 +9,11 @@ import { BrowserRouter } from 'react-router-dom'
 /* eslint-disable  @typescript-eslint/no-non-null-assertion */
 const container = document.getElementById('root')!
 const root = createRoot(container)
+const noOp = function () {}
 
+window.console.log = noOp
+window.console.dir = noOp
+window.console.warn = noOp
 root.render(<React.StrictMode>
     <Provider store={store}>
         <BrowserRouter>

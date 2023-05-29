@@ -7,6 +7,7 @@ import {
 // import { fetchDataGraph } from './dataGraphService'
 import { type RootState } from '../../app/store'
 import { fetchFavs, setFav, setUnFav } from './favsService'
+import { checkStatus } from '../utils/checkStatus'
 
 export interface Favs {
   name: string
@@ -28,8 +29,8 @@ export const getFavs = createAsyncThunk(
   'favs/fetchFavs',
   async () => {
     const response = await fetchFavs()
-    const tags = ['python developer']
-    return tags
+    // const response = { status: 200, favorites: [{ id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }, { id: 27, name: 'Go Developer', count_all: 22, count_finished: 4 }, { id: 23, name: 'Java Developer', count_all: 41, count_finished: 4 }] }
+    return ((!checkStatus(response.status)) ? response.data.favorites : { errMessage: checkStatus(response.status) })
     // if (response.status === 200) {
     //   return response.data
     // }
@@ -39,20 +40,18 @@ export const getFavs = createAsyncThunk(
 export const setFavs = createAsyncThunk(
   'favs/setFavs',
   async (input: string) => {
+    // const response = { status: 200 }
     const response = await setFav(input)
-    if (response.status === 200) {
-      return response.data
-    }
+    return ((!checkStatus(response.status)) ? { errMessage: null } : { errMessage: checkStatus(response.status) })
   }
 )
 
 export const setUnFavs = createAsyncThunk(
   'favs/setUnFavs',
   async (input: string) => {
+    // const response = { status: 200 }
     const response = await setUnFav(input)
-    if (response.status === 200) {
-      return response.data
-    }
+    return ((!checkStatus(response.status)) ? { errMessage: null } : { errMessage: checkStatus(response.status) })
   }
 )
 //

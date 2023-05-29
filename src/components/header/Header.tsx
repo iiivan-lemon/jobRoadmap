@@ -1,12 +1,21 @@
-import React, { type FC } from 'react'
+import React, { type FC, useEffect, useState } from 'react'
 import Search from '../search/Search'
 import styles from './Header.module.css'
 // Import { useHistory } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { authActions } from '../../authApp/_store'
+// import { authActions } from
 import { loginOrLogout } from '../../models/auth/authActions'
 import { getTops } from '../../models/tops/topsSlice'
+import { getFavs } from '../../models/favs/favsSlice'
+import { loadState } from '../../utils/utils'
+import { Avatar } from '@mui/material'
+import { loadingProfile } from '../../models/user/userActions'
+import { useSelector } from 'react-redux'
+import { clearRecommendsTech } from '../../models/recommendTech/recommendTechSlice'
+import { clearRecommends } from '../../models/recommend/recommendSlice'
+import stylesOps from '../headerOptions/HeaderOptions.module.css'
+import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.css'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -16,14 +25,22 @@ interface HeaderProps {
   title?: string
   changeData?: any
   setGrade?: any
+  isMainSearch?: any
+  takeInput?: any
 }
 
-const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
-  const { isAuth } = useAppSelector(state => state.auth)
-  const { username } = useAppSelector(state => state.user)
+const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, takeInput }) => {
+  const { isAuth } = useAppSelector(x => x?.auth)
+  const [favs, setFavs] = useState([])
+  const { user } = useAppSelector(state => state)
   const dispatch = useAppDispatch()
   React.useEffect(() => {
     void dispatch(getTops())
+    void dispatch(loadingProfile())
+      .then((res) => {
+        if (res === true) { /* empty */ }
+        if (res === 500) { /* empty */ }
+      })
   }, [])
   /*
    * Function submitForm (event: any): void {
@@ -52,23 +69,44 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
   }
   const location = useLocation()
   const history = useNavigate()
+
   React.useEffect(() => {
-    if (location.pathname !== '/search' && location.pathname !== '/searchjob') {
+
+  }, [takeInput])
+  React.useEffect(() => {
+    if (location.pathname !== ('/search') && location.pathname !== '/searchjob') {
       if ((document.getElementById('search') as HTMLInputElement)) {
+        void dispatch(clearRecommends());
         (document.getElementById('search') as HTMLInputElement).value = ''
       }
       if ((document.getElementById('tagSearch') as HTMLInputElement)) {
+        void dispatch(clearRecommendsTech());
         (document.getElementById('tagSearch') as HTMLInputElement).value = ''
       }
     }
+    resumeRef.current?.classList.remove(styles.chooseTitle)
+    letterRef.current?.classList.remove(styles.chooseTitle)
+    switch (location.pathname) {
+      case '/resumeFix':
+        resumeRef.current?.classList.add(styles.chooseTitle)
+        break
+      case '/jobLetter':
+        letterRef.current?.classList.add(styles.chooseTitle)
+        break
+    }
   }, [history])
+
+  const resumeRef = React.useRef<HTMLElement>(null)
+  const letterRef = React.useRef<HTMLElement>(null)
 
   return (
       <React.Fragment>
+
           <div
               className={styles.header}
               id="header"
           >
+
               <div className={styles.mainHeader}>
                   <span
                       className={styles.logoHref}
@@ -79,49 +117,42 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                       </span>
                   </span>
                   <Search
+                    title = {takeInput}
+                      isMainSearch={isMainSearch}
                       changeData={changeData}
                       setGrade={setGrade}
                   />
                 <div className={styles.titles}>
                 <span
-                  className={styles.favorite}
-                  onClick={() => { goTo('/resumeFix') }}
+                  ref={resumeRef}
+                  className={styles.favorite + ' ' + styles.baseTitle }
+                  onClick={(e) => {
+                    goTo('/resumeFix')
+                  }}
                 >
                       Резюме
                   </span>
                 <span
-                  className={styles.favorite}
+                  ref={letterRef}
+                  className={styles.favorite + ' ' + styles.baseTitle }
                   onClick={() => { goTo('/jobLetter') }}
                 >
                       Письмо
                   </span>
                   <span
-                      className={styles.favorite}
+                      className={styles.favorite + ' ' + styles.baseTitle }
                       onClick={() => { goTo('/favorites') }}
                   >
                       Избранное
                   </span>
                   {/* eslint-disable-next-line multiline-ternary */}
-                  {(isAuth) ? (<><span
-                      className={styles.username}
-                      // onClick={() => { goTo('/profile') }}
-                  >
-                      {username}
-                  </span>
-                  <svg
-                      fill="none"
-                      height="35"
-                      viewBox="0 0 56 56"
-                      width="35"
-                      xmlns="http://www.w3.org/2000/svg"
-                  >
-                      <path
-                          d="M28 54.5C42.6355 54.5 54.5 42.6355 54.5 28C54.5 13.3645 42.6355 1.5 28 1.5C13.3645 1.5 1.5 13.3645 1.5 28C1.5 42.6355 13.3645 54.5 28 54.5Z"
-                          fill="white"
-                          stroke="#3A3A3A"
-                          strokeWidth="3"
-                      />
-                  </svg>
+                  {(isAuth) ? (<>
+                    <div onClick={() => {
+                      history('/profile')
+                    }
+                    } className={styles.avatar}>
+                    <Avatar alt="Cindy Baker" src={user.avatar} />
+                    </div>
                   <svg
                       className={styles.logout}
                       fill="none"
@@ -163,7 +194,8 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade }) => {
                           </clipPath>
                       </defs>
                   </svg></>) : <span
-                      className={styles.username}
+                    style={{ margin: 0 }}
+                    className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn}
                       onClick={() => { goTo('/login') }}
                   >
                       войти

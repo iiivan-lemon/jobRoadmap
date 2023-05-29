@@ -6,7 +6,6 @@ const Tag = ({ style, title, className, setTitleTag, id, setGrade, input }): any
       setTitleTag('')
     }
     // eslint-disable-next-line no-debugger
-    // debugger
     // setGrade({ begin: 0, end: 4 })
   }, [input])
   const setColorClick = (e): void => {

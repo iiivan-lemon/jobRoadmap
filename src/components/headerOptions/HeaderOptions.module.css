@@ -1,11 +1,11 @@
 .spaceLine{
-    margin-inline-start: 80px;
 }
 
 .headerOpsStrings{
+    z-index: 20;
     margin-block-end: 1rem;
 }
 .gradeDesr{
-    color: white;
+    color: #3a3a3a;
     margin-inline-end: 1rem;
 }

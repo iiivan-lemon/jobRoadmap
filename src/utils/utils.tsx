@@ -32,3 +32,12 @@ export function replaceURLs (message): ReactNode {
     )
   })
 }
+
+export const updTips = (tips: string) => {
+  const upd = ('! ' + tips).split('1.')
+  if (upd.shift()) {
+    const t = upd.join('1.')
+    return ('1.' + t)
+  }
+  return ''
+}
