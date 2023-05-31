@@ -22,12 +22,32 @@ const NewUserPage: FC = () => {
     (document.getElementById('tagSearch') as HTMLInputElement)?.focus()
   }
 
+  const focusHeaderTitle = (e) => {
+    e.stopPropagation()
+    const header = document.getElementById('mainHeader')
+    const title = document.getElementById(e.currentTarget.id.split('_')[1] + 'Title')
+    if (title && header) {
+      title.classList.add(styles.widjetHeaderTitle)
+      // header.classList.add(styles.headerFocus)
+    }
+  }
+  const unFocusHeaderTitle = (e) => {
+    // eslint-disable-next-line no-debugger
+    e.stopPropagation()
+    const header = document.getElementById('mainHeader')
+    const title = document.getElementById(e.currentTarget.id.split('_')[1] + 'Title')
+    if (title && header) {
+      // header.classList.remove(styles.headerFocus)
+      title.classList.remove(styles.widjetHeaderTitle)
+    }
+  }
+
   return (
       <React.Fragment>
         <div className={styles.noiseWidgetBack}></div>
         <div className={styles.arrow}></div>
         <div className={styles.startBlock}>
-          <div className={styles.description}>
+          <div className={styles.description} onClick={() => { console.log(1) } }>
                   <span className={styles.title}>
                       Job Roadmap
                   </span>
@@ -41,11 +61,28 @@ const NewUserPage: FC = () => {
                   <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button>
               </div>
               <div className={styles.widgetsDescr}>
-
-                <div className={`${styles.widjet} ${styles.widjetSkill}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div>
-                <div className={`${styles.widjet} ${styles.widjetLetter}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
-                <div className={`${styles.widjet} ${styles.widjetResume}`}><span className={styles.widjetText}>Анализ резюме</span></div>
-                  <span className={styles.widjetTitle}>
+                <div id='widget_skills' onClick={openHeader} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div>
+                <div id='widget_jobLetter' onClick={ (e) => {
+                  unFocusHeaderTitle(e)
+                  history('/jobLetter')
+                }} onMouseOver={(e) => {
+                  focusHeaderTitle(e)
+                }} onMouseOut={(e) => {
+                  // eslint-disable-next-line no-debugger
+                  unFocusHeaderTitle(e)
+                }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
+                <div id='widget_resumeFix'
+                     onClick={ (e) => {
+                       unFocusHeaderTitle(e)
+                       history('/resumeFix')
+                     }}
+                     onMouseOver={(e) => {
+                       focusHeaderTitle(e)
+                     }} onMouseOut={(e) => {
+                       // eslint-disable-next-line no-debugger
+                       unFocusHeaderTitle(e)
+                     }} className={`${styles.widjet} ${styles.widjetResume} ${styles.widjetNew}`}><span className={styles.widjetText}>Анализ резюме</span></div>
+                  <span className={styles.widjetTitle} >
                       Анализ актуальных открытых вакансий по Вашей специальности
                   </span>
               </div>

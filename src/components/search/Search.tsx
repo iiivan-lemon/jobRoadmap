@@ -31,28 +31,6 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
   const recommends = useAppSelector(selectDataRecommends)
   // Const [value, setValue] = useState('')
 
-  React.useEffect(() => {
-    const texts = ['python developer', 'frontend developer', 'data scientist']
-    const input = document.querySelector('#search') as HTMLInputElement
-    // @ts-expect-error asdasd
-    let aw = (new AnimationWorker(input, texts)).start();
-
-    (input).addEventListener('focus', (e) => {
-      // eslint-disable-next-line no-debugger
-
-      // @ts-expect-error asdasd
-      aw.stop()
-    });
-    (input).addEventListener('blur', (e) => {
-      // eslint-disable-next-line no-debugger
-
-      aw = new AnimationWorker(input, texts)
-      // eslint-disable-next-line @typescript-eslint/no-implied-eval
-      // @ts-expect-error asdasd
-      // eslint-disable-next-line @typescript-eslint/no-implied-eval
-      if ((e.target as HTMLInputElement).value === 'введите профессию или должность') setTimeout(aw.start, 2000)
-    })
-  }, [])
   const [
     isModalOpen,
     setIsModalOpen
@@ -86,6 +64,29 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
       if ((document.getElementById('search') as HTMLInputElement)) {
         (document.getElementById('search') as HTMLInputElement).value = title
       }
+    }
+    if (isTechSearch) {
+      const texts = ['python developer', 'frontend developer', 'data scientist']
+      const input = document.querySelector('#search') as HTMLInputElement
+      // @ts-expect-error asdasd
+      let aw = (new AnimationWorker(input, texts)).start();
+
+      (input).addEventListener('focusin', (e) => {
+        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression,no-debugger
+        debugger
+        // @ts-expect-error asdasd
+        aw.stop()
+      });
+      (input).addEventListener('blur', (e) => {
+        // eslint-disable-next-line no-debugger
+        // eslint-disable-next-line no-debugger
+
+        aw = new AnimationWorker(input, texts)
+        // eslint-disable-next-line @typescript-eslint/no-implied-eval
+        // @ts-expect-error asdasd
+        // eslint-disable-next-line @typescript-eslint/no-implied-eval
+        if ((e.target as HTMLInputElement).value === 'введите профессию или должность') setTimeout(aw.start, 2000)
+      })
     }
   }, [isTechSearch])
 
@@ -230,7 +231,8 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
               onClick={() => { setIsModalOpen(true); document.body.style.overflowX = 'hidden' }}
           >
             <div className={styles.changeIconSearch}>
-              <svg className={styles.changeSearch} onClick={ () => {
+              <svg className={styles.changeSearch} onClick={ (e) => {
+                e.currentTarget.classList.toggle(styles.rotateChangeSearch)
                 setHavRecommends(false)
                 setSearch(!isTechSearch)
               }

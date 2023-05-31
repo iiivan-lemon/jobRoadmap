@@ -6,9 +6,32 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { debounce } from '../../utils/utils'
 import { getRecommendsTech, selectDataRecommendsTech } from '../../models/recommendTech/recommendTechSlice'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { animationWorker as AnimationWorker } from '../search/typingAnimation'
 export const TagInput = ({ subJob }) => {
   useEffect(() => {
     setHavRecommends(false)
+  }, [])
+
+  React.useEffect(() => {
+    const texts = ['react.js', 'python', 'postgres']
+    const input = document.querySelector('#tagSearch') as HTMLInputElement
+    // @ts-expect-error asdasd
+    let aw = (new AnimationWorker(input, texts)).start();
+
+    (input).addEventListener('focusin', (e) => {
+      // @ts-expect-error asdasd
+      aw.stop()
+    });
+    (input).addEventListener('blur', (e) => {
+      // eslint-disable-next-line no-debugger
+      // eslint-disable-next-line no-debugger
+
+      aw = new AnimationWorker(input, texts)
+      // eslint-disable-next-line @typescript-eslint/no-implied-eval
+      // @ts-expect-error asdasd
+      // eslint-disable-next-line @typescript-eslint/no-implied-eval
+      if ((e.target as HTMLInputElement).value === 'введите навыки') setTimeout(aw.start, 2000)
+    })
   }, [])
   const recommends = useAppSelector(selectDataRecommendsTech)
   const [tags, setTags] = React.useState([] as string[])
@@ -65,7 +88,7 @@ export const TagInput = ({ subJob }) => {
   }
 
   return (
-   <><div className="tags-input-container" onClick={(e) => { e.stopPropagation() }}>
+   <><div id='tags-input-container' className="tags-input-container" onClick={(e) => { e.stopPropagation() }}>
       { tags && [...tags].map((tag, index) => (
         <form className="tag-item" key={index}>
           <span className="text">{tag}</span>
@@ -73,7 +96,12 @@ export const TagInput = ({ subJob }) => {
         </form>
       )) }
      <div style={{ alignSelf: 'center' }}>
-      <input autoComplete="off" onChange={
+      <input autoComplete="off"
+             onFocus={() => {
+               (document.getElementById('tags-input-container') as HTMLElement).style.background = 'rgba(111, 203, 255, 0.37)'
+             }
+             }
+             onChange={
         debounce(sendSearchValue)
       } onKeyDown={handleKeyDown} type="text" className="tags-input" id='tagSearch' placeholder="введите навыки"></input>
      { haveRecommends && <div className={styles.dropDown}>{renderRecommends(recommends)}</div> }

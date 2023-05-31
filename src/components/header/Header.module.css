@@ -40,7 +40,9 @@
     color: #6d54ff;
 }
 .favorite {
-    transition: color 0.5s ease;
+    border-radius: 45px;
+    line-height: 2rem;
+    /*transition: all 1s ease;*/
     cursor: pointer;
     z-index: 20;
     text-decoration: none;
@@ -48,7 +50,6 @@
     font-style: normal;
     font-weight: 400;
     font-size: 1rem;
-    line-height: 23px;
     display: flex;
     align-items: flex-end;
     text-align: center;
@@ -71,6 +72,7 @@
 
 
 .mainHeader {
+    transition: background 1s ease;
     grid-template-columns: 1fr 2fr 2fr;
     display: grid;
     padding-block: 1rem;
@@ -83,7 +85,7 @@
     justify-content: space-between;
     align-items: center;
     padding-inline: 80px;
-    /*background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%);*/
+    /*background: transparent;*/
 }
 
 .headerTags {
@@ -105,7 +107,7 @@
     color: #6d54ff;
 }
 .baseTitle {
-    transition: color 0.4s ease;
+    transition: color 0.4s ease, background 1s ease, box-shadow 1s ease, border-radius 1s ease;
 }
 
 .logout{

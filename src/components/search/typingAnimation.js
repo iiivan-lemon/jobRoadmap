@@ -18,7 +18,7 @@ export const animationWorker = function (input, texts) {
         setTimeout(
             () => {
                 this.input.classList.remove('imitatefocus');
-                if (this.curTextNum == 0)
+                if (this.curTextNum === 0)
                     this.input.setAttribute('placeholder',this.defaultPlaceholder);
                 else
                     this.input.setAttribute('placeholder',this.curPlaceholder);
@@ -37,18 +37,18 @@ export const animationWorker = function (input, texts) {
         if(!this.animationActive) return;
         let curPlaceholderFullText = this.texts[this.curTextNum];
         let timeout = 900;
-        if (this.curPlaceholder == curPlaceholderFullText+'|' && this.blinkCounter==3) {
+        if (this.curPlaceholder === curPlaceholderFullText+'|' && this.blinkCounter===3) {
             this.blinkCounter = 0;
             this.curTextNum = (this.curTextNum >= this.texts.length-1)? 0 : this.curTextNum+1;
             this.curPlaceholder = '|';
             this.switch(1500);
             return;
         }
-        else if (this.curPlaceholder == curPlaceholderFullText+'|' && this.blinkCounter<3) {
+        else if (this.curPlaceholder === curPlaceholderFullText+'|' && this.blinkCounter<3) {
             this.curPlaceholder = curPlaceholderFullText;
             this.blinkCounter++;
         }
-        else if (this.curPlaceholder == curPlaceholderFullText && this.blinkCounter<3) {
+        else if (this.curPlaceholder === curPlaceholderFullText && this.blinkCounter<3) {
             this.curPlaceholder = this.curPlaceholder+'|';
         }
         else {
@@ -60,12 +60,13 @@ export const animationWorker = function (input, texts) {
         }
         this.input.setAttribute('placeholder',this.curPlaceholder);
         setTimeout(
-            () => { if(this.animationActive) this.animationFrameId = window.requestAnimationFrame(this.animate)},
+            () => {
+              if(this.animationActive) this.animationFrameId = window.requestAnimationFrame(this.animate)},
             timeout);
     }
 
     this.stop = () => {
-        this.animationActive = false;
+      this.animationFrameId = false
         window.cancelAnimationFrame(this.animationFrameId);
     }
 

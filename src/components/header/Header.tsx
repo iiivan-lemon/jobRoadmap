@@ -107,7 +107,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
               id="header"
           >
 
-              <div className={styles.mainHeader}>
+              <div id='mainHeader' className={styles.mainHeader}>
                   <span
                       className={styles.logoHref}
                       onClick={() => { goTo('/') }}
@@ -124,6 +124,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                   />
                 <div className={styles.titles}>
                 <span
+                  id='resumeFixTitle'
                   ref={resumeRef}
                   className={styles.favorite + ' ' + styles.baseTitle }
                   onClick={(e) => {
@@ -133,6 +134,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                       Резюме
                   </span>
                 <span
+                  id='jobLetterTitle'
                   ref={letterRef}
                   className={styles.favorite + ' ' + styles.baseTitle }
                   onClick={() => { goTo('/jobLetter') }}
