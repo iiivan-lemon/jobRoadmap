@@ -33,9 +33,38 @@
 }
 
 .formSearch {
+    position: relative;
     align-items: center;
     width: 100%;
     display: flex;
+}
+
+.formSearch  label{
+
+    position: absolute;
+    top: 28px;
+    left: 188px;
+    padding-inline: 6px;
+    z-index: 1;
+}
+
+.formSearch label:after {
+    border: solid 1px #5b5b5b;
+    border-radius: 45px;
+    content: " ";
+    background-color: #E8F1F2;
+    width: 100%;
+    height: 13px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+label {
+    font-size: 10px;
+    display: inline-block;
+    margin-bottom: .5rem;
 }
 
 .favorite {
@@ -69,6 +98,7 @@
 
 
 .changeSearch {
+
     rotate: 0deg;
     transition: filter 0.5s ease;
     height: 2rem;
@@ -135,6 +165,7 @@
 .rotateChangeSearch{
     animation: changeSearch 0.5s
 }
+
 
 
 

@@ -30,7 +30,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
 
   const recommends = useAppSelector(selectDataRecommends)
   // Const [value, setValue] = useState('')
-
+  const [changeAnimation, setChangeAnimation] = React.useState(0)
   const [
     isModalOpen,
     setIsModalOpen
@@ -118,7 +118,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
     if ((document.getElementById('search') as HTMLInputElement).value !== '') {
       void dispatch(setUnFavs((document.getElementById('search') as HTMLInputElement).value))
         .then((data) => {
-        // @ts-expect-error awd
+          // @ts-expect-error awd
           if (!data.payload.errMessage) {
             // setFav(favs.filter((el: any) => el.name !== (document.getElementById('search') as HTMLInputElement).value))
             setFavorite(false)
@@ -126,6 +126,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
         })
     }
   }
+
   function sub (event: any): void {
     event?.preventDefault()
     void dispatch(clearRecommends())
@@ -156,7 +157,9 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
     if ((document.getElementById('search') as HTMLInputElement)) {
       if (~favs.findIndex((el: any) => el.name === (document.getElementById('search') as HTMLInputElement).value)) {
         setFavorite(true)
-      } else { setFavorite(false) }
+      } else {
+        setFavorite(false)
+      }
     }
   }
 
@@ -201,42 +204,47 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
     setHavRecommends(false)
   }, [])
   useEffect(() => {
-    if (recommends.professions.length && (document.getElementById('search') as HTMLInputElement)?.value) { setHavRecommends(true) } else setHavRecommends(false)
+    if (recommends.professions.length && (document.getElementById('search') as HTMLInputElement)?.value) {
+      setHavRecommends(true)
+    } else setHavRecommends(false)
   }, [recommends])
   // const [recommends, setRecommends] = useState([])
   const renderRecommends = (recommends) => {
     if (recommends.professions.length) {
       return recommends.professions.map((el) =>
-    <div className={styles.titleRecommend} onClick={ (e) => {
-      if ((document.getElementById('search') as HTMLInputElement)) {
-        (document.getElementById('search') as HTMLInputElement).value = el
-      }
-      sub(e)
-    }}>{el}</div>)
+        <div className={styles.titleRecommend} onClick={(e) => {
+          if ((document.getElementById('search') as HTMLInputElement)) {
+            (document.getElementById('search') as HTMLInputElement).value = el
+          }
+          sub(e)
+        }}>{el}</div>)
     }
   }
 
   const sendSearchValue = (e) => {
-    if (!e.target.value && e.target.value === titleTag) { return }
+    if (!e.target.value && e.target.value === titleTag) {
+      return
+    }
     void (dispatch(getRecommends(e.target.value)))
   }
   const refSearchJob = useRef<HTMLInputElement | null>(null)
   const refSearch = useRef<HTMLInputElement | null>(null)
-
+  const [rotate, setRotate] = React.useState(0)
   return (
-      <React.Fragment>
+    <React.Fragment>
 
           <div
               className={styles.searchBlock}
               onClick={() => { setIsModalOpen(true); document.body.style.overflowX = 'hidden' }}
           >
             <div className={styles.changeIconSearch}>
-              <svg className={styles.changeSearch} onClick={ (e) => {
-                e.currentTarget.classList.toggle(styles.rotateChangeSearch)
+              <svg className={rotate ? styles.rotateChangeSearch + ' ' + styles.changeSearch : styles.changeSearch} onClick={ (e) => {
+                setRotate(1)
                 setHavRecommends(false)
                 setSearch(!isTechSearch)
               }
-              } fill="#ffffff" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke="#3a3a3a"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 12v-2l-4 3 4 3v-2h2.997A6.006 6.006 0 0 0 16 8h-2a4 4 0 0 1-3.996 4H7zM9 2H6.003A6.006 6.006 0 0 0 0 8h2a4 4 0 0 1 3.996-4H9v2l4-3-4-3v2z" fill-rule="evenodd"></path> </g></svg>
+              } onAnimationEnd={() => { setRotate(0) }}
+                   fill="#ffffff" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke="#3a3a3a"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 12v-2l-4 3 4 3v-2h2.997A6.006 6.006 0 0 0 16 8h-2a4 4 0 0 1-3.996 4H7zM9 2H6.003A6.006 6.006 0 0 0 0 8h2a4 4 0 0 1 3.996-4H9v2l4-3-4-3v2z" fill-rule="evenodd"></path> </g></svg>
             </div>
               {/* <svg  fill="#2663f2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" enable-background="new 0 0 100 100" stroke="#2663f2"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M37.3,31.9h21.8c1.1,0,2-0.9,2-2v-4c0-3.3-2.7-5.9-5.9-5.9H41.3c-3.3,0-5.9,2.7-5.9,5.9v4 C35.3,31,36.2,31.9,37.3,31.9z"></path> <path d="M70,24.9h-2c-0.6,0-1,0.4-1,1v4c0,4.4-3.6,7.9-7.9,7.9H37.3c-4.4,0-7.9-3.6-7.9-7.9v-4c0-0.6-0.4-1-1-1h-2 c-3.3,0-5.9,2.7-5.9,5.9v40.6c0,3.3,2.7,5.9,5.9,5.9h20c2.8,0,3.1-2.3,3.1-3.1V52.8c0-2.3,1.3-2.8,2-2.8h21.6c2.4,0,2.8-2.1,2.8-2.8 V31C76,27.6,73.3,24.9,70,24.9z"></path> <path d="M78.4,60.4H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,59.9,79,60.4,78.4,60.4z M78.4,70.2H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,69.7,79,70.2,78.4,70.2z M78.4,80H56.6c-0.6,0-1.1-0.5-1.1-1.1v-2.2c0-0.6,0.5-1.1,1.1-1.1h21.8c0.6,0,1.1,0.5,1.1,1.1v2.2 C79.5,79.5,79,80,78.4,80z"></path> </g></svg> */}
             {isTechSearch && <>
@@ -244,6 +252,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
                   className={styles.formSearch}
                   onSubmit={sub}
               >
+                {/* <label htmlFor="searchTerm">{(isTechSearch) ? 'поиск по профессии' : ''}</label> */}
                   <input
                       ref={refSearch}
                       placeholder="введите профессию или должность"
@@ -272,46 +281,47 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
               {/* name="searchTerm" */}
               {/* /> */}
 
-            {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
-            </>}
-            <div id='favSvg' style = {{ visibility: (location.pathname === '/search') ? 'visible' : 'hidden' }} className={styles.favorite}>
-              <svg
-                  onClick={(e) => {
-                    if (isAuth) {
-                      e.stopPropagation();
-                      (isFavorite) ? sendUnFav() : sendFav()
-                    }
-                  }}
-                  fill = {(isFavorite) ? '#3a3a3a' : 'none'}
-                  height="29"
-
-                  viewBox="0 0 24 29"
-                  width="24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M22.2487 1.08846L22.2625 1.09449L22.2764 1.10011C22.5105 1.19437 22.6789 1.33196 22.8079 1.52139C22.9382 1.71256 23 1.91236 23 2.14673V26.8533C23 27.0876 22.9382 27.2874 22.8079 27.4786C22.6789 27.668 22.5105 27.8056 22.2764 27.8999L22.2655 27.9043L22.2546 27.909C22.1652 27.9475 22.0293 27.9808 21.825 27.9808C21.4817 27.9808 21.2093 27.8746 20.9597 27.6444L12.701 19.5274L12 18.8384L11.299 19.5274L3.0397 27.645C2.76741 27.8973 2.49193 28 2.175 28C2.02518 28 1.88685 27.9709 1.75129 27.9115L1.73751 27.9055L1.72355 27.8999C1.48949 27.8056 1.32112 27.668 1.19206 27.4786C1.06182 27.2874 1 27.0876 1 26.8533V2.14673C1 1.91236 1.06182 1.71256 1.19206 1.52139C1.32112 1.33196 1.48949 1.19437 1.72355 1.10011L1.73751 1.09449L1.75129 1.08846C1.88685 1.02907 2.02518 1 2.175 1H21.825C21.9748 1 22.1132 1.02907 22.2487 1.08846Z"
-                    stroke="#3a3a3a"
-                    strokeWidth="2"
-                  />
-                </svg>
-            </div>
-              {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
-
-          </div>
-
-        { isTechSearch && <>{isModalOpen && <HeaderOptions
-            onClose={
-              () => {
-                setHavRecommends(false)
-                setIsModalOpen(false)
+          {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
+        </>}
+        <div id='favSvg' style={{ visibility: (location.pathname === '/search') ? 'visible' : 'hidden' }}
+             className={styles.favorite}>
+          <svg
+            onClick={(e) => {
+              if (isAuth) {
+                e.stopPropagation();
+                (isFavorite) ? sendUnFav() : sendFav()
               }
-            }
-            setGrade={setGradeTag}
-            setTitleTag={setTitleTag}
-        />}</> }
+            }}
+            fill={(isFavorite) ? '#3a3a3a' : 'none'}
+            height="29"
 
-      </React.Fragment>
+            viewBox="0 0 24 29"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22.2487 1.08846L22.2625 1.09449L22.2764 1.10011C22.5105 1.19437 22.6789 1.33196 22.8079 1.52139C22.9382 1.71256 23 1.91236 23 2.14673V26.8533C23 27.0876 22.9382 27.2874 22.8079 27.4786C22.6789 27.668 22.5105 27.8056 22.2764 27.8999L22.2655 27.9043L22.2546 27.909C22.1652 27.9475 22.0293 27.9808 21.825 27.9808C21.4817 27.9808 21.2093 27.8746 20.9597 27.6444L12.701 19.5274L12 18.8384L11.299 19.5274L3.0397 27.645C2.76741 27.8973 2.49193 28 2.175 28C2.02518 28 1.88685 27.9709 1.75129 27.9115L1.73751 27.9055L1.72355 27.8999C1.48949 27.8056 1.32112 27.668 1.19206 27.4786C1.06182 27.2874 1 27.0876 1 26.8533V2.14673C1 1.91236 1.06182 1.71256 1.19206 1.52139C1.32112 1.33196 1.48949 1.19437 1.72355 1.10011L1.73751 1.09449L1.75129 1.08846C1.88685 1.02907 2.02518 1 2.175 1H21.825C21.9748 1 22.1132 1.02907 22.2487 1.08846Z"
+              stroke="#3a3a3a"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+        {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
+
+      </div>
+
+      {isTechSearch && <>{isModalOpen && <HeaderOptions
+        onClose={
+          () => {
+            setHavRecommends(false)
+            setIsModalOpen(false)
+          }
+        }
+        setGrade={setGradeTag}
+        setTitleTag={setTitleTag}
+      />}</>}
+
+    </React.Fragment>
   )
 }
 

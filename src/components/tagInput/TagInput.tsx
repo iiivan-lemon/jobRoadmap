@@ -89,12 +89,13 @@ export const TagInput = ({ subJob }) => {
 
   return (
    <><div id='tags-input-container' className="tags-input-container" onClick={(e) => { e.stopPropagation() }}>
-      { tags && [...tags].map((tag, index) => (
+     {/* <label htmlFor="searchTerm">{'поиск по навыкам'}</label> */}
+     { tags && [...tags].map((tag, index) => (
         <form className="tag-item" key={index}>
           <span className="text">{tag}</span>
           <span className="close" onClick={() => { removeTag(index) }}>&times;</span>
         </form>
-      )) }
+     )) }
      <div style={{ alignSelf: 'center' }}>
       <input autoComplete="off"
              onFocus={() => {
