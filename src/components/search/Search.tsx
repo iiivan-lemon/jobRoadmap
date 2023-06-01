@@ -72,7 +72,6 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
       let aw = (new AnimationWorker(input, texts)).start();
 
       (input).addEventListener('focusin', (e) => {
-
         // @ts-expect-error asdasd
         aw.stop()
       });
@@ -251,7 +250,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
                   className={styles.formSearch}
                   onSubmit={sub}
               >
-                {/* <label htmlFor="searchTerm">{(isTechSearch) ? 'поиск по профессии' : ''}</label> */}
+                 <label htmlFor="searchTerm">{(isTechSearch) ? 'поиск по профессии' : ''}</label>
                   <input
                       ref={refSearch}
                       placeholder="введите профессию или должность"
@@ -282,7 +281,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
 
           {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
         </>}
-        <div id='favSvg' style={{ visibility: (location.pathname === '/search') ? 'visible' : 'hidden' }}
+        <div id='favSvg' style={{ display: (location.pathname === '/search') ? 'block' : 'none' }}
              className={styles.favorite}>
           <svg
             onClick={(e) => {

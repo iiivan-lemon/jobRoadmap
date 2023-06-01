@@ -52,6 +52,7 @@
     "react-vis-network-graph": "^3.0.1",
     "recolor-img": "^0.1.1",
     "redux": "^4.2.1",
+    "sass": "^1.62.1",
     "shade-blend-color": "^1.0.0",
     "source-map-loader": "^4.0.1",
     "styled-components": "^5.3.9",
