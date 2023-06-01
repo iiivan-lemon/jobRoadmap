@@ -72,8 +72,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
       let aw = (new AnimationWorker(input, texts)).start();
 
       (input).addEventListener('focusin', (e) => {
-        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression,no-debugger
-        debugger
+
         // @ts-expect-error asdasd
         aw.stop()
       });
