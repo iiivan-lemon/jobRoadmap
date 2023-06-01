@@ -7,10 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadingProfile} from "../../models/user/userActions";
 import {deleteError, loginOrLogout} from "../../models/auth/authActions";
 import './reg.css'
-import styleSearch from "../../components/search/Search.module.css";
-import styles from './../../pages/newUserPage/NewUserPage.module.css'
+import styleSearch from "../../components/search/Search.module.sass";
+import styles from '../../pages/newUserPage/NewUserPage.module.sass'
 import {useAppSelector} from "../../app/hooks";
-import stylesTag from "../../components/Tag/Tag.module.css";
+import stylesTag from "../../components/Tag/Tag.module.sass";
 const ValidatedRegForm = () => {
     const refLinkCon = useRef();
     const refRegCon = useRef();

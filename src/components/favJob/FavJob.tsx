@@ -1,4 +1,4 @@
-import './favJob.css'
+import './favJob.sass'
 import React, { useState } from 'react'
 import { setFav } from '../../models/favs/favsService'
 import { setUnFavs } from '../../models/favs/favsSlice'

@@ -1,5 +1,5 @@
-import styleSearch from "../../components/search/Search.module.css";
-import styles from "../../pages/newUserPage/NewUserPage.module.css";
+import styleSearch from "../../components/search/Search.module.sass";
+import styles from "../../pages/newUserPage/NewUserPage.module.sass";
 import React, {useEffect} from "react";
 import {ValidatedProfileForm} from "./formikProfile";
 import {IconButton} from "@mui/material";

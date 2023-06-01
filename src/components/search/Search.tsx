@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 // eslint-disable-next-line import/no-duplicates
-import styles from './Search.module.css'
+import styles from './Search.module.sass'
 import HeaderOptions from '../headerOptions/HeaderOptions'
 // eslint-disable-next-line import/no-duplicates
-import './Search.module.css'
+import './Search.module.sass'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getTops } from '../../models/tops/topsSlice'
 import { getFavs, setFavs, setUnFavs } from '../../models/favs/favsSlice'
@@ -12,7 +12,7 @@ import { selectGrade } from '../../models/gradeFilter/gradeSlice'
 import { debounce, loadState } from '../../utils/utils'
 import { TagInput } from '../tagInput/TagInput'
 import { useLocation } from 'react-router-dom'
-import stylesNew from '../../pages/newUserPage/NewUserPage.module.css'
+import stylesNew from '../../pages/newUserPage/NewUserPage.module.sass'
 import { animationWorker as AnimationWorker } from './typingAnimation'
 
 const input = document.querySelector('#search')

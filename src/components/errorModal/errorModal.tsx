@@ -1,8 +1,8 @@
-import './errorModal.css'
+import './errorModal.sass'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import styles from './../../pages/newUserPage/NewUserPage.module.css'
-import stylesTag from '../Tag/Tag.module.css'
+import styles from '../../pages/newUserPage/NewUserPage.module.sass'
+import stylesTag from '../Tag/Tag.module.sass'
 
 export const ErrorModal = ({ message }) => {
   const nav = useNavigate()

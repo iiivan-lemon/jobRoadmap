@@ -1,6 +1,6 @@
-import './tagInput.css'
+import './tagInput.sass'
 import React, { useEffect, useState } from 'react'
-import styles from '../search/Search.module.css'
+import styles from '../search/Search.module.sass'
 import { getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { debounce } from '../../utils/utils'
@@ -13,7 +13,7 @@ export const TagInput = ({ subJob }) => {
   }, [])
 
   React.useEffect(() => {
-    const texts = ['react.js', 'python', 'postgres']
+    const texts = ['react.js figma', 'python sql django', 'postgres java ci/cd docker']
     const input = document.querySelector('#tagSearch') as HTMLInputElement
     // @ts-expect-error asdasd
     let aw = (new AnimationWorker(input, texts)).start();

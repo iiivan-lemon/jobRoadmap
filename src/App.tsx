@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './App.css'
+import './App.sass'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import HomePage from './pages/homePage/HomePage'
 
@@ -38,7 +38,7 @@ import ValidatedLoginForm from './authApp/login/Formik'
 import ValidatedRegForm from './authApp/register/FormikReg'
 import { ProfileUser } from './authApp/profile/profileUser'
 import { ReactComponent as NodeSvg } from '../src/static/images/svg-hex.svg'
-import stylesNewPage from './pages/newUserPage/NewUserPage.module.css'
+import stylesNewPage from './pages/newUserPage/NewUserPage.module.sass'
 
 /*
  * Import { PrivateRoute } from './components/privateRoute/PrivateRoute'

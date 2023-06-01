@@ -1,0 +1,180 @@
+@use '../../styles/colors' as color
+
+.header
+    z-index: 24
+    /*background-image: url("../../static/images/darkBlue.png")*/
+    /*background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%)*/
+
+    overflow-x: clip
+    position: relative
+    display: flex
+    /*background: #1B1B1B*/
+    flex-direction: column
+    /*border-bottom: 3px solid rgba(255, 255, 255, 0.2)*/
+
+
+.logoHref 
+    z-index: 12
+    /*flex-grow: 1*/
+    text-decoration: none
+
+
+
+.title 
+    color:  color.$base-title
+    cursor: pointer
+    font-family: 'Minipax', 'GT Eesti Pro Display', serif
+    font-style: normal
+    font-weight: 700
+    font-size: 32px
+    line-height: 37px
+    text-align: center
+
+
+.titles
+    align-items: center
+    justify-content: space-between
+    /*flex-grow: 0.5*/
+    display: flex
+
+
+.favorite:hover
+    color: #6d54ff
+
+.favorite 
+    border-radius: 45px
+    line-height: 2rem
+    /*transition: all 1s ease*/
+    cursor: pointer
+    z-index: 20
+    text-decoration: none
+    padding-inline: 10px
+    font-style: normal
+    font-weight: 400
+    font-size: 1rem
+    display: flex
+    align-items: flex-end
+    text-align: center
+    color:  color.$base-title
+
+
+.username 
+    cursor: pointer
+    text-decoration: none
+    padding-inline: 10px
+    font-style: normal
+    font-weight: 500
+    font-size: 1rem
+    line-height: 23px
+    display: flex
+    align-items: flex-end
+    text-align: center
+    color:  color.$base-title
+
+
+
+.mainHeader 
+    transition: background 1s ease
+    grid-template-columns: 1fr 2fr 2fr
+    display: grid
+    padding-block: 1rem
+    backdrop-filter: blur(30px)
+    z-index: 31
+    border-bottom: 1px solid transparent
+    border-image: linear-gradient(0.25turn,  color.$base-title, rgb(131 131 131 / 0%))
+    border-image-slice: 1
+    /*width: 100%*/
+    justify-content: space-between
+    align-items: center
+    padding-inline: 80px
+    /*background: transparent*/
+
+
+.headerTags 
+    background: rgb(255 255 255 / 0%)
+
+    box-shadow: 0px 0px 20px 10px rgb(85 85 85 / 0%)
+    -webkit-backdrop-filter: blur(35px)
+    backdrop-filter: blur(35px)
+    width: -webkit-fill-available
+    z-index: 30
+    border: none
+    position: absolute
+    display: flex
+    padding: 1rem 80px
+    flex-direction: column
+
+
+.chooseTitle
+    color: #6d54ff
+
+.baseTitle 
+    transition: color 0.4s ease, background 1s ease, box-shadow 1s ease, border-radius 1s ease
+
+
+.logout
+    filter: brightness(0.2)
+    margin-inline: 1rem
+
+
+.avatar
+    cursor: pointer
+    position: relative
+
+.avatar:hover:before 
+    margin-inline: -1rem
+    left: 0
+    z-index: 50
+    font-size: medium
+    position: absolute
+    width: fit-content
+    color: #fff
+    background: color.$main-button
+    padding: 5px
+    border-radius: 4px
+    top: 2rem
+    content: "профиль"
+    cursor: pointer
+
+
+@media (max-width: 1500px) 
+    .favorite
+        margin-inline: 1rem
+    
+
+
+@media (max-width: 1500px) and (min-width: 1300px) 
+    .favorite
+        margin-inline: 1rem
+    
+
+
+@media (min-width: 1500px) and (max-width: 2000px) 
+    .favorite
+        margin-inline: 2rem
+    
+
+
+
+@media (min-width: 900px) and (max-width: 1300px) 
+    .mainHeader
+        padding-block: 0.5rem
+    
+    .favorite
+        margin-inline: 0.5rem
+        font-size: 0.8rem
+    
+    .username
+        font-size: 0.8rem
+    
+
+    .title
+        font-size: 1.2rem
+        line-height: 1.3rem
+    
+
+    .headerTags
+        padding: 0.7rem 80px
+    
+
+

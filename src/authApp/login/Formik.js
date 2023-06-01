@@ -6,11 +6,11 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loadingProfile} from "../../models/user/userActions";
 import {deleteError, loginOrLogout} from "../../models/auth/authActions";
-import  './../styles/auth.css'
-import styleSearch from "../../components/search/Search.module.css";
-import styles from './../../pages/newUserPage/NewUserPage.module.css'
+import  '../styles/auth.sass'
+import styleSearch from "../../components/search/Search.module.sass";
+import styles from '../../pages/newUserPage/NewUserPage.module.sass'
 import {useAppSelector} from "../../app/hooks";
-import stylesTag from "../../components/Tag/Tag.module.css";
+import stylesTag from "../../components/Tag/Tag.module.sass";
 const ValidatedLoginForm = () => {
     const history = useNavigate()
     const dispatch = useDispatch();

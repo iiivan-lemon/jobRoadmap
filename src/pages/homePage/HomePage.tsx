@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
-import './HomePage.css'
-import './../../App.css'
+import './HomePage.sass'
+import '../../App.sass'
 import Draggable from 'react-draggable'
 import { PushSpinner } from 'react-spinners-kit'
 import { getDataGraph } from '../../models/dataGraph/dataGraphSlice'
 import { useAppDispatch } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
-import { GraphSelf } from '../../components/graphSelf/graphSelf'
 import GradientGrade from '../../components/gradientGrade/GradientGrade'
-import styles from '../newUserPage/NewUserPage.module.css'
+import styles from '../newUserPage/NewUserPage.module.sass'
 import { RangeSlider } from 'react-double-range-slider'
 import { loadState } from '../../utils/utils'
 import { getFinished }
@@ -16,7 +15,7 @@ import { getFinished }
 import { ErrorModal } from '../../components/errorModal/errorModal'
 import { generateGraph } from '../../components/bubbleChart/graphChart'
 import NodeModal from '../../components/nodeModal/NodeModal'
-import stylesTag from '../../components/Tag/Tag.module.css'
+import stylesTag from '../../components/Tag/Tag.module.sass'
 
 const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   const nav = useNavigate()

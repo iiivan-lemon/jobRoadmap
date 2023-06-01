@@ -1,13 +1,13 @@
 import React from 'react'
 import { loadState } from '../../utils/utils'
 import { useAppDispatch } from '../../app/hooks'
-import './jobLetter.css'
-import styles from './../newUserPage/NewUserPage.module.css'
+import './jobLetterPage.sass'
+import styles from '../newUserPage/NewUserPage.module.sass'
 import { getJobLetter } from '../../models/jobLetter/jobLetterSlice'
-import './../resumeFixPage/resumeFixPage.css'
-import styleSearch from './../../components/search/Search.module.css'
+import '../resumeFixPage/resumeFixPage.sass'
+import styleSearch from '../../components/search/Search.module.sass'
 import { PushSpinner, WhisperSpinner } from 'react-spinners-kit'
-import stylesTag from './../../components/Tag/Tag.module.css'
+import stylesTag from '../../components/Tag/Tag.module.sass'
 export const JobLetterPage = () => {
   const dispatch = useAppDispatch()
   const [

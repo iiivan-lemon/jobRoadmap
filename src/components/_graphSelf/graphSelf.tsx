@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import './graphSelf.css'
+import './graphSelf.sass'
 import { type DataGraphState } from '../../models/dataGraph/dataGraphSlice'
 import pSBC from 'shade-blend-color'
 import { ReactComponent as NodeSvg } from '../../static/images/svg-hex.svg'

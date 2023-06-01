@@ -1,14 +1,13 @@
 import React, { type FC } from 'react'
-import styles from './NewUserPage.module.css'
-import stylesTag from '../../components/Tag/Tag.module.css'
-import './../../App.css'
+import styles from './NewUserPage.module.sass'
+import stylesTag from '../../components/Tag/Tag.module.sass'
+import '../../App.sass'
 import GradientGrade from '../../components/gradientGrade/GradientGrade'
-import NodeFav from '../../components/nodeFav/nodeFav'
 import { useNavigate } from 'react-router-dom'
 // import styled from 'styled-components'
 import { ReactComponent as NodeSvg } from '../../static/images/svg-hex.svg'
 import pSBC from 'shade-blend-color'
-import stylesOps from '../../components/headerOptions/HeaderOptions.module.css'
+import stylesOps from '../../components/headerOptions/HeaderOptions.module.sass'
 const NewUserPage: FC = () => {
   React.useEffect(() => {
     // document.body.style.overflow = 'auto'
@@ -22,13 +21,15 @@ const NewUserPage: FC = () => {
     (document.getElementById('tagSearch') as HTMLInputElement)?.focus()
   }
 
-  const focusHeaderTitle = (e) => {
+  const toggleHeaderTitle = (e) => {
     e.stopPropagation()
     const header = document.getElementById('mainHeader')
     const title = document.getElementById(e.currentTarget.id.split('_')[1] + 'Title')
-    if (title && header) {
-      title.classList.add(styles.widjetHeaderTitle)
-      // header.classList.add(styles.headerFocus)
+    if (title) {
+      title.classList.toggle(styles.widjetHeaderTitle)
+    }
+    if (header) {
+      header.classList.toggle(styles.headerFocus)
     }
   }
   const unFocusHeaderTitle = (e) => {
@@ -36,9 +37,11 @@ const NewUserPage: FC = () => {
     e.stopPropagation()
     const header = document.getElementById('mainHeader')
     const title = document.getElementById(e.currentTarget.id.split('_')[1] + 'Title')
-    if (title && header) {
-      // header.classList.remove(styles.headerFocus)
+    if (title) {
       title.classList.remove(styles.widjetHeaderTitle)
+    }
+    if (header) {
+      header.classList.remove(styles.headerFocus)
     }
   }
 
@@ -47,7 +50,7 @@ const NewUserPage: FC = () => {
         <div className={styles.noiseWidgetBack}></div>
         <div className={styles.arrow}></div>
         <div className={styles.startBlock}>
-          <div className={styles.description} onClick={() => { console.log(1) } }>
+          <div className={styles.description}>
                   <span className={styles.title}>
                       Job Roadmap
                   </span>
@@ -61,26 +64,33 @@ const NewUserPage: FC = () => {
                   <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button>
               </div>
               <div className={styles.widgetsDescr}>
-                <div id='widget_skills' onClick={openHeader} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div>
-                <div id='widget_jobLetter' onClick={ (e) => {
-                  unFocusHeaderTitle(e)
-                  history('/jobLetter')
+                <div id='widget_skills' onClick={ (e) => {
+                  openHeader()
                 }} onMouseOver={(e) => {
-                  focusHeaderTitle(e)
+                  toggleHeaderTitle(e)
                 }} onMouseOut={(e) => {
                   // eslint-disable-next-line no-debugger
-                  unFocusHeaderTitle(e)
+                  toggleHeaderTitle(e)
+                }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div>
+                <div id='widget_jobLetter' onClick={ (e) => {
+                  toggleHeaderTitle(e)
+                  history('/jobLetter')
+                }} onMouseOver={(e) => {
+                  toggleHeaderTitle(e)
+                }} onMouseOut={(e) => {
+                  // eslint-disable-next-line no-debugger
+                  toggleHeaderTitle(e)
                 }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
                 <div id='widget_resumeFix'
                      onClick={ (e) => {
-                       unFocusHeaderTitle(e)
+                       toggleHeaderTitle(e)
                        history('/resumeFix')
                      }}
                      onMouseOver={(e) => {
-                       focusHeaderTitle(e)
+                       toggleHeaderTitle(e)
                      }} onMouseOut={(e) => {
                        // eslint-disable-next-line no-debugger
-                       unFocusHeaderTitle(e)
+                       toggleHeaderTitle(e)
                      }} className={`${styles.widjet} ${styles.widjetResume} ${styles.widjetNew}`}><span className={styles.widjetText}>Анализ резюме</span></div>
                   <span className={styles.widjetTitle} >
                       Анализ актуальных открытых вакансий по Вашей специальности

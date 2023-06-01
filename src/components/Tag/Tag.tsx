@@ -1,4 +1,4 @@
-import styles from './Tag.module.css'
+import styles from './Tag.module.sass'
 import React from 'react'
 const Tag = ({ style, title, className, setTitleTag, id, setGrade, input }): any => {
   React.useEffect(() => {

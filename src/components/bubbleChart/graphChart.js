@@ -9,7 +9,7 @@ import * as d3 from "d3";
 const width = window.innerWidth;
 const height = window.innerHeight;
 const svgNode = require('../../../src/static/images/svg-hex.svg')
-import '../../pages/homePage/HomePage.css'
+import '../../pages/homePage/HomePage.sass'
 
 function processData(data) {
     var obj = data.call_data;

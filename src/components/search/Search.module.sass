@@ -1,0 +1,227 @@
+@use '../../styles/colors' as color
+
+.search
+    box-sizing: border-box
+    line-height: 2rem
+    font-size: 1rem
+    padding-inline-start: 0.8rem
+    border: 1px solid color.$base-title
+    border-radius: 10px
+    color: color.$base-title
+    background:  color.$input-back
+    /*outline-color: black*/
+    //width: 22vw
+    height: 2rem
+
+
+.search:focus 
+    background: color.$input-focus-back
+
+.search:focus-visible
+    outline: none
+
+
+.searchHeader 
+    width: 100%
+    font-size: 1rem
+    padding-inline-start: 0.8rem
+
+
+.searchBlock 
+    width: 100%
+    align-items: center
+    display: flex
+
+
+
+.formSearch 
+    position: relative
+    align-items: center
+    width: 100%
+    display: flex
+
+
+.formSearch  label
+    border: solid 1px #5b5b5b
+    border-radius: 45px
+    content: " "
+    background-color:  color.$input-back
+    width: fit-content
+    height: fit-content
+    position: absolute
+    top: 80%
+    right: 3rem
+    padding-inline: 6px
+    z-index: 1
+
+
+/*.formSearch label:after */
+/*    border: solid 1px #5b5b5b*/
+/*    border-radius: 45px*/
+/*    content: " "*/
+/*    background-color:  color.$input-back*/
+/*    width: 100%*/
+/*    height: 13px*/
+/*    position: absolute*/
+/*    left: 0*/
+/*    bottom: 0*/
+/*    z-index: -1*/
+/**/
+
+label
+    color: color.$base-title
+    font-size: 0.7rem
+    display: inline-block
+    margin-bottom: .5rem
+
+
+.favorite 
+    cursor: pointer
+    margin-inline: 1rem
+    /*visibility: visible*/
+
+
+/* Задаем общий стиль всплывающей подсказки для нужных элементов*/
+.favorite:hover:before 
+    z-index: 50
+    font-size: medium
+    position: absolute
+    width: 6rem
+    color: #fff
+    background:  color.$main-button
+    padding: 5px
+    border-radius: 4px
+    top: 3.4rem
+
+
+/* Добавляем текст в конкретной всплывающей подсказке */
+.favorite:hover:before 
+    content: "добавьте роадмап в избранное"
+
+
+.changeSearch:hover 
+
+    filter: contrast(0.3)
+
+
+
+.changeSearch 
+
+    rotate: 0deg
+    transition: filter 0.5s ease
+    height: 2rem
+    stroke: none
+    fill: color.$base-title
+    cursor: pointer
+    margin-inline: 1rem
+
+
+
+.changeIconSearch:hover:before 
+    z-index: 50
+    font-size: medium
+    position: absolute
+    width: 4rem
+    color: #fff
+    background:  color.$main-button
+    padding: 5px
+    border-radius: 4px
+    top: 3.4rem
+
+
+/* Добавляем текст в конкретной всплывающей подсказке */
+.changeIconSearch:hover:before 
+    content: "смена поиска"
+
+
+.dropDown 
+    -webkit-backdrop-filter: blur(53px)
+    backdrop-filter: blur(53px)
+    top: 4rem
+    margin-block: 10px
+    position: absolute
+    z-index: 200
+    width: -moz-fit-content
+    width: fit-content
+    background-color: aliceblue
+    padding: 1rem
+    border-radius: 20px
+    box-shadow: 0px 0px 20px 10px rgb(85 85 85 / 21%)
+
+
+.titleRecommend 
+    border: 1px solid rgba(58, 58, 58, 0.5)
+    border-radius: 10px
+    cursor: pointer
+    background-color: #c7d9f9
+    margin: 10px 0px
+    padding: 10px
+
+
+.searchSvg 
+    filter: brightness(0.1)
+    transition: filter 0.5s ease
+    cursor: pointer
+    margin-inline-start: 10px
+
+
+
+.searchSvg:hover 
+    filter: brightness(0.5)
+
+
+.rotateChangeSearch
+    animation: changeSearch 0.5s
+
+
+
+@media (min-width: 1600px)
+    label 
+        font-size: 0.9rem
+    
+
+
+@media (min-width: 1500px) and (max-width: 2000px) 
+
+    .searchHeader 
+        width: 100%
+    
+
+
+@media (max-width: 1300px) and (min-width: 900px) 
+    .searchHeader 
+        width: 18rem
+    
+
+    .changeSearch 
+        height: 1.2rem
+    
+
+    .svgS 
+        height: 1.2rem
+    
+
+    .search 
+        font-size: 0.8rem
+        height: 1.2rem
+        width: 15rem
+    
+
+
+
+@keyframes changeSearch 
+    0% 
+        transform: rotate(0deg)
+    
+    100% 
+        transform: rotate(180deg)
+    
+
+@keyframes changeReverseSearch 
+    0% 
+        transform: rotate(180deg)
+    
+    100% 
+        transform: rotate(0deg)
+    
+

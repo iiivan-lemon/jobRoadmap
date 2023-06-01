@@ -1,4 +1,4 @@
-import styles from './gradientGrade.module.css'
+import styles from './gradientGrade.module.sass'
 import React from 'react'
 
 const GradientGrade = ({ width }) => {

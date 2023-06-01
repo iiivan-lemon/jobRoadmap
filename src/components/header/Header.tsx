@@ -1,6 +1,6 @@
 import React, { type FC, useEffect, useState } from 'react'
 import Search from '../search/Search'
-import styles from './Header.module.css'
+import styles from './Header.module.sass'
 // Import { useHistory } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -14,8 +14,8 @@ import { loadingProfile } from '../../models/user/userActions'
 import { useSelector } from 'react-redux'
 import { clearRecommendsTech } from '../../models/recommendTech/recommendTechSlice'
 import { clearRecommends } from '../../models/recommend/recommendSlice'
-import stylesOps from '../headerOptions/HeaderOptions.module.css'
-import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.css'
+import stylesOps from '../headerOptions/HeaderOptions.module.sass'
+import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.sass'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'

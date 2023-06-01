@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './NodeModal.css'
+import './NodeModal.sass'
 import { Button } from 'antd'
 import { getNodeProf, selectDataTops, selectListJobs } from '../../models/tops/topsSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -8,13 +8,13 @@ import { fetchNodeTips } from '../../models/nodeData/nodeDataService'
 import { loadState, updTips } from '../../utils/utils'
 import { getNodeData } from '../../models/nodeData/nodeDataSlice'
 import Tag from '../Tag/Tag'
-import stylesTag from '../Tag/Tag.module.css'
+import stylesTag from '../Tag/Tag.module.sass'
 import { setFinished, unSetFinished } from '../../models/check/checkNodeSlice'
 import Linkify from 'linkify-react'
 import { chechUrlSlice, selectSendUrl, sendText, sendUrl } from '../../models/urlCheck/urlCheckSlice'
 // import { selectGrade } from '../../models/gradeFilter/gradeSlice'
-import './../../pages/homePage/HomePage.css'
-import styles from '../../pages/newUserPage/NewUserPage.module.css'
+import '../../pages/homePage/HomePage.sass'
+import styles from '../../pages/newUserPage/NewUserPage.module.sass'
 const NodeModal = ({ onClose, node, isChecked, sendJob }): JSX.Element => {
   // const textURls = useAppSelector(selectSendUrl)
   const colors = [

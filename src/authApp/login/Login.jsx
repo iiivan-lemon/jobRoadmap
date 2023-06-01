@@ -6,11 +6,11 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import {useNavigate} from "react-router-dom";
 import {authActions, userActions} from '../_store';
-import styles from './../../pages/newUserPage/NewUserPage.module.css'
-import  './../styles/auth.css'
+import styles from '../../pages/newUserPage/NewUserPage.module.sass'
+import  '../styles/auth.sass'
 import {loadingProfile} from "../../models/user/userActions";
 import {loginOrLogout} from "../../models/auth/authActions";
-import styleSearch from "../../components/search/Search.module.css";
+import styleSearch from "../../components/search/Search.module.sass";
 
 
 export { Login };
