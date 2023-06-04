@@ -89,16 +89,21 @@ export const TagInput = ({ subJob }) => {
 
   return (
    <>
-      <div style={{ position: 'relative', display: 'flex', width: '100%' }}>
-     <div id='tags-input-container' className="tags-input-container" onClick={(e) => { e.stopPropagation() }}>
-       <label htmlFor="searchTerm">{'поиск по навыкам'}</label>
+      <div id='tag-container' className='tags' style={{ alignItems: 'center', position: 'relative', display: 'flex', width: '100%' }}>
+        { haveRecommends && <div className={styles.dropDown}>{renderRecommends(recommends)}</div> }
+        <label className='labelSearch' htmlFor="searchTerm">{'поиск по навыкам'}</label>
+        <div style={{
+          position: 'relative',
+          height: '100%'
+        }} className="input-wrap tags" id='tags-input-container'>
+          <div className="input-container tags" onClick={(e) => { e.stopPropagation() }}>
      { tags && [...tags].map((tag, index) => (
         <form className="tag-item" key={index}>
           <span className="text">{tag}</span>
           <span className="close" onClick={() => { removeTag(index) }}>&times;</span>
         </form>
      )) }
-     <div style={{ alignSelf: 'center' }}>
+          <div style={{ alignSelf: 'center' }}>
       <input autoComplete="off"
              onFocus={() => {
                (document.getElementById('tags-input-container') as HTMLElement).style.background = 'rgba(111, 203, 255, 0.37)'
@@ -107,11 +112,16 @@ export const TagInput = ({ subJob }) => {
              onChange={
         debounce(sendSearchValue)
       } onKeyDown={handleKeyDown} type="text" className="tags-input" id='tagSearch' placeholder="введите навыки"></input>
-     { haveRecommends && <div className={styles.dropDown}>{renderRecommends(recommends)}</div> }
+       {/* <label className={styles.tags + ' ' + styles.wrapInput } onClick={(e) => { */}
+       {/*  (document.getElementById('tagSearch') as HTMLInputElement).value = '' */}
+       {/*  setHavRecommends(false) */}
+       {/* }}> */}
+       {/* </label> */}
      </div>
-   </div>
-  <div className={styles.searchSvg}>
-    <svg width='2rem' onClick={() => { setHavRecommends(false); subJob([...tags]) }} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Search_Magnifying_Glass"> <path id="Vector" d="M15 15L21 21M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
-  </div></div></>
+        </div>
+        </div>
+        <div className={styles.searchSvg}>
+        <svg width='2rem' onClick={() => { setHavRecommends(false); subJob([...tags]) }} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Search_Magnifying_Glass"> <path id="Vector" d="M15 15L21 21M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
+        </div></div></>
   )
 }

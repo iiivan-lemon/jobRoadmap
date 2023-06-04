@@ -1,54 +1,95 @@
 @use '../../styles/colors' as color
 
-.tags-input-container
+.input-container
+    &.tags
+        border: none
+        background: none
+        width: 100%
+        max-width: 24rem
+        height: 2rem
+        padding-inline-start: 0
+    //position: relative
+    //align-items: flex-end
     box-sizing: border-box
     width: 100%
-    /*width: 22vw*/
-    overflow: overlay
+    //width: 22vw
+    overflow: visible
     display: inline-flex
     /*box-shadow: 0px 4px 4px rgb(0 0 0 / 25%)*/
-    /*height: 2rem*/
     padding-inline-start: 0.8rem
-
     border: 1px solid  color.$base-title
     border-radius: 10px
     color: black
     background:  color.$input-back
     outline-color: black
 
-.tags-input:focus  .tags-input-container 
-    background: color.$input-focus-back
 
 
-.tags-input-container::-webkit-scrollbar 
-    width: 1px
+
+.tags-input:focus
+    .input-container
+        &.tags
+            background: color.$input-focus-back
+
+.input-container
+            background: color.$input-focus-back
+
+.input-container::-webkit-scrollbar
+            cursor: pointer
+            width: 1px
+            height: 5px
 
 
-/* Track */
-.tags-input-container::-webkit-scrollbar-track 
-    box-shadow: inset 0 0 1px transparent
-    border-radius: 10px
+
+.input-wrap
+        &.tags::-webkit-scrollbar-track
+            box-shadow: inset 0 0 1px transparent
+            border-radius: 10px
 
 
-/* Handle */
-.tags-input-container::-webkit-scrollbar-thumb 
-    cursor: pointer
-    background: transparent
-    border-radius: 10px
+.input-wrap
+    &.tags
+        box-sizing: border-box
+        width: 100%
+        overflow: auto
+        overflow-y: hidden
+        display: inline-flex
+        border-radius: 10px
+        color: black
+        position: relative
+        height: 100%
+        background:  color.$input-back
+        outline-color: black
+        border: solid 1px black
+        padding-inline-start: 0.8rem
+
+.input-wrap
+        &.tags::-webkit-scrollbar-thumb
+            cursor: pointer
+            background: rgba(0, 0, 0, 0.27)
+            border-radius: 10px
+
+.labelSearch
+
+    color: color.$base-title
+    font-size: 0.7rem
+    display: inline-block
+    margin-bottom: .5rem
 
 
-.tags-input-container label 
-    border: solid 1px #5b5b5b
-    border-radius: 45px
-    content: " "
-    background-color:  color.$input-back
-    width: fit-content
-    height: fit-content
-    position: absolute
-    top: 80%
-    right: 3rem
-    padding-inline: 6px
-    z-index: 1
+#tag-container
+    &.tags .labelSearch
+            border: solid 1px #5b5b5b
+            border-radius: 45px
+            content: " "
+            background-color:  color.$input-back
+            width: fit-content
+            height: fit-content
+            position: absolute
+            top: 80%
+            padding-inline: 6px
+            z-index: 1
+            left: 0
 
 
 /*.tags-input-container label:after */
@@ -75,12 +116,15 @@
 
 
 .tag-item
+    align-items: center
     margin: 2px
     font-size: 1rem
     background-color: rgb(218, 216, 216)
     display: flex
     padding: 0.3em 0.5em
     border-radius: 20px
+    span
+        width: max-content
 
 .tag-item .close
     height: 20px
@@ -108,3 +152,12 @@
     cursor: pointer
     margin-inline-start: 10px
 
+@media (min-width: 1500px) and (max-width: 1600px)
+    .input-container
+        &.tags
+            width: 30rem
+
+@media (min-width: 1600px) and (max-width: 1700px)
+    .input-container
+        &.tags
+            width: 30rem

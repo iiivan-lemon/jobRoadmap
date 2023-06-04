@@ -37,25 +37,25 @@ export const animationWorker = function (input, texts) {
         if(!this.animationActive) return;
         let curPlaceholderFullText = this.texts[this.curTextNum];
         let timeout = 900;
-        if (this.curPlaceholder === curPlaceholderFullText+'|' && this.blinkCounter===3) {
+        if (this.curPlaceholder === curPlaceholderFullText+ '' && this.blinkCounter===3) {
             this.blinkCounter = 0;
             this.curTextNum = (this.curTextNum >= this.texts.length-1)? 0 : this.curTextNum+1;
-            this.curPlaceholder = '|';
+            this.curPlaceholder = '';
             this.switch(1500);
             return;
         }
-        else if (this.curPlaceholder === curPlaceholderFullText+'|' && this.blinkCounter<3) {
+        else if (this.curPlaceholder === curPlaceholderFullText+'' && this.blinkCounter<3) {
             this.curPlaceholder = curPlaceholderFullText;
             this.blinkCounter++;
         }
         else if (this.curPlaceholder === curPlaceholderFullText && this.blinkCounter<3) {
-            this.curPlaceholder = this.curPlaceholder+'|';
+            this.curPlaceholder = this.curPlaceholder+'';
         }
         else {
             this.curPlaceholder = curPlaceholderFullText
                 .split('')
                 .slice(0,this.curPlaceholder.length+1)
-                .join('') + '|';
+                .join('') + '';
             timeout = 150;
         }
         this.input.setAttribute('placeholder',this.curPlaceholder);
