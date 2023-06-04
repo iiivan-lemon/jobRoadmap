@@ -52,16 +52,16 @@ function App (): JSX.Element {
     setLoad
   ] = React.useState(loadState.base)
   React.useEffect(() => {
-    const script = document.createElement('script')
-
-    script.src = 'https://d3js.org/d3.v6.js'
-    script.async = true
-    script.type = 'text/javascript'
-    document.body.appendChild(script)
-
-    return () => {
-      document.body.removeChild(script)
-    }
+    // const script = document.createElement('script')
+    //
+    // script.src = 'https://d3js.org/d3.v6.js'
+    // script.async = true
+    // script.type = 'text/javascript'
+    // document.body.appendChild(script)
+    //
+    // return () => {
+    //   document.body.removeChild(script)
+    // }
   }, [])
 
   const [isMainSearch, setIsMainSearch] = React.useState(true)
@@ -126,8 +126,8 @@ function App (): JSX.Element {
         }
       }
     }
-    bgImg1.src = 'static/img.png'
-    bgImg2.src = 'static/img_5.png'
+    bgImg1.src = 'static/img.webp'
+    bgImg2.src = 'static/img_5.webp'
   }, [])
 
   const routes = (

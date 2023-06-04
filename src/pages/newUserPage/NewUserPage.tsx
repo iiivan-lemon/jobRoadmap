@@ -32,7 +32,7 @@ const NewUserPage: FC = () => {
         div.style.visibility = 'visible'
       }
     }
-    bgImg.src = 'static/img_6.png'
+    bgImg.src = 'static/img_6.webp'
   }, [])
   const history = useNavigate()
 
