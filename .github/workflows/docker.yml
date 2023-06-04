@@ -32,7 +32,7 @@ jobs:
           # This path is totally independant from the 'file' directve below
           context: .
           # This path is totally independant from the 'context' directive above
-          file: Dockerfile
+          file: Dockerfile1
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sample:latest
           
