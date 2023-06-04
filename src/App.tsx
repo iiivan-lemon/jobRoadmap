@@ -93,7 +93,13 @@ function App (): JSX.Element {
   }
 
   React.useEffect(() => {
+    const div1 = document.getElementById('backBlueNoise')
+    const div2 = document.getElementById('backDarkBlueNoiseLeft')
     setLoad(loadState.load)
+    if (div1 && div2) {
+      div1.style.visibility = 'hidden'
+      div2.style.visibility = 'hidden'
+    }
     const bgImg1 = new Image()
     const bgImg2 = new Image()
     bgImg1.onload = function () {
@@ -102,6 +108,8 @@ function App (): JSX.Element {
       if (div1) {
         div1.style.backgroundImage = 'url(' + bgImg1.src + ')'
         if (div2?.style.backgroundImage) {
+          div1.style.visibility = 'visible'
+          div2.style.visibility = 'visible'
           setLoad(loadState.res)
         }
       }
@@ -112,6 +120,8 @@ function App (): JSX.Element {
       if (div2) {
         div2.style.backgroundImage = 'url(' + bgImg2.src + ')'
         if (div1?.style.backgroundImage) {
+          div1.style.visibility = 'visible'
+          div2.style.visibility = 'visible'
           setLoad(loadState.res)
         }
       }
@@ -122,14 +132,6 @@ function App (): JSX.Element {
 
   const routes = (
       <React.Fragment>
-        <div className='backBlueNoise' id='backBlueNoise'></div>
-        <div className='backDarkBlueNoiseLeft' id='backDarkBlueNoiseLeft'></div>
-          <Header
-              takeInput={takeInput}
-              isMainSearch={isMainSearch}
-              changeData={change}
-              setGrade={setGrade}
-          />
         <div className='preloader'>
           <PushSpinner
             color="#686769"
@@ -138,7 +140,17 @@ function App (): JSX.Element {
             size={30}
           />
         </div>
-        {loading === loadState.res && <Routes>
+
+        <div className='backBlueNoise' id='backBlueNoise'></div>
+        <div className='backDarkBlueNoiseLeft' id='backDarkBlueNoiseLeft'></div>
+        {loading === loadState.res && <>
+          <Header
+              takeInput={takeInput}
+              isMainSearch={isMainSearch}
+              changeData={change}
+              setGrade={setGrade}
+          />
+         <Routes>
           {/* Private */}
           <Route
             element={
@@ -196,7 +208,7 @@ function App (): JSX.Element {
             element={<ValidatedRegForm />}
             path="/signup"
           />
-        </Routes>}
+        </Routes></>}
 
       </React.Fragment>
   )

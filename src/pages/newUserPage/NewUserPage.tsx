@@ -8,10 +8,31 @@ import { useNavigate } from 'react-router-dom'
 import { ReactComponent as NodeSvg } from '../../static/images/svg-hex.svg'
 import pSBC from 'shade-blend-color'
 import stylesOps from '../../components/headerOptions/HeaderOptions.module.sass'
+import { loadState } from '../../utils/utils'
+import { PushSpinner } from 'react-spinners-kit'
 const NewUserPage: FC = () => {
+  const [
+    loading,
+    setLoad
+  ] = React.useState(loadState.base)
+
   React.useEffect(() => {
     // document.body.style.overflow = 'auto'
-    // document.getElementById('header')?.classList.add('headerFix')
+    const div = document.getElementById('noiseWidgetBack')
+    setLoad(loadState.load)
+    if (div) {
+      div.style.visibility = 'hidden'
+    }
+    const bgImg = new Image()
+    bgImg.onload = function () {
+      const div = document.getElementById('noiseWidgetBack')
+      if (div) {
+        div.style.backgroundImage = 'url(' + bgImg.src + ')'
+        setLoad(loadState.res)
+        div.style.visibility = 'visible'
+      }
+    }
+    bgImg.src = 'static/img_6.png'
   }, [])
   const history = useNavigate()
 
@@ -47,21 +68,31 @@ const NewUserPage: FC = () => {
 
   return (
       <React.Fragment>
-        <div className={styles.noiseWidgetBack}></div>
-        <div className={styles.arrow}></div>
-        <div className={styles.startBlock}>
-          <div className={styles.description}>
+        <div className='preloader'>
+          <PushSpinner
+            color="#686769"
+            id="preloader"
+            loading={loading === loadState.load}
+            size={30}
+          />
+        </div>
+        <div className={styles.noiseWidgetBack} id='noiseWidgetBack'></div>
+        { loading === loadState.res &&
+          <>
+            <div className={styles.arrow}></div>
+            <div className={styles.startBlock}>
+              <div className={styles.description}>
                   <span className={styles.title}>
                       Job Roadmap
                   </span>
-                  <div className={styles.wrapper}>
+                <div className={styles.wrapper}>
                   <span
-                      className={styles.titleDescr}
+                    className={styles.titleDescr}
                   >
                       Cервис, который поможет вам узнать и изучить необходимые навыки для подготовки к собеседованиям по выбранной IT профессии
                   </span>
-                  </div>
-                  <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button>
+                </div>
+                <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button>
               </div>
               <div className={styles.widgetsDescr}>
                 <div id='widget_skills' onClick={ (e) => {
@@ -92,11 +123,12 @@ const NewUserPage: FC = () => {
                        // eslint-disable-next-line no-debugger
                        toggleHeaderTitle(e)
                      }} className={`${styles.widjet} ${styles.widjetResume} ${styles.widjetNew}`}><span className={styles.widjetText}>Анализ резюме</span></div>
-                  <span className={styles.widjetTitle} >
+                <span className={styles.widjetTitle} >
                       Анализ актуальных открытых вакансий по Вашей специальности
                   </span>
               </div>
-          </div>
+            </div></>
+        }
       </React.Fragment>
   )
 }
