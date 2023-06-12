@@ -94,7 +94,7 @@ export const TagInput = ({ subJob }) => {
         <label className='labelSearch' htmlFor="searchTerm">{'поиск по навыкам'}</label>
         <div style={{
           position: 'relative',
-          height: '100%'
+          height: '2rem'
         }} className="input-wrap tags" id='tags-input-container'>
           <div className="input-container tags" onClick={(e) => { e.stopPropagation() }}>
      { tags && [...tags].map((tag, index) => (
