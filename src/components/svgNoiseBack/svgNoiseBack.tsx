@@ -4,6 +4,7 @@ export const SvgNoiseBack = () => {
   return (
     <>
     <svg width="874" style={{
+      filter: (window.innerWidth > 1000) ? '' : 'blur(50px)',
       position: 'absolute',
       height: '100vh',
       width: 'fit-content',
@@ -33,6 +34,7 @@ export const SvgNoiseBack = () => {
       </defs>
     </svg>
   <svg style={{
+    filter: (window.innerWidth > 1000) ? '' : 'blur(50px)',
     height: '100vh',
     width: 'fit-content',
     position: 'absolute',

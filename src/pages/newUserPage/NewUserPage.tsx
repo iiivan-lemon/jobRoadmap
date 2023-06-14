@@ -59,6 +59,7 @@ const NewUserPage: FC = () => {
           />
         </div>
         <svg style={{
+          filter: (window.innerWidth > 1000) ? '' : 'blur(50px)',
           position: 'absolute',
           right: '11vw',
           height: '100vh',
@@ -136,9 +137,9 @@ const NewUserPage: FC = () => {
                        // eslint-disable-next-line no-debugger
                        toggleHeaderTitle(e)
                      }} className={`${styles.widjet} ${styles.widjetResume} ${styles.widjetNew}`}><span className={styles.widjetText}>Анализ резюме</span></div>
-                <span className={styles.widjetTitle} >
+                {window.innerWidth > 1000 && <span className={styles.widjetTitle} >
                       Анализ актуальных открытых вакансий по Вашей специальности
-                  </span>
+                  </span>}
               </div>
             </div></>
         }
