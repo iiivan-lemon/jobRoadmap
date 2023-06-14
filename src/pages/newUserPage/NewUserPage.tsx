@@ -16,25 +16,6 @@ const NewUserPage: FC = () => {
     setLoad
   ] = React.useState(loadState.res)
 
-  React.useEffect(() => {
-    // // document.body.style.overflow = 'auto'
-    // const div = document.getElementById('noiseWidgetBack')
-    // setLoad(loadState.load)
-    // if (div) {
-    //   div.style.visibility = 'hidden'
-    // }
-    // const bgImg = new Image()
-    // bgImg.onload = function () {
-    //   const div = document.getElementById('noiseWidgetBack')
-    //   if (div) {
-    //     div.style.backgroundImage = 'url(' + bgImg.src + ')'
-    //     setLoad(loadState.res)
-    //     div.style.visibility = 'visible'
-    //   }
-    // }
-    // setLoad(loadState.res)
-    // bgImg.src = 'static/img_6.webp'
-  }, [])
   const history = useNavigate()
 
   const openHeader = () => {
@@ -110,7 +91,9 @@ const NewUserPage: FC = () => {
         { loading === loadState.res &&
           <>
             <div className={styles.arrow}></div>
+
             <div className={styles.startBlock}>
+                { window.innerWidth > 1000 && <>
               <div className={styles.description}>
                   <span className={styles.title}>
                       Job Roadmap
@@ -123,16 +106,16 @@ const NewUserPage: FC = () => {
                   </span>
                 </div>
                 <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button>
-              </div>
+              </div></>}
               <div className={styles.widgetsDescr}>
-                <div id='widget_skills' onClick={ (e) => {
+                { window.innerWidth > 1000 && <><div id='widget_skills' onClick={ (e) => {
                   openHeader()
                 }} onMouseOver={(e) => {
                   toggleHeaderTitle(e)
                 }} onMouseOut={(e) => {
                   // eslint-disable-next-line no-debugger
                   toggleHeaderTitle(e)
-                }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div>
+                }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
                 <div id='widget_jobLetter' onClick={ (e) => {
                   toggleHeaderTitle(e)
                   history('/jobLetter')

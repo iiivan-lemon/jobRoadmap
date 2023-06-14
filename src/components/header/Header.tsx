@@ -116,12 +116,14 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                           JOB Roadmap
                       </span>
                   </span>
+                {window.innerWidth > 1000 && <>
                   <Search
                     title = {takeInput}
                       isMainSearch={isMainSearch}
                       changeData={changeData}
                       setGrade={setGrade}
                   />
+                  </>}
                 <div className={styles.titles}>
                 <span
                   id='resumeFixTitle'
@@ -141,6 +143,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                 >
                       Письмо
                   </span>
+                  {window.innerWidth > 1000 && <>
                   <span
                       className={styles.favorite + ' ' + styles.baseTitle }
                       onClick={() => { goTo('/favorites') }}
@@ -202,7 +205,9 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                   >
                       войти
                   </span>}
+                  </>}
                 </div>
+
               </div>
 
               <div id="header-options" />
