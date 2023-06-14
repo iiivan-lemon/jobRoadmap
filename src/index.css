@@ -10,6 +10,7 @@ body {
   /*background: linear-gradient(167.69deg, #D7D7D7 1.1%, #E7E7E7 91.05%);*/
   background-color: #D7D7D7
 }
+
 ::-webkit-input-placeholder {
   transition: all 0.3s ease-in-out;
 
@@ -19,3 +20,10 @@ body {
   font-style: normal;
   color: black;
 }
+
+@media (max-width: 1000px){
+  body {
+    overflow-y: visible;
+  }
+}
+
