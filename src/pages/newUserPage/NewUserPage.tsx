@@ -62,9 +62,9 @@ const NewUserPage: FC = () => {
           filter: (window.innerWidth > 1000) ? '' : 'blur(50px)',
           position: 'absolute',
           right: '11vw',
-          height: '100vh',
+          height: (window.innerWidth > 1000) ? '100vh' : '100%',
           top: '0',
-          width: 'fit-content',
+          width: (window.innerWidth > 1000) ? 'fit-content' : '100%',
           zIndex: '9 '
         }} width="1035" height="986" viewBox="0 0 1035 986" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <mask id="mask0_312_3051" style= {{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="-31" width="1048" height="1064">
@@ -88,17 +88,19 @@ const NewUserPage: FC = () => {
           </defs>
         </svg>
 
-        <div className={styles.noiseWidgetBack} id='noiseWidgetBack'></div>
+        { /* <div className={styles.noiseWidgetBack} id='noiseWidgetBack'></div> */ }
         { loading === loadState.res &&
           <>
             <div className={styles.arrow}></div>
 
             <div className={styles.startBlock}>
-                { window.innerWidth > 1000 && <>
+
               <div className={styles.description}>
+                { window.innerWidth > 1000 && <>
                   <span className={styles.title}>
                       Job Roadmap
                   </span>
+                </>}
                 <div className={styles.wrapper}>
                   <span
                     className={styles.titleDescr}
@@ -106,8 +108,9 @@ const NewUserPage: FC = () => {
                       Cервис, который поможет вам узнать и изучить необходимые навыки для подготовки к собеседованиям по выбранной IT профессии
                   </span>
                 </div>
-                <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button>
-              </div></>}
+                { window.innerWidth > 1000 && <>
+                <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button></>}
+              </div>
               <div className={styles.widgetsDescr}>
                 { window.innerWidth > 1000 && <><div id='widget_skills' onClick={ (e) => {
                   openHeader()

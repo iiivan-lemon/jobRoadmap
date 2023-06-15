@@ -6,10 +6,10 @@ export const SvgNoiseBack = () => {
     <svg width="874" style={{
       filter: (window.innerWidth > 1000) ? '' : 'blur(50px)',
       position: 'absolute',
-      height: '100vh',
-      width: 'fit-content',
-      left: '-12vw',
-      top: '-40vh'
+      height: (window.innerWidth > 1000) ? '100vh' : '100%',
+      width: (window.innerWidth > 1000) ? 'fit-content' : '100%',
+      left: (window.innerWidth > 1000) ? '-12vw' : '0',
+      top: (window.innerWidth > 1000) ? '-40vh' : '0'
     }} height="861" viewBox="0 0 874 861" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
       <mask id="mask0_415_920" style={{
         maskType: 'alpha'
@@ -35,11 +35,11 @@ export const SvgNoiseBack = () => {
     </svg>
   <svg style={{
     filter: (window.innerWidth > 1000) ? '' : 'blur(50px)',
-    height: '100vh',
-    width: 'fit-content',
+    height: (window.innerWidth > 1000) ? '100vh' : '100%',
+    width: (window.innerWidth > 1000) ? 'fit-content' : '100%',
     position: 'absolute',
-    right: '-12vw',
-    bottom: '-40vh'
+    right: (window.innerWidth > 1000) ? '-12vw' : '0',
+    bottom: (window.innerWidth > 1000) ? '-40vh' : '0'
   }} width="737" height="769" viewBox="0 0 737 769" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
     <mask id="mask0_415_923" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="874" height="861">
       <rect width="873.789" height="861" fill="url(#pattern0)"/>
