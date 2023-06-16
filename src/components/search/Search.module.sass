@@ -103,7 +103,8 @@
 
 
 /* Задаем общий стиль всплывающей подсказки для нужных элементов*/
-.favorite:hover:before 
+.favorite[data-title]:hover::after
+    content: attr(data-title)
     z-index: 50
     font-size: medium
     position: absolute
@@ -116,8 +117,8 @@
 
 
 /* Добавляем текст в конкретной всплывающей подсказке */
-.favorite:hover:before 
-    content: "добавьте роадмап в избранное"
+//.favorite:hover:before
+//    content: "добавьте роадмап в избранное"
 
 
 .changeSearch:hover 
@@ -127,7 +128,6 @@
 
 
 .changeSearch 
-
     rotate: 0deg
     transition: filter 0.5s ease
     height: 2rem
@@ -137,8 +137,11 @@
     margin-inline: 1rem
 
 
-
-.changeIconSearch:hover:before 
+.changeIconSearch
+    position: relative
+.changeIconSearch[data-title]:hover::after
+    content: attr(data-title)
+    left: -5%
     z-index: 50
     font-size: medium
     position: absolute
@@ -147,12 +150,12 @@
     background:  color.$main-button
     padding: 5px
     border-radius: 4px
-    top: 3.4rem
+    top: 100%
 
 
 /* Добавляем текст в конкретной всплывающей подсказке */
-.changeIconSearch:hover:before 
-    content: "смена поиска"
+//.changeIconSearch:hover:before
+//    content: "смена поиска"
 
 
 .dropDown 

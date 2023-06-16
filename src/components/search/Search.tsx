@@ -235,7 +235,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
               className={styles.searchBlock}
               onClick={() => { setIsModalOpen(true); document.body.style.overflowX = 'hidden' }}
           >
-            <div className={styles.changeIconSearch}>
+            <div className={styles.changeIconSearch} data-title='смена поиска'>
               <svg className={rotate ? styles.rotateChangeSearch + ' ' + styles.changeSearch : styles.changeSearch} onClick={ (e) => {
                 setRotate(1)
                 setHavRecommends(false)
@@ -290,7 +290,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
           {/* <input   type="text" value={this.state.value} onSubmit={sendValue(value)}></input> */}
         </>}
         <div id='favSvg' style={{ display: (location.pathname === '/search') ? 'block' : 'none' }}
-             className={styles.favorite}>
+             className={styles.favorite} data-title='добавьте роадмап в избранное'>
           <svg
             onClick={(e) => {
               if (isAuth) {
