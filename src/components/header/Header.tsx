@@ -16,6 +16,7 @@ import { clearRecommendsTech } from '../../models/recommendTech/recommendTechSli
 import { clearRecommends } from '../../models/recommend/recommendSlice'
 import stylesOps from '../headerOptions/HeaderOptions.module.sass'
 import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.sass'
+import { Button } from 'antd'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -198,13 +199,16 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                               />
                           </clipPath>
                       </defs>
-                  </svg></>) : <span
-                    style={{ margin: 0 }}
-                    className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn}
-                      onClick={() => { goTo('/login') }}
-                  >
-                      войти
-                  </span>}
+                  </svg></>)
+                  //   <span
+                  //   style={{ margin: 0 }}
+                  //   className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn}
+                  //     onClick={() => { goTo('/login') }}
+                  // >
+                    : <Button style={{ margin: 0 }} onClick={() => { goTo('/login') }}>войти</Button>
+
+                  // </span>
+                  }
                   </>}
                 </div>
 

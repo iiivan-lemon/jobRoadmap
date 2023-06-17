@@ -10,6 +10,7 @@ import pSBC from 'shade-blend-color'
 import stylesOps from '../../components/headerOptions/HeaderOptions.module.sass'
 import { loadState } from '../../utils/utils'
 import { PushSpinner } from 'react-spinners-kit'
+import { Button } from 'antd'
 const NewUserPage: FC = () => {
   const [
     loading,
@@ -110,7 +111,9 @@ const NewUserPage: FC = () => {
                 </div>
                 { window.innerWidth > 1000 && <>
                   <div style={{ textAlign: 'center' }}>
-                <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button></div></>}
+                    <Button onClick={openHeader}>начать поиск!</Button>
+                {/* <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} ></button> */}
+                  </div></>}
               </div>
               <div className={styles.widgetsDescr}>
                 { window.innerWidth > 1000 && <><div id='widget_skills' onClick={ (e) => {
