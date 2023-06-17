@@ -109,7 +109,8 @@ const NewUserPage: FC = () => {
                   </span>
                 </div>
                 { window.innerWidth > 1000 && <>
-                <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button></>}
+                  <div style={{ textAlign: 'center' }}>
+                <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} onClick={openHeader}>начать поиск!</button></div></>}
               </div>
               <div className={styles.widgetsDescr}>
                 { window.innerWidth > 1000 && <><div id='widget_skills' onClick={ (e) => {

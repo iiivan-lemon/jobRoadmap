@@ -109,10 +109,12 @@ export const JobLetterPage = () => {
                 <input id="upload-photo" style={{ display: 'none' }} type="file" onChange={handleFileSelect}
                        accept=".pdf"/>
               </div>
-              <input autoComplete="off" placeholder='введите ссылку на вакансию hh.ru' id='jobLetter'
+              <div style={{ textAlign: 'center' }}>
+              <input style={{ display: 'inline-block' }} autoComplete="off" placeholder='введите ссылку на вакансию hh.ru' id='jobLetter'
                      className={styleSearch.search} type="text" onChange={handleUrlSelect}/>
-              <div style={{ display: 'contents' }}><input type="submit" className={styles.newPageColorBtn + ' ' + styles.newPageBtn}
-                     value="получить сопроводительное письмо" disabled={!(selectedFile && selectedUrl)}/>
+              </div>
+              <div style={{ display: 'contents' }}><div style={{ textAlign: 'center' }}><input type="submit" className={styles.newPageColorBtn + ' ' + styles.newPageBtn}
+                                                               value="получить сопроводительное письмо" disabled={!(selectedFile && selectedUrl)}/></div>
                 { window.innerWidth > 1000 && <div className='helpResume' data-title='после ввода необходимых данных, вы получите образец сопроводительного письма'><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 17V16.9929M12 14.8571C12 11.6429 15 12.3571 15 9.85714C15 8.27919 13.6568 7 12 7C10.6567 7 9.51961 7.84083 9.13733 9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
               </div>}</div>
               {(loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
