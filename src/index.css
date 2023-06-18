@@ -1,6 +1,6 @@
 
 @import url("static/fonts/stylesheet.css");
-
+@import url('./styles/reset.sass');
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -20,33 +20,6 @@ body {
   color: black;
 }
 
-input[type="text"], input[type="reset"], input[type="submit"], button, select, textarea {
-  margin-top:0;
-  margin-left:0;
-  margin-bottom:0;
-  margin-right:0;
-
-  padding-top:0;
-  padding-right:0;
-  padding-left:0;
-  padding-bottom:0;
-
-  font-family:inherit;
-  font-size:1em;
-  /*line-height:12px !important;*/
-
-  border-width:0;
-}
-
-input[type="text"], select, textarea {
-  outline:0 none;
-  background-color:transparent;
-}
-
-textarea {
-  overflow:auto; /* for IE */
-  resize:none;
-}
 
 @media (max-width: 1000px){
   body {

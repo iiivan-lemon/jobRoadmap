@@ -15,7 +15,6 @@ import { getFinished }
 import { ErrorModal } from '../../components/errorModal/errorModal'
 import { generateGraph } from '../../components/bubbleChart/graphChart'
 import NodeModal from '../../components/nodeModal/NodeModal'
-import stylesTag from '../../components/Tag/Tag.module.sass'
 import { Preloader } from '../../components/preloader/Preloader'
 
 const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
@@ -252,10 +251,11 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
                       <RangeSlider from={grade.begin} to={grade.end} onChange={(e) => {
                         setGrade({ begin: e.minIndex, end: e.maxIndex })
                       }} value={[0, 1, 2, 3]}></RangeSlider></> }
-                  { (((changeSkills(data, false).length > 2)) &&
-                      <button style={{ margin: 0 }} className={stylesTag.tag + ' skillBtn'} onClick={() => {
-                        setIsHard(!isHard)
-                      }}> показать {(!isHard) ? 'hard ' : 'soft '} скиллы</button>)}
+                  {/* { (((changeSkills(data, false).length > 2)) && */}
+                  {/*    <button style={{ margin: 0 }} className={stylesTag.tag + ' skillBtn'} onClick={() => { */}
+                  {/*      setIsHard(!isHard) */}
+                  {/*    }}> показать {(!isHard) ? 'hard ' : 'soft '} скиллы</button> */}
+                  {/* )} */}
                     <div className={'jobOptions'}><span className='gradeTitleLeg'>найдено: <span className='jobBackTitle'>{jobBack}</span></span><span className='gradeTitleLeg'>всего навыков: <span className='countTitle'>{skillCount}</span></span></div>
                 </div>
                 {/* <div style={{ width: 'fit-content', padding: '1rem', zIndex: '15' }} className={'jobOptions ' + styles.widjet}></div> */}
