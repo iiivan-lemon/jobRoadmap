@@ -57,15 +57,6 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
   }
 
   function goTo (path: string): void {
-    // if ((document.getElementById('search') as HTMLInputElement)) {
-    //   (document.getElementById('search') as HTMLInputElement).value = ''
-    // }
-    // if (
-    //   (document.getElementById('searchJob') as HTMLInputElement)
-    // ) {
-    //   (document.getElementById('searchJob') as HTMLInputElement).value = ''
-    // }
-
     history(path)
   }
   const location = useLocation()
@@ -205,7 +196,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                   //   className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn}
                   //     onClick={() => { goTo('/login') }}
                   // >
-                    : <Button style={{ margin: 0 }} onClick={() => { goTo('/login') }}>войти</Button>
+                    : <Button className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn} style={{ margin: 0 }} onClick={() => { goTo('/login') }}>войти</Button>
 
                   // </span>
                   }

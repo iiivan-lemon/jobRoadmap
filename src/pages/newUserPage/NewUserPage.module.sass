@@ -136,11 +136,18 @@
     transform: scale(0.95)
 
 .newPageColorBtn
+    span
+        color: color.$main-button-title
+.newPageColorBtn
     transition: all 0.5s ease
     border: none
     background:  color.$main-button
     border-radius: 50px
 
+.newPageColorBtn[disabled]
+    background:  #A8A8A8FF
+    span
+        color: color.$base-title
 
 .newPageColorBtn:hover
     box-shadow: 0px 0px 3px 3px rgba(104, 114, 255, 0.63)
@@ -150,19 +157,19 @@
     align-items: center
     -webkit-appearance: none
     appearance: none
-    background-color: #33c173
+    //background-color: #33c173
     border: 0
     border-radius: 9999px
-    box-shadow: 0 0 transparent, 0 0 transparent, 0 4px 0 #15a962
+    //box-shadow: 0 0 transparent, 0 0 transparent, 0 4px 0 #15a962
     box-sizing: border-box
-    color: #fff
+    //color: #fff
     cursor: pointer
     display: inline-flex
     font-size: 18px
     justify-content: center
     line-height: 1
     list-style: none
-    margin: 10px
+    margin-block: 10px
     overflow: hidden
     position: relative
     text-align: left

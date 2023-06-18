@@ -10,6 +10,7 @@ import { loadState } from '../../utils/utils'
 import { generateChart } from '../../components/bubbleChart/bubbleChart'
 import Draggable from 'react-draggable'
 import { ErrorModal } from '../../components/errorModal/errorModal'
+import { Preloader } from '../../components/preloader/Preloader'
 
 export const JobsPage = ({ inputData, sendJob }) => {
   const [data, setData] = useState([])
@@ -87,14 +88,7 @@ export const JobsPage = ({ inputData, sendJob }) => {
 
   return (
     <div className={styles.page}>
-      <div className='preloader'>
-        <PushSpinner
-          color="#686769"
-          id="preloader"
-          loading={loading === loadState.load}
-          size={30}
-        />
-      </div>
+      <Preloader loading={loading}/>
       { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
       <>
       {((loading === loadState.res)) &&

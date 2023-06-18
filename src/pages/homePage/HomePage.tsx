@@ -16,6 +16,7 @@ import { ErrorModal } from '../../components/errorModal/errorModal'
 import { generateGraph } from '../../components/bubbleChart/graphChart'
 import NodeModal from '../../components/nodeModal/NodeModal'
 import stylesTag from '../../components/Tag/Tag.module.sass'
+import { Preloader } from '../../components/preloader/Preloader'
 
 const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   const nav = useNavigate()
@@ -238,14 +239,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
            //   // }
            // }
       >
-            <div className='preloader'>
-              <PushSpinner
-                  color="#686769"
-                  id="preloader"
-                  loading={loading === loadState.load}
-                  size={30}
-              />
-            </div>
+        <Preloader loading={loading}/>
         { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
             {(loading === loadState.res) && <>
                 <div className='optionsPanel'>

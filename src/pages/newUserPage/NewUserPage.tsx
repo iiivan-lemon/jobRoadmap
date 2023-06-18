@@ -111,7 +111,7 @@ const NewUserPage: FC = () => {
                 </div>
                 { window.innerWidth > 1000 && <>
                   <div style={{ textAlign: 'center' }}>
-                    <Button onClick={openHeader}>начать поиск!</Button>
+                    <Button className={styles.newPageBtn + ' ' + styles.newPageColorBtn} onClick={openHeader}>начать поиск!</Button>
                 {/* <button type='button' className={styles.newPageColorBtn + ' ' + styles.newPageBtn} ></button> */}
                   </div></>}
               </div>

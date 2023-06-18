@@ -205,7 +205,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
     if (recommends.professions.length && (document.getElementById('search') as HTMLInputElement)?.value) {
       setHavRecommends(true)
     } else setHavRecommends(false)
-  }, [recommends])
+  }, [recommends, (document.getElementById('search') as HTMLInputElement)?.value])
   // const [recommends, setRecommends] = useState([])
   const renderRecommends = (recommends) => {
     if (recommends.professions.length) {

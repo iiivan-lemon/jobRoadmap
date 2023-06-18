@@ -18,6 +18,7 @@ import { sendUrl } from '../../models/urlCheck/urlCheckSlice'
 import stylesTag from '../../components/Tag/Tag.module.sass'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from 'antd'
+import { Preloader } from '../../components/preloader/Preloader'
 // eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-duplicates
 // eslint-disable-next-line no-template-curly-in-string
 pdfjs.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js'
@@ -96,7 +97,7 @@ export const ResumeFixPage = () => {
     setSelectedFile(event.target.files[0])
   }
   useEffect(() => {
-    if (recommends.professions.length) { setHavRecommends(true) } else setHavRecommends(false)
+    if (recommends.professions.length && (document.getElementById('searchResume') as HTMLInputElement)?.value) { setHavRecommends(true) } else setHavRecommends(false)
   }, [recommends])
   const sendSearchValue = (e) => {
     setSelectedJob(e.target.value)
@@ -210,6 +211,7 @@ export const ResumeFixPage = () => {
   const learnNodeRef = React.useRef(null)
   return (
     <div className='resumePage' style={ (loading === loadState.res) ? { justifyContent: 'center' } : { justifyContent: 'initial' }}>
+      <Preloader loading={loading} tips={['']}/>
       <div className={'fullResBlock'}>
         <div className={'resumeInput ' + styles.widjet }>
           <form className='resumeBlock' onSubmit={handleSubmit}>
@@ -226,7 +228,7 @@ export const ResumeFixPage = () => {
             { !tips && haveRecommends && <div className={styleSearch.dropDown}>{renderRecommends(recommends)}</div> }
             </div>
             <div style={{ display: 'contents' }}><div style={{ textAlign: 'center' }}>
-              <Button id ='inputScan' disabled={(!(selectedJob && selectedFile))}>сканировать резюме</Button>
+              <Button onClick={handleSubmit} className={styles.newPageColorBtn + ' ' + styles.newPageBtn} id ='inputScan' disabled={(!(selectedJob && selectedFile))}>сканировать резюме</Button>
               {/* <input style={{ padding: '0.6rem' }} className={styles.newPageColorBtn + ' ' + styles.newPageBtn}  /> */}
             </div>
               { window.innerWidth > 1000 && <div className='helpResume' data-title='после ввода необходимых данных, вы получите о навыков,изученных вами и которые необходимо добавить в резюме'><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 17V16.9929M12 14.8571C12 11.6429 15 12.3571 15 9.85714C15 8.27919 13.6568 7 12 7C10.6567 7 9.51961 7.84083 9.13733 9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
@@ -234,19 +236,12 @@ export const ResumeFixPage = () => {
         { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
       </form>
         </div>
-        {loading !== loadState.base &&
+        {loading === loadState.res &&
             <div className={styles.widjet + ' resResumeBlock'}>
-              <div className='preloader' style={{
-                left: '50%',
-                top: '25%'
-              }}>
-                <PushSpinner
-                  color="#686769"
-                  id="preloader"
-                  loading={loading === loadState.load}
-                  size={30}
-                />
-              </div>
+              {/* <Preloader style={{ */}
+              {/*  left: '50%', */}
+              {/*  top: '25%' */}
+              {/* }} loading={loading}/> */}
                  <CSSTransition
                   in={loading === loadState.res && !!data.length}
                   nodeRef={learnedNodeRef}
