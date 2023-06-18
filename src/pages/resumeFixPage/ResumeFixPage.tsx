@@ -210,7 +210,7 @@ export const ResumeFixPage = () => {
   const learnedNodeRef = React.useRef(null)
   const learnNodeRef = React.useRef(null)
   return (
-    <div className='resumePage' style={ (loading === loadState.res) ? { justifyContent: 'center' } : { justifyContent: 'initial' }}>
+    <div className='resumePage' >
       <Preloader loading={loading} tips={['']}/>
       <div className={'fullResBlock'}>
         <div className={'resumeInput ' + styles.widjet }>
