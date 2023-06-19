@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import './App.sass'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import HomePage from './pages/homePage/HomePage'
 
 /*
  * Import NewUserPage from './pages/newUserPage/NewUserPage'
@@ -19,21 +18,21 @@ import { type GradeState, selectGrade, setFilter } from './models/gradeFilter/gr
 import { PrivateRoute } from './authApp/_components'
 import NewUserPage from './pages/newUserPage/NewUserPage'
 
-/*
- * Import RegPage from './pages/regPage/RegPage'
- * import ProfilePage from './pages/profilePage/ProfilePage'
- */
-import ProfilePage from './pages/profilePage/ProfilePage'
-import { JobsPage } from './pages/jobsPage/JobsPage'
 import { ResumeFixPage } from './pages/resumeFixPage/ResumeFixPage'
 import { JobLetterPage } from './pages/jobLetterPage/jobLetterPage'
 import { loadState } from './utils/utils'
 import ValidatedLoginForm from './authApp/login/Formik'
 import ValidatedRegForm from './authApp/register/FormikReg'
-import { ProfileUser } from './authApp/profile/profileUser'
 import { ReactComponent as NodeSvg } from '../src/static/images/svg-hex.svg'
 import { PushSpinner } from 'react-spinners-kit'
 import { SvgNoiseBack } from './components/svgNoiseBack/svgNoiseBack'
+import { Preloader } from './components/preloader/Preloader'
+
+const HomePage = lazy(async () => await import('./pages/homePage/HomePage'))
+
+const ProfilePage = lazy(async () => await import('./pages/profilePage/ProfilePage'))
+const JobsPage = lazy(async () => await import('./pages/jobsPage/JobsPage'))
+const ProfileUser = lazy(async () => await import('./authApp/profile/profileUser'))
 
 /*
  * Import { PrivateRoute } from './components/privateRoute/PrivateRoute'
@@ -164,7 +163,9 @@ function App (): JSX.Element {
           <Route
             element={
               <PrivateRoute>
+                <Suspense fallback={<Preloader loading={loadState.load}/>}>
                 <ProfileUser/>
+                </Suspense>
               </PrivateRoute>
             }
             path="/profile"
@@ -175,18 +176,26 @@ function App (): JSX.Element {
             path="/"
           />
           <Route
-            element={<HomePage
-              sendJob={change}
-              headerGrade={headerGrade}
-              inputData={inputData}
-            />}
+            element={
+              <Suspense fallback={<></>}>
+                <HomePage
+                  sendJob={change}
+                  headerGrade={headerGrade}
+                  inputData={inputData}
+                />
+              </Suspense>
+          }
             path={'/search'}
           />
           <Route
-            element={<JobsPage
+            element={
+              <Suspense fallback={<></>}>
+            <JobsPage
               inputData={inputData}
               sendJob={change}
-            />}
+            />
+              </Suspense>
+              }
             path="/searchJob"
           />
           <Route

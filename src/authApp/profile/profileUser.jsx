@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const ProfileUser = () => {
+const ProfileUser = () => {
     const {isAuth} = useAppSelector(x => x?.auth)
     const classes = useStyles();
     const history = useNavigate()
@@ -83,3 +83,5 @@ export const ProfileUser = () => {
         </div>
     )
 }
+
+export default ProfileUser

@@ -12,7 +12,7 @@ import Draggable from 'react-draggable'
 import { ErrorModal } from '../../components/errorModal/errorModal'
 import { Preloader } from '../../components/preloader/Preloader'
 
-export const JobsPage = ({ inputData, sendJob }) => {
+const JobsPage = ({ inputData, sendJob }) => {
   const [data, setData] = useState([])
   const dispatch = useAppDispatch()
   const nav = useNavigate()
@@ -88,7 +88,10 @@ export const JobsPage = ({ inputData, sendJob }) => {
 
   return (
     <div className={styles.page}>
-      <Preloader loading={loading}/>
+      <Preloader style={{
+        zIndex: 1000,
+        left: 'auto'
+      }} loading={loading}/>
       { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
       <>
       {((loading === loadState.res)) &&
@@ -132,3 +135,5 @@ export const JobsPage = ({ inputData, sendJob }) => {
     </div>
   )
 }
+
+export default JobsPage

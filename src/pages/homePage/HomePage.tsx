@@ -214,6 +214,7 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
   return (
 
       <div id='page' className='page'
+
            // onWheel={ (event) => {
            //   // // eslint-disable-next-line no-debugger
            //   if ((event.target as HTMLElement).classList.contains('profList')) {
@@ -238,7 +239,11 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
            //   // }
            // }
       >
-        <Preloader loading={loading}/>
+        <Preloader style={{
+          zIndex: 1000,
+          left: 'auto'
+        }} loading={loading}/>
+
         { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
             {(loading === loadState.res) && <>
                 <div className='optionsPanel'>
