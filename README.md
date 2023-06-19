@@ -1,4 +1,5 @@
-# frontend jobRoadmap
+# frontend job-roadmap.ru
+A service that will help you learn and learn the necessary skills to prepare for interviews in your chosen IT profession
 
 ## Frameworks and technologies
 ![React](https://img.shields.io/badge/-React-090909?style=for-the-badge&logo=React&logoColor=27A0D9)
@@ -16,17 +17,17 @@
   <br>
 ## How to start
 
-### For dependencies installing
+#### For dependencies installing
 
 ```yarn install ```
 
-### For run JSON-server and React App
+#### For run JSON-server and React App
 
 ```yarn start```
 
-### Node version
+#### Node version
 
 ```v16.9.1```
 
-#### Follow me
+## Follow me
 [![Telegram](https://img.shields.io/badge/-Telegram-090909?style=for-the-badge&logo=telegram&logoColor=27A0D9)](https://t.me/ivanlemon)
