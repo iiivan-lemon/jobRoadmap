@@ -1,4 +1,4 @@
-# frontend job-roadmap.ru
+# frontend [JOB-Roadmap](https://job-roadmap.ru/)
 A service that will help you learn and learn the necessary skills to prepare for interviews in your chosen IT profession
 
 ## Frameworks and technologies
@@ -21,13 +21,16 @@ A service that will help you learn and learn the necessary skills to prepare for
 
 ```yarn install ```
 
-#### For run JSON-server and React App
+#### For run React App
 
 ```yarn start```
 
 #### Node version
 
 ```v16.9.1```
+
+## FIGMA
+[Pages templates](https://www.figma.com/file/5zjMqDbPcupxUAUPV8cqiS/Untitled?type=design&node-id=149%3A3661&t=ZTLEyFrJiwvy8maa-1)
 
 ## Follow me
 [![Telegram](https://img.shields.io/badge/-Telegram-090909?style=for-the-badge&logo=telegram&logoColor=27A0D9)](https://t.me/ivanlemon)
