@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import styles from '../header/Header.module.css'
+import styles from '../header/Header.module.sass'
 import { Space } from 'antd'
 import React, { useEffect, useRef }
   from 'react'
 import ReactDOM from 'react-dom'
-import stylesOps from './HeaderOptions.module.css'
+import stylesOps from './HeaderOptions.module.sass'
 import Tag from '../Tag/Tag'
-import stylesTag from './../Tag/Tag.module.css'
+import stylesTag from '../Tag/Tag.module.sass'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { selectGrade } from '../../models/gradeFilter/gradeSlice'
 import { getTops, selectDataTops } from '../../models/tops/topsSlice'
 import { getDataGraph } from '../../models/dataGraph/dataGraphSlice'
-import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.css'
+import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.sass'
 const HeaderOptions = ({ onClose, setTitleTag, setGrade }): any => {
   const top = useAppSelector(selectDataTops)
 

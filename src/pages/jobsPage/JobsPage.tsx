@@ -3,13 +3,14 @@ import { getJobs } from '../../models/dataJobs/dataJobsSlice'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PushSpinner } from 'react-spinners-kit'
-import styles from './JobsPage.module.css'
-import stylesNew from '../newUserPage/NewUserPage.module.css'
-import './../../components/bubbleChart/bubble.css'
+import styles from './JobsPage.module.sass'
+import stylesNew from '../newUserPage/NewUserPage.module.sass'
+import '../../components/bubbleChart/bubble.sass'
 import { loadState } from '../../utils/utils'
 import { generateChart } from '../../components/bubbleChart/bubbleChart'
 import Draggable from 'react-draggable'
 import { ErrorModal } from '../../components/errorModal/errorModal'
+import { Preloader } from '../../components/preloader/Preloader'
 
 export const JobsPage = ({ inputData, sendJob }) => {
   const [data, setData] = useState([])
@@ -87,14 +88,7 @@ export const JobsPage = ({ inputData, sendJob }) => {
 
   return (
     <div className={styles.page}>
-      <div className='preloader'>
-        <PushSpinner
-          color="#686769"
-          id="preloader"
-          loading={loading === loadState.load}
-          size={30}
-        />
-      </div>
+      <Preloader loading={loading}/>
       { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
       <>
       {((loading === loadState.res)) &&

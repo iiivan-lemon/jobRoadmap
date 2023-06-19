@@ -1,6 +1,6 @@
 import React, { type FC, useEffect, useState } from 'react'
 import Search from '../search/Search'
-import styles from './Header.module.css'
+import styles from './Header.module.sass'
 // Import { useHistory } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -14,8 +14,9 @@ import { loadingProfile } from '../../models/user/userActions'
 import { useSelector } from 'react-redux'
 import { clearRecommendsTech } from '../../models/recommendTech/recommendTechSlice'
 import { clearRecommends } from '../../models/recommend/recommendSlice'
-import stylesOps from '../headerOptions/HeaderOptions.module.css'
-import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.css'
+import stylesOps from '../headerOptions/HeaderOptions.module.sass'
+import stylesNewPage from '../../pages/newUserPage/NewUserPage.module.sass'
+import { Button } from 'antd'
 
 /*
  * Import HeaderOptions from '../headerOptions/HeaderOptions'
@@ -56,15 +57,6 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
   }
 
   function goTo (path: string): void {
-    // if ((document.getElementById('search') as HTMLInputElement)) {
-    //   (document.getElementById('search') as HTMLInputElement).value = ''
-    // }
-    // if (
-    //   (document.getElementById('searchJob') as HTMLInputElement)
-    // ) {
-    //   (document.getElementById('searchJob') as HTMLInputElement).value = ''
-    // }
-
     history(path)
   }
   const location = useLocation()
@@ -107,7 +99,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
               id="header"
           >
 
-              <div className={styles.mainHeader}>
+              <div id='mainHeader' className={styles.mainHeader}>
                   <span
                       className={styles.logoHref}
                       onClick={() => { goTo('/') }}
@@ -116,14 +108,17 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                           JOB Roadmap
                       </span>
                   </span>
+                {window.innerWidth > 1000 && <>
                   <Search
                     title = {takeInput}
                       isMainSearch={isMainSearch}
                       changeData={changeData}
                       setGrade={setGrade}
                   />
+                  </>}
                 <div className={styles.titles}>
                 <span
+                  id='resumeFixTitle'
                   ref={resumeRef}
                   className={styles.favorite + ' ' + styles.baseTitle }
                   onClick={(e) => {
@@ -133,12 +128,14 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                       Резюме
                   </span>
                 <span
+                  id='jobLetterTitle'
                   ref={letterRef}
                   className={styles.favorite + ' ' + styles.baseTitle }
                   onClick={() => { goTo('/jobLetter') }}
                 >
                       Письмо
                   </span>
+                  {window.innerWidth > 1000 && <>
                   <span
                       className={styles.favorite + ' ' + styles.baseTitle }
                       onClick={() => { goTo('/favorites') }}
@@ -193,14 +190,19 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                               />
                           </clipPath>
                       </defs>
-                  </svg></>) : <span
-                    style={{ margin: 0 }}
-                    className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn}
-                      onClick={() => { goTo('/login') }}
-                  >
-                      войти
-                  </span>}
+                  </svg></>)
+                  //   <span
+                  //   style={{ margin: 0 }}
+                  //   className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn}
+                  //     onClick={() => { goTo('/login') }}
+                  // >
+                    : <Button className={stylesNewPage.newPageColorBtn + ' ' + stylesNewPage.newPageBtn} style={{ margin: 0 }} onClick={() => { goTo('/login') }}>войти</Button>
+
+                  // </span>
+                  }
+                  </>}
                 </div>
+
               </div>
 
               <div id="header-options" />

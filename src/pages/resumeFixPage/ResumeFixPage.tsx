@@ -6,16 +6,19 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getResResume } from '../../models/resume/resumeFixSlice'
 import { useNavigate } from 'react-router-dom'
 import { PushSpinner } from 'react-spinners-kit'
-import './resumeFixPage.css'
+import './resumeFixPage.sass'
 import { debounce, loadState, updTips } from '../../utils/utils'
-import styles from '../newUserPage/NewUserPage.module.css'
-import styleSearch from '../../components/search/Search.module.css'
+import styles from '../newUserPage/NewUserPage.module.sass'
+import styleSearch from '../../components/search/Search.module.sass'
 import { clearRecommends, getRecommends, selectDataRecommends } from '../../models/recommend/recommendSlice'
 import { getNodeProf } from '../../models/tops/topsSlice'
 import Tag from '../../components/Tag/Tag'
 import Linkify from 'linkify-react'
 import { sendUrl } from '../../models/urlCheck/urlCheckSlice'
-import stylesTag from './../../components/Tag/Tag.module.css'
+import stylesTag from '../../components/Tag/Tag.module.sass'
+import { CSSTransition } from 'react-transition-group'
+import { Button } from 'antd'
+import { Preloader } from '../../components/preloader/Preloader'
 // eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-duplicates
 // eslint-disable-next-line no-template-curly-in-string
 pdfjs.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js'
@@ -34,6 +37,7 @@ export const ResumeFixPage = () => {
   const [selectedJob, setSelectedJob] = React.useState(null)
   const [tips, setTips] = useState('')
   const [toLearn, setToLearn] = useState('')
+  const [isRecActive, setRecActive] = useState(false)
   const handleJobSelect = (event) => {
     if (!event.target.value.trim()) {
       setSelectedJob(null)
@@ -48,7 +52,7 @@ export const ResumeFixPage = () => {
     setTips('')
   }, [selectedJob, selectedFile])
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
     void dispatch(clearRecommends())
     // eslint-disable-next-line no-debugger
@@ -67,7 +71,9 @@ export const ResumeFixPage = () => {
             setLoad(loadState.res)
             setData(data.payload)
             if (data.payload[0].to_learn) {
-              setToLearn(data.payload[0].to_learn.map(el => <Tag
+              let dataL = data.payload[0].to_learn
+              dataL = [...new Set(dataL.map(el => el.split(' ').join('')))]
+              setToLearn(dataL.map(el => <Tag
                 setTitleTag={getTips}
                 className={
                   stylesTag.tag}
@@ -85,7 +91,6 @@ export const ResumeFixPage = () => {
         }).catch(() => { setLoad(loadState.error) })
     } catch (error) {
       // eslint-disable-next-line no-debugger
-
       setLoad(loadState.error)
     }
   }
@@ -94,11 +99,12 @@ export const ResumeFixPage = () => {
     setSelectedFile(event.target.files[0])
   }
   useEffect(() => {
-    if (recommends.professions.length) { setHavRecommends(true) } else setHavRecommends(false)
+    if (recommends.professions.length && recommends.isResume) { setHavRecommends(true) } else { setHavRecommends(false) }
   }, [recommends])
   const sendSearchValue = (e) => {
     setSelectedJob(e.target.value)
-    void (dispatch(getRecommends(e.target.value)))
+    setRecActive(true)
+    void (dispatch(getRecommends({ input: e.target.value, isResume: true })))
   }
 
   const getTips = (skill: string) => {
@@ -108,7 +114,6 @@ export const ResumeFixPage = () => {
         setTips('')
       } else {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-
         setTips(updTips(data.payload.tips_to_learn))
       }
     })
@@ -122,7 +127,7 @@ export const ResumeFixPage = () => {
       //   // return <div className='rec'><span> По вашей специальности ничего не найдено</span></div>
       // }
       return (
-        <div className={'rec '}><span> Ваши навыки:</span> <div className={'learnedTags'}>{data[0].learned.map((el: string) => (<div className={stylesTag.tagNotActive}>{el}</div>)) }</div></div>
+        <div className={'rec '}><span> Ваши навыки:</span> <div ref={learnedNodeRef} className={'learnedTags'}>{data[0]?.learned.map((el: string) => (<div className={stylesTag.tagNotActive}>{el}</div>)) }</div></div>
       )
     }
   }
@@ -185,7 +190,7 @@ export const ResumeFixPage = () => {
   const renderLink = ({ attributes, content }) => {
     const urlPattern = /^(https?:\/\/)/
     if (!urlPattern.test(content as string)) {
-      return <span style={{ color: 'white' }}>{content}</span>
+      return <span style={{ color: '#3a3a3a' }}>{content}</span>
     }
     const { href, ...props } = attributes
     let updHref = <></>
@@ -204,9 +209,18 @@ export const ResumeFixPage = () => {
     return updHref
   }
 
-  React.useEffect(() => { pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js` })
+  const nodeRef = React.useRef(null)
+  const learnedNodeRef = React.useRef(null)
+  const learnNodeRef = React.useRef(null)
   return (
-    <div className='resumePage' style={ (loading === loadState.res) ? { justifyContent: 'center' } : { justifyContent: 'initial' }}>
+    <div className='resumePage' onClick={(e) => {
+      if ((e.target as HTMLElement).closest('.resumeInput')) {
+        setRecActive(false)
+        setHavRecommends(false)
+      }
+    }
+    } >
+      <Preloader loading={loading} tips={['']}/>
       <div className={'fullResBlock'}>
         <div className={'resumeInput ' + styles.widjet }>
           <form className='resumeBlock' onSubmit={handleSubmit}>
@@ -216,43 +230,61 @@ export const ResumeFixPage = () => {
              <input id="upload-photo" style={{ display: 'none' }} placeholder='выбрать файл' type="file" onChange={handleFileSelect} accept=".pdf" />
             </div>
               <div style={{ position: 'relative' }}>
-            <input placeholder='введите профессию' autoComplete="off" id='searchResume' className={styleSearch.search} type="text" onChange={
+                <div style={{ textAlign: 'center' }}>
+            <input style={{ display: 'inline-block' }} placeholder='введите профессию' autoComplete="off" id='searchResume' className={styleSearch.search} type="text" onChange={
               debounce(sendSearchValue)
-            }/>
-            { !tips && haveRecommends && <div className={styleSearch.dropDown}>{renderRecommends(recommends)}</div> }
+            }/></div>
+            { !tips && haveRecommends && isRecActive && <div className={styleSearch.dropDown}>{renderRecommends(recommends)}</div> }
             </div>
-            <input className={styles.newPageColorBtn + ' ' + styles.newPageBtn} type="submit" id='inputScan' value="сканировать резюме" disabled={(!(selectedJob && selectedFile))} />
+            <div style={{ display: 'contents' }}><div style={{ textAlign: 'center' }}>
+              <Button onClick={handleSubmit} className={styles.newPageColorBtn + ' ' + styles.newPageBtn} id ='inputScan' disabled={(!(selectedJob && selectedFile))}>сканировать резюме</Button>
+              {/* <input style={{ padding: '0.6rem' }} className={styles.newPageColorBtn + ' ' + styles.newPageBtn}  /> */}
+            </div>
+              { window.innerWidth > 1000 && <div className='helpResume' data-title='после ввода необходимых данных, вы получите о навыков,изученных вами и которые необходимо добавить в резюме'><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 17V16.9929M12 14.8571C12 11.6429 15 12.3571 15 9.85714C15 8.27919 13.6568 7 12 7C10.6567 7 9.51961 7.84083 9.13733 9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </div>}</div>
         { (loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
       </form>
-
         </div>
-
-        { ((loading !== loadState.error) && (loading !== loadState.base)) && <div className={styles.widjet + ' resResumeBlock'}>
-            <div className='preloader' style={{
-              left: '50%',
-              top: '25%'
-            }}>
-                <PushSpinner
-                    color="#686769"
-                    id="preloader"
-                    loading={loading === loadState.load}
-                    size={30}
-                />
-            </div>
-          { loading === loadState.res && !!toLearn &&
-              <>
-                {(loading === loadState.res) &&
-                  renderResumeRes(data)
-                }
+        {loading === loadState.res &&
+            <div className={styles.widjet + ' resResumeBlock'}>
+                 <CSSTransition
+                  in={loading === loadState.res && !!data.length}
+                  nodeRef={learnedNodeRef}
+                  timeout={3000}
+                  classNames="results"
+                  unmountOnExit
+                  // onEnter={() => { setLoad(loadState.res) }}
+                  // onExited={() => { setTips('') }}
+                 >
+                  {
+                    renderResumeRes(data)
+                  }
+                 </CSSTransition>
+                <CSSTransition
+                  in={loading === loadState.res && !!toLearn}
+                  nodeRef={learnNodeRef}
+                  timeout={3000}
+                  classNames="results"
+                  unmountOnExit
+                  // onEnter={() => { setLoad(loadState.res) }}
+                  // onExited={() => { setTips('') }}
+                >
                   <div id='toLearn'><span>Что Вам стоит изучить: </span>
-                      <div className={'tagToLearn '}>{toLearn}</div>
+                      <div ref={learnNodeRef} className={'tagToLearn '}>{toLearn}</div>
                   </div>
-
-                  <div id='tips' className='tipsText' style={{ visibility: (tips) ? 'visible' : 'hidden' }}>{textToLink()}</div>
-              </>
-          }
-
-        </div> }
+                </CSSTransition>
+                <CSSTransition
+                  in={loading === loadState.res && !!tips}
+                  nodeRef={nodeRef}
+                  timeout={3000}
+                  classNames="results"
+                  unmountOnExit
+                  onEnter={() => { setLoad(loadState.res) }}
+                  onExited={() => { setTips('') }}
+                >
+                  <div id='tips' ref={nodeRef} className='tipsText' style={{ visibility: (tips) ? 'visible' : 'hidden' }}>{textToLink()}</div>
+                </CSSTransition>
+            </div>}
       </div>
     </div>
   )

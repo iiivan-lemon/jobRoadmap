@@ -1,9 +1,8 @@
 import React, { type FC, useState } from 'react'
-import styles from './ProfilePage.module.css'
-import './../../App.css'
+import styles from './ProfilePage.module.sass'
+import '../../App.sass'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getFavs, setFavs, setUnFavs } from '../../models/favs/favsSlice'
-import { GraphSelf } from '../../components/graphSelf/graphSelf'
 import { FavJob } from '../../components/favJob/FavJob'
 import { loadState } from '../../utils/utils'
 

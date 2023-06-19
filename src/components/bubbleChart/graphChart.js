@@ -5,10 +5,12 @@ const colors = {
     others: '#6a5a5a'
 };
 import * as d3 from "d3";
+
 const width = window.innerWidth;
 const height = window.innerHeight;
 const svgNode = require('../../../src/static/images/svg-hex.svg')
-import '../../pages/homePage/HomePage.css'
+import '../../pages/homePage/HomePage.sass'
+
 function processData(data) {
     var obj = data.call_data;
 
@@ -32,10 +34,12 @@ export const generateGraph = (data, showModal, grade, finished) => {
     const bubble = data => d3.pack()
         .size([width, height])
         .padding(25)
-        (d3.hierarchy({ children: data.map((el,i) => {
-            el['index'] = i
+        (d3.hierarchy({
+            children: data.map((el, i) => {
+                el['index'] = i
                 return el
-        })}).sum(d => d.distance * 1000));
+            })
+        }).sum(d => d.distance * 1000));
 
     const svg = d3.select('#graph-chart')
         .style('width', width)
@@ -48,7 +52,6 @@ export const generateGraph = (data, showModal, grade, finished) => {
             // tooltip.select('span').attr('class', d.data.technology_name).text(d.data.technology_name);
 
         })
-
 
 
     const root = bubble(data);
@@ -66,27 +69,27 @@ export const generateGraph = (data, showModal, grade, finished) => {
         .attr("id", d => d.data.professionalism)
         .attr('transform', `translate(${width / 2}, ${height / 2})`)
         .on('mouseover', function (e, d) {
-                d3.select(this).style('cursor', 'pointer');
-                text.style('font-size', '0.8rem')
-                // d3.select(this).style('fill', 'white')
-                // tooltip.select('img').attr('src', d.data.img);
-                // tooltip.select('span').text(d.data.technology_name + ' ' +  d.data.distance * 100 + ' %');
-                // tooltip.select('span').attr('class', d.data.technology_name).text(d.data.technology_name);
+            d3.select(this).style('cursor', 'pointer');
+            text.style('font-size', '0.8rem')
+            // d3.select(this).style('fill', 'white')
+            // tooltip.select('img').attr('src', d.data.img);
+            // tooltip.select('span').text(d.data.technology_name + ' ' +  d.data.distance * 100 + ' %');
+            // tooltip.select('span').attr('class', d.data.technology_name).text(d.data.technology_name);
 
-            })
+        })
         .on('mouseout', function () {
             // d3.select(this).style('fill', 'black')
 
         })
 
     const colors = [
-        {front: '#92FFFF' ,main: '#51BABA', back: '#92FFFF'},
-        {front: '#A6D4FF' ,main: '#4F85B8', back: '#A6D4FF'},
-        {front: '#A5A4FF' ,main: '#605ECA', back: '#A5A4FF'},
-        {front: '#9087d2' ,main: '#343f8c', back: '#9087d2'},
+        {front: '#92FFFF', main: '#51BABA', back: '#92FFFF'},
+        {front: '#A6D4FF', main: '#4F85B8', back: '#A6D4FF'},
+        {front: '#A5A4FF', main: '#605ECA', back: '#A5A4FF'},
+        {front: '#9087d2', main: '#343f8c', back: '#9087d2'},
     ]
 
-    colors.forEach( (el, i) => {
+    colors.forEach((el, i) => {
         const gradient = svg.append('defs')
             .append('radialGradient')
             .attr('cx', '50%')
@@ -94,7 +97,7 @@ export const generateGraph = (data, showModal, grade, finished) => {
             .attr('r', '75%')
             .attr('fx', '28.33%')
             .attr('fy', '24.33%')
-            .attr('id', 'grad' + i )
+            .attr('id', 'grad' + i)
         const stop1 = gradient.append('stop')
             .attr('offset', '0%')
             .style('stop-color', el.front)
@@ -132,7 +135,7 @@ export const generateGraph = (data, showModal, grade, finished) => {
     const circle = node.append('circle')
         .attr('class', d => !!~finished.findIndex(el => el === d.data.technology_name) ? d.data.technology_name + " svgAni checkNode" : d.data.technology_name + " svgAni")
         .attr("id", d => d.data.professionalism)
-        .style('fill', d =>  'url(#grad' +  d.data.professionalism +')')
+        .style('fill', d => 'url(#grad' + d.data.professionalism + ')')
         // .style('fill', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
         // .style('filter', d => `brightness(0.5)`)
         // .style('stroke', d => d.data.professionalism > 0.5 ? colors.main : colors.others)
@@ -152,15 +155,10 @@ export const generateGraph = (data, showModal, grade, finished) => {
             // d3.select(this).style('stroke-width', '0px');
             // return tooltip.style('visibility', 'hidden');
         })
-        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'opacity(0.3)' : ''  )
-        .on('click', function(e,d){
+        .style('filter', d => (d.data.professionalism < grade.begin || d.data.professionalism > grade.end) ? 'opacity(0.3)' : '')
+        .on('click', function (e, d) {
             showModal(d.data)
         })
-
-
-
-
-
 
 
     // node.append("image")
@@ -187,13 +185,13 @@ export const generateGraph = (data, showModal, grade, finished) => {
         .attr('fill', 'white')
         .style('font-size', '1rem')
         .attr("id", d => d.data.professionalism)
-        .on('click', function(e,d){
+        .on('click', function (e, d) {
             showModal(d.data)
         })
-        .text(d => d.data.technology_name.length < ( d.r/ 5) ? d.data.technology_name : (d.data.technology_name.substring(0, d.r / 5) + '...'))
+        .text(d => d.data.technology_name.length < (d.r / 5) ? d.data.technology_name : (d.data.technology_name.substring(0, d.r / 5) + '...'))
         .on('mouseover', function (e, d) {
             d3.select(this).style('cursor', 'pointer');
-            tooltip.select('span').text(d.data.technology_name + ' ' +  Math.floor(d.data.distance * 100) + ' %');
+            tooltip.select('span').text(d.data.technology_name + ' ' + Math.floor(d.data.distance * 100) + ' %');
             tooltip.style('visibility', 'visible');
         })
         .on('mouseout', function () {

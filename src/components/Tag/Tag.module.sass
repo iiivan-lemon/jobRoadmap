@@ -1,0 +1,58 @@
+@use '../../styles/colors' as color
+@use '../../styles/fonts' as font
+.tag
+    cursor: pointer
+    background: rgba(255, 255, 255, 0.37)
+    border: 1px solid rgba(58, 58, 58, 0.5)
+    backdrop-filter: blur(2px)
+    border-radius: 50px
+    color: color.$base-title
+    margin-inline-end: 0.6rem
+    padding: 0.4rem 0.5rem
+    box-sizing: border-box
+    font-style: normal
+    font-weight: 400
+    font-size: 1rem
+    line-height: 1.5rem
+    text-align: center
+    transition: 0.5s ease
+
+.tag:hover
+    background: color.$tag-back-hover
+
+.tagActive
+    background: color.$input-focus-back
+
+.tagNotActive
+    cursor: default
+    background: rgba(176, 176, 176, 0.37)
+    border: 1px solid rgba(58, 58, 58, 0.5)
+    backdrop-filter: blur(2px)
+    border-radius: 50px
+    color: black
+    margin-inline-end: 0.6rem
+    padding: 0.4rem 0.5rem
+    box-sizing: border-box
+    font-style: normal
+    font-weight: 400
+    font-size: 1rem
+    line-height: 1.5rem
+    text-align: center
+    transition: 0.5s ease
+
+
+@media (min-width: 1600px) and (max-width: 2000px) 
+    .tag 
+        padding: 0.6rem 0.8rem
+        font-size: font.$large-font-btn
+    
+
+
+@media (min-width: 900px) and (max-width: 1300px) 
+    .tag
+        font-size: 0.8rem
+        line-height: 1rem
+
+@media (min-width: 2000px)
+    .tag
+        font-size: font.$max-large-font

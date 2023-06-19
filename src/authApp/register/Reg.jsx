@@ -11,8 +11,8 @@ import {useNavigate} from "react-router-dom";
 import {loadingProfile, registration} from "../../models/user/userActions";
 import {loginOrLogout} from "../../models/auth/authActions";
 import './reg.css'
-import styles from "../../pages/newUserPage/NewUserPage.module.css";
-import styleSearch from "../../components/search/Search.module.css";
+import styles from "../../pages/newUserPage/NewUserPage.module.sass";
+import styleSearch from "../../components/search/Search.module.sass";
 // export { Reg };
 
 export const Reg = () => {

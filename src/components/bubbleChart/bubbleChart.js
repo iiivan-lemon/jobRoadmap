@@ -1,10 +1,10 @@
 import {useNavigate} from "react-router-dom";
-import styles from './../../pages/jobsPage/JobsPage.module.css'
+import styles from '../../pages/jobsPage/JobsPage.module.sass'
 const colors = {
     main: 'rgba(119,122,208,0.8)',
     others: 'rgba(56,58,107,0.8)'
 };
-import '../../pages/homePage/HomePage.css'
+import '../../pages/homePage/HomePage.sass'
 import * as d3 from "d3";
 const width = window.innerWidth;
 const height = window.innerHeight;

@@ -6,11 +6,11 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loadingProfile} from "../../models/user/userActions";
 import {deleteError, loginOrLogout} from "../../models/auth/authActions";
-import  './../styles/auth.css'
-import styleSearch from "../../components/search/Search.module.css";
-import styles from './../../pages/newUserPage/NewUserPage.module.css'
+import  '../styles/auth.sass'
+import styleSearch from "../../components/search/Search.module.sass";
+import styles from '../../pages/newUserPage/NewUserPage.module.sass'
 import {useAppSelector} from "../../app/hooks";
-import stylesTag from "../../components/Tag/Tag.module.css";
+import stylesTag from "../../components/Tag/Tag.module.sass";
 const ValidatedLoginForm = () => {
     const history = useNavigate()
     const dispatch = useDispatch();
@@ -107,11 +107,11 @@ const ValidatedLoginForm = () => {
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className={styleSearch.search ||  errors.email && touched.email && "error" }
+                        className={styleSearch.search }
                     />
-                    {errors.email && touched.email && (
-                        <div className="invalid-feedback">{errors.email}</div>
-                    )}
+
+                        <div style={{visibility: (errors.email && touched.email) ? "visible" : "hidden" }} className="invalid-feedback">{errors.email || 'email'}</div>
+
                     </div>
                     <div className="form-group">
                     <input
@@ -124,9 +124,7 @@ const ValidatedLoginForm = () => {
                         onBlur={handleBlur}
                         className={styleSearch.search || errors.password && touched.password && "error" }
                     />
-                    {errors.password && touched.password && (
-                        <div className="invalid-feedback">{errors.password}</div>
-                    )}
+                        <div style={{visibility: (errors.password && touched.password) ? "visible" : "hidden" }} className="invalid-feedback">{errors.password  || 'password'}</div>
                     </div>
                     <button className={stylesTag.tag + ' submitBtn'} type="submit" disabled={isSubmitting}>
                         войти

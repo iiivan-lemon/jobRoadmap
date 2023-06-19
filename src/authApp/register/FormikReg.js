@@ -7,10 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadingProfile} from "../../models/user/userActions";
 import {deleteError, loginOrLogout} from "../../models/auth/authActions";
 import './reg.css'
-import styleSearch from "../../components/search/Search.module.css";
-import styles from './../../pages/newUserPage/NewUserPage.module.css'
+import styleSearch from "../../components/search/Search.module.sass";
+import styles from '../../pages/newUserPage/NewUserPage.module.sass'
 import {useAppSelector} from "../../app/hooks";
-import stylesTag from "../../components/Tag/Tag.module.css";
+import stylesTag from "../../components/Tag/Tag.module.sass";
 const ValidatedRegForm = () => {
     const refLinkCon = useRef();
     const refRegCon = useRef();
@@ -106,9 +106,8 @@ const ValidatedRegForm = () => {
                                         onBlur={handleBlur}
                                         className={styleSearch.search ||  errors.username && touched.username && "error" }
                                     />
-                                    {errors.username && touched.username && (
-                                        <div className="invalid-feedback">{errors.username}</div>
-                                    )}
+                                    <div style={{visibility: (errors.username && touched.username) ? "visible" : "hidden" }} className="invalid-feedback">{errors.username  || 'username'}</div>
+
                                 </div>
                                 <div className="form-group">
                                     <input
@@ -121,9 +120,7 @@ const ValidatedRegForm = () => {
                                         onBlur={handleBlur}
                                         className={styleSearch.search ||  errors.email && touched.email && "error" }
                                     />
-                                    {errors.email && touched.email && (
-                                        <div className="invalid-feedback">{errors.email}</div>
-                                    )}
+                                    <div style={{visibility: (errors.email && touched.email) ? "visible" : "hidden" }} className="invalid-feedback">{errors.email || 'email'}</div>
                                 </div>
                                 <div className="form-group">
                                     <input
@@ -136,9 +133,8 @@ const ValidatedRegForm = () => {
                                         onBlur={handleBlur}
                                         className={styleSearch.search || errors.password && touched.password && "error" }
                                     />
-                                    {errors.password && touched.password && (
-                                        <div className="invalid-feedback">{errors.password}</div>
-                                    )}
+                                    <div style={{visibility: (errors.password && touched.password) ? "visible" : "hidden" }} className="invalid-feedback">{errors.password  || 'password'}</div>
+
                                 </div>
                                 <button className={stylesTag.tag + ' submitBtn'} type="submit" disabled={isSubmitting}>
                                     зарегистрироваться

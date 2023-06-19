@@ -1,0 +1,21 @@
+@use '../../styles/colors' as color
+
+
+.tooltip
+    border: solid 1px whitesmoke
+    background: rgb(255 255 255 / 77%)
+    box-shadow: 0px 0px 20px 10px rgb(85 85 85 / 0%)
+    -webkit-backdrop-filter: blur(35px)
+    backdrop-filter: blur(35px)
+    border-radius: 45px
+    position: absolute
+    visibility: hidden
+    display: flex
+    font-family: sans-serif
+    max-width: 500px
+    padding: 1rem
+
+
+
+.tooltip > div > span
+    color:  color.$base-title
