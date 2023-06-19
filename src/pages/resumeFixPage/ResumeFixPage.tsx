@@ -104,7 +104,7 @@ export const ResumeFixPage = () => {
   const sendSearchValue = (e) => {
     setSelectedJob(e.target.value)
     setRecActive(true)
-    void (dispatch(getRecommends({ input: e.target.value, isResume: true})))
+    void (dispatch(getRecommends({ input: e.target.value, isResume: true })))
   }
 
   const getTips = (skill: string) => {
