@@ -12,9 +12,9 @@ import { fetchRecommend } from './recommendService'
 //   profession: string
 // }
 
-export interface Recommends {professions: string[] }
+export interface Recommends {professions: string[], isResume: boolean }
 
-const initialState: Recommends = { professions: [] }
+const initialState: Recommends = { professions: [], isResume: false }
 
 /*
  * The function below is called a thunk and allows us to perform async logic. It
@@ -26,13 +26,14 @@ const initialState: Recommends = { professions: [] }
 
 export const getRecommends = createAsyncThunk(
   'recommends/fetchRecommend',
-  async (input: string) => {
+  async ({ input, isResume = false }: { input: string, isResume: boolean }) => {
     //
     // const string = { professions: [input] }
     // return string
     const response = await fetchRecommend(input)
     if (response.status === 200) {
-      return response.data
+      // eslint-disable-next-line no-debugger
+      return { ...response.data, isResume }
     }
   }
 )
@@ -59,13 +60,13 @@ export const RecommendSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getRecommends.pending, (state) => {
-        return { professions: [] }
+        return { professions: [], isResume: false }
       })
       .addCase(getRecommends.fulfilled, (state, action) => {
         return ((action.payload) ? action.payload : state)
       })
       .addCase(getRecommends.rejected, (state) => {
-        return { professions: [] }
+        return { professions: [], isResume: false }
       })
   }
 })

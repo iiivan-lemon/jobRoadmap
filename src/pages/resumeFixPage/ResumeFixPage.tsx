@@ -37,6 +37,7 @@ export const ResumeFixPage = () => {
   const [selectedJob, setSelectedJob] = React.useState(null)
   const [tips, setTips] = useState('')
   const [toLearn, setToLearn] = useState('')
+  const [isRecActive, setRecActive] = useState(false)
   const handleJobSelect = (event) => {
     if (!event.target.value.trim()) {
       setSelectedJob(null)
@@ -70,7 +71,9 @@ export const ResumeFixPage = () => {
             setLoad(loadState.res)
             setData(data.payload)
             if (data.payload[0].to_learn) {
-              setToLearn(data.payload[0].to_learn.map(el => <Tag
+              let dataL = data.payload[0].to_learn
+              dataL = [...new Set(dataL.map(el => el.split(' ').join('')))]
+              setToLearn(dataL.map(el => <Tag
                 setTitleTag={getTips}
                 className={
                   stylesTag.tag}
@@ -88,7 +91,6 @@ export const ResumeFixPage = () => {
         }).catch(() => { setLoad(loadState.error) })
     } catch (error) {
       // eslint-disable-next-line no-debugger
-
       setLoad(loadState.error)
     }
   }
@@ -97,11 +99,12 @@ export const ResumeFixPage = () => {
     setSelectedFile(event.target.files[0])
   }
   useEffect(() => {
-    if (recommends.professions.length && (document.getElementById('searchResume') as HTMLInputElement)?.value) { setHavRecommends(true) } else setHavRecommends(false)
+    if (recommends.professions.length && recommends.isResume) { setHavRecommends(true) } else { setHavRecommends(false) }
   }, [recommends])
   const sendSearchValue = (e) => {
     setSelectedJob(e.target.value)
-    void (dispatch(getRecommends(e.target.value)))
+    setRecActive(true)
+    void (dispatch(getRecommends({ input: e.target.value, isResume: true})))
   }
 
   const getTips = (skill: string) => {
@@ -210,7 +213,13 @@ export const ResumeFixPage = () => {
   const learnedNodeRef = React.useRef(null)
   const learnNodeRef = React.useRef(null)
   return (
-    <div className='resumePage' >
+    <div className='resumePage' onClick={(e) => {
+      if ((e.target as HTMLElement).closest('.resumeInput')) {
+        setRecActive(false)
+        setHavRecommends(false)
+      }
+    }
+    } >
       <Preloader loading={loading} tips={['']}/>
       <div className={'fullResBlock'}>
         <div className={'resumeInput ' + styles.widjet }>
@@ -225,7 +234,7 @@ export const ResumeFixPage = () => {
             <input style={{ display: 'inline-block' }} placeholder='введите профессию' autoComplete="off" id='searchResume' className={styleSearch.search} type="text" onChange={
               debounce(sendSearchValue)
             }/></div>
-            { !tips && haveRecommends && <div className={styleSearch.dropDown}>{renderRecommends(recommends)}</div> }
+            { !tips && haveRecommends && isRecActive && <div className={styleSearch.dropDown}>{renderRecommends(recommends)}</div> }
             </div>
             <div style={{ display: 'contents' }}><div style={{ textAlign: 'center' }}>
               <Button onClick={handleSubmit} className={styles.newPageColorBtn + ' ' + styles.newPageBtn} id ='inputScan' disabled={(!(selectedJob && selectedFile))}>сканировать резюме</Button>
@@ -238,10 +247,6 @@ export const ResumeFixPage = () => {
         </div>
         {loading === loadState.res &&
             <div className={styles.widjet + ' resResumeBlock'}>
-              {/* <Preloader style={{ */}
-              {/*  left: '50%', */}
-              {/*  top: '25%' */}
-              {/* }} loading={loading}/> */}
                  <CSSTransition
                   in={loading === loadState.res && !!data.length}
                   nodeRef={learnedNodeRef}

@@ -54,6 +54,7 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
     isTechSearch,
     setSearch
   ] = useState(true)
+  const [isRecActive, setRecActive] = useState(false)
 
   React.useEffect(() => {
     // const el = (document.getElementById('spaceLine') as HTMLElement)
@@ -202,15 +203,16 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
     setHavRecommends(false)
   }, [])
   useEffect(() => {
-    if (recommends.professions.length && (document.getElementById('search') as HTMLInputElement)?.value) {
+    if (recommends.professions.length && !recommends.isResume) {
       setHavRecommends(true)
     } else setHavRecommends(false)
-  }, [recommends, (document.getElementById('search') as HTMLInputElement)?.value])
+  }, [recommends])
   // const [recommends, setRecommends] = useState([])
   const renderRecommends = (recommends) => {
     if (recommends.professions.length) {
       return recommends.professions.map((el) =>
         <div className={styles.titleRecommend} onClick={(e) => {
+          setRecActive(false)
           if ((document.getElementById('search') as HTMLInputElement)) {
             (document.getElementById('search') as HTMLInputElement).value = el
           }
@@ -223,7 +225,8 @@ const Search = ({ changeData, setGrade, isMainSearch, title }): JSX.Element => {
     if (!e.target.value && e.target.value === titleTag) {
       return
     }
-    void (dispatch(getRecommends(e.target.value)))
+    setRecActive(true)
+    void (dispatch(getRecommends({ input: e.target.value, isResume: false })))
   }
   const refSearchJob = useRef<HTMLInputElement | null>(null)
   const refSearch = useRef<HTMLInputElement | null>(null)
