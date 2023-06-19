@@ -1,6 +1,6 @@
 
 @import url("static/fonts/stylesheet.css");
-@import url('./styles/reset.sass');
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
