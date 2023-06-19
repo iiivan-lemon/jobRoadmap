@@ -8,6 +8,7 @@
         url('GTEestiProText-ThinItalic.ttf') format('truetype');
     font-weight: 100;
     font-style: italic;
+    font-display: swap;
 }
 
 
@@ -22,6 +23,7 @@
     url('GTEestiProText-Medium.ttf') format('truetype');
     /*font-weight: 500;*/
     font-style: normal;
+    font-display: swap;
 }
 
 
@@ -35,6 +37,7 @@
         url('GTEestiProText-LightItalic.ttf') format('truetype');
     font-weight: 300;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -47,6 +50,7 @@
         url('GTEestiProDisplay-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -59,6 +63,7 @@
         url('GTEestiProText-Light.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -71,6 +76,7 @@
         url('GTEestiProDisplay-MediumItalic.ttf') format('truetype');
     /*font-weight: 500;*/
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -83,6 +89,7 @@
         url('GTEestiProText-RegularItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -95,6 +102,7 @@
         url('GTEestiProText-Book.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -107,6 +115,7 @@
         url('GTEestiProText-BoldItalic.ttf') format('truetype');
     font-weight: bold;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -119,6 +128,7 @@
         url('GTEestiProText-UltraLightItalic.ttf') format('truetype');
     font-weight: 200;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -131,6 +141,7 @@
         url('GTEestiProDisplay-Thin.ttf') format('truetype');
     font-weight: 100;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -143,47 +154,9 @@
         url('GTEestiProText-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
-@font-face {
-    font-family: 'Minipax';
-    src: local('Minipax-Medium'), local('Minipax-Medium'),
-    url('Minipax-Medium.woff2') format('woff2'),
-    url('Minipax-Medium.woff') format('woff'),
-    url('Minipax-Medium.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
+    font-display: swap;
 }
 
-@font-face {
-    font-family: 'Minipax';
-    src: local('Minipax-Regular'), local('Minipax-Regular'),
-    url('Minipax-Regular.woff2') format('woff2'),
-    url('Minipax-Regular.woff') format('woff'),
-    url('Minipax-Regular.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Minipax';
-    src: local('Minipax-SemiBold'), local('Minipax-SemiBold'),
-    url('Minipax-SemiBold.woff2') format('woff2'),
-    url('Minipax-SemiBold.woff') format('woff'),
-    url('Minipax-SemiBold.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-
-@font-face {
-    font-family: 'Minipax';
-    src: local('Minipax-Bold'), local('Minipax-Bold'),
-    url('Minipax-Bold.woff2') format('woff2'),
-    url('Minipax-Bold.woff') format('woff'),
-    url('Minipax-Bold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-}
 
 @font-face {
     font-family: 'GT Eesti Pro Display';
@@ -195,6 +168,7 @@
         url('GTEestiProDisplay-Light.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -207,6 +181,7 @@
         url('GTEestiProDisplay-UltraBold.ttf') format('truetype');
     font-weight: 800;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -219,6 +194,7 @@
         url('GTEestiProDisplay-UltraBoldItalic.ttf') format('truetype');
     font-weight: 800;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -231,6 +207,7 @@
         url('GTEestiProDisplay-Medium.ttf') format('truetype');
     /*font-weight: 500;*/
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -243,6 +220,7 @@
         url('GTEestiProDisplay-UltraLight.ttf') format('truetype');
     font-weight: 200;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -255,6 +233,7 @@
         url('GTEestiProDisplay-RegularItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -267,6 +246,7 @@
         url('GTEestiProDisplay-LightItalic.ttf') format('truetype');
     font-weight: 300;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -279,6 +259,7 @@
         url('GTEestiProText-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -291,6 +272,7 @@
         url('GTEestiProText-Thin.ttf') format('truetype');
     font-weight: 100;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -303,6 +285,7 @@
         url('GTEestiProDisplay-UltraLightItalic.ttf') format('truetype');
     font-weight: 200;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -315,6 +298,7 @@
         url('GTEestiProDisplay-BoldItalic.ttf') format('truetype');
     font-weight: bold;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -327,6 +311,7 @@
         url('GTEestiProText-MediumItalic.ttf') format('truetype');
     /*font-weight: 500;*/
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -339,6 +324,7 @@
         url('GTEestiProText-BookItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -351,6 +337,7 @@
         url('GTEestiProText-UltraLight.ttf') format('truetype');
     font-weight: 200;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -363,6 +350,7 @@
         url('GTEestiProDisplay-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -375,5 +363,6 @@
         url('GTEestiProDisplay-ThinItalic.ttf') format('truetype');
     font-weight: 100;
     font-style: italic;
+    font-display: swap;
 }
 
