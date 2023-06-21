@@ -129,7 +129,7 @@ const NewUserPage: FC = () => {
                                                      }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
                 <div id='widget_jobLetter'
                      onTouchEnd={ (e) => {
-                       e.preventDefault();
+                       e.preventDefault()
                        history('/jobLetter')
                      }}
                      onClick={ (e) => {
