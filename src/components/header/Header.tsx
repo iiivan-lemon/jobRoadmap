@@ -103,6 +103,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                   <span
                       className={styles.logoHref}
                       onClick={() => { goTo('/') }}
+                      onTouchStart={() => { goTo('/') }}
                   >
                       <span className={styles.title}>
                           JOB Roadmap
@@ -124,6 +125,9 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                   onClick={(e) => {
                     goTo('/resumeFix')
                   }}
+                  onTouchStart={(e) => {
+                    goTo('/resumeFix')
+                  }}
                 >
                       Резюме
                   </span>
@@ -132,6 +136,7 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                   ref={letterRef}
                   className={styles.favorite + ' ' + styles.baseTitle }
                   onClick={() => { goTo('/jobLetter') }}
+                  onTouchStart={() => { goTo('/jobLetter') }}
                 >
                       Письмо
                   </span>

@@ -116,24 +116,37 @@ const NewUserPage: FC = () => {
                   </div></>}
               </div>
               <div className={styles.widgetsDescr}>
-                { window.innerWidth > 1000 && <><div id='widget_skills' onClick={ (e) => {
-                  openHeader()
-                }} onMouseOver={(e) => {
-                  toggleHeaderTitle(e)
-                }} onMouseOut={(e) => {
-                  // eslint-disable-next-line no-debugger
-                  toggleHeaderTitle(e)
-                }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
-                <div id='widget_jobLetter' onClick={ (e) => {
-                  toggleHeaderTitle(e)
-                  history('/jobLetter')
-                }} onMouseOver={(e) => {
-                  toggleHeaderTitle(e)
-                }} onMouseOut={(e) => {
-                  // eslint-disable-next-line no-debugger
-                  toggleHeaderTitle(e)
-                }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
+                { window.innerWidth > 1000 && <><div id='widget_skills'
+                                                     onTouchStart={ (e) => {
+                                                       openHeader()
+                                                     }}
+                                                     onClick={ (e) => {
+                                                       openHeader()
+                                                     }} onMouseOver={(e) => {
+                                                       toggleHeaderTitle(e)
+                                                     }} onMouseOut={(e) => {
+                                                       // eslint-disable-next-line no-debugger
+                                                       toggleHeaderTitle(e)
+                                                     }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
+                <div id='widget_jobLetter'
+                     onTouchStart={ (e) => {
+                       toggleHeaderTitle(e)
+                       history('/jobLetter')
+                     }}
+                     onClick={ (e) => {
+                       toggleHeaderTitle(e)
+                       history('/jobLetter')
+                     }} onMouseOver={(e) => {
+                       toggleHeaderTitle(e)
+                     }} onMouseOut={(e) => {
+                       // eslint-disable-next-line no-debugger
+                       toggleHeaderTitle(e)
+                     }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
                 <div id='widget_resumeFix'
+                     onTouchStart = { (e) => {
+                       toggleHeaderTitle(e)
+                       history('/resumeFix')
+                     }}
                      onClick={ (e) => {
                        toggleHeaderTitle(e)
                        history('/resumeFix')

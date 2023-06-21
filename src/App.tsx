@@ -155,7 +155,9 @@ function App (): JSX.Element {
           <Route
             element={
               <PrivateRoute>
+                <Suspense fallback={<Preloader loading={loadState.load}/>}>
                 <ProfilePage chooseRoadmap={change}/>
+                </Suspense>
               </PrivateRoute>
             }
             path="/favorites"
