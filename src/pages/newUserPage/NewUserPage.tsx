@@ -116,24 +116,27 @@ const NewUserPage: FC = () => {
                   </div></>}
               </div>
               <div className={styles.widgetsDescr}>
-                { window.innerWidth > 1000 && <><div id='widget_skills'
-                                                     onTouchStart={ (e) => {
-                                                       openHeader()
-                                                     }}
+                { window.innerWidth > 1000 && <>
+                  <div id='widget_skills'
+                                                     // onTouchStart={ (e) => {
+                                                     //   openHeader()
+                                                     // }}
                                                      onClick={ (e) => {
+                                                       e.preventDefault()
                                                        openHeader()
                                                      }} onMouseOver={(e) => {
                                                        toggleHeaderTitle(e)
                                                      }} onMouseOut={(e) => {
                                                        // eslint-disable-next-line no-debugger
                                                        toggleHeaderTitle(e)
-                                                     }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
+                                                     }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
                 <div id='widget_jobLetter'
-                     onTouchStart={ (e) => {
-                       toggleHeaderTitle(e)
-                       history('/jobLetter')
-                     }}
+                     // onTouchStart={ (e) => {
+                     //   // toggleHeaderTitle(e)
+                     //   history('/jobLetter')
+                     // }}
                      onClick={ (e) => {
+                       e.preventDefault()
                        toggleHeaderTitle(e)
                        history('/jobLetter')
                      }} onMouseOver={(e) => {
@@ -141,13 +144,14 @@ const NewUserPage: FC = () => {
                      }} onMouseOut={(e) => {
                        // eslint-disable-next-line no-debugger
                        toggleHeaderTitle(e)
-                     }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
+                     }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
                 <div id='widget_resumeFix'
-                     onTouchStart = { (e) => {
-                       toggleHeaderTitle(e)
-                       history('/resumeFix')
-                     }}
+                     // onTouchStart = { (e) => {
+                     //   // toggleHeaderTitle(e)
+                     //   history('/resumeFix')
+                     // }}
                      onClick={ (e) => {
+                       e.preventDefault()
                        toggleHeaderTitle(e)
                        history('/resumeFix')
                      }}
@@ -156,7 +160,7 @@ const NewUserPage: FC = () => {
                      }} onMouseOut={(e) => {
                        // eslint-disable-next-line no-debugger
                        toggleHeaderTitle(e)
-                     }} className={`${styles.widjet} ${styles.widjetResume} ${styles.widjetNew}`}><span className={styles.widjetText}>Анализ резюме</span></div>
+                     }} className={`${styles.widjet} ${styles.widjetResume} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>Анализ резюме</span></div>
                 {window.innerWidth > 1000 && <span className={styles.widjetTitle} >
                       Анализ актуальных открытых вакансий по Вашей специальности
                   </span>}

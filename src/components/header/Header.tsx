@@ -101,9 +101,12 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
 
               <div id='mainHeader' className={styles.mainHeader}>
                   <span
-                      className={styles.logoHref}
-                      onClick={() => { goTo('/') }}
-                      onTouchStart={() => { goTo('/') }}
+                      className={styles.logoHref + ' ' + stylesNewPage.touchTitle}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        goTo('/')
+                      }}
+                      // onTouchStart={() => { goTo('/') }}
                   >
                       <span className={styles.title}>
                           JOB Roadmap
@@ -121,22 +124,26 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                 <span
                   id='resumeFixTitle'
                   ref={resumeRef}
-                  className={styles.favorite + ' ' + styles.baseTitle }
+                  className={styles.favorite + ' ' + styles.baseTitle + ' ' + stylesNewPage.touchTitle }
                   onClick={(e) => {
+                    e.preventDefault()
                     goTo('/resumeFix')
                   }}
-                  onTouchStart={(e) => {
-                    goTo('/resumeFix')
-                  }}
+                  // onTouchStart={(e) => {
+                  //   goTo('/resumeFix')
+                  // }}
                 >
                       Резюме
                   </span>
                 <span
                   id='jobLetterTitle'
                   ref={letterRef}
-                  className={styles.favorite + ' ' + styles.baseTitle }
-                  onClick={() => { goTo('/jobLetter') }}
-                  onTouchStart={() => { goTo('/jobLetter') }}
+                  className={styles.favorite + ' ' + styles.baseTitle + ' ' + stylesNewPage.touchTitle }
+                  onClick={(e) => {
+                    e.preventDefault()
+                    goTo('/jobLetter')
+                  }}
+                  // onTouchStart={() => { goTo('/jobLetter') }}
                 >
                       Письмо
                   </span>
