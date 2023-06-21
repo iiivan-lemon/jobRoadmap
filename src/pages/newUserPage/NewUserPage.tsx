@@ -118,10 +118,6 @@ const NewUserPage: FC = () => {
               <div className={styles.widgetsDescr}>
                 { window.innerWidth > 1000 && <>
                   <div id='widget_skills'
-                                                     onTouchEnd={ (e) => {
-                                                       e.preventDefault();
-                                                       (e.target as HTMLElement).click()
-                                                     }}
                                                      onClick={ (e) => {
                                                        e.preventDefault()
                                                        openHeader()
@@ -134,7 +130,7 @@ const NewUserPage: FC = () => {
                 <div id='widget_jobLetter'
                      onTouchEnd={ (e) => {
                        e.preventDefault();
-                       (e.target as HTMLElement).click()
+                       history('/jobLetter')
                      }}
                      onClick={ (e) => {
                        e.preventDefault()
@@ -148,13 +144,12 @@ const NewUserPage: FC = () => {
                      }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
                 <div id='widget_resumeFix'
                      onTouchEnd = { (e) => {
-                       e.preventDefault();
-                       (e.target as HTMLElement).click()
+                       e.preventDefault()
+                       history('/resumeFix')
                      }}
                      onClick={ (e) => {
                        e.preventDefault()
                        toggleHeaderTitle(e)
-                       history('/resumeFix')
                      }}
                      onMouseOver={(e) => {
                        toggleHeaderTitle(e)

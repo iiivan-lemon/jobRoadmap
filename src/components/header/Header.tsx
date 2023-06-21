@@ -100,22 +100,27 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
           >
 
               <div id='mainHeader' className={styles.mainHeader}>
-                  <span
+                  <div
                       className={styles.logoHref + ' ' + stylesNewPage.touchTitle}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        goTo('/')
-                      }}
-                      onTouchEnd={(e) => {
-                        e.preventDefault();
-                        (e.target as HTMLElement).click()
-                        // goTo('/')
-                      }}
+
                   >
-                      <span className={styles.title}>
+                      <span onClick={ window.innerWidth > 1000
+                        ? (e) => {
+                            e.preventDefault()
+                            goTo('/')
+                          }
+                        : () => {}}
+                            onTouchEnd={ window.innerWidth <= 1000
+                              // eslint-disable-next-line multiline-ternary
+                              ? (e) => {
+                                  e.preventDefault()
+                                  goTo('/')
+                                // goTo('/')
+                                } : () => {} }
+                            className={styles.title}>
                           JOB Roadmap
                       </span>
-                  </span>
+                  </div>
                 {window.innerWidth > 1000 && <>
                   <Search
                     title = {takeInput}
@@ -134,8 +139,8 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                     goTo('/resumeFix')
                   }}
                   onTouchEnd={(e) => {
-                    e.preventDefault();
-                    (e.target as HTMLElement).click()
+                    e.preventDefault()
+                    goTo('/resumeFix')
                   }}
                 >
                       Резюме
@@ -149,8 +154,8 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                     goTo('/jobLetter')
                   }}
                   onTouchEnd={(e) => {
-                    e.preventDefault();
-                    (e.target as HTMLElement).click()
+                    e.preventDefault()
+                    goTo('/jobLetter')
                   }}
                 >
                       Письмо
