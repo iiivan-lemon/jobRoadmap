@@ -118,9 +118,10 @@ const NewUserPage: FC = () => {
               <div className={styles.widgetsDescr}>
                 { window.innerWidth > 1000 && <>
                   <div id='widget_skills'
-                                                     // onTouchStart={ (e) => {
-                                                     //   openHeader()
-                                                     // }}
+                                                     onTouchEnd={ (e) => {
+                                                       e.preventDefault();
+                                                       (e.target as HTMLElement).click()
+                                                     }}
                                                      onClick={ (e) => {
                                                        e.preventDefault()
                                                        openHeader()
@@ -131,10 +132,10 @@ const NewUserPage: FC = () => {
                                                        toggleHeaderTitle(e)
                                                      }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
                 <div id='widget_jobLetter'
-                     // onTouchStart={ (e) => {
-                     //   // toggleHeaderTitle(e)
-                     //   history('/jobLetter')
-                     // }}
+                     onTouchEnd={ (e) => {
+                       e.preventDefault();
+                       (e.target as HTMLElement).click()
+                     }}
                      onClick={ (e) => {
                        e.preventDefault()
                        toggleHeaderTitle(e)
@@ -146,10 +147,10 @@ const NewUserPage: FC = () => {
                        toggleHeaderTitle(e)
                      }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
                 <div id='widget_resumeFix'
-                     // onTouchStart = { (e) => {
-                     //   // toggleHeaderTitle(e)
-                     //   history('/resumeFix')
-                     // }}
+                     onTouchEnd = { (e) => {
+                       e.preventDefault();
+                       (e.target as HTMLElement).click()
+                     }}
                      onClick={ (e) => {
                        e.preventDefault()
                        toggleHeaderTitle(e)

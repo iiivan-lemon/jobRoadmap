@@ -106,7 +106,11 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                         e.preventDefault()
                         goTo('/')
                       }}
-                      // onTouchStart={() => { goTo('/') }}
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        (e.target as HTMLElement).click()
+                        // goTo('/')
+                      }}
                   >
                       <span className={styles.title}>
                           JOB Roadmap
@@ -129,9 +133,10 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                     e.preventDefault()
                     goTo('/resumeFix')
                   }}
-                  // onTouchStart={(e) => {
-                  //   goTo('/resumeFix')
-                  // }}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    (e.target as HTMLElement).click()
+                  }}
                 >
                       Резюме
                   </span>
@@ -143,7 +148,10 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                     e.preventDefault()
                     goTo('/jobLetter')
                   }}
-                  // onTouchStart={() => { goTo('/jobLetter') }}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    (e.target as HTMLElement).click()
+                  }}
                 >
                       Письмо
                   </span>
