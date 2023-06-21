@@ -3,7 +3,7 @@ import styles from './NewUserPage.module.sass'
 import stylesTag from '../../components/Tag/Tag.module.sass'
 import '../../App.sass'
 import GradientGrade from '../../components/gradientGrade/GradientGrade'
-import { useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 // import styled from 'styled-components'
 import { ReactComponent as NodeSvg } from '../../static/images/svg-hex.svg'
 import pSBC from 'shade-blend-color'
@@ -127,22 +127,23 @@ const NewUserPage: FC = () => {
                                                        // eslint-disable-next-line no-debugger
                                                        toggleHeaderTitle(e)
                                                      }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
-                <div id='widget_jobLetter'
+                <Link id='widget_jobLetter'
                      onClick={ (e) => {
-                       e.preventDefault()
-                       e.stopPropagation()
+                       // e.preventDefault()
+                       // e.stopPropagation()
                        toggleHeaderTitle(e)
-                       history('/jobLetter')
+                       // history('/jobLetter')
                      }} onMouseOver={(e) => {
                        toggleHeaderTitle(e)
                      }} onMouseOut={(e) => {
                        // eslint-disable-next-line no-debugger
                        toggleHeaderTitle(e)
-                     }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
-                <div id='widget_resumeFix'
+                     }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew} ${styles.touchTitle}`} to='/jobLetter'><span className={styles.widjetText}>Генерация сопроводительного письма</span></Link>
+                <Link id='widget_resumeFix'
+                      to='/resumeFix'
                      onClick={ (e) => {
-                       e.preventDefault()
-                       e.stopPropagation()
+                       // e.preventDefault()
+                       // e.stopPropagation()
                        toggleHeaderTitle(e)
                      }}
                      onMouseOver={(e) => {
@@ -150,7 +151,7 @@ const NewUserPage: FC = () => {
                      }} onMouseOut={(e) => {
                        // eslint-disable-next-line no-debugger
                        toggleHeaderTitle(e)
-                     }} className={`${styles.widjet} ${styles.widjetResume} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>Анализ резюме</span></div>
+                     }} className={`${styles.widjet} ${styles.widjetResume} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>Анализ резюме</span></Link>
                 {window.innerWidth > 1000 && <span className={styles.widjetTitle} >
                       Анализ актуальных открытых вакансий по Вашей специальности
                   </span>}

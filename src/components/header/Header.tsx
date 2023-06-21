@@ -3,7 +3,7 @@ import Search from '../search/Search'
 import styles from './Header.module.sass'
 // Import { useHistory } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 // import { authActions } from
 import { loginOrLogout } from '../../models/auth/authActions'
 import { getTops } from '../../models/tops/topsSlice'
@@ -88,8 +88,8 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
     }
   }, [history])
 
-  const resumeRef = React.useRef<HTMLElement>(null)
-  const letterRef = React.useRef<HTMLElement>(null)
+  const resumeRef = React.useRef<any>(null)
+  const letterRef = React.useRef<any>(null)
 
   return (
       <React.Fragment>
@@ -104,14 +104,14 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                       className={styles.logoHref + ' ' + stylesNewPage.touchTitle}
 
                   >
-                      <span onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        goTo('/')
+                      <Link to='/' onClick={(e) => {
+                        // e.preventDefault()
+                        // e.stopPropagation()
+                        // goTo('/')
                       }}
                             className={styles.title}>
                           JOB Roadmap
-                      </span>
+                      </Link>
                   </div>
                 {window.innerWidth > 1000 && <>
                   <Search
@@ -122,36 +122,38 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                   />
                   </>}
                 <div className={styles.titles}>
-                <span
+                <Link
+                  to='/resumeFix'
                   id='resumeFixTitle'
                   ref={resumeRef}
                   className={styles.favorite + ' ' + styles.baseTitle + ' ' + stylesNewPage.touchTitle }
                   onClick={(e) => {
-                    e.preventDefault()
-                    goTo('/resumeFix')
+                    // e.preventDefault()
+                    // goTo('/resumeFix')
                   }}
                   onTouchEnd={(e) => {
-                    e.preventDefault()
-                    goTo('/resumeFix')
+                    // e.preventDefault()
+                    // goTo('/resumeFix')
                   }}
                 >
                       Резюме
-                  </span>
-                <span
+                  </Link>
+                <Link
+                  to='jobLetter'
                   id='jobLetterTitle'
                   ref={letterRef}
                   className={styles.favorite + ' ' + styles.baseTitle + ' ' + stylesNewPage.touchTitle }
                   onClick={(e) => {
-                    e.preventDefault()
-                    goTo('/jobLetter')
+                    // e.preventDefault()
+                    // goTo('/jobLetter')
                   }}
                   onTouchEnd={(e) => {
-                    e.preventDefault()
-                    goTo('/jobLetter')
+                    // e.preventDefault()
+                    // goTo('/jobLetter')
                   }}
                 >
                       Письмо
-                  </span>
+                  </Link>
                   {window.innerWidth > 1000 && <>
                   <span
                       className={styles.favorite + ' ' + styles.baseTitle }
