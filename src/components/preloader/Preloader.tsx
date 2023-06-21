@@ -3,7 +3,7 @@ import { loadState } from '../../utils/utils'
 import React from 'react'
 import { animationWorker as AnimationWorker } from './typingAnimation'
 import './preloader.sass'
-export const Preloader = ({ loading, style, tips }): JSX.Element => {
+export const Preloader = ({ loading, style, tips, className }): JSX.Element => {
   React.useEffect(() => {
     if (loading === loadState.load && window.innerWidth > 1000) {
       const texts = tips
@@ -25,7 +25,7 @@ export const Preloader = ({ loading, style, tips }): JSX.Element => {
   }, [loading])
 
   return (
-    <>{loading === loadState.load && <div className='preloader' style={style}>
+    <>{loading === loadState.load && <div className={(className) || 'preloader' } style={style}>
       { window.innerWidth > 1000 && <span id='tipsLoader'>загрузка...</span>}
       <PushSpinner
         color="#686769"
@@ -40,5 +40,6 @@ export const Preloader = ({ loading, style, tips }): JSX.Element => {
 
 Preloader.defaultProps = {
   style: {},
-  tips: ['загрузка...']
+  tips: ['загрузка...'],
+  className: ''
 }

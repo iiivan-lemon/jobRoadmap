@@ -239,10 +239,6 @@ const HomePage = ({ inputData, headerGrade, sendJob }): JSX.Element => {
            //   // }
            // }
       >
-        <Preloader style={{
-          zIndex: 1000,
-          left: 'auto'
-        }} loading={loading}/>
 
         { (loading === loadState.error) && <ErrorModal message={errMessage}/>}
             {(loading === loadState.res) && <>

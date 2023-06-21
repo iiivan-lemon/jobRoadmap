@@ -6,7 +6,6 @@ import styles from '../newUserPage/NewUserPage.module.sass'
 import { getJobLetter } from '../../models/jobLetter/jobLetterSlice'
 import '../resumeFixPage/resumeFixPage.sass'
 import styleSearch from '../../components/search/Search.module.sass'
-import { PushSpinner, WhisperSpinner } from 'react-spinners-kit'
 import stylesTag from '../../components/Tag/Tag.module.sass'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from 'antd'
@@ -96,14 +95,16 @@ export const JobLetterPage = () => {
     refTextArea.current?.focus()
   }
   const letterNodeRef = React.useRef(null)
+  const inputNodeRef = React.useRef(null)
   return (
     <>
-      <div className='resumePage'
+      <div className='resumePage' ref={inputNodeRef}
            style={(loading === loadState.res) ? { justifyContent: 'center' } : { justifyContent: 'initial' }}>
         <Preloader loading={loading} tips={['полученное письмо будет связано с выбранным резюме и вакансией', 'скопируйте полученный результат в буфер', 'хотите улучшить сгенерированное письмо? Отредактируйте сразу после получения результата']}/>
         <div className={'fullResBlock'}>
-          <div className={'resumeInput ' + styles.widjet}>
-            <form className='resumeBlock' onSubmit={handleSubmit}>
+
+          <><div className={'resumeInput ' + styles.widjet}>
+              <form className='resumeBlock' onSubmit={handleSubmit}>
               <div className={'uploadBlock'}>
                 <span>добавьте резюме PDF</span>
                 <label style={{ margin: 0 }} htmlFor="upload-photo"
@@ -123,7 +124,7 @@ export const JobLetterPage = () => {
               </div>}</div>
               {(loading === loadState.error) && <div className='errDesr'>{errMessage}</div>}
             </form>
-          </div>
+          </div></>
           <CSSTransition
               in={loading === loadState.res && !!data}
               nodeRef={letterNodeRef}
