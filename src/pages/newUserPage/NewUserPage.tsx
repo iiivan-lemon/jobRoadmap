@@ -128,12 +128,9 @@ const NewUserPage: FC = () => {
                                                        toggleHeaderTitle(e)
                                                      }} className={`${styles.widjet} ${styles.widjetSkill} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>{'Поиск по навыкам\n и профессиям'}</span></div></>}
                 <div id='widget_jobLetter'
-                     onTouchEnd={ (e) => {
-                       e.preventDefault()
-                       history('/jobLetter')
-                     }}
                      onClick={ (e) => {
                        e.preventDefault()
+                       e.stopPropagation()
                        toggleHeaderTitle(e)
                        history('/jobLetter')
                      }} onMouseOver={(e) => {
@@ -143,12 +140,9 @@ const NewUserPage: FC = () => {
                        toggleHeaderTitle(e)
                      }} className={`${styles.widjet} ${styles.widjetLetter} ${styles.widjetNew} ${styles.touchTitle}`}><span className={styles.widjetText}>Генерация сопроводительного письма</span></div>
                 <div id='widget_resumeFix'
-                     onTouchEnd = { (e) => {
-                       e.preventDefault()
-                       history('/resumeFix')
-                     }}
                      onClick={ (e) => {
                        e.preventDefault()
+                       e.stopPropagation()
                        toggleHeaderTitle(e)
                      }}
                      onMouseOver={(e) => {

@@ -104,19 +104,11 @@ const Header: FC<HeaderProps> = ({ title, changeData, setGrade, isMainSearch, ta
                       className={styles.logoHref + ' ' + stylesNewPage.touchTitle}
 
                   >
-                      <span onClick={ window.innerWidth > 1000
-                        ? (e) => {
-                            e.preventDefault()
-                            goTo('/')
-                          }
-                        : () => {}}
-                            onTouchEnd={ window.innerWidth <= 1000
-                              // eslint-disable-next-line multiline-ternary
-                              ? (e) => {
-                                  e.preventDefault()
-                                  goTo('/')
-                                // goTo('/')
-                                } : () => {} }
+                      <span onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        goTo('/')
+                      }}
                             className={styles.title}>
                           JOB Roadmap
                       </span>
