@@ -39,10 +39,10 @@ export const JobLetterPage = () => {
       setSelectedUrl(null)
     } else {
       const url = (new URL(event.target.value))
-      if (!url.origin.includes('hh.ru')) {
-        setSelectedUrl(null)
-        return
-      }
+      // if (!url.origin.includes('hh.ru')) {
+      //   setSelectedUrl(null)
+      //   return
+      // }
       setLoad(loadState.base)
       setSelectedUrl(event.target.value)
     }
